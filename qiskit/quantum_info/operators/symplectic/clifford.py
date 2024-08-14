@@ -18,7 +18,7 @@ import functools
 import itertools
 import math
 import re
-from typing import Literal
+from typing import Optional, Literal
 
 import numpy as np
 
@@ -138,7 +138,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
     _COMPOSE_PHASE_LOOKUP = None
     _COMPOSE_1Q_LOOKUP = None
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
         arr = self.to_matrix()
@@ -912,7 +912,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return np.hstack((table, phase.reshape(len(phase), 1)))
 
     @staticmethod
-    def _from_label(label):
+    def _from_label(label: str):
         phase = False
         if label[0] in ("-", "+"):
             phase = label[0] == "-"
@@ -934,7 +934,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return symp
 
     @staticmethod
-    def _pauli_matrix_to_row(mat, num_qubits):
+    def _pauli_matrix_to_row(mat, num_qubits: int):
         """Generate a binary vector (a row of tableau representation) from a Pauli matrix.
         Return None if the non-Pauli matrix is supplied."""
         # pylint: disable=too-many-return-statements
@@ -944,7 +944,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
             indices = np.where(np.round(np.abs(x), decimals=decimals) == 1)
             return indices[0][0] if len(indices[0]) == 1 else None
 
-        def bitvector(n, num_bits):
+        def bitvector(n, num_bits: int):
             return np.array([int(digit) for digit in format(n, f"0{num_bits}b")], dtype=bool)[::-1]
 
         # compute x-bits

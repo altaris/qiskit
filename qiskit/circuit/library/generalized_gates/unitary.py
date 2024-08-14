@@ -16,6 +16,7 @@ from __future__ import annotations
 import math
 
 import typing
+from typing import Optional
 import numpy
 
 from qiskit import _numpy_compat
@@ -113,7 +114,7 @@ class UnitaryGate(Gate):
             return False
         return matrix_equal(self.params[0], other.params[0])
 
-    def __array__(self, dtype=None, copy=_numpy_compat.COPY_ONLY_IF_NEEDED):
+    def __array__(self, dtype=None, copy: Optional[bool] = _numpy_compat.COPY_ONLY_IF_NEEDED):
         """Return matrix for the unitary."""
         dtype = self.params[0].dtype if dtype is None else dtype
         return numpy.array(self.params[0], dtype=dtype, copy=copy)

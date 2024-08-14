@@ -162,7 +162,7 @@ class U3Gate(Gate):
         qc.u(self.params[0], self.params[1], self.params[2], 0)
         self.definition = qc
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a Numpy.array for the U3 gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -252,7 +252,7 @@ class CU3Gate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CU3 gate."""
         super().__init__(
@@ -322,7 +322,7 @@ class CU3Gate(ControlledGate):
             -self.params[0], -self.params[2], -self.params[1], ctrl_state=self.ctrl_state
         )
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the CU3 gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -352,7 +352,7 @@ class CU3Gate(ControlledGate):
             )
 
 
-def _generate_gray_code(num_bits):
+def _generate_gray_code(num_bits: int):
     """Generate the gray code for ``num_bits`` bits."""
     if num_bits <= 0:
         raise ValueError("Cannot generate the gray code for less than 1 bit.")
@@ -362,7 +362,7 @@ def _generate_gray_code(num_bits):
     return [format(x, f"0{num_bits}b") for x in result]
 
 
-def _gray_code_chain(q, num_ctrl_qubits, gate):
+def _gray_code_chain(q, num_ctrl_qubits: int, gate):
     """Apply the gate to the last qubit in the register ``q``, controlled on all
     preceding qubits. This function uses the gray code to propagate down to the last qubit.
 

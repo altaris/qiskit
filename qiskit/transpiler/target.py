@@ -325,7 +325,7 @@ class Target(BaseTarget):
 
     def __init__(
         self,
-        description=None,  # pylint: disable=unused-argument
+        description: Optional[str] = None,  # pylint: disable=unused-argument
         num_qubits: int = 0,  # pylint: disable=unused-argument
         dt=None,  # pylint: disable=unused-argument
         granularity=1,  # pylint: disable=unused-argument
@@ -341,7 +341,7 @@ class Target(BaseTarget):
         self._instruction_durations = None
         self._instruction_schedule_map = None
 
-    def add_instruction(self, instruction, properties=None, name=None):
+    def add_instruction(self, instruction, properties=None, name: Optional[str] = None):
         """Add a new instruction to the :class:`~qiskit.transpiler.Target`
 
         As ``Target`` objects are strictly additive this is the primary method

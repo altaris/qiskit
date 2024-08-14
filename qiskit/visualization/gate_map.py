@@ -13,7 +13,7 @@
 """A module for visualizing device coupling maps"""
 
 import math
-from typing import List
+from typing import Optional, Sequence, List, Tuple
 
 import numpy as np
 import rustworkx as rx
@@ -34,14 +34,14 @@ def _get_backend_interface_version(backend):
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def plot_gate_map(
     backend,
-    figsize=None,
+    figsize: Optional[Tuple[int, int]] = None,
     plot_directed: bool = False,
     label_qubits: bool = True,
-    qubit_size=None,
+    qubit_size: Optional[float] = None,
     line_width=4,
-    font_size=None,
+    font_size: Optional[float] = None,
     qubit_color=None,
-    qubit_labels=None,
+    qubit_labels: Optional[Sequence[str]] = None,
     line_color=None,
     font_color: str = "white",
     ax=None,
@@ -954,14 +954,14 @@ def plot_coupling_map(
     num_qubits: int,
     qubit_coordinates: List[List[int]],
     coupling_map: List[List[int]],
-    figsize=None,
+    figsize: Optional[Tuple[int, int]] = None,
     plot_directed: bool = False,
     label_qubits: bool = True,
-    qubit_size=None,
+    qubit_size: Optional[int] = None,
     line_width=4,
-    font_size=None,
+    font_size: Optional[int] = None,
     qubit_color=None,
-    qubit_labels=None,
+    qubit_labels: Optional[Sequence[str]] = None,
     line_color=None,
     font_color: str = "white",
     ax=None,
@@ -1226,7 +1226,9 @@ def plot_circuit_layout(circuit, backend, view: str = "virtual", qubit_coordinat
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
 @_optionals.HAS_SEABORN.require_in_call
-def plot_error_map(backend, figsize=(15, 12), show_title: bool = True, qubit_coordinates=None):
+def plot_error_map(
+    backend, figsize: Tuple[int, int] = (15, 12), show_title: bool = True, qubit_coordinates=None
+):
     """Plots the error map of a given backend.
 
     Args:

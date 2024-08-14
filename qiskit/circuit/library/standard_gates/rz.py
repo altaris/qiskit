@@ -144,7 +144,7 @@ class RZGate(Gate):
         """
         return RZGate(-self.params[0])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the RZ gate."""
         import numpy as np
 
@@ -237,7 +237,7 @@ class CRZGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CRZ gate."""
         super().__init__(
@@ -294,7 +294,7 @@ class CRZGate(ControlledGate):
         """
         return CRZGate(-self.params[0], ctrl_state=self.ctrl_state)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the CRZ gate."""
         import numpy
 

@@ -85,7 +85,9 @@ class LazyDependencyManager(abc.ABC):
 
     __slots__ = ("_bool", "_callback", "_name", "_install", "_msg")
 
-    def __init__(self, *, name=None, callback=None, install=None, msg=None) -> None:
+    def __init__(
+        self, *, name: Optional[str] = None, callback=None, install=None, msg=None
+    ) -> None:
         """
         Args:
             name: the name of this optional dependency.

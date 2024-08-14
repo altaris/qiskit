@@ -161,7 +161,7 @@ class RYYGate(Gate):
         """
         return RYYGate(-self.params[0])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the RYY gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

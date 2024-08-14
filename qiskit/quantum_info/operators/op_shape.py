@@ -20,6 +20,7 @@ from functools import reduce
 from operator import mul
 from math import log2
 from numbers import Integral
+from typing import Optional, Tuple
 
 from qiskit.exceptions import QiskitError
 
@@ -227,10 +228,10 @@ class OpShape:
         shape=None,
         dims_l=None,
         dims_r=None,
-        dims=None,
+        dims: Optional[Tuple[int, int]] = None,
         num_qubits_l=None,
         num_qubits_r=None,
-        num_qubits=None,
+        num_qubits: Optional[int] = None,
     ):
         """Construct TensorShape with automatic checking of qubit dimensions"""
         if dims and (dims_l or dims_r):

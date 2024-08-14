@@ -245,7 +245,7 @@ def _create_graph_state(cliff, validate: bool = False):
     return H1_circ, cliffh
 
 
-def _decompose_graph_state(cliff, validate, cz_synth_func):
+def _decompose_graph_state(cliff, validate: bool, cz_synth_func):
     """Assumes that a stabilizer state of the Clifford cliff (denoted by U) corresponds to a graph state.
     Decompose it into the layers S1 - CZ1 - H2, such that:
     S1 CZ1 H2 |0> = U |0>,
@@ -309,7 +309,7 @@ def _decompose_graph_state(cliff, validate, cz_synth_func):
 
 
 def _decompose_hadamard_free(
-    cliff, validate, cz_synth_func, cx_synth_func, cx_cz_synth_func, cz_func_reverse_qubits
+    cliff, validate: bool, cz_synth_func, cx_synth_func, cx_cz_synth_func, cz_func_reverse_qubits
 ):
     """Assumes that the Clifford cliff is Hadamard free.
     Decompose it into the layers S2 - CZ2 - CX, where

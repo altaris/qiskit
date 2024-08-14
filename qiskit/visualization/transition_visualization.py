@@ -38,7 +38,7 @@ class _Quaternion:
         self._val = None
 
     @staticmethod
-    def from_axisangle(theta, v):
+    def from_axisangle(theta: float, v):
         """Create quaternion from axis"""
         v = _normalize(v)
 
@@ -53,7 +53,7 @@ class _Quaternion:
         new_quaternion._val = value
         return new_quaternion
 
-    def _axisangle_to_q(self, theta, v) -> None:
+    def _axisangle_to_q(self, theta: float, v) -> None:
         """Convert axis and angle to quaternion"""
         x = v[0]
         y = v[1]

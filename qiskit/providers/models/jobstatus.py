@@ -59,7 +59,7 @@ class JobStatus:
         out_dict.update(self._data)
         return out_dict
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._data[name]
         except KeyError as ex:

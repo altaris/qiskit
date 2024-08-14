@@ -14,6 +14,7 @@
 Quantum measurement in the computational basis.
 """
 
+from typing import Optional
 from qiskit.circuit.singleton import SingletonInstruction, stdlib_singleton_key
 from qiskit.circuit.exceptions import CircuitError
 
@@ -21,7 +22,7 @@ from qiskit.circuit.exceptions import CircuitError
 class Measure(SingletonInstruction):
     """Quantum measurement in the computational basis."""
 
-    def __init__(self, label=None, *, duration=None, unit: str = "dt") -> None:
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit: str = "dt") -> None:
         """
         Args:
             label: optional string label for this instruction.

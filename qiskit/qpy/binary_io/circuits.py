@@ -118,7 +118,7 @@ def _read_header(file_obj, metadata_deserializer=None):
     return header, name, metadata
 
 
-def _read_registers_v4(file_obj, num_registers):
+def _read_registers_v4(file_obj, num_registers: int):
     registers = {"q": {}, "c": {}}
     for _reg in range(num_registers):
         data = formats.REGISTER_V4._make(
@@ -138,7 +138,7 @@ def _read_registers_v4(file_obj, num_registers):
     return registers
 
 
-def _read_registers(file_obj, num_registers):
+def _read_registers(file_obj, num_registers: int):
     registers = {"q": {}, "c": {}}
     for _reg in range(num_registers):
         data = formats.REGISTER._make(
@@ -428,7 +428,7 @@ def _read_instruction(
 
 def _parse_custom_operation(
     custom_operations,
-    gate_name,
+    gate_name: str,
     params,
     version,
     vectors,
@@ -908,7 +908,14 @@ def _write_modifier(file_obj, modifier):
 
 
 def _write_custom_operation(
-    file_obj, name, operation, custom_operations, use_symengine, version, *, standalone_var_indices
+    file_obj,
+    name: str,
+    operation,
+    custom_operations,
+    use_symengine,
+    version,
+    *,
+    standalone_var_indices,
 ):
     type_key = type_keys.CircuitInstruction.assign(operation)
     has_definition = False

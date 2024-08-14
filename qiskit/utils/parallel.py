@@ -119,7 +119,7 @@ def should_run_in_parallel(num_processes: int | None = None) -> bool:
 
 
 def parallel_map(  # pylint: disable=dangerous-default-value
-    task, values, task_args=(), task_kwargs={}, num_processes=CPU_COUNT
+    task, values, task_args=(), task_kwargs={}, num_processes: int = CPU_COUNT
 ):
     """
     Parallel execution of a mapping of `values` to the function `task`. This

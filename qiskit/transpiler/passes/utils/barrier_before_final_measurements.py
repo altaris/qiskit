@@ -13,6 +13,7 @@
 
 """Add a barrier before final measurements."""
 
+from typing import Optional
 from qiskit.circuit.barrier import Barrier
 from qiskit.transpiler.basepasses import TransformationPass
 from qiskit.dagcircuit import DAGCircuit, DAGOpNode
@@ -27,7 +28,7 @@ class BarrierBeforeFinalMeasurements(TransformationPass):
     other measurements or barriers.)
     """
 
-    def __init__(self, label=None) -> None:
+    def __init__(self, label: Optional[str] = None) -> None:
         super().__init__()
         self.label = label
 

@@ -27,7 +27,7 @@ from .utils import tweedledum2qiskit
 class ClassicalFunction(ClassicalElement):
     """Represent a classical function and its logic network."""
 
-    def __init__(self, source, name=None) -> None:
+    def __init__(self, source, name: Optional[str] = None) -> None:
         """Creates a ``ClassicalFunction`` from Python source code in ``source``.
 
         The code should be a single function with types.

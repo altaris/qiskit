@@ -20,7 +20,7 @@ onto a device with this coupling.
 """
 
 import math
-from typing import List
+from typing import Optional, List
 
 import rustworkx as rx
 from rustworkx.visualization import graphviz_draw
@@ -46,7 +46,7 @@ class CouplingMap:
         "_is_symmetric",
     )
 
-    def __init__(self, couplinglist=None, description=None) -> None:
+    def __init__(self, couplinglist=None, description: Optional[str] = None) -> None:
         """
         Create coupling graph. By default, the generated coupling has no nodes.
 
@@ -292,7 +292,7 @@ class CouplingMap:
         return reduced_coupling_map
 
     @classmethod
-    def from_full(cls, num_qubits, bidirectional: bool = True) -> "CouplingMap":
+    def from_full(cls, num_qubits: int, bidirectional: bool = True) -> "CouplingMap":
         """Return a fully connected coupling map on n qubits."""
         cmap = cls(description="full")
         if bidirectional:
@@ -306,21 +306,23 @@ class CouplingMap:
         return cmap
 
     @classmethod
-    def from_line(cls, num_qubits, bidirectional: bool = True) -> "CouplingMap":
+    def from_line(cls, num_qubits: int, bidirectional: bool = True) -> "CouplingMap":
         """Return a coupling map of n qubits connected in a line."""
         cmap = cls(description="line")
         cmap.graph = rx.generators.directed_path_graph(num_qubits, bidirectional=bidirectional)
         return cmap
 
     @classmethod
-    def from_ring(cls, num_qubits, bidirectional: bool = True) -> "CouplingMap":
+    def from_ring(cls, num_qubits: int, bidirectional: bool = True) -> "CouplingMap":
         """Return a coupling map of n qubits connected to each of their neighbors in a ring."""
         cmap = cls(description="ring")
         cmap.graph = rx.generators.directed_cycle_graph(num_qubits, bidirectional=bidirectional)
         return cmap
 
     @classmethod
-    def from_grid(cls, num_rows, num_columns, bidirectional: bool = True) -> "CouplingMap":
+    def from_grid(
+        cls, num_rows: int, num_columns: int, bidirectional: bool = True
+    ) -> "CouplingMap":
         """Return a coupling map of qubits connected on a grid of num_rows x num_columns."""
         cmap = cls(description="grid")
         cmap.graph = rx.generators.directed_grid_graph(

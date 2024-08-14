@@ -13,6 +13,7 @@
 """Schema and helper models for schema-conformant Results."""
 
 import copy
+from typing import Optional, Dict
 import warnings
 
 from qiskit.qobj.utils import MeasReturnType, MeasLevel
@@ -24,7 +25,13 @@ class ExperimentResultData:
     """Class representing experiment result data"""
 
     def __init__(
-        self, counts=None, snapshots=None, memory=None, statevector=None, unitary=None, **kwargs
+        self,
+        counts: Optional[Dict[str, int]] = None,
+        snapshots=None,
+        memory=None,
+        statevector=None,
+        unitary=None,
+        **kwargs,
     ) -> None:
         """Initialize an ExperimentalResult Data class
 
@@ -111,11 +118,11 @@ class ExperimentResult:
     def __init__(
         self,
         shots,
-        success,
+        success: bool,
         data,
         meas_level=MeasLevel.CLASSIFIED,
         status=None,
-        seed=None,
+        seed: Optional[int] = None,
         meas_return=None,
         header=None,
         **kwargs,
@@ -178,7 +185,7 @@ class ExperimentResult:
         out += ")"
         return out
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._metadata[name]
         except KeyError as ex:

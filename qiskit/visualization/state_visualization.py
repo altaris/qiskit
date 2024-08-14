@@ -18,7 +18,7 @@ Visualization functions for quantum states.
 """
 
 import math
-from typing import List, Union
+from typing import Optional, List, Union, Tuple
 from functools import reduce
 import colorsys
 
@@ -38,7 +38,13 @@ from .exceptions import VisualizationError
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def plot_state_hinton(
-    state, title: str = "", figsize=None, ax_real=None, ax_imag=None, *, filename=None
+    state,
+    title: str = "",
+    figsize: Optional[Tuple[int, int]] = None,
+    ax_real=None,
+    ax_imag=None,
+    *,
+    filename=None,
 ):
     """Plot a hinton diagram for the density matrix of a quantum state.
 
@@ -188,7 +194,12 @@ def plot_state_hinton(
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def plot_bloch_vector(
-    bloch, title: str = "", ax=None, figsize=None, coord_type: str = "cartesian", font_size=None
+    bloch,
+    title: str = "",
+    ax=None,
+    figsize: Optional[Tuple[int, int]] = None,
+    coord_type: str = "cartesian",
+    font_size: Optional[float] = None,
 ):
     """Plot the Bloch sphere.
 
@@ -257,12 +268,12 @@ def plot_bloch_vector(
 def plot_bloch_multivector(
     state,
     title: str = "",
-    figsize=None,
+    figsize: Optional[Tuple[int, int]] = None,
     *,
     reverse_bits: bool = False,
     filename=None,
-    font_size=None,
-    title_font_size=None,
+    font_size: Optional[float] = None,
+    title_font_size: Optional[float] = None,
     title_pad=1,
 ):
     r"""Plot a Bloch sphere for each qubit.
@@ -363,9 +374,9 @@ def plot_bloch_multivector(
 def plot_state_city(
     state,
     title: str = "",
-    figsize=None,
+    figsize: Optional[Tuple[int, int]] = None,
     color=None,
-    alpha=1,
+    alpha: float = 1,
     ax_real=None,
     ax_imag=None,
     *,
@@ -612,7 +623,13 @@ def plot_state_city(
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def plot_state_paulivec(
-    state, title: str = "", figsize=None, color=None, ax=None, *, filename=None
+    state,
+    title: str = "",
+    figsize: Optional[Tuple[int, int]] = None,
+    color=None,
+    ax=None,
+    *,
+    filename=None,
 ):
     r"""Plot the Pauli-vector representation of a quantum state as bar graph.
 
@@ -787,7 +804,7 @@ def phase_to_rgb(complex_number):
 @_optionals.HAS_SEABORN.require_in_call
 def plot_state_qsphere(
     state,
-    figsize=None,
+    figsize: Optional[Tuple[int, int]] = None,
     ax=None,
     show_state_labels: bool = True,
     show_state_phases: bool = False,
@@ -1350,7 +1367,9 @@ class TextMatrix:
     """Text representation of an array, with `__str__` method so it
     displays nicely in Jupyter notebooks"""
 
-    def __init__(self, state, max_size=8, dims=None, prefix: str = "", suffix: str = "") -> None:
+    def __init__(
+        self, state, max_size: int = 8, dims=None, prefix: str = "", suffix: str = ""
+    ) -> None:
         self.state = state
         self.max_size = max_size
         if dims is None:  # show dims if state is not only qubits

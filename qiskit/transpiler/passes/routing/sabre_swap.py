@@ -15,7 +15,7 @@
 import logging
 from copy import deepcopy
 import time
-from typing import Literal
+from typing import Optional, Literal
 
 import rustworkx
 
@@ -85,7 +85,7 @@ class SabreSwap(TransformationPass):
         self,
         coupling_map,
         heuristic: Literal["basic", "lookahead", "decay"] = "basic",
-        seed=None,
+        seed: Optional[int] = None,
         fake_run: bool = False,
         trials=None,
     ) -> None:
@@ -294,7 +294,7 @@ class SabreSwap(TransformationPass):
         )
 
 
-def _build_sabre_dag(dag, num_physical_qubits, qubit_indices):
+def _build_sabre_dag(dag, num_physical_qubits: int, qubit_indices):
     from qiskit.converters import circuit_to_dag
 
     # Maps id(block): circuit_to_dag(block) for all descendant blocks

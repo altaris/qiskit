@@ -355,7 +355,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         return _count_y(self._x, self._z, dtype=dtype)
 
     @staticmethod
-    def _stack(array, size, vertical: bool = True):
+    def _stack(array, size: int, vertical: bool = True):
         """Stack array."""
         if size == 1:
             return array

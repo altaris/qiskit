@@ -13,6 +13,7 @@
 Tools to create LaTeX arrays.
 """
 
+from typing import Tuple
 import numpy as np
 
 from qiskit.exceptions import MissingOptionalLibraryError
@@ -66,7 +67,9 @@ def _num_to_latex(
     return element
 
 
-def _matrix_to_latex(matrix, decimals: int = 10, prefix: str = "", max_size=(8, 8)):
+def _matrix_to_latex(
+    matrix, decimals: int = 10, prefix: str = "", max_size: Tuple[int, int] = (8, 8)
+):
     """Latex representation of a complex numpy array (with maximum dimension 2)
 
     Args:

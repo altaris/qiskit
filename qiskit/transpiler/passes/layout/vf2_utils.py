@@ -217,7 +217,7 @@ def build_average_error_map(target, properties, coupling_map):
         return None
 
 
-def shuffle_coupling_graph(coupling_map, seed, strict_direction: bool = True):
+def shuffle_coupling_graph(coupling_map, seed: int, strict_direction: bool = True):
     """Create a shuffled coupling graph from a coupling map."""
     if strict_direction:
         cm_graph = coupling_map.graph
@@ -236,7 +236,7 @@ def shuffle_coupling_graph(coupling_map, seed, strict_direction: bool = True):
 
 
 def map_free_qubits(
-    free_nodes, partial_layout, num_physical_qubits, reverse_bit_map, avg_error_map
+    free_nodes, partial_layout, num_physical_qubits: int, reverse_bit_map, avg_error_map
 ):
     """Add any free nodes to a layout."""
     if not free_nodes:

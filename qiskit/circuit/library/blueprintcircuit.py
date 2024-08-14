@@ -14,7 +14,7 @@
 
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Literal
+from typing import Optional, Literal
 from qiskit._accelerate.circuit import CircuitData
 from qiskit.circuit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit.parametertable import ParameterView
@@ -168,12 +168,12 @@ class BlueprintCircuit(QuantumCircuit, ABC):
             self._build()
         return super().size(*args, **kwargs)
 
-    def to_instruction(self, parameter_map=None, label=None):
+    def to_instruction(self, parameter_map=None, label: Optional[str] = None):
         if not self._is_built:
             self._build()
         return super().to_instruction(parameter_map, label=label)
 
-    def to_gate(self, parameter_map=None, label=None):
+    def to_gate(self, parameter_map=None, label: Optional[str] = None):
         if not self._is_built:
             self._build()
         return super().to_gate(parameter_map, label=label)
@@ -200,7 +200,7 @@ class BlueprintCircuit(QuantumCircuit, ABC):
 
     def copy_empty_like(
         self,
-        name=None,
+        name: Optional[str] = None,
         *,
         vars_mode: Literal["alike", "captures", "drop"] = "alike",
     ):
@@ -213,7 +213,7 @@ class BlueprintCircuit(QuantumCircuit, ABC):
         cpy.global_phase = self.global_phase
         return cpy
 
-    def copy(self, name=None):
+    def copy(self, name: Optional[str] = None):
         if not self._is_built:
             self._build()
         circuit_copy = super().copy(name=name)

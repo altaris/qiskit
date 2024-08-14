@@ -133,7 +133,7 @@ class RXGate(Gate):
         """
         return RXGate(-self.params[0])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the RX gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -219,7 +219,7 @@ class CRXGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CRX gate."""
         super().__init__(
@@ -280,7 +280,7 @@ class CRXGate(ControlledGate):
         """
         return CRXGate(-self.params[0], ctrl_state=self.ctrl_state)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the CRX gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

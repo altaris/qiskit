@@ -16,6 +16,7 @@ satisfy the circuit, i.e. no further swap is needed. If no solution is
 found, no ``property_set['layout']`` is set.
 """
 import random
+from typing import Optional
 
 from qiskit.transpiler.layout import Layout
 from qiskit.transpiler.basepasses import AnalysisPass
@@ -32,7 +33,7 @@ class CSPLayout(AnalysisPass):
         self,
         coupling_map,
         strict_direction: bool = False,
-        seed=None,
+        seed: Optional[int] = None,
         call_limit: int = 1000,
         time_limit: int = 10,
     ) -> None:

@@ -12,6 +12,7 @@
 
 
 """Helper function for converting a circuit to a gate"""
+from typing import Optional
 from qiskit.circuit.annotated_operation import AnnotatedOperation
 from qiskit.circuit.gate import Gate
 from qiskit.circuit.quantumregister import QuantumRegister
@@ -27,7 +28,9 @@ def _check_is_gate(op):
     return False
 
 
-def circuit_to_gate(circuit, parameter_map=None, equivalence_library=None, label=None):
+def circuit_to_gate(
+    circuit, parameter_map=None, equivalence_library=None, label: Optional[str] = None
+):
     """Build a :class:`.Gate` object from a :class:`.QuantumCircuit`.
 
     The gate is anonymous (not tied to a named quantum register),
@@ -42,7 +45,7 @@ def circuit_to_gate(circuit, parameter_map=None, equivalence_library=None, label
            Gate.
         equivalence_library (EquivalenceLibrary): Optional equivalence library
            where the converted gate will be registered.
-        label (str): Optional gate label.
+        label (str, optional): Optional gate label.
 
     Raises:
         QiskitError: if circuit is non-unitary or if

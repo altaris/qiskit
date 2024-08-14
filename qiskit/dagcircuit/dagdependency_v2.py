@@ -15,7 +15,7 @@
 
 import math
 from collections import OrderedDict, defaultdict, namedtuple
-from typing import Dict, List, Generator, Any
+from typing import Sequence, Dict, List, Generator, Any, Union
 
 import numpy as np
 import rustworkx as rx
@@ -125,7 +125,7 @@ class _DAGDependencyV2:
         return self._global_phase
 
     @global_phase.setter
-    def global_phase(self, angle) -> None:
+    def global_phase(self, angle: Union[float, ParameterExpression]) -> None:
         """Set the global phase of the circuit.
 
         Args:
@@ -413,7 +413,7 @@ class _DAGDependencyV2:
         """
         return self._multi_graph.get_node_data(node_id)
 
-    def named_nodes(self, *names):
+    def named_nodes(self, *names: Sequence[str]):
         """Get the set of "op" nodes with the given name."""
         named_nodes = []
         for node in self._multi_graph.nodes():

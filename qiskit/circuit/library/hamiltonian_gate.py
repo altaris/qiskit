@@ -17,6 +17,7 @@ Gate described by the time evolution of a Hermitian Hamiltonian operator.
 from __future__ import annotations
 import math
 import typing
+from typing import Optional
 
 from numbers import Number
 import numpy as np
@@ -93,7 +94,7 @@ class HamiltonianGate(Gate):
         times_eq = self.params[1] == other.params[1]
         return operators_eq and times_eq
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return matrix for the unitary."""
         import scipy.linalg
 

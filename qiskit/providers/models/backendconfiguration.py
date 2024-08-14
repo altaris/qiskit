@@ -14,7 +14,7 @@
 import re
 import copy
 import numbers
-from typing import Dict, List, Any, Iterable, Tuple, Union
+from typing import Optional, Dict, List, Any, Iterable, Tuple, Union
 from collections import defaultdict
 
 from qiskit.exceptions import QiskitError
@@ -50,13 +50,13 @@ class GateConfig:
     )
     def __init__(
         self,
-        name,
+        name: str,
         parameters,
         qasm_def,
         coupling_map=None,
         latency_map=None,
         conditional=None,
-        description=None,
+        description: Optional[str] = None,
     ) -> None:
         """Initialize a GateConfig object
 
@@ -76,7 +76,7 @@ class GateConfig:
             conditional (bool): Optionally specify whether this gate supports
                 conditional operations (true/false). If this is not specified,
                 then the gate inherits the conditional property of the backend.
-            description (str): Description of the gate operation
+            description (str, optional): Description of the gate operation
         """
 
         self.name = name
@@ -240,9 +240,9 @@ class QasmBackendConfiguration:
     )
     def __init__(
         self,
-        backend_name,
+        backend_name: str,
         backend_version,
-        n_qubits,
+        n_qubits: int,
         basis_gates,
         gates,
         local,
@@ -257,14 +257,14 @@ class QasmBackendConfiguration:
         rep_delay_range=None,
         default_rep_delay=None,
         max_experiments=None,
-        sample_name=None,
-        n_registers=None,
+        sample_name: Optional[str] = None,
+        n_registers: Optional[int] = None,
         register_map=None,
         configurable=None,
         credits_required=None,
         online_date=None,
-        display_name=None,
-        description=None,
+        display_name: Optional[str] = None,
+        description: Optional[str] = None,
         tags=None,
         dt=None,
         dtm=None,
@@ -404,7 +404,7 @@ class QasmBackendConfiguration:
 
         self._data.update(kwargs)
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._data[name]
         except KeyError as ex:
@@ -577,14 +577,14 @@ class PulseBackendConfiguration(QasmBackendConfiguration):
         conditional_latency=None,
         meas_map=None,
         max_experiments=None,
-        sample_name=None,
-        n_registers=None,
+        sample_name: Optional[str] = None,
+        n_registers: Optional[int] = None,
         register_map=None,
         configurable=None,
         credits_required=None,
         online_date=None,
-        display_name=None,
-        description=None,
+        display_name: Optional[str] = None,
+        description: Optional[str] = None,
         tags=None,
         channels: Dict[str, Any] = None,
         **kwargs,

@@ -189,7 +189,7 @@ class LookaheadSwap(TransformationPass):
         return mapped_dag
 
 
-def _search_forward_n_swaps(state, gates, depth, width):
+def _search_forward_n_swaps(state, gates, depth: int, width: int):
     """Search for SWAPs which allow for application of largest number of gates.
 
     Args:

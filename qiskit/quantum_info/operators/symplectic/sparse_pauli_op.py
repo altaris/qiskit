@@ -14,7 +14,7 @@ N-Qubit Sparse Pauli Operator class.
 """
 
 from __future__ import annotations
-from typing import TYPE_CHECKING, List
+from typing import Optional, TYPE_CHECKING, List
 
 from collections.abc import Mapping, Sequence, Iterable
 from numbers import Number
@@ -177,7 +177,7 @@ class SparsePauliOp(LinearOp):
         # Initialize LinearOp
         super().__init__(num_qubits=self._pauli_list.num_qubits)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
         arr = self.to_matrix()

@@ -16,7 +16,7 @@ N-qubit Pauli Operator Class
 from __future__ import annotations
 
 import re
-from typing import Literal, TYPE_CHECKING
+from typing import Optional, Literal, TYPE_CHECKING
 
 import numpy as np
 
@@ -224,7 +224,7 @@ class Pauli(BasePauli):
             return front + "..."
         return self.to_label()
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
         arr = self.to_matrix()
@@ -607,7 +607,7 @@ class Pauli(BasePauli):
     # ---------------------------------------------------------------------
 
     @staticmethod
-    def _from_label(label):
+    def _from_label(label: str):
         """Return the symplectic representation of Pauli string.
 
         Args:

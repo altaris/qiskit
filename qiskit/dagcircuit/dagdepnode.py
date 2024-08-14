@@ -15,6 +15,7 @@
 """Object to represent the information at a node in the DAGCircuit."""
 from __future__ import annotations
 
+from typing import Optional
 from qiskit.exceptions import QiskitError
 
 
@@ -47,7 +48,7 @@ class DAGDepNode:
         self,
         type=None,
         op=None,
-        name=None,
+        name: Optional[str] = None,
         qargs=(),
         cargs=(),
         successors: list[int] | None = None,

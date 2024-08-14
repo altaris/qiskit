@@ -870,7 +870,7 @@ class MatplotlibDrawer:
         return sum_text
 
     def _draw_regs_wires(
-        self, num_folds, xmax, max_x_index, qubits_dict, clbits_dict, glob_data
+        self, num_folds: int, xmax, max_x_index, qubits_dict, clbits_dict, glob_data
     ) -> None:
         """Draw the register names and numbers, wires, and vertical lines at the ends"""
 
@@ -1759,7 +1759,7 @@ class MatplotlibDrawer:
     def _set_ctrl_bits(
         self,
         ctrl_state,
-        num_ctrl_qubits,
+        num_ctrl_qubits: int,
         qbit,
         glob_data,
         ec=None,

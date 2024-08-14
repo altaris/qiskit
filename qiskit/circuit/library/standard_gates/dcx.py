@@ -12,6 +12,8 @@
 
 """Double-CNOT gate."""
 
+from typing import Optional
+
 from qiskit.circuit.singleton import SingletonGate, stdlib_singleton_key
 from qiskit.circuit.quantumregister import QuantumRegister
 from qiskit.circuit._utils import with_gate_array
@@ -51,7 +53,7 @@ class DCXGate(SingletonGate):
 
     _standard_gate = StandardGate.DCXGate
 
-    def __init__(self, label=None, *, duration=None, unit="dt") -> None:
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new DCX gate."""
         super().__init__("dcx", 2, [], label=label, duration=duration, unit=unit)
 

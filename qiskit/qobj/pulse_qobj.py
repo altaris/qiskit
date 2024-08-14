@@ -17,7 +17,7 @@
 
 import copy
 import pprint
-from typing import Union, List
+from typing import Optional, Union, List
 
 import numpy
 from qiskit.qobj.common import QobjDictField
@@ -37,7 +37,7 @@ class QobjMeasurementOption:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, name, params=None) -> None:
+    def __init__(self, name: str, params=None) -> None:
         """Instantiate a new QobjMeasurementOption object.
 
         Args:
@@ -108,7 +108,7 @@ class PulseQobjInstruction:
     )
     def __init__(
         self,
-        name,
+        name: str,
         t0,
         ch=None,
         conditional=None,
@@ -120,7 +120,7 @@ class PulseQobjInstruction:
         register_slot=None,
         kernels=None,
         discriminators=None,
-        label=None,
+        label: Optional[str] = None,
         type=None,
         pulse_shape=None,
         parameters=None,
@@ -314,7 +314,7 @@ class PulseQobjConfig(QobjDictField):
         pulse_library,
         qubit_lo_freq,
         meas_lo_freq,
-        memory_slot_size=None,
+        memory_slot_size: Optional[int] = None,
         rep_time=None,
         rep_delay=None,
         shots=None,
@@ -541,7 +541,7 @@ class PulseLibraryItem:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, name, samples) -> None:
+    def __init__(self, name: str, samples) -> None:
         """Instantiate a pulse library item.
 
         Args:

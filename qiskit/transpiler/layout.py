@@ -301,7 +301,7 @@ class Layout:
         return layout
 
     @staticmethod
-    def from_intlist(int_list, *qregs):
+    def from_intlist(int_list: List[int], *qregs):
         """Converts a list of integers to a Layout
         mapping virtual qubits (index of the list) to
         physical qubits (the list values).

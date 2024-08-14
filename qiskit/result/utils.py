@@ -99,7 +99,7 @@ def marginal_counts(
         return marg_counts
 
 
-def _adjust_creg_sizes(creg_sizes, indices):
+def _adjust_creg_sizes(creg_sizes: Sequence[int], indices):
     """Helper to reduce creg_sizes to match indices"""
 
     # Zero out creg_sizes list
@@ -290,6 +290,6 @@ def _format_marginal(counts, marg_counts, indices):
     return format_counts
 
 
-def _remove_space_underscore(bitstring):
+def _remove_space_underscore(bitstring: str):
     """Removes all spaces and underscores from bitstring"""
     return bitstring.replace(" ", "").replace("_", "")

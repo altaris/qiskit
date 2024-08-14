@@ -484,7 +484,7 @@ def trace_to_fid(trace):
     return (4 + abs(trace) ** 2) / 20
 
 
-def rz_array(theta):
+def rz_array(theta: float):
     """Return numpy array for Rz(theta).
 
     Rz(theta) = diag(exp(-i*theta/2),exp(i*theta/2))

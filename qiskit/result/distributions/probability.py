@@ -12,6 +12,7 @@
 """Class for probability distributions."""
 
 import re
+from typing import Optional
 
 
 # NOTE: A dict subclass should not overload any dunder methods like __getitem__
@@ -72,7 +73,7 @@ class ProbDistribution(dict):
                 raise TypeError("Input data's keys are of invalid type, must be str or int")
         super().__init__(data)
 
-    def binary_probabilities(self, num_bits=None):
+    def binary_probabilities(self, num_bits: Optional[int] = None):
         """Build a probabilities dictionary with binary string keys
 
         Parameters:

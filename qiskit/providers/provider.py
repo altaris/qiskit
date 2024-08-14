@@ -13,6 +13,7 @@
 """Base class for a provider."""
 
 from abc import ABC, abstractmethod
+from typing import Optional
 
 from qiskit.providers.exceptions import QiskitBackendNotFoundError
 from qiskit.utils import deprecate_func
@@ -50,7 +51,7 @@ class ProviderV1(Provider, ABC):
         "removed in 2.0. You can just remove it as the parent class and a `get_backend` "
         "method that returns the backends from `self.backend`.",
     )
-    def get_backend(self, name=None, **kwargs):
+    def get_backend(self, name: Optional[str] = None, **kwargs):
         """Return a single backend matching the specified filtering.
 
         Args:
@@ -73,7 +74,7 @@ class ProviderV1(Provider, ABC):
         return backends[0]
 
     @abstractmethod
-    def backends(self, name=None, **kwargs):
+    def backends(self, name: Optional[str] = None, **kwargs):
         """Return a list of backends matching the specified filtering.
 
         Args:

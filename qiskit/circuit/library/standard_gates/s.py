@@ -292,7 +292,7 @@ class CSGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CS gate."""
         super().__init__(
@@ -380,7 +380,7 @@ class CSdgGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CSdg gate."""
         super().__init__(

@@ -41,7 +41,7 @@ class ControlledGate(Gate):
         duration=None,
         unit=None,
         *,
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create a new ControlledGate. In the new gate the first ``num_ctrl_qubits``
         of the gate are the controls.
@@ -174,7 +174,7 @@ class ControlledGate(Gate):
         return self._num_ctrl_qubits
 
     @num_ctrl_qubits.setter
-    def num_ctrl_qubits(self, num_ctrl_qubits):
+    def num_ctrl_qubits(self, num_ctrl_qubits: int):
         """Set the number of control qubits.
 
         Args:

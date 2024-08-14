@@ -12,6 +12,8 @@
 
 """Internal utils for Classical Function Compiler"""
 
+from typing import Optional
+
 from qiskit.utils.optionals import HAS_TWEEDLEDUM
 
 from qiskit.circuit import QuantumCircuit
@@ -62,7 +64,7 @@ def _convert_tweedledum_operator(op):
 
 
 @HAS_TWEEDLEDUM.require_in_call
-def tweedledum2qiskit(tweedledum_circuit, name=None, qregs=None):
+def tweedledum2qiskit(tweedledum_circuit, name: Optional[str] = None, qregs=None):
     """Converts a `Tweedledum <https://github.com/boschmitt/tweedledum>`_
     circuit into a Qiskit circuit.
     Args:

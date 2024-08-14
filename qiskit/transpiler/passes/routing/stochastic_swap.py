@@ -15,6 +15,7 @@
 import itertools
 import logging
 from math import inf
+from typing import Optional
 import numpy as np
 
 from qiskit.converters import dag_to_circuit, circuit_to_dag
@@ -41,6 +42,7 @@ from qiskit.transpiler.passes.layout import disjoint_utils
 
 from .utils import get_swap_map_dag
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -60,7 +62,12 @@ class StochasticSwap(TransformationPass):
     """
 
     def __init__(
-        self, coupling_map, trials: int = 20, seed=None, fake_run: bool = False, initial_layout=None
+        self,
+        coupling_map,
+        trials: int = 20,
+        seed: Optional[int] = None,
+        fake_run: bool = False,
+        initial_layout=None,
     ) -> None:
         """StochasticSwap initializer.
 

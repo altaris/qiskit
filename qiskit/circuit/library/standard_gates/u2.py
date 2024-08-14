@@ -130,7 +130,7 @@ class U2Gate(Gate):
         """
         return U2Gate(-self.params[1] - pi, -self.params[0] + pi)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a Numpy.array for the U2 gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

@@ -124,7 +124,7 @@ class Options(Mapping):
 
     # SimpleNamespace-like access to options:
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         # This does not interrupt the normal lookup of things like methods or `_fields`, because
         # those are successfully resolved by the normal Python lookup apparatus.  If we are here,
         # then lookup has failed, so we must be looking for an option.  If the user has manually

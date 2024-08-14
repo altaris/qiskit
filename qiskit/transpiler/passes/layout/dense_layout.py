@@ -105,7 +105,7 @@ class DenseLayout(AnalysisPass):
         }
         return layout_mapping
 
-    def _best_subset(self, num_qubits, num_meas, num_cx, coupling_map):
+    def _best_subset(self, num_qubits: int, num_meas: int, num_cx, coupling_map):
         """Computes the qubit mapping with the best connectivity.
 
         Args:
@@ -148,7 +148,9 @@ class DenseLayout(AnalysisPass):
         return best_map
 
 
-def _build_error_matrix(num_qubits, qubit_map, target=None, coupling_map=None, backend_prop=None):
+def _build_error_matrix(
+    num_qubits: int, qubit_map, target=None, coupling_map=None, backend_prop=None
+):
     error_mat = np.zeros((num_qubits, num_qubits))
     use_error = False
     if target is not None and target.qargs is not None:

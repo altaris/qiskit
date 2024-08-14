@@ -48,7 +48,7 @@ _supported_ops = {
 
 
 @lru_cache(maxsize=None)
-def _identity_op(num_qubits):
+def _identity_op(num_qubits: int):
     """Cached identity matrix"""
     return Operator(
         np.eye(2**num_qubits), input_dims=(2,) * num_qubits, output_dims=(2,) * num_qubits

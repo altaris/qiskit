@@ -202,7 +202,7 @@ class UCGate(Gate):
         return uc_gate.dec_ucg_help(single_qubit_gates, self.num_qubits)
 
     @staticmethod
-    def _rz(alpha):
+    def _rz(alpha: float):
         return np.array([[np.exp(1j * alpha / 2), 0], [0, np.exp(-1j * alpha / 2)]])
 
     def validate_parameter(self, parameter):

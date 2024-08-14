@@ -128,6 +128,7 @@ import functools
 import textwrap
 import pydoc
 from collections.abc import Callable
+from typing import Optional
 
 import numpy as np
 
@@ -147,7 +148,7 @@ def functional_pulse(func: Callable) -> Callable:
     """
 
     @functools.wraps(func)
-    def to_pulse(duration, *args, name=None, **kwargs):
+    def to_pulse(duration, *args, name: Optional[str] = None, **kwargs):
         """Return Waveform."""
         if isinstance(duration, (int, np.integer)) and duration > 0:
             samples = func(duration, *args, **kwargs)

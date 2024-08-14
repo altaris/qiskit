@@ -16,7 +16,7 @@ Optimized list of Pauli operators
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Literal
+from typing import Optional, Literal
 
 import numpy as np
 import rustworkx as rx
@@ -148,7 +148,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         """Return settings."""
         return {"data": self.to_labels()}
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Convert to numpy array"""
         if copy is False:
             raise ValueError("cannot provide a matrix without calculation")

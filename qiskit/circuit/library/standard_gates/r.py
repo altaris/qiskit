@@ -96,7 +96,7 @@ class RGate(Gate):
         """
         return RGate(-self.params[0], self.params[1])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the R gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

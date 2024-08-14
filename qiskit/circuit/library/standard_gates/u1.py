@@ -13,6 +13,7 @@
 """U1 Gate."""
 from __future__ import annotations
 from cmath import exp
+from typing import Optional
 import numpy
 from qiskit.circuit.controlledgate import ControlledGate
 from qiskit.circuit.gate import Gate
@@ -163,7 +164,7 @@ class U1Gate(Gate):
         """
         return U1Gate(-self.params[0])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the U1 gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -218,7 +219,7 @@ class CU1Gate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CU1 gate."""
         super().__init__(
@@ -311,7 +312,7 @@ class CU1Gate(ControlledGate):
         """
         return CU1Gate(-self.params[0], ctrl_state=self.ctrl_state)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the CU1 gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -360,7 +361,7 @@ class MCU1Gate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new MCU1 gate."""
         super().__init__(

@@ -205,7 +205,7 @@ class ConsolidateBlocks(TransformationPass):
             node.op = node.op.replace_blocks(pass_manager.run(block) for block in node.op.blocks)
         return dag
 
-    def _check_not_in_basis(self, dag, gate_name, qargs):
+    def _check_not_in_basis(self, dag, gate_name: str, qargs):
         if self.target is not None:
             return not self.target.instruction_supported(
                 gate_name, tuple(dag.find_bit(qubit).index for qubit in qargs)

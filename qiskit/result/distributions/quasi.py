@@ -13,6 +13,7 @@
 
 from math import sqrt
 import re
+from typing import Optional
 
 from .probability import ProbDistribution
 
@@ -118,7 +119,7 @@ class QuasiDistribution(dict):
             return ProbDistribution(new_probs, self.shots), sqrt(diff)
         return ProbDistribution(new_probs, self.shots)
 
-    def binary_probabilities(self, num_bits=None):
+    def binary_probabilities(self, num_bits: Optional[int] = None):
         """Build a quasi-probabilities dictionary with binary string keys
 
         Parameters:

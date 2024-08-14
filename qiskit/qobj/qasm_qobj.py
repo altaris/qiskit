@@ -14,6 +14,7 @@
 
 import copy
 import pprint
+from typing import Optional
 from types import SimpleNamespace
 from qiskit.circuit.parameterexpression import ParameterExpression
 from qiskit.qobj.pulse_qobj import PulseQobjInstruction, PulseLibraryItem
@@ -34,14 +35,14 @@ class QasmQobjInstruction:
     )
     def __init__(
         self,
-        name,
+        name: str,
         params=None,
         qubits=None,
         register=None,
         memory=None,
         condition=None,
         conditional=None,
-        label=None,
+        label: Optional[str] = None,
         mask=None,
         relation=None,
         val=None,
@@ -310,7 +311,7 @@ class QasmQobjConfig(SimpleNamespace):
         meas_level=None,
         meas_return=None,
         memory_slots=None,
-        n_qubits=None,
+        n_qubits: Optional[int] = None,
         pulse_library=None,
         calibrations=None,
         rep_delay=None,
@@ -535,7 +536,7 @@ class GateCalibration:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, name, qubits, params, instructions) -> None:
+    def __init__(self, name: str, qubits, params, instructions) -> None:
         """
         Initialize a single gate calibration. Instructions may reference waveforms which should be
         made available in the pulse_library.

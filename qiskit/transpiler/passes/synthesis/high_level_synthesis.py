@@ -297,7 +297,7 @@ class HLSConfig:
         for key, value in kwargs.items():
             self.set_methods(key, value)
 
-    def set_methods(self, hls_name, hls_methods) -> None:
+    def set_methods(self, hls_name: str, hls_methods) -> None:
         """Sets the list of synthesis methods for a given higher-level-object. This overwrites
         the lists of methods if also set previously."""
         self.methods[hls_name] = hls_methods

@@ -14,12 +14,13 @@ Random CNOTDihedral operator functions
 """
 
 from __future__ import annotations
+from typing import Optional
 import numpy as np
 from numpy.random import default_rng
 from .dihedral import CNOTDihedral
 
 
-def random_cnotdihedral(num_qubits, seed=None):
+def random_cnotdihedral(num_qubits: int, seed: Optional[int] = None):
     """Return a random CNOTDihedral element.
 
     Args:

@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from typing import Optional
 
 from qiskit import circuit
 from qiskit.circuit import ControlledGate, Gate, QuantumRegister, QuantumCircuit
@@ -143,7 +144,11 @@ class MCMT(QuantumCircuit):
         return base_gate
 
     def control(
-        self, num_ctrl_qubits: int = 1, label=None, ctrl_state=None, annotated: bool = False
+        self,
+        num_ctrl_qubits: int = 1,
+        label: Optional[str] = None,
+        ctrl_state=None,
+        annotated: bool = False,
     ):
         """Return the controlled version of the MCMT circuit."""
         if not annotated and ctrl_state is None:

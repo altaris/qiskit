@@ -34,7 +34,7 @@ class Nduv:
         value: value.
     """
 
-    def __init__(self, date, name, unit, value) -> None:
+    def __init__(self, date, name: str, unit, value) -> None:
         """Initialize a new name-date-unit-value object
 
         Args:
@@ -113,7 +113,7 @@ class GateProperties:
         self.parameters = parameters
         self._data.update(kwargs)
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._data[name]
         except KeyError as ex:
@@ -183,7 +183,7 @@ class BackendProperties:
         stacklevel=3,
     )
     def __init__(
-        self, backend_name, backend_version, last_update_date, qubits, gates, general, **kwargs
+        self, backend_name: str, backend_version, last_update_date, qubits, gates, general, **kwargs
     ) -> None:
         """Initialize a BackendProperties instance.
 
@@ -229,7 +229,7 @@ class BackendProperties:
             self._gates[gate.gate][tuple(gate.qubits)] = formatted_props
         self._data.update(kwargs)
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._data[name]
         except KeyError as ex:

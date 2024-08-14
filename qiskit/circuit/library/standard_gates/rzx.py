@@ -205,7 +205,7 @@ class RZXGate(Gate):
         """
         return RZXGate(-self.params[0])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the RZX gate."""
         import numpy
 

@@ -45,13 +45,13 @@
 ###############################################################################
 
 """Bloch sphere"""
+from typing import Optional, Tuple, Literal
 
 __all__ = ["Bloch"]
 
 import math
 import os
 import re
-from typing import Literal
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -200,9 +200,9 @@ class Bloch:
         fig=None,
         axes=None,
         view=None,
-        figsize=None,
+        figsize: Optional[Tuple[int, int]] = None,
         background: bool = False,
-        font_size=20,
+        font_size: int = 20,
     ) -> None:
 
         # Figure and axes
@@ -431,7 +431,7 @@ class Bloch:
         else:
             self.vectors.append(vectors)
 
-    def add_annotation(self, state_or_vector, text, **kwargs):
+    def add_annotation(self, state_or_vector, text: str, **kwargs):
         """Add a text or LaTeX annotation to Bloch sphere,
         parameterized by a qubit state or a vector.
 
@@ -782,7 +782,7 @@ class Bloch:
         if self.fig:
             plt.show(self.fig)
 
-    def save(self, name=None, output: str = "png", dirc=None) -> None:
+    def save(self, name: Optional[str] = None, output: str = "png", dirc=None) -> None:
         """Saves Bloch sphere to file of type ``format`` in directory ``dirc``.
 
         Args:

@@ -208,7 +208,7 @@ class XXMinusYYGate(Gate):
         theta, beta = self.params
         return XXMinusYYGate(-theta, beta)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Gate matrix."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

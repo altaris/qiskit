@@ -11,13 +11,16 @@
 # that they have been altered from the originals.
 
 """Helper function for converting a circuit to an instruction."""
+from typing import Optional
 from qiskit.exceptions import QiskitError
 from qiskit.circuit.instruction import Instruction
 from qiskit.circuit.quantumregister import QuantumRegister
 from qiskit.circuit.classicalregister import ClassicalRegister, Clbit
 
 
-def circuit_to_instruction(circuit, parameter_map=None, equivalence_library=None, label=None):
+def circuit_to_instruction(
+    circuit, parameter_map=None, equivalence_library=None, label: Optional[str] = None
+):
     """Build an :class:`~.circuit.Instruction` object from a :class:`.QuantumCircuit`.
 
     The instruction is anonymous (not tied to a named quantum register),
@@ -32,7 +35,7 @@ def circuit_to_instruction(circuit, parameter_map=None, equivalence_library=None
            instruction.
         equivalence_library (EquivalenceLibrary): Optional equivalence library
            where the converted instruction will be registered.
-        label (str): Optional instruction label.
+        label (str, optional): Optional instruction label.
 
     Raises:
         QiskitError: if parameter_map is not compatible with circuit

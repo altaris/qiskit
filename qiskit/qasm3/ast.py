@@ -177,7 +177,7 @@ class Range(Expression):
 
 
 class Identifier(Expression):
-    def __init__(self, string) -> None:
+    def __init__(self, string: str) -> None:
         self.string = string
 
 
@@ -208,7 +208,7 @@ class BooleanLiteral(Expression):
 
 
 class BitstringLiteral(Expression):
-    def __init__(self, value, width) -> None:
+    def __init__(self, value, width: int) -> None:
         self.value = value
         self.width = width
 

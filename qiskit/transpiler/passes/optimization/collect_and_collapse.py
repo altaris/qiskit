@@ -92,7 +92,7 @@ def collect_using_filter_function(
     dag,
     filter_function,
     split_blocks,
-    min_block_size,
+    min_block_size: int,
     split_layers: bool = False,
     collect_from_back: bool = False,
 ):

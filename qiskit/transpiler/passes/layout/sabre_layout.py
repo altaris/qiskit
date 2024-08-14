@@ -18,6 +18,7 @@ import dataclasses
 import logging
 import functools
 import time
+from typing import Optional
 
 import numpy as np
 import rustworkx as rx
@@ -40,6 +41,7 @@ from qiskit.transpiler.passes.routing.sabre_swap import _build_sabre_dag, _apply
 from qiskit.transpiler.target import Target
 from qiskit.transpiler.coupling import CouplingMap
 from qiskit.utils.parallel import CPU_COUNT
+
 
 logger = logging.getLogger(__name__)
 
@@ -110,7 +112,7 @@ class SabreLayout(TransformationPass):
         self,
         coupling_map,
         routing_pass=None,
-        seed=None,
+        seed: Optional[int] = None,
         max_iterations: int = 3,
         swap_trials=None,
         layout_trials=None,

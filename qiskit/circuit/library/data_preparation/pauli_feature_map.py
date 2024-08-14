@@ -238,13 +238,13 @@ class PauliFeatureMap(NLocal):
         x = np.asarray(x)
         return x[where_non_i]
 
-    def pauli_block(self, pauli_string):
+    def pauli_block(self, pauli_string: str):
         """Get the Pauli block for the feature map circuit."""
         params = ParameterVector("_", length=len(pauli_string))
         time = self._data_map_func(np.asarray(params))
         return self.pauli_evolution(pauli_string, time)
 
-    def pauli_evolution(self, pauli_string, time):
+    def pauli_evolution(self, pauli_string: str, time):
         """Get the evolution block for the given pauli string."""
         # for some reason this is in reversed order
         pauli_string = pauli_string[::-1]

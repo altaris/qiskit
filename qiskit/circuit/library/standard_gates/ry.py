@@ -132,7 +132,7 @@ class RYGate(Gate):
         """
         return RYGate(-self.params[0])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the RY gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -218,7 +218,7 @@ class CRYGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CRY gate."""
         super().__init__(
@@ -275,7 +275,7 @@ class CRYGate(ControlledGate):
         ."""
         return CRYGate(-self.params[0], ctrl_state=self.ctrl_state)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the CRY gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

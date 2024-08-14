@@ -21,7 +21,7 @@ from qiskit.exceptions import QiskitError
 from qiskit.circuit.exceptions import CircuitError
 
 
-def _compute_control_matrix(base_mat, num_ctrl_qubits, ctrl_state=None):
+def _compute_control_matrix(base_mat, num_ctrl_qubits: int, ctrl_state=None):
     r"""
     Compute the controlled version of the input matrix with qiskit ordering.
     This function computes the controlled unitary with :math:`n` control qubits
@@ -65,7 +65,7 @@ def _compute_control_matrix(base_mat, num_ctrl_qubits, ctrl_state=None):
     return full_mat
 
 
-def _ctrl_state_to_int(ctrl_state, num_ctrl_qubits):
+def _ctrl_state_to_int(ctrl_state, num_ctrl_qubits: int):
     """Convert ctrl_state to int.
 
     Args:
@@ -106,7 +106,7 @@ def with_gate_array(base_array):
     nonwritable = numpy.array(base_array, dtype=numpy.complex128)
     nonwritable.setflags(write=False)
 
-    def __array__(_self, dtype=None, copy=_numpy_compat.COPY_ONLY_IF_NEEDED):
+    def __array__(_self, dtype=None, copy: bool = _numpy_compat.COPY_ONLY_IF_NEEDED):
         dtype = nonwritable.dtype if dtype is None else dtype
         return numpy.array(nonwritable, dtype=dtype, copy=copy)
 
@@ -119,7 +119,7 @@ def with_gate_array(base_array):
     return decorator
 
 
-def with_controlled_gate_array(base_array, num_ctrl_qubits, cached_states=None):
+def with_controlled_gate_array(base_array, num_ctrl_qubits: int, cached_states=None):
     """Class decorator that adds an ``__array__`` method to a :class:`.ControlledGate` instance that
     returns singleton nonwritable views onto a relevant precomputed complex matrix for the given
     control state.
@@ -139,7 +139,7 @@ def with_controlled_gate_array(base_array, num_ctrl_qubits, cached_states=None):
     if cached_states is None:
         nonwritables = [matrix_for_control_state(state) for state in range(2**num_ctrl_qubits)]
 
-        def __array__(self, dtype=None, copy=_numpy_compat.COPY_ONLY_IF_NEEDED):
+        def __array__(self, dtype=None, copy: bool = _numpy_compat.COPY_ONLY_IF_NEEDED):
             arr = nonwritables[self.ctrl_state]
             dtype = arr.dtype if dtype is None else dtype
             return numpy.array(arr, dtype=dtype, copy=copy)
@@ -147,7 +147,7 @@ def with_controlled_gate_array(base_array, num_ctrl_qubits, cached_states=None):
     else:
         nonwritables = {state: matrix_for_control_state(state) for state in cached_states}
 
-        def __array__(self, dtype=None, copy=_numpy_compat.COPY_ONLY_IF_NEEDED):
+        def __array__(self, dtype=None, copy: bool = _numpy_compat.COPY_ONLY_IF_NEEDED):
             if (arr := nonwritables.get(self.ctrl_state)) is not None:
                 dtype = arr.dtype if dtype is None else dtype
                 return numpy.array(arr, dtype=dtype, copy=copy)

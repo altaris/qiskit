@@ -220,7 +220,7 @@ def _demultiplex(um0, um1, opt_a1: bool = False, opt_a2: bool = False, *, _depth
     return circ
 
 
-def _get_ucry_cz(nqubits, angles):
+def _get_ucry_cz(nqubits, angles: list):
     """
     Get uniformly controlled Ry gate in CZ-Ry as in UCPauliRotGate.
     """

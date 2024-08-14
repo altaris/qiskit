@@ -24,7 +24,7 @@ class Quaternion:
     def __init__(self, data) -> None:
         self.data = np.asarray(data, dtype=float)
 
-    def __call__(self, idx):
+    def __call__(self, idx: int):
         return self.data[idx]
 
     def __repr__(self) -> str:

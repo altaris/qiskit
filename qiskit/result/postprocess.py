@@ -12,28 +12,29 @@
 
 """Post-processing of raw result."""
 
+from typing import Any, Dict, Sequence
 import numpy as np
 
 from qiskit.exceptions import QiskitError
 
 
-def _hex_to_bin(hexstring):
+def _hex_to_bin(hexstring: str):
     """Convert hexadecimal readouts (memory) to binary readouts."""
     return str(bin(int(hexstring, 16)))[2:]
 
 
-def _bin_to_hex(bitstring):
+def _bin_to_hex(bitstring: str):
     """Convert bitstring readouts (memory) to hexadecimal readouts."""
     return hex(int(bitstring, 2))
 
 
-def _pad_zeros(bitstring, memory_slots):
+def _pad_zeros(bitstring: str, memory_slots):
     """If the bitstring is truncated, pad extra zeros to make its
     length equal to memory_slots"""
     return format(int(bitstring, 2), f"0{memory_slots}b")
 
 
-def _separate_bitstring(bitstring, creg_sizes):
+def _separate_bitstring(bitstring: str, creg_sizes: Sequence[int]):
     """Separate a bitstring according to the registers defined in the result header."""
     substrings = []
     running_index = 0
@@ -152,7 +153,7 @@ def format_level_2_memory(memory, header=None):
     return memory_list
 
 
-def format_counts(counts, header=None):
+def format_counts(counts: Dict[Any, int], header=None):
     """Format a single experiment result coming from backend to present
     to the Qiskit user.
 

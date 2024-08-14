@@ -13,6 +13,7 @@
 """Export tools for OpenQASM 2."""
 
 from __future__ import annotations
+from typing import Sequence
 
 __all__ = ["dump", "dumps"]
 
@@ -261,7 +262,7 @@ def _instruction_call_site(operation):
 _FIXED_PARAMETERS = [Parameter("param0"), Parameter("param1"), Parameter("param2")]
 
 
-def _custom_operation_statement(instruction, gates_to_define, bit_labels):
+def _custom_operation_statement(instruction, gates_to_define, bit_labels: Sequence[str]):
     operation = _define_custom_operation(instruction.operation, gates_to_define)
     # Insert qasm representation of the original instruction
     if instruction.clbits:

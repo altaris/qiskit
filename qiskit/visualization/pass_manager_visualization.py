@@ -189,7 +189,7 @@ def staged_pass_manager_drawer(pass_manager, filename=None, style=None, raw: boo
     return output
 
 
-def draw_subgraph(controller_group, component_id, style, prev_node, idx):
+def draw_subgraph(controller_group, component_id, style, prev_node, idx: int):
     """Draw subgraph."""
     import pydot
 

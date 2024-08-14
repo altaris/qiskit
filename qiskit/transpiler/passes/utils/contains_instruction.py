@@ -12,6 +12,7 @@
 
 """Check if a property reached a fixed point."""
 
+from typing import Iterable, Union
 from qiskit.transpiler.basepasses import AnalysisPass
 
 
@@ -23,7 +24,7 @@ class ContainsInstruction(AnalysisPass):
     that instruction and ``False`` if it does not.
     """
 
-    def __init__(self, instruction_name, recurse: bool = True) -> None:
+    def __init__(self, instruction_name: Union[str, Iterable[str]], recurse: bool = True) -> None:
         """ContainsInstruction initializer.
 
         Args:

@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import math
+from typing import Sequence
 
 import numpy as np
 
@@ -130,7 +131,7 @@ class UCPauliRotGate(Gate):
         return circuit
 
     @staticmethod
-    def _dec_uc_rotations(angles, start_index, end_index, reversed_dec) -> None:
+    def _dec_uc_rotations(angles: Sequence[float], start_index, end_index, reversed_dec) -> None:
         """
         Calculates rotation angles for a uniformly controlled R_t gate with a C-NOT gate at
         the end of the circuit. The rotation angles of the gate R_t are stored in

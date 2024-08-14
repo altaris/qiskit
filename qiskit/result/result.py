@@ -44,11 +44,11 @@ class Result:
 
     def __init__(
         self,
-        backend_name,
+        backend_name: str,
         backend_version,
         qobj_id,
         job_id,
-        success,
+        success: bool,
         results,
         date=None,
         status=None,
@@ -103,7 +103,7 @@ class Result:
         out_dict.update(self._metadata)
         return out_dict
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._metadata[name]
         except KeyError as ex:

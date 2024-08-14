@@ -105,7 +105,7 @@ class Statevector(QuantumState, TolerancesMixin):
                 raise QiskitError("Invalid input: not a vector or column-vector.")
         super().__init__(op_shape=OpShape.auto(shape=shape, dims_l=dims, num_qubits_r=0))
 
-    def __array__(self, dtype=None, copy=_numpy_compat.COPY_ONLY_IF_NEEDED):
+    def __array__(self, dtype=None, copy: bool = _numpy_compat.COPY_ONLY_IF_NEEDED):
         dtype = self.data.dtype if dtype is None else dtype
         return np.array(self.data, dtype=dtype, copy=copy)
 

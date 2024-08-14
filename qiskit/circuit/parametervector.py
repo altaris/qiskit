@@ -52,7 +52,7 @@ class ParameterVector:
 
     __slots__ = ("_name", "_params", "_root_uuid")
 
-    def __init__(self, name, length: int = 0) -> None:
+    def __init__(self, name: str, length: int = 0) -> None:
         self._name = name
         self._root_uuid = uuid4()
         root_uuid_int = self._root_uuid.int
@@ -89,7 +89,7 @@ class ParameterVector:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={repr(self.name)}, length={len(self)})"
 
-    def resize(self, length) -> None:
+    def resize(self, length: int) -> None:
         """Resize the parameter vector.  If necessary, new elements are generated.
 
         Note that the UUID of each :class:`.Parameter` element will be generated

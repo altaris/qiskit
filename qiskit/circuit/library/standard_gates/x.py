@@ -225,7 +225,7 @@ class CXGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CX gate."""
         super().__init__(
@@ -377,7 +377,7 @@ class CCXGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CCX gate."""
         super().__init__(
@@ -591,7 +591,7 @@ class C3SXGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create a new 3-qubit controlled sqrt-X gate.
 
@@ -695,7 +695,7 @@ class C3XGate(SingletonControlledGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         *,
-        _base_label=None,
+        _base_label: Optional[str] = None,
         duration=None,
         unit="dt",
     ) -> None:
@@ -963,7 +963,7 @@ class C4XGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create a new 4-qubit controlled X gate."""
         if unit is None:
@@ -1104,7 +1104,7 @@ class MCXGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ):
         """Create a new MCX instance.
 
@@ -1138,8 +1138,8 @@ class MCXGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _name="mcx",
-        _base_label=None,
+        _name: str = "mcx",
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new MCX gate."""
         num_ancilla_qubits = self.__class__.get_num_ancilla_qubits(num_ctrl_qubits)
@@ -1255,7 +1255,7 @@ class MCXGrayCode(MCXGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ):
         """Create a new MCXGrayCode instance"""
         # if 1 to 4 control qubits, create explicit gates
@@ -1338,7 +1338,7 @@ class MCXRecursive(MCXGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         super().__init__(
             num_ctrl_qubits,
@@ -1391,7 +1391,7 @@ class MCXVChain(MCXGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
         relative_phase: bool = False,  # pylint: disable=unused-argument
         action_only: bool = False,  # pylint: disable=unused-argument
     ):
@@ -1418,7 +1418,7 @@ class MCXVChain(MCXGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
         relative_phase: bool = False,
         action_only: bool = False,
     ) -> None:

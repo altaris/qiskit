@@ -277,7 +277,7 @@ class CSXGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CSX gate."""
         super().__init__(

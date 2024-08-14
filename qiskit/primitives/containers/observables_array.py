@@ -20,7 +20,7 @@ import re
 from collections import defaultdict
 from collections.abc import Iterable, Mapping as _Mapping
 from functools import lru_cache
-from typing import Union, Mapping, overload
+from typing import Optional, Union, Mapping, overload
 from numbers import Complex
 
 import numpy as np
@@ -101,7 +101,7 @@ class ObservablesArray(ShapedMixin):
         """Convert to a nested list"""
         return self._array.tolist()
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Convert to an Numpy.ndarray"""
         if dtype is None or dtype == object:
             return self._array.copy() if copy else self._array

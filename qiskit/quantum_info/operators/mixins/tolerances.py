@@ -28,7 +28,7 @@ class TolerancesMeta(ABCMeta):
         cls._MAX_TOL = 1e-4
         super().__init__(cls, args, kwargs)
 
-    def _check_value(cls, value, value_name):
+    def _check_value(cls, value, value_name: str):
         """Check if value is within valid ranges"""
         if value < 0:
             raise QiskitError(f"Invalid {value_name} ({value}) must be non-negative.")

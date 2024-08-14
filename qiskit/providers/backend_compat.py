@@ -152,7 +152,7 @@ def convert_to_target(
     # Populate instruction properties
     if properties:
 
-        def _get_value(prop_dict, prop_name):
+        def _get_value(prop_dict, prop_name: str):
             if ndval := prop_dict.get(prop_name, None):
                 return ndval[0]
             return None

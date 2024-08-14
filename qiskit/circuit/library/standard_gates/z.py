@@ -193,7 +193,7 @@ class CZGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CZ gate."""
         super().__init__(
@@ -295,7 +295,7 @@ class CCZGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CCZ gate."""
         super().__init__(

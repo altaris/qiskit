@@ -439,7 +439,7 @@ def _parse_coupling_map(coupling_map):
         return coupling_map
 
 
-def _parse_output_name(output_name, circuits):
+def _parse_output_name(output_name: Union[str, List[str], None], circuits):
     # naming and returning circuits
     # output_name could be either a string or a list
     if output_name is not None:

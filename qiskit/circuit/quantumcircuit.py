@@ -5974,7 +5974,9 @@ class QuantumCircuit:
         label: str | None,
     ) -> InstructionSet: ...
 
-    def while_loop(self, condition, body=None, qubits=None, clbits=None, *, label=None):
+    def while_loop(
+        self, condition, body=None, qubits=None, clbits=None, *, label: Optional[str] = None
+    ):
         """Create a ``while`` loop on this circuit.
 
         There are two forms for calling this function.  If called with all its arguments (with the
@@ -6062,7 +6064,14 @@ class QuantumCircuit:
     ) -> InstructionSet: ...
 
     def for_loop(
-        self, indexset, loop_parameter=None, body=None, qubits=None, clbits=None, *, label=None
+        self,
+        indexset,
+        loop_parameter=None,
+        body=None,
+        qubits=None,
+        clbits=None,
+        *,
+        label: Optional[str] = None,
     ):
         """Create a ``for`` loop on this circuit.
 
@@ -6149,7 +6158,7 @@ class QuantumCircuit:
         qubits=None,
         clbits=None,
         *,
-        label=None,
+        label: Optional[str] = None,
     ):
         """Create an ``if`` statement on this circuit.
 
@@ -6268,7 +6277,7 @@ class QuantumCircuit:
             false_body: The circuit to be run if ``condition`` is false.
             qubits: The circuit qubits over which the if/else should be run.
             clbits: The circuit clbits over which the if/else should be run.
-            label: The string label of the instruction in the circuit.
+            label (Optional[str]): The string label of the instruction in the circuit.
 
         Raises:
             CircuitError: If the provided condition references Clbits outside the
@@ -6309,7 +6318,7 @@ class QuantumCircuit:
         label: Optional[str],
     ) -> InstructionSet: ...
 
-    def switch(self, target, cases=None, qubits=None, clbits=None, *, label=None):
+    def switch(self, target, cases=None, qubits=None, clbits=None, *, label: Optional[str] = None):
         """Create a ``switch``/``case`` structure on this circuit.
 
         There are two forms for calling this function.  If called with all its arguments (with the
@@ -6637,7 +6646,7 @@ class _OuterCircuitScopeInterface(CircuitScopeInterface):
     def remove_var(self, var) -> None:
         self.circuit._vars_local.pop(var.name)
 
-    def get_var(self, name):
+    def get_var(self, name: str):
         if (out := self.circuit._vars_local.get(name)) is not None:
             return out
         if (out := self.circuit._vars_capture.get(name)) is not None:

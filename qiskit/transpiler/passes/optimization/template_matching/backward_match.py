@@ -343,7 +343,7 @@ class BackwardMatch:
 
         return circuit_matched, circuit_blocked, template_matched, template_blocked
 
-    def _backward_heuristics(self, gate_indices, length, survivor) -> None:
+    def _backward_heuristics(self, gate_indices, length: int, survivor) -> None:
         """
         Heuristics to cut the tree in the backward match algorithm
         Args:

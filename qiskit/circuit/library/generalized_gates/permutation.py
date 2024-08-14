@@ -17,6 +17,8 @@ gate (the new way to specify permutations, allowing a variety of synthesis algor
 
 from __future__ import annotations
 
+from typing import Optional
+
 import numpy as np
 
 from qiskit.circuit.quantumcircuit import QuantumCircuit
@@ -145,7 +147,7 @@ class PermutationGate(Gate):
 
         super().__init__(name="permutation", num_qubits=num_qubits, params=[pattern])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the Permutation gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

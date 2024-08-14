@@ -17,6 +17,7 @@ ScalarOp class
 from __future__ import annotations
 import copy as _copy
 from numbers import Number
+from typing import Optional
 import numpy as np
 
 from qiskit.exceptions import QiskitError
@@ -52,7 +53,7 @@ class ScalarOp(LinearOp):
         self._coeff = coeff
         super().__init__(input_dims=dims, output_dims=dims)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         if copy is False:
             raise ValueError("could not produce matrix without calculation")
         arr = self.to_matrix()

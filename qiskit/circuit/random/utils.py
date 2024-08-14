@@ -12,6 +12,7 @@
 
 """Utility functions for generating random circuits."""
 
+from typing import Optional, Union
 import numpy as np
 
 from qiskit.circuit import ClassicalRegister, QuantumCircuit, CircuitInstruction
@@ -22,13 +23,13 @@ from qiskit.quantum_info.operators.symplectic.clifford_circuits import _BASIS_1Q
 
 
 def random_circuit(
-    num_qubits,
-    depth,
+    num_qubits: int,
+    depth: int,
     max_operands: int = 4,
     measure: bool = False,
     conditional: bool = False,
     reset: bool = False,
-    seed=None,
+    seed: Optional[int] = None,
     num_operand_distribution: dict = None,
 ):
     """Generate random circuit of arbitrary size and form.
@@ -288,7 +289,9 @@ def random_circuit(
     return qc
 
 
-def random_clifford_circuit(num_qubits, num_gates, gates="all", seed=None):
+def random_clifford_circuit(
+    num_qubits: int, num_gates: int, gates="all", seed: Union[int, np.random.Generator, None] = None
+):
     """Generate a pseudo-random Clifford circuit.
 
     This function will generate a Clifford circuit by randomly selecting the chosen amount of Clifford

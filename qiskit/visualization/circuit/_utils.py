@@ -334,7 +334,7 @@ def get_condition_label_val(condition, circuit, cregbundle):
     return label, val_bits
 
 
-def fix_special_characters(label):
+def fix_special_characters(label: str):
     """
     Convert any special characters for mpl and latex drawers.
     Currently only checks for multiple underscores in register names
@@ -351,7 +351,7 @@ def fix_special_characters(label):
 
 
 @_optionals.HAS_PYLATEX.require_in_call("the latex and latex_source circuit drawers")
-def generate_latex_label(label):
+def generate_latex_label(label: str):
     """Convert a label to a valid latex string."""
     from pylatexenc.latexencode import utf8tolatex
 

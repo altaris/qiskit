@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 from cmath import exp
+from typing import Optional
 import numpy
 from qiskit.circuit.controlledgate import ControlledGate
 from qiskit.circuit.gate import Gate
@@ -143,7 +144,7 @@ class PhaseGate(Gate):
         """
         return PhaseGate(-self.params[0])
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the Phase gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -210,7 +211,7 @@ class CPhaseGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CPhase gate."""
         super().__init__(
@@ -286,7 +287,7 @@ class CPhaseGate(ControlledGate):
         r"""Return inverted CPhase gate (:math:`CPhase(\lambda)^{\dagger} = CPhase(-\lambda)`)"""
         return CPhaseGate(-self.params[0], ctrl_state=self.ctrl_state)
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the CPhase gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -344,7 +345,7 @@ class MCPhaseGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new MCPhase gate."""
         super().__init__(

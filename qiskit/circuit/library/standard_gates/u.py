@@ -149,7 +149,7 @@ class UGate(Gate):
             )
         return gate
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the U gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
@@ -285,7 +285,7 @@ class CUGate(ControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CU gate."""
         super().__init__(
@@ -354,7 +354,7 @@ class CUGate(ControlledGate):
             ctrl_state=self.ctrl_state,
         )
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         """Return a numpy.array for the CU gate."""
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")

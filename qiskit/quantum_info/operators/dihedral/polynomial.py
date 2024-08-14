@@ -30,7 +30,7 @@ class SpecialPolynomial:
     Maximum degree 3, n Z_2 variables, coefficients in Z_8.
     """
 
-    def __init__(self, n_vars) -> None:
+    def __init__(self, n_vars: int) -> None:
         """Construct the zero polynomial on n_vars variables."""
         #   1 constant term
         #   n linear terms x_1, ..., x_n

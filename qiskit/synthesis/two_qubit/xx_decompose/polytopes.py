@@ -68,7 +68,7 @@ def polytope_has_element(polytope, point):
     )
 
 
-def manual_get_vertex(polytope, seed=42):
+def manual_get_vertex(polytope, seed: int | None = 42):
     """
     Returns a single random vertex from `polytope`.
     """

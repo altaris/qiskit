@@ -14,7 +14,7 @@
 
 import dataclasses
 import math
-from typing import Iterable, Callable
+from typing import Optional, Iterable, Callable
 
 import numpy as np
 
@@ -110,7 +110,7 @@ def _generate_delay(time: float):
 
 
 class _U0Gate(Gate):
-    def __init__(self, count) -> None:
+    def __init__(self, count: int) -> None:
         if int(count) != count:
             raise QASM2ParseError("the number of single-qubit delay lengths must be an integer")
         super().__init__("u0", 1, [int(count)])
@@ -289,7 +289,7 @@ class _DefinedGate(Gate):
     """A gate object defined by a `gate` statement in an OpenQASM 2 program.  This object lazily
     binds its parameters to its definition, so it is only synthesized when required."""
 
-    def __init__(self, name, num_qubits, params, gates, bytecode) -> None:
+    def __init__(self, name: str, num_qubits: int, params, gates, bytecode) -> None:
         self._gates = gates
         self._bytecode = bytecode
         super().__init__(name, num_qubits, list(params))
@@ -318,7 +318,7 @@ class _DefinedGate(Gate):
                 raise ValueError(f"received invalid bytecode to build gate: {op}")
         self._definition = qc
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
         return np.asarray(Operator(self.definition), dtype=dtype)
@@ -338,7 +338,7 @@ class _DefinedGate(Gate):
         self._condition = condition
 
 
-def _gate_builder(name, num_qubits, known_gates, bytecode):
+def _gate_builder(name: str, num_qubits: int, known_gates, bytecode):
     """Create a gate-builder function of the signature `*params -> Gate` for a gate with a given
     `name`.  This produces a `_DefinedGate` class, whose `_define` method runs through the given
     `bytecode` using the current list of `known_gates` to interpret the gate indices.
@@ -351,7 +351,7 @@ def _gate_builder(name, num_qubits, known_gates, bytecode):
     return definer
 
 
-def _opaque_builder(name, num_qubits):
+def _opaque_builder(name: str, num_qubits: int):
     """Create a gate-builder function of the signature `*params -> Gate` for an opaque gate with a
     given `name`, which takes the given numbers of qubits."""
 

@@ -29,6 +29,7 @@ References:
 """
 
 from copy import deepcopy
+from typing import Sequence
 import numpy as np
 
 from qiskit.circuit import QuantumCircuit
@@ -55,7 +56,7 @@ def _initialize_phase_schedule(mat_z):
     return phase_schedule
 
 
-def _shuffle(labels, odd):
+def _shuffle(labels: Sequence[int], odd):
     """
     Args:
         labels : a list of indices

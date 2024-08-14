@@ -12,6 +12,7 @@
 
 """Two-qubit ZX-rotation gate."""
 from math import sqrt
+from typing import Optional
 import numpy as np
 
 from qiskit.circuit._utils import with_gate_array
@@ -87,7 +88,7 @@ class ECRGate(SingletonGate):
 
     _standard_gate = StandardGate.ECRGate
 
-    def __init__(self, label=None, *, duration=None, unit="dt") -> None:
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new ECR gate."""
         super().__init__("ecr", 2, [], label=label, duration=duration, unit=unit)
 

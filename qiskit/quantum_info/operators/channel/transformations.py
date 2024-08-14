@@ -407,7 +407,7 @@ def _reravel(mat1, mat2, shape1, shape2):
     return data
 
 
-def _transform_to_pauli(data, num_qubits):
+def _transform_to_pauli(data, num_qubits: int):
     """Change of basis of bipartite matrix representation."""
     # Change basis: um_{i=0}^3 |i>><\sigma_i|
     basis_mat = np.array(
@@ -428,7 +428,7 @@ def _transform_to_pauli(data, num_qubits):
     return np.dot(np.dot(cob, data), cob.conj().T) / 2**num_qubits
 
 
-def _transform_from_pauli(data, num_qubits):
+def _transform_from_pauli(data, num_qubits: int):
     """Change of basis of bipartite matrix representation."""
     # Change basis: sum_{i=0}^3 =|\sigma_i>><i|
     basis_mat = np.array(

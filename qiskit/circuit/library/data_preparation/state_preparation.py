@@ -183,7 +183,7 @@ class StatePreparation(Gate):
 
         return initialize_circuit
 
-    def _get_num_qubits(self, num_qubits, params):
+    def _get_num_qubits(self, num_qubits: int, params):
         """Get number of qubits needed for state preparation"""
         if isinstance(params, str):
             num_qubits = len(params)

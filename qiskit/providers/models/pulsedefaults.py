@@ -23,7 +23,7 @@ from qiskit.qobj.converters import QobjToInstructionConverter
 class MeasurementKernel:
     """Class representing a Measurement Kernel."""
 
-    def __init__(self, name, params) -> None:
+    def __init__(self, name: str, params) -> None:
         """Initialize a MeasurementKernel object
 
         Args:
@@ -59,7 +59,7 @@ class MeasurementKernel:
 class Discriminator:
     """Class representing a Discriminator."""
 
-    def __init__(self, name, params) -> None:
+    def __init__(self, name: str, params) -> None:
         """Initialize a Discriminator object
 
         Args:
@@ -118,7 +118,7 @@ class Command:
             self.sequence = sequence
         self._data.update(kwargs)
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._data[name]
         except KeyError as ex:
@@ -219,7 +219,7 @@ class PulseDefaults:
 
         self._data.update(kwargs)
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         try:
             return self._data[name]
         except KeyError as ex:

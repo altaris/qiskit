@@ -439,7 +439,7 @@ def _read_expr_type(file_obj) -> types.Type:
     raise exceptions.QpyError(f"Invalid classical-expression Type key '{type_key}'")
 
 
-def read_standalone_vars(file_obj, num_vars):
+def read_standalone_vars(file_obj, num_vars: int):
     """Read the ``num_vars`` standalone variable declarations from the file.
 
     Args:

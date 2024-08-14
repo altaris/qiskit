@@ -15,6 +15,7 @@ CNOTDihedral operator class.
 """
 from __future__ import annotations
 import itertools
+from typing import Optional
 import numpy as np
 
 from qiskit.exceptions import QiskitError
@@ -357,7 +358,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         _append_circuit(elem, circuit)
         return elem
 
-    def __array__(self, dtype=None, copy=None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None):
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
         arr = self.to_matrix()

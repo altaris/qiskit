@@ -17,6 +17,7 @@ import logging
 import inspect
 import itertools
 import time
+from typing import Optional
 
 from rustworkx import PyDiGraph, vf2_mapping, PyGraph
 
@@ -104,7 +105,7 @@ class VF2PostLayout(AnalysisPass):
         target=None,
         coupling_map=None,
         properties=None,
-        seed=None,
+        seed: Optional[int] = None,
         call_limit=None,
         time_limit=None,
         strict_direction: bool = True,

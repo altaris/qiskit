@@ -126,7 +126,7 @@ class TemplateMatching:
 
         return l_q, l_c
 
-    def _sublist(self, lst, exclude, length):
+    def _sublist(self, lst, exclude, length: int):
         """
         Function that returns all possible combinations of a given length, considering an
         excluded list of elements.
@@ -186,7 +186,7 @@ class TemplateMatching:
             if not already_in:
                 self.match_list.append(b_match)
 
-    def _explore_circuit(self, node_id_c, node_id_t, n_qubits_t, length):
+    def _explore_circuit(self, node_id_c, node_id_t, n_qubits_t, length: int):
         """
         Explore the successors of the node_id_c (up to the given length).
         Args:

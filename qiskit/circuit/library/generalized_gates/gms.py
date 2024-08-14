@@ -15,7 +15,7 @@
 Global Mølmer–Sørensen gate.
 """
 
-from typing import Union, List
+from typing import Optional, Union, List
 
 import numpy as np
 from qiskit.circuit.quantumcircuit import QuantumCircuit
@@ -106,7 +106,7 @@ class MSGate(Gate):
     and is thus reduced to the RXXGate.
     """
 
-    def __init__(self, num_qubits, theta, label=None) -> None:
+    def __init__(self, num_qubits: int, theta, label: Optional[str] = None) -> None:
         """Create new MS gate."""
         super().__init__("ms", num_qubits, [theta], label=label)
 

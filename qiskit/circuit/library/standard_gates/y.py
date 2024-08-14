@@ -209,7 +209,7 @@ class CYGate(SingletonControlledGate):
         *,
         duration=None,
         unit="dt",
-        _base_label=None,
+        _base_label: Optional[str] = None,
     ) -> None:
         """Create new CY gate."""
         super().__init__(

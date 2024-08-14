@@ -17,6 +17,7 @@ Abstract QuantumState class.
 from __future__ import annotations
 import copy
 from abc import abstractmethod
+from typing import Sequence
 
 import numpy as np
 
@@ -374,7 +375,7 @@ class QuantumState:
         return kets.T
 
     @staticmethod
-    def _vector_to_dict(vec, dims, decimals=None, string_labels: bool = False):
+    def _vector_to_dict(vec, dims: Sequence[int], decimals=None, string_labels: bool = False):
         """Convert a vector to a ket dictionary.
 
         This representation will not show zero values in the output dict.
@@ -405,7 +406,7 @@ class QuantumState:
         return {tuple(ket): val for ket, val in zip(kets, vals[inds])}
 
     @staticmethod
-    def _matrix_to_dict(mat, dims, decimals=None, string_labels: bool = False):
+    def _matrix_to_dict(mat, dims: Sequence[int], decimals=None, string_labels: bool = False):
         """Convert a matrix to a ket dictionary.
 
         This representation will not show zero values in the output dict.

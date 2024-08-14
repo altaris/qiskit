@@ -16,7 +16,7 @@ Visualization functions for measurement counts.
 
 from collections import OrderedDict
 import functools
-from typing import Literal
+from typing import Optional, Sequence, Literal, Tuple
 
 import numpy as np
 
@@ -59,11 +59,11 @@ def _is_deprecated_data_format(data) -> bool:
 
 def plot_histogram(
     data,
-    figsize=None,
+    figsize: Optional[Tuple[int, int]] = None,
     color=None,
     number_to_keep=None,
     sort: Literal["asc", "desc", "hamming", "value", "value_desc"] = "asc",
-    target_string=None,
+    target_string: Optional[str] = None,
     legend=None,
     bar_labels: bool = True,
     title=None,
@@ -165,11 +165,11 @@ def plot_histogram(
 
 def plot_distribution(
     data,
-    figsize=(7, 5),
+    figsize: Tuple[int, int] = (7, 5),
     color=None,
     number_to_keep=None,
     sort: Literal["asc", "desc", "hamming", "value", "value_desc"] = "asc",
-    target_string=None,
+    target_string: Optional[str] = None,
     legend=None,
     bar_labels: bool = True,
     title=None,
@@ -262,11 +262,11 @@ def plot_distribution(
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def _plotting_core(
     data,
-    figsize=(7, 5),
+    figsize: Tuple[int, int] = (7, 5),
     color=None,
     number_to_keep=None,
     sort: Literal["asc", "desc", "hamming", "value", "value_desc"] = "asc",
-    target_string=None,
+    target_string: Optional[str] = None,
     legend=None,
     bar_labels: bool = True,
     title=None,
@@ -439,7 +439,7 @@ def _unify_labels(data):
 
 def _plot_data(
     data,
-    labels,
+    labels: Sequence[str],
     number_to_keep,
     kind: Literal["counts", "distribution"] = "counts",
 ):

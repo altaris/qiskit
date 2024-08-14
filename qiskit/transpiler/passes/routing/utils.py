@@ -16,7 +16,7 @@ from qiskit.transpiler.exceptions import TranspilerError
 from .algorithms import ApproximateTokenSwapper
 
 
-def get_swap_map_dag(dag, coupling_map, from_layout, to_layout, seed, trials: int = 4):
+def get_swap_map_dag(dag, coupling_map, from_layout, to_layout, seed: int, trials: int = 4):
     """Get the circuit of swaps to go from from_layout to to_layout, and the physical qubits
     (integers) that the swap circuit should be applied on."""
     if len(dag.qregs) != 1 or dag.qregs.get("q", None) is None:

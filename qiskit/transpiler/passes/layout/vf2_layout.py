@@ -16,6 +16,7 @@ from enum import Enum
 import itertools
 import logging
 import time
+from typing import Optional
 
 from rustworkx import vf2_mapping
 
@@ -77,7 +78,7 @@ class VF2Layout(AnalysisPass):
         self,
         coupling_map=None,
         strict_direction: bool = False,
-        seed=None,
+        seed: Optional[int] = None,
         call_limit=None,
         time_limit=None,
         properties=None,

@@ -27,8 +27,8 @@ import enum
 import itertools
 import math
 from collections import OrderedDict, defaultdict, deque, namedtuple
-from collections.abc import Callable, Sequence, Generator, Iterable
-from typing import Any, Literal
+from collections.abc import Callable, Generator, Iterable
+from typing import Dict, Sequence, Any, Literal
 
 import numpy as np
 import rustworkx as rx
@@ -261,7 +261,7 @@ class DAGCircuit:
         params = tuple(params)
         return (qubits, params) in self.calibrations[node.op.name]
 
-    def remove_all_ops_named(self, opname) -> None:
+    def remove_all_ops_named(self, opname: str) -> None:
         """Remove all operation nodes with the given name."""
         for n in self.named_nodes(opname):
             self.remove_op_node(n)
@@ -608,7 +608,7 @@ class DAGCircuit:
         del self.input_map[wire]
         del self.output_map[wire]
 
-    def _check_condition(self, name, condition):
+    def _check_condition(self, name: str, condition):
         """Verify that the condition is valid.
 
         Args:
@@ -644,13 +644,13 @@ class DAGCircuit:
             if wire not in amap:
                 raise DAGCircuitError(f"wire {wire} not found in {amap}")
 
-    def _increment_op(self, op_name) -> None:
+    def _increment_op(self, op_name: str) -> None:
         if op_name in self._op_names:
             self._op_names[op_name] += 1
         else:
             self._op_names[op_name] = 1
 
-    def _decrement_op(self, op_name) -> None:
+    def _decrement_op(self, op_name: str) -> None:
         if self._op_names[op_name] == 1:
             del self._op_names[op_name]
         else:
@@ -1891,7 +1891,7 @@ class DAGCircuit:
                 nodes.append(node)
         return nodes
 
-    def named_nodes(self, *names):
+    def named_nodes(self, *names: Sequence[str]):
         """Get the set of "op" nodes with the given name."""
         named_nodes = []
         for node in self._multi_graph.nodes():
@@ -2229,7 +2229,7 @@ class DAGCircuit:
         # pylint: disable=cyclic-import
         from qiskit.converters import circuit_to_dag
 
-        def inner(dag, counts):
+        def inner(dag, counts: Dict[str, int]):
             for name, count in dag._op_names.items():
                 counts[name] += count
             for node in dag.op_nodes(ControlFlowOp):

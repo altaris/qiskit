@@ -25,7 +25,7 @@ from ..counts import Counts
 logger = logging.getLogger(__name__)
 
 
-def z_diagonal(dim, dtype=float):
+def z_diagonal(dim: int, dtype=float):
     r"""Return the diagonal for the operator :math:`Z^\otimes n`"""
     parity = np.zeros(dim, dtype=dtype)
     for i in range(dim):
@@ -60,7 +60,7 @@ def expval_with_stddev(coeffs: np.ndarray, probs: np.ndarray, shots: int) -> Tup
     return [expval, calc_stddev]
 
 
-def stddev(probs, shots):
+def stddev(probs: Dict[str, float], shots):
     """Calculate stddev dict"""
     ret = {}
     for key, prob in probs.items():
@@ -69,7 +69,7 @@ def stddev(probs, shots):
     return ret
 
 
-def str2diag(string):
+def str2diag(string: str):
     """Transform diagonal from a string to a numpy array"""
     chars = {
         "I": np.array([1, 1], dtype=float),

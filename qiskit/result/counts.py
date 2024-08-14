@@ -13,6 +13,7 @@
 """A container class for counts from a circuit execution."""
 
 import re
+from typing import Optional, Sequence
 
 from qiskit.result import postprocess
 from qiskit import exceptions
@@ -29,7 +30,9 @@ class Counts(dict):
 
     bitstring_regex = re.compile(r"^[01\s]+$")
 
-    def __init__(self, data, time_taken=None, creg_sizes=None, memory_slots=None) -> None:
+    def __init__(
+        self, data, time_taken=None, creg_sizes: Optional[Sequence[int]] = None, memory_slots=None
+    ) -> None:
         """Build a counts object
 
         Args:
@@ -180,7 +183,7 @@ class Counts(dict):
             return out_dict
 
     @staticmethod
-    def _remove_space_underscore(bitstring):
+    def _remove_space_underscore(bitstring: str):
         """Removes all spaces and underscores from bitstring"""
         return int(bitstring.replace(" ", "").replace("_", ""), 2)
 
