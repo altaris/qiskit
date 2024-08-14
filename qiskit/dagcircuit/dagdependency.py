@@ -523,7 +523,7 @@ class DAGDependency:
             dag._multi_graph.add_edge(edges[0], edges[1], edges[2])
         return dag
 
-    def draw(self, scale=0.7, filename=None, style="color"):
+    def draw(self, scale: float=0.7, filename=None, style="color"):
         """
         Draws the DAGDependency graph.
 

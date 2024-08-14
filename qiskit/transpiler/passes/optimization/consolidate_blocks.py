@@ -52,7 +52,7 @@ class ConsolidateBlocks(TransformationPass):
         kak_basis_gate=None,
         force_consolidate=False,
         basis_gates=None,
-        approximation_degree=1.0,
+        approximation_degree: float=1.0,
         target=None,
     ) -> None:
         """ConsolidateBlocks initializer.

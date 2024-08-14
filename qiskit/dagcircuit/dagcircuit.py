@@ -2318,7 +2318,7 @@ class DAGCircuit:
         }
         return summary
 
-    def draw(self, scale=0.7, filename=None, style="color"):
+    def draw(self, scale: float=0.7, filename=None, style="color"):
         """
         Draws the dag circuit.
 

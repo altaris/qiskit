@@ -34,7 +34,7 @@ _CHOP_THRESHOLD = 1e-15
 class Optimize1qGates(TransformationPass):
     """Optimize chains of single-qubit u1, u2, u3 gates by combining them into a single gate."""
 
-    def __init__(self, basis=None, eps=1e-15, target=None) -> None:
+    def __init__(self, basis=None, eps: float=1e-15, target=None) -> None:
         """Optimize1qGates initializer.
 
         Args:
@@ -339,7 +339,7 @@ class Optimize1qGates(TransformationPass):
         return (theta, phi, lamb)
 
     @staticmethod
-    def yzy_to_zyz(xi, theta1, theta2, eps=1e-9):  # pylint: disable=invalid-name
+    def yzy_to_zyz(xi, theta1, theta2, eps: float=1e-9):  # pylint: disable=invalid-name
         """Express a Y.Z.Y single qubit gate as a Z.Y.Z gate.
 
         Solve the equation

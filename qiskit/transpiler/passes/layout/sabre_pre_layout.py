@@ -37,7 +37,7 @@ class SabrePreLayout(AnalysisPass):
         self,
         coupling_map,
         max_distance: int = 2,
-        error_rate=0.1,
+        error_rate: float=0.1,
         max_trials_vf2: int = 100,
         call_limit_vf2=None,
         improve_layout=True,

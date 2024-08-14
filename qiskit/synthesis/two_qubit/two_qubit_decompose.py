@@ -417,7 +417,7 @@ class TwoQubitControlledUDecomposer:
 
         return rxx_circ
 
-    def _weyl_gate(self, circ: QuantumCircuit, atol=1.0e-13):
+    def _weyl_gate(self, circ: QuantumCircuit, atol: float=1.0e-13):
         """Appends U_d(a, b, c) to the circuit."""
 
         circ_rxx = self._to_rxx_gate(-2 * self.decomposer.a)

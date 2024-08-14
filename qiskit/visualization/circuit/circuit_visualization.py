@@ -451,7 +451,7 @@ def _text_circuit_drawer(
 @_optionals.HAS_PIL.require_in_call("LaTeX circuit drawing")
 def _latex_circuit_drawer(
     circuit,
-    scale=0.7,
+    scale: float=0.7,
     style=None,
     filename=None,
     plot_barriers=True,
@@ -571,7 +571,7 @@ def _latex_circuit_drawer(
 def _generate_latex_source(
     circuit,
     filename=None,
-    scale=0.7,
+    scale: float=0.7,
     style=None,
     reverse_bits=False,
     plot_barriers=True,

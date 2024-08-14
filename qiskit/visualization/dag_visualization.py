@@ -27,7 +27,7 @@ from .exceptions import VisualizationError
 
 
 @_optionals.HAS_GRAPHVIZ.require_in_call
-def dag_drawer(dag, scale=0.7, filename=None, style="color"):
+def dag_drawer(dag, scale: float=0.7, filename=None, style="color"):
     """Plot the directed acyclic graph (dag) to represent operation dependencies
     in a quantum circuit.
 

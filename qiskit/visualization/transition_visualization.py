@@ -21,7 +21,7 @@ from qiskit.exceptions import MissingOptionalLibraryError
 from qiskit.utils.deprecation import deprecate_func
 
 
-def _normalize(v, tolerance=0.00001):
+def _normalize(v, tolerance: float=0.00001):
     """Makes sure magnitude of the vector is 1 with given tolerance"""
 
     mag2 = sum(n * n for n in v)
