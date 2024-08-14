@@ -310,7 +310,7 @@ def _parse_common_args(
     qubit_lo_range,
     meas_lo_range,
     schedule_los,
-    pulse_qobj=False,
+    pulse_qobj: bool = False,
     **run_config,
 ):
     """Resolve the various types of args allowed to the assemble() function through

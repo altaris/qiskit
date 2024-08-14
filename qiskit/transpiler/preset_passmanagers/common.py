@@ -277,8 +277,8 @@ def generate_routing_passmanager(
     vf2_call_limit=None,
     backend_properties=None,
     seed_transpiler=None,
-    check_trivial=False,
-    use_barrier_before_measurement=True,
+    check_trivial: bool = False,
+    use_barrier_before_measurement: bool = True,
     vf2_max_trials=None,
 ):
     """Generate a routing :class:`~qiskit.transpiler.PassManager`
@@ -371,7 +371,7 @@ def generate_routing_passmanager(
     return routing
 
 
-def generate_pre_op_passmanager(target=None, coupling_map=None, remove_reset_in_zero=False):
+def generate_pre_op_passmanager(target=None, coupling_map=None, remove_reset_in_zero: bool = False):
     """Generate a pre-optimization loop :class:`~qiskit.transpiler.PassManager`
 
     This pass manager will check to ensure that directionality from the coupling

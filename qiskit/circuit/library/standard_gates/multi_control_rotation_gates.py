@@ -25,7 +25,7 @@ from qiskit.circuit.parameterexpression import ParameterValueType
 from qiskit.exceptions import QiskitError
 
 
-def _apply_cu(circuit, theta, phi, lam, control, target, use_basis_gates=True) -> None:
+def _apply_cu(circuit, theta, phi, lam, control, target, use_basis_gates: bool = True) -> None:
     if use_basis_gates:
         # pylint: disable=cyclic-import
         #          ┌──────────────┐

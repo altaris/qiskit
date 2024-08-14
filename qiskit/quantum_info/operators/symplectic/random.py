@@ -185,7 +185,7 @@ def _sample_qmallows(n, rng=None):
     return had, perm
 
 
-def _fill_tril(mat, rng, symmetric=False) -> None:
+def _fill_tril(mat, rng, symmetric: bool = False) -> None:
     """Add symmetric random ints to off diagonals"""
     dim = mat.shape[0]
     # Optimized for low dimensions

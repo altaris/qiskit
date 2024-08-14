@@ -60,7 +60,7 @@ def generate_preset_pass_manager(
     optimization_method=None,
     dt=None,
     *,
-    _skip_target=False,
+    _skip_target: bool = False,
 ):
     """Generate a preset :class:`~.PassManager`
 

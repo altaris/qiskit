@@ -181,7 +181,7 @@ class BoxOnQuWire(DrawElement):
         bot: └───┘   └───┘
     """
 
-    def __init__(self, label: str = "", top_connect: str = "─", conditional=False) -> None:
+    def __init__(self, label: str = "", top_connect: str = "─", conditional: bool = False) -> None:
         super().__init__(label)
         self.top_format = "┌─%s─┐"
         self.mid_format = "┤ %s ├"
@@ -312,7 +312,7 @@ class BoxOnQuWireBot(MultiBox, BoxOnQuWire):
     """Draws the bottom part of a box that affects more than one quantum wire"""
 
     def __init__(
-        self, label, input_length, bot_connect=None, wire_label: str = "", conditional=False
+        self, label, input_length, bot_connect=None, wire_label: str = "", conditional: bool = False
     ) -> None:
         super().__init__(label)
         self.wire_label = wire_label
@@ -333,7 +333,9 @@ class BoxOnQuWireBot(MultiBox, BoxOnQuWire):
 class FlowOnQuWire(DrawElement):
     """Draws a box for a ControlFlowOp using a single qubit."""
 
-    def __init__(self, section, label: str = "", top_connect: str = "─", conditional=False) -> None:
+    def __init__(
+        self, section, label: str = "", top_connect: str = "─", conditional: bool = False
+    ) -> None:
         super().__init__(label)
         if section == CF_RIGHT:
             self.top_format = " ─%s─┐"
@@ -403,7 +405,7 @@ class FlowOnQuWireBot(MultiBox, BoxOnQuWire):
         input_length,
         bot_connect=None,
         wire_label: str = "",
-        conditional=False,
+        conditional: bool = False,
     ) -> None:
         super().__init__(label)
         self.wire_label = wire_label
@@ -513,7 +515,9 @@ class Ex(DirectOnQuWire):
         bot:  │     │
     """
 
-    def __init__(self, bot_connect: str = " ", top_connect: str = " ", conditional=False) -> None:
+    def __init__(
+        self, bot_connect: str = " ", top_connect: str = " ", conditional: bool = False
+    ) -> None:
         super().__init__("X")
         self.bot_connect = "║" if conditional else bot_connect
         self.top_connect = top_connect
@@ -522,7 +526,7 @@ class Ex(DirectOnQuWire):
 class ResetDisplay(DirectOnQuWire):
     """Draws a reset gate"""
 
-    def __init__(self, conditional=False) -> None:
+    def __init__(self, conditional: bool = False) -> None:
         super().__init__("|0>")
         if conditional:
             self.bot_connect = "║"
@@ -542,9 +546,9 @@ class Bullet(DirectOnQuWire):
         self,
         top_connect: str = "",
         bot_connect: str = "",
-        conditional=False,
+        conditional: bool = False,
         label=None,
-        bottom=False,
+        bottom: bool = False,
     ) -> None:
         super().__init__("■")
         self.conditional = conditional
@@ -571,9 +575,9 @@ class OpenBullet(DirectOnQuWire):
         self,
         top_connect: str = "",
         bot_connect: str = "",
-        conditional=False,
+        conditional: bool = False,
         label=None,
-        bottom=False,
+        bottom: bool = False,
     ) -> None:
         super().__init__("o")
         self.conditional = conditional
@@ -615,9 +619,9 @@ class ClBullet(DirectOnClWire):
         self,
         top_connect: str = "",
         bot_connect: str = "",
-        conditional=False,
+        conditional: bool = False,
         label=None,
-        bottom=False,
+        bottom: bool = False,
     ) -> None:
         super().__init__("■")
         self.top_connect = top_connect
@@ -643,9 +647,9 @@ class ClOpenBullet(DirectOnClWire):
         self,
         top_connect: str = "",
         bot_connect: str = "",
-        conditional=False,
+        conditional: bool = False,
         label=None,
-        bottom=False,
+        bottom: bool = False,
     ) -> None:
         super().__init__("o")
         self.top_connect = top_connect
@@ -739,14 +743,14 @@ class TextDrawing:
         clbits,
         nodes,
         circuit,
-        reverse_bits=False,
-        plotbarriers=True,
+        reverse_bits: bool = False,
+        plotbarriers: bool = True,
         line_length=None,
         vertical_compression: str = "high",
-        initial_state=True,
+        initial_state: bool = True,
         cregbundle=None,
         encoding=None,
-        with_layout=False,
+        with_layout: bool = False,
         expr_len=30,
     ):
         self.qubits = qubits
@@ -904,7 +908,7 @@ class TextDrawing:
 
         return lines
 
-    def wire_names(self, with_initial_state=False):
+    def wire_names(self, with_initial_state: bool = False):
         """Returns a list of names for each wire.
 
         Args:
@@ -1432,7 +1436,7 @@ class TextDrawing:
         flow_layer = self.draw_flow_box(node, flow_wire_map, CF_RIGHT, conditional=False)
         layers.append(flow_layer.full_layer)
 
-    def draw_flow_box(self, node, flow_wire_map, section, circ_num=0, conditional=False):
+    def draw_flow_box(self, node, flow_wire_map, section, circ_num=0, conditional: bool = False):
         """Draw the left, middle, or right of a control flow box"""
 
         op = node.op
@@ -1596,7 +1600,7 @@ class Layer:
         cargs=None,
         top_connect=None,
         bot_connect=None,
-        conditional=False,
+        conditional: bool = False,
         controlled_edge=None,
     ):
         if qargs is not None and cargs is not None:
@@ -1818,7 +1822,7 @@ class Layer:
         label,
         top_connect=None,
         bot_connect=None,
-        conditional=False,
+        conditional: bool = False,
         controlled_edge=None,
     ):
         """Sets the multi qubit box.

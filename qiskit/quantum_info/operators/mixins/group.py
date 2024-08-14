@@ -101,7 +101,7 @@ class GroupMixin(ABC):
         """
 
     @abstractmethod
-    def compose(self, other, qargs=None, front=False) -> Self:
+    def compose(self, other, qargs=None, front: bool = False) -> Self:
         """Return the operator composition with another CLASS.
 
         Args:

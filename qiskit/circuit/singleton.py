@@ -262,7 +262,11 @@ def _impl_init_subclass(
     # __init_subclass__ for the classes that make their children singletons (e.g. `SingletonGate`)
 
     def __init_subclass__(
-        instruction_class, *, create_default_singleton=True, additional_singletons=(), **kwargs
+        instruction_class,
+        *,
+        create_default_singleton: bool = True,
+        additional_singletons=(),
+        **kwargs,
     ) -> None:
         super(base, instruction_class).__init_subclass__(**kwargs)
         if not create_default_singleton and not additional_singletons:
@@ -377,7 +381,7 @@ class _SingletonMeta(type(Instruction)):
             cls.__init_subclass__ = _impl_init_subclass(cls, overrides)
         return cls
 
-    def __call__(cls, *args, _force_mutable=False, **kwargs):
+    def __call__(cls, *args, _force_mutable: bool = False, **kwargs):
         if _force_mutable:
             return super().__call__(*args, **kwargs)
         if not args and not kwargs:

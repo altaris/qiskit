@@ -42,7 +42,7 @@ def duration_in_dt(duration_in_sec: float, dt_in_sec: float) -> int:
     return res
 
 
-def convert_durations_to_dt(qc: QuantumCircuit, dt_in_sec: float, inplace=True):
+def convert_durations_to_dt(qc: QuantumCircuit, dt_in_sec: float, inplace: bool = True):
     """Convert all the durations in SI (seconds) into those in dt.
 
     Returns a new circuit if `inplace=False`.

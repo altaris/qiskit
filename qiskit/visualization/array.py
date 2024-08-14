@@ -18,7 +18,9 @@ import numpy as np
 from qiskit.exceptions import MissingOptionalLibraryError
 
 
-def _num_to_latex(raw_value, decimals: int = 15, first_term=True, coefficient=False):
+def _num_to_latex(
+    raw_value, decimals: int = 15, first_term: bool = True, coefficient: bool = False
+):
     """Convert a complex number to latex code suitable for a ket expression
 
     Args:
@@ -143,7 +145,9 @@ def _matrix_to_latex(matrix, decimals: int = 10, prefix: str = "", max_size=(8, 
     return out_string
 
 
-def array_to_latex(array, precision: int = 10, prefix: str = "", source=False, max_size: int = 8):
+def array_to_latex(
+    array, precision: int = 10, prefix: str = "", source: bool = False, max_size: int = 8
+):
     """Latex representation of a complex numpy array (with dimension 1 or 2)
 
     Args:

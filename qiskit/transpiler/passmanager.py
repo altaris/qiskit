@@ -230,7 +230,7 @@ class PassManager(BasePassManager):
             num_processes=num_processes,
         )
 
-    def draw(self, filename=None, style=None, raw=False):
+    def draw(self, filename=None, style=None, raw: bool = False):
         """Draw the pass manager.
 
         This function needs `pydot <https://github.com/erocarrera/pydot>`__, which in turn needs
@@ -444,7 +444,7 @@ class StagedPassManager(PassManager):
         self._update_passmanager()
         return super().to_flow_controller()
 
-    def draw(self, filename=None, style=None, raw=False):
+    def draw(self, filename=None, style=None, raw: bool = False):
         """Draw the staged pass manager."""
         from qiskit.visualization import staged_pass_manager_drawer
 

@@ -21,7 +21,9 @@ ATOL_DEFAULT = 1e-8
 RTOL_DEFAULT = 1e-5
 
 
-def matrix_equal(mat1, mat2, ignore_phase=False, rtol=RTOL_DEFAULT, atol=ATOL_DEFAULT, props=None):
+def matrix_equal(
+    mat1, mat2, ignore_phase: bool = False, rtol=RTOL_DEFAULT, atol=ATOL_DEFAULT, props=None
+):
     # pylint: disable-next=consider-using-f-string
     """Test if two arrays are equal.
 
@@ -146,7 +148,7 @@ def is_positive_semidefinite_matrix(mat, rtol=RTOL_DEFAULT, atol=ATOL_DEFAULT):
     return True
 
 
-def is_identity_matrix(mat, ignore_phase=False, rtol=RTOL_DEFAULT, atol=ATOL_DEFAULT):
+def is_identity_matrix(mat, ignore_phase: bool = False, rtol=RTOL_DEFAULT, atol=ATOL_DEFAULT):
     """Test if an array is an identity matrix."""
     if atol is None:
         atol = ATOL_DEFAULT

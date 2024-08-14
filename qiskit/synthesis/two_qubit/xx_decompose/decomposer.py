@@ -201,7 +201,7 @@ class XXDecomposer:
         return len(best_sequence)
 
     @staticmethod
-    def _strength_to_infidelity(basis_fidelity, approximate=False):
+    def _strength_to_infidelity(basis_fidelity, approximate: bool = False):
         """
         Converts a dictionary mapping XX strengths to fidelities to a dictionary mapping XX
         strengths to infidelities. Also supports one of the other formats Qiskit uses: if only a

@@ -71,7 +71,7 @@ class VariableMapper(expr.ExprVisitor[expr.Expr]):
         self.register_map[theirs.name] = mapped_theirs
         return mapped_theirs
 
-    def map_condition(self, condition, /, *, allow_reorder=False):
+    def map_condition(self, condition, /, *, allow_reorder: bool = False):
         """Map the given ``condition`` so that it only references variables in the destination
         circuit (as given to this class on initialization).
 

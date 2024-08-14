@@ -84,7 +84,7 @@ class LookaheadSwap(TransformationPass):
     """
 
     def __init__(
-        self, coupling_map, search_depth: int = 4, search_width: int = 4, fake_run=False
+        self, coupling_map, search_depth: int = 4, search_width: int = 4, fake_run: bool = False
     ) -> None:
         """LookaheadSwap initializer.
 

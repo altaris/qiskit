@@ -559,7 +559,7 @@ class _DAGDependencyV2:
 
         return dag_drawer(dag=self, scale=scale, filename=filename, style=style)
 
-    def replace_block_with_op(self, node_block, op, wire_pos_map, cycle_check=True):
+    def replace_block_with_op(self, node_block, op, wire_pos_map, cycle_check: bool = True):
         """Replace a block of nodes with a single node.
 
         This is used to consolidate a block of DAGOpNodes into a single

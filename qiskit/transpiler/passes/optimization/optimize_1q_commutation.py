@@ -61,7 +61,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
     # NOTE: A run from dag.collect_1q_runs is always nonempty, so we sometimes use an empty list
     #       to signify the absence of a run.
 
-    def __init__(self, basis=None, run_to_completion=False, target=None) -> None:
+    def __init__(self, basis=None, run_to_completion: bool = False, target=None) -> None:
         """
         Args:
             basis (List[str]): See also `Optimize1qGatesDecomposition`.
@@ -78,7 +78,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
         self._run_to_completion = run_to_completion
 
     @staticmethod
-    def _find_adjoining_run(dag, runs, run, front=True):
+    def _find_adjoining_run(dag, runs, run, front: bool = True):
         """
         Finds the run which abuts `run` from the front (or the rear if `front == False`), separated
         by a blocking node.
@@ -105,7 +105,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
         return (blocker, adjoining_run)
 
     @staticmethod
-    def _commute_through(blocker, run, front=True):
+    def _commute_through(blocker, run, front: bool = True):
         """
         Pulls `DAGOpNode`s from the front of `run` (or the back, if `front == False`) until it
         encounters a gate which does not commute with `blocker`.

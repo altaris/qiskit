@@ -201,7 +201,7 @@ class Bloch:
         axes=None,
         view=None,
         figsize=None,
-        background=False,
+        background: bool = False,
         font_size=20,
     ) -> None:
 

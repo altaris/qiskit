@@ -834,7 +834,14 @@ class DAGCircuit:
         return node
 
     def compose(
-        self, other, qubits=None, clbits=None, front=False, inplace=True, *, inline_captures=False
+        self,
+        other,
+        qubits=None,
+        clbits=None,
+        front: bool = False,
+        inplace: bool = True,
+        *,
+        inline_captures: bool = False,
     ):
         """Compose the ``other`` circuit onto the output of this circuit.
 
@@ -1298,7 +1305,7 @@ class DAGCircuit:
         return (nd for nd in self.topological_nodes(key) if isinstance(nd, DAGOpNode))
 
     def replace_block_with_op(
-        self, node_block: list[DAGOpNode], op: Operation, wire_pos_map, cycle_check=True
+        self, node_block: list[DAGOpNode], op: Operation, wire_pos_map, cycle_check: bool = True
     ):
         """Replace a block of nodes with a single node.
 
@@ -1387,7 +1394,9 @@ class DAGCircuit:
 
         return new_node
 
-    def substitute_node_with_dag(self, node, input_dag, wires=None, propagate_condition=True):
+    def substitute_node_with_dag(
+        self, node, input_dag, wires=None, propagate_condition: bool = True
+    ):
         """Replace one node with dag.
 
         Args:
@@ -1631,7 +1640,9 @@ class DAGCircuit:
 
         return {k: self._multi_graph[v] for k, v in node_map.items()}
 
-    def substitute_node(self, node: DAGOpNode, op, inplace: bool = False, propagate_condition=True):
+    def substitute_node(
+        self, node: DAGOpNode, op, inplace: bool = False, propagate_condition: bool = True
+    ):
         """Replace an DAGOpNode with a single operation. qargs, cargs and
         conditions for the new operation will be inferred from the node to be
         replaced. The new operation will be checked to match the shape of the
@@ -1841,7 +1852,7 @@ class DAGCircuit:
             for source, dest, edge in raw_nodes:
                 yield (self._multi_graph[source], self._multi_graph[dest], edge)
 
-    def op_nodes(self, op=None, include_directives=True):
+    def op_nodes(self, op=None, include_directives: bool = True):
         """Get the list of "op" nodes in the dag.
 
         Args:
@@ -2166,7 +2177,7 @@ class DAGCircuit:
 
         return rx.collect_bicolor_runs(self._multi_graph, collect_2q_blocks_filter, color_fn)
 
-    def nodes_on_wire(self, wire, only_ops=False):
+    def nodes_on_wire(self, wire, only_ops: bool = False):
         """
         Iterator for nodes that affect a given wire.
 

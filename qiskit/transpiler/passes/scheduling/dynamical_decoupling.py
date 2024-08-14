@@ -113,7 +113,13 @@ class DynamicalDecoupling(TransformationPass):
         since="1.1.0",
     )
     def __init__(
-        self, durations, dd_sequence, qubits=None, spacing=None, skip_reset_qubits=True, target=None
+        self,
+        durations,
+        dd_sequence,
+        qubits=None,
+        spacing=None,
+        skip_reset_qubits: bool = True,
+        target=None,
     ):
         """Dynamical decoupling initializer.
 

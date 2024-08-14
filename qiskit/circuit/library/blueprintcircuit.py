@@ -130,13 +130,13 @@ class BlueprintCircuit(QuantumCircuit, ABC):
         other,
         qubits=None,
         clbits=None,
-        front=False,
-        inplace=False,
-        wrap=False,
+        front: bool = False,
+        inplace: bool = False,
+        wrap: bool = False,
         *,
-        copy=True,
+        copy: bool = True,
         var_remap=None,
-        inline_captures=False,
+        inline_captures: bool = False,
     ):
         if not self._is_built:
             self._build()
@@ -193,7 +193,7 @@ class BlueprintCircuit(QuantumCircuit, ABC):
             self._build()
         return super().num_nonlocal_gates()
 
-    def num_connected_components(self, unitary_only=False):
+    def num_connected_components(self, unitary_only: bool = False):
         if not self._is_built:
             self._build()
         return super().num_connected_components(unitary_only=unitary_only)

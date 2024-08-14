@@ -208,7 +208,7 @@ def schmidt_decomposition(state, qargs):
     return schmidt_components
 
 
-def _format_state(state, validate=True):
+def _format_state(state, validate: bool = True):
     """Format input state into class object"""
     if isinstance(state, list):
         state = np.array(state, dtype=complex)

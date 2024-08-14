@@ -31,7 +31,7 @@ DEFAULT_STYLE = {AnalysisPass: "red", TransformationPass: "blue"}
 
 @_optionals.HAS_GRAPHVIZ.require_in_call
 @_optionals.HAS_PYDOT.require_in_call
-def pass_manager_drawer(pass_manager, filename=None, style=None, raw=False):
+def pass_manager_drawer(pass_manager, filename=None, style=None, raw: bool = False):
     """
     Draws the pass manager.
 
@@ -117,7 +117,7 @@ def _get_node_color(pss, style):
 
 @_optionals.HAS_GRAPHVIZ.require_in_call
 @_optionals.HAS_PYDOT.require_in_call
-def staged_pass_manager_drawer(pass_manager, filename=None, style=None, raw=False):
+def staged_pass_manager_drawer(pass_manager, filename=None, style=None, raw: bool = False):
     """
     Draws the staged pass manager.
 

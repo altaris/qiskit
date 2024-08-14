@@ -50,7 +50,7 @@ class ConsolidateBlocks(TransformationPass):
     def __init__(
         self,
         kak_basis_gate=None,
-        force_consolidate=False,
+        force_consolidate: bool = False,
         basis_gates=None,
         approximation_degree: float = 1.0,
         target=None,

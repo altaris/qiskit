@@ -767,7 +767,7 @@ class Target(BaseTarget):
         ):
             self._coupling_graph = None  # pylint: disable=attribute-defined-outside-init
 
-    def build_coupling_map(self, two_q_gate=None, filter_idle_qubits=False):
+    def build_coupling_map(self, two_q_gate=None, filter_idle_qubits: bool = False):
         """Get a :class:`~qiskit.transpiler.CouplingMap` from this target.
 
         If there is a mix of two qubit operations that have a connectivity

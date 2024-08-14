@@ -60,7 +60,7 @@ class StochasticSwap(TransformationPass):
     """
 
     def __init__(
-        self, coupling_map, trials: int = 20, seed=None, fake_run=False, initial_layout=None
+        self, coupling_map, trials: int = 20, seed=None, fake_run: bool = False, initial_layout=None
     ) -> None:
         """StochasticSwap initializer.
 

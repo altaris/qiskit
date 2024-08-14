@@ -15,7 +15,7 @@
 from qiskit.circuit import QuantumCircuit
 
 
-def dag_to_circuit(dag, copy_operations=True):
+def dag_to_circuit(dag, copy_operations: bool = True):
     """Build a ``QuantumCircuit`` object from a ``DAGCircuit``.
 
     Args:

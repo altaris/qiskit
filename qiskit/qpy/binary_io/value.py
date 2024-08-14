@@ -517,7 +517,7 @@ def dumps_value(
     *,
     version,
     index_map=None,
-    use_symengine=False,
+    use_symengine: bool = False,
     standalone_var_indices=None,
 ):
     """Serialize input value object.
@@ -580,7 +580,13 @@ def dumps_value(
 
 
 def write_value(
-    file_obj, obj, *, version, index_map=None, use_symengine=False, standalone_var_indices=None
+    file_obj,
+    obj,
+    *,
+    version,
+    index_map=None,
+    use_symengine: bool = False,
+    standalone_var_indices=None,
 ) -> None:
     """Write a value to the file like object.
 
@@ -616,7 +622,7 @@ def loads_value(
     *,
     clbits=(),
     cregs=None,
-    use_symengine=False,
+    use_symengine: bool = False,
     standalone_vars=(),
 ):
     """Deserialize input binary data to value object.
@@ -693,7 +699,7 @@ def read_value(
     *,
     clbits=(),
     cregs=None,
-    use_symengine=False,
+    use_symengine: bool = False,
     standalone_vars=(),
 ):
     """Read a value from the file like object.

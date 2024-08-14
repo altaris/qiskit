@@ -253,7 +253,7 @@ class QasmBackendConfiguration:
         max_shots,
         coupling_map,
         supported_instructions=None,
-        dynamic_reprate_enabled=False,
+        dynamic_reprate_enabled: bool = False,
         rep_delay_range=None,
         default_rep_delay=None,
         max_experiments=None,

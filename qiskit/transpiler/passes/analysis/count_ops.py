@@ -21,7 +21,7 @@ class CountOps(AnalysisPass):
     The result is saved in ``property_set['count_ops']`` as an integer.
     """
 
-    def __init__(self, *, recurse=True) -> None:
+    def __init__(self, *, recurse: bool = True) -> None:
         super().__init__()
         self.recurse = recurse
 

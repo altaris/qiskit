@@ -25,9 +25,9 @@ def random_circuit(
     num_qubits,
     depth,
     max_operands: int = 4,
-    measure=False,
-    conditional=False,
-    reset=False,
+    measure: bool = False,
+    conditional: bool = False,
+    reset: bool = False,
     seed=None,
     num_operand_distribution: dict = None,
 ):

@@ -15,7 +15,7 @@
 from qiskit.dagcircuit.dagcircuit import DAGCircuit, DAGOpNode
 
 
-def circuit_to_dag(circuit, copy_operations=True, *, qubit_order=None, clbit_order=None):
+def circuit_to_dag(circuit, copy_operations: bool = True, *, qubit_order=None, clbit_order=None):
     """Build a :class:`.DAGCircuit` object from a :class:`.QuantumCircuit`.
 
     Args:

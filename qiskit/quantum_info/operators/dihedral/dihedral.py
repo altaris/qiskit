@@ -385,7 +385,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         other.poly.weight_0 = 0  # set global phase
         return other
 
-    def _tensor(self, other, reverse=False):
+    def _tensor(self, other, reverse: bool = False):
         """Returns the tensor product operator."""
 
         if not isinstance(other, CNOTDihedral):

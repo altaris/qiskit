@@ -1193,7 +1193,11 @@ def _read_layout_v2(file_obj, circuit) -> None:
 
 
 def write_circuit(
-    file_obj, circuit, metadata_serializer=None, use_symengine=False, version=common.QPY_VERSION
+    file_obj,
+    circuit,
+    metadata_serializer=None,
+    use_symengine: bool = False,
+    version=common.QPY_VERSION,
 ):
     """Write a single QuantumCircuit object in the file like object.
 
@@ -1314,7 +1318,7 @@ def write_circuit(
     _write_layout(file_obj, circuit)
 
 
-def read_circuit(file_obj, version, metadata_deserializer=None, use_symengine=False):
+def read_circuit(file_obj, version, metadata_deserializer=None, use_symengine: bool = False):
     """Read a single QuantumCircuit object from the file like object.
 
     Args:

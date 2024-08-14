@@ -144,7 +144,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         arr = self.to_matrix()
         return arr if dtype is None else arr.astype(dtype, copy=False)
 
-    def __init__(self, data, validate=True, copy=True):
+    def __init__(self, data, validate: bool = True, copy: bool = True):
         """Initialize an operator object."""
 
         # pylint: disable=cyclic-import

@@ -45,7 +45,7 @@ class CollectAndCollapse(TransformationPass):
         self,
         collect_function,
         collapse_function,
-        do_commutative_analysis=False,
+        do_commutative_analysis: bool = False,
     ) -> None:
         """
         Args:
@@ -93,8 +93,8 @@ def collect_using_filter_function(
     filter_function,
     split_blocks,
     min_block_size,
-    split_layers=False,
-    collect_from_back=False,
+    split_layers: bool = False,
+    collect_from_back: bool = False,
 ):
     """Corresponds to an important block collection strategy that greedily collects
     maximal blocks of nodes matching a given ``filter_function``.

@@ -285,7 +285,7 @@ class QuantumChannel(LinearOp):
         zero = np.isclose(tp_cond, 0, atol=atol, rtol=rtol)
         return np.all(zero)
 
-    def _format_state(self, state, density_matrix=False):
+    def _format_state(self, state, density_matrix: bool = False):
         """Format input state so it is statevector or density matrix"""
         state = np.array(state)
         shape = state.shape

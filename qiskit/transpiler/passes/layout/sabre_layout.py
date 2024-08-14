@@ -114,7 +114,7 @@ class SabreLayout(TransformationPass):
         max_iterations: int = 3,
         swap_trials=None,
         layout_trials=None,
-        skip_routing=False,
+        skip_routing: bool = False,
     ):
         """SabreLayout initializer.
 

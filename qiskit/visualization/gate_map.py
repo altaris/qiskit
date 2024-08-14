@@ -35,8 +35,8 @@ def _get_backend_interface_version(backend):
 def plot_gate_map(
     backend,
     figsize=None,
-    plot_directed=False,
-    label_qubits=True,
+    plot_directed: bool = False,
+    label_qubits: bool = True,
     qubit_size=None,
     line_width=4,
     font_size=None,
@@ -955,8 +955,8 @@ def plot_coupling_map(
     qubit_coordinates: List[List[int]],
     coupling_map: List[List[int]],
     figsize=None,
-    plot_directed=False,
-    label_qubits=True,
+    plot_directed: bool = False,
+    label_qubits: bool = True,
     qubit_size=None,
     line_width=4,
     font_size=None,
@@ -1226,7 +1226,7 @@ def plot_circuit_layout(circuit, backend, view: str = "virtual", qubit_coordinat
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
 @_optionals.HAS_SEABORN.require_in_call
-def plot_error_map(backend, figsize=(15, 12), show_title=True, qubit_coordinates=None):
+def plot_error_map(backend, figsize=(15, 12), show_title: bool = True, qubit_coordinates=None):
     """Plots the error map of a given backend.
 
     Args:

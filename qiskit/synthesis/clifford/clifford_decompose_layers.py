@@ -178,7 +178,7 @@ def _reverse_clifford(cliff):
     return cliff_cpy
 
 
-def _create_graph_state(cliff, validate=False):
+def _create_graph_state(cliff, validate: bool = False):
     """Given a Clifford cliff (denoted by U) that induces a stabilizer state U |0>,
     apply a layer H1 of Hadamard gates to a subset of the qubits to make H1 U |0> into a graph state,
     namely to make cliff.stab_x matrix have full rank.

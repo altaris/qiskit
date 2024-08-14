@@ -101,7 +101,7 @@ def _read_discriminator(file_obj, version):
     return Discriminator(name=name, **params)
 
 
-def _loads_symbolic_expr(expr_bytes, use_symengine=False):
+def _loads_symbolic_expr(expr_bytes, use_symengine: bool = False):
     if expr_bytes == b"":
         return None
     expr_bytes = zlib.decompress(expr_bytes)
@@ -513,7 +513,7 @@ def _dumps_reference_item(schedule, metadata_serializer, version):
     return type_key, data_bytes
 
 
-def read_schedule_block(file_obj, version, metadata_deserializer=None, use_symengine=False):
+def read_schedule_block(file_obj, version, metadata_deserializer=None, use_symengine: bool = False):
     """Read a single ScheduleBlock from the file like object.
 
     Args:
@@ -580,7 +580,11 @@ def read_schedule_block(file_obj, version, metadata_deserializer=None, use_symen
 
 
 def write_schedule_block(
-    file_obj, block, metadata_serializer=None, use_symengine=False, version=common.QPY_VERSION
+    file_obj,
+    block,
+    metadata_serializer=None,
+    use_symengine: bool = False,
+    version=common.QPY_VERSION,
 ) -> None:
     """Write a single ScheduleBlock object in the file like object.
 

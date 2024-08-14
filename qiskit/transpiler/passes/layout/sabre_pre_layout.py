@@ -40,7 +40,7 @@ class SabrePreLayout(AnalysisPass):
         error_rate: float = 0.1,
         max_trials_vf2: int = 100,
         call_limit_vf2=None,
-        improve_layout=True,
+        improve_layout: bool = True,
     ) -> None:
         """SabrePreLayout initializer.
 

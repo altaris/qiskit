@@ -887,7 +887,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         """
         return self._commutes_with_all(other, anti=True)
 
-    def _commutes_with_all(self, other, anti=False):
+    def _commutes_with_all(self, other, anti: bool = False):
         """Return row indexes that commute with all rows in another PauliList.
 
         Args:

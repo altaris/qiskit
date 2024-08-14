@@ -235,7 +235,7 @@ def get_bit_reg_index(circuit, bit):
     return register, bit_index, reg_index
 
 
-def get_wire_label(drawer, register, index, layout=None, cregbundle=True):
+def get_wire_label(drawer, register, index, layout=None, cregbundle: bool = True):
     """Get the bit labels to display to the left of the wires.
 
     Args:
@@ -398,7 +398,12 @@ def _get_valid_justify_arg(justify):
 
 
 def _get_layered_instructions(
-    circuit, reverse_bits=False, justify=None, idle_wires=True, wire_order=None, wire_map=None
+    circuit,
+    reverse_bits: bool = False,
+    justify=None,
+    idle_wires: bool = True,
+    wire_order=None,
+    wire_map=None,
 ):
     """
     Given a circuit, return a tuple (qubits, clbits, nodes) where

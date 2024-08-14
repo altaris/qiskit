@@ -106,7 +106,7 @@ class PassManagerConfig:
         self.hls_config = hls_config
 
     @classmethod
-    def from_backend(cls, backend, _skip_target=False, **pass_manager_options):
+    def from_backend(cls, backend, _skip_target: bool = False, **pass_manager_options):
         """Construct a configuration based on a backend and user input.
 
         This method automatically gererates a PassManagerConfig object based on the backend's

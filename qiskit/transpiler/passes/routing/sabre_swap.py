@@ -86,7 +86,7 @@ class SabreSwap(TransformationPass):
         coupling_map,
         heuristic: Literal["basic", "lookahead", "decay"] = "basic",
         seed=None,
-        fake_run=False,
+        fake_run: bool = False,
         trials=None,
     ) -> None:
         r"""SabreSwap initializer.

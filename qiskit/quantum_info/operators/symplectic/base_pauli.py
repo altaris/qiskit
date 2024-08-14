@@ -96,7 +96,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         phase = np.mod(phase1 + phase2, 4)
         return BasePauli(z, x, phase)
 
-    def compose(self, other, qargs: list | None = None, front: bool = False, inplace=False):
+    def compose(self, other, qargs: list | None = None, front: bool = False, inplace: bool = False):
         """Return the composition of Paulis.
 
         Args:
@@ -355,7 +355,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         return _count_y(self._x, self._z, dtype=dtype)
 
     @staticmethod
-    def _stack(array, size, vertical=True):
+    def _stack(array, size, vertical: bool = True):
         """Stack array."""
         if size == 1:
             return array
@@ -406,7 +406,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         return base_z, base_x, base_phase
 
     @staticmethod
-    def _to_matrix(z, x, phase=0, group_phase=False, sparse=False):
+    def _to_matrix(z, x, phase=0, group_phase: bool = False, sparse: bool = False):
         """Return the matrix from symplectic representation.
 
         The Pauli is defined as :math:`P = (-i)^{phase + z.x} * Z^z.x^x`
@@ -470,7 +470,9 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         return mat
 
     @staticmethod
-    def _to_label(z, x, phase, group_phase=False, full_group=True, return_phase=False):
+    def _to_label(
+        z, x, phase, group_phase: bool = False, full_group: bool = True, return_phase: bool = False
+    ):
         """Return the label string for a Pauli.
 
         Args:

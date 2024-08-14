@@ -21,7 +21,7 @@ class Size(AnalysisPass):
     The result is saved in ``property_set['size']`` as an integer.
     """
 
-    def __init__(self, *, recurse=False) -> None:
+    def __init__(self, *, recurse: bool = False) -> None:
         """
         Args:
             recurse: whether to allow recursion into control flow.  If this is ``False`` (default),

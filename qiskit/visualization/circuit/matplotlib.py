@@ -100,13 +100,13 @@ class MatplotlibDrawer:
         circuit,
         scale=None,
         style=None,
-        reverse_bits=False,
-        plot_barriers=True,
+        reverse_bits: bool = False,
+        plot_barriers: bool = True,
         fold=25,
         ax=None,
-        initial_state=False,
+        initial_state: bool = False,
         cregbundle=None,
-        with_layout=False,
+        with_layout: bool = False,
         expr_len=30,
     ) -> None:
         self._circuit = circuit
@@ -250,7 +250,7 @@ class MatplotlibDrawer:
             "}": (0.1896, 0.1188),
         }
 
-    def draw(self, filename=None, verbose=False):
+    def draw(self, filename=None, verbose: bool = False):
         """Main entry point to 'matplotlib' ('mpl') drawer. Called from
         ``visualization.circuit_drawer`` and from ``QuantumCircuit.draw`` through circuit_drawer.
         """
@@ -821,7 +821,9 @@ class MatplotlibDrawer:
 
         return prev_x_index + 1
 
-    def _get_text_width(self, text, glob_data, fontsize, param=False, reg_remove_under=None):
+    def _get_text_width(
+        self, text, glob_data, fontsize, param: bool = False, reg_remove_under=None
+    ):
         """Compute the width of a string in the default font"""
 
         from pylatexenc.latex2text import LatexNodes2Text
@@ -1049,7 +1051,7 @@ class MatplotlibDrawer:
         qubits_dict,
         clbits_dict,
         glob_data,
-        verbose=False,
+        verbose: bool = False,
     ) -> None:
         """Draw the gates in the circuit"""
 
@@ -1990,7 +1992,7 @@ class MatplotlibDrawer:
                 zorder=zorder,
             )
 
-    def _plot_coord(self, x_index, y_index, gate_width, glob_data, flow_op=False):
+    def _plot_coord(self, x_index, y_index, gate_width, glob_data, flow_op: bool = False):
         """Get the coord positions for an index"""
 
         # Check folding

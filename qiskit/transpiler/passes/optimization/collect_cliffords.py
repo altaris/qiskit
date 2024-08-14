@@ -32,11 +32,11 @@ class CollectCliffords(CollectAndCollapse):
 
     def __init__(
         self,
-        do_commutative_analysis=False,
-        split_blocks=True,
+        do_commutative_analysis: bool = False,
+        split_blocks: bool = True,
         min_block_size: int = 2,
-        split_layers=False,
-        collect_from_back=False,
+        split_layers: bool = False,
+        collect_from_back: bool = False,
     ) -> None:
         """CollectCliffords initializer.
 

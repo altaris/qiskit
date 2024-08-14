@@ -177,10 +177,10 @@ class BlockCollector:
     def collect_all_matching_blocks(
         self,
         filter_fn,
-        split_blocks=True,
+        split_blocks: bool = True,
         min_block_size: int = 2,
-        split_layers=False,
-        collect_from_back=False,
+        split_layers: bool = False,
+        collect_from_back: bool = False,
     ):
         """Collects all blocks that match a given filtering function filter_fn.
         This iteratively finds the largest block that does not match filter_fn,

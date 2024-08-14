@@ -22,7 +22,14 @@ import numpy as np
 from qiskit.circuit import Clbit, Qubit, ClassicalRegister
 from qiskit.circuit.classical import expr
 from qiskit.circuit.controlledgate import ControlledGate
-from qiskit.circuit.library.standard_gates import SwapGate, XGate, ZGate, RZZGate, U1Gate, PhaseGate
+from qiskit.circuit.library.standard_gates import (
+    SwapGate,
+    XGate,
+    ZGate,
+    RZZGate,
+    U1Gate,
+    PhaseGate,
+)
 from qiskit.circuit.measure import Measure
 from qiskit.circuit.tools.pi_check import pi_check
 
@@ -56,9 +63,9 @@ class QCircuitImage:
         nodes,
         scale,
         style=None,
-        reverse_bits=False,
-        plot_barriers=True,
-        initial_state=False,
+        reverse_bits: bool = False,
+        plot_barriers: bool = True,
+        initial_state: bool = False,
         cregbundle=None,
         with_layout=False,
         circuit=None,
@@ -178,7 +185,10 @@ class QCircuitImage:
         if self._global_phase:
             output.write(
                 r"""{$\mathrm{%s} \mathrm{%s}$}"""
-                % ("global\\,phase:\\,", pi_check(self._global_phase, output="latex"))
+                % (
+                    "global\\,phase:\\,",
+                    pi_check(self._global_phase, output="latex"),
+                )
             )
         output.write(qcircuit_line % (self._column_separation, self._wire_separation))
         for i in range(self._img_width):
@@ -217,7 +227,11 @@ class QCircuitImage:
             if isinstance(wire, ClassicalRegister):
                 register = wire
                 wire_label = get_wire_label(
-                    "latex", register, index, layout=self._layout, cregbundle=self._cregbundle
+                    "latex",
+                    register,
+                    index,
+                    layout=self._layout,
+                    cregbundle=self._cregbundle,
                 )
             else:
                 register, bit_index, reg_index = get_bit_reg_index(self._circuit, wire)
@@ -304,7 +318,11 @@ class QCircuitImage:
                 # the wide gates
                 for arg in op.params:
                     if not any(isinstance(param, np.ndarray) for param in op.params):
-                        arg_str = re.sub(r"[-+]?\d*\.\d{2,}|\d{2,}", self._truncate_float, str(arg))
+                        arg_str = re.sub(
+                            r"[-+]?\d*\.\d{2,}|\d{2,}",
+                            self._truncate_float,
+                            str(arg),
+                        )
                         arg_str_len += len(arg_str)
 
                 # the width of the column is the max of all the gates in the column

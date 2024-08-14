@@ -26,7 +26,7 @@ from qiskit._accelerate.nlayout import NLayout
 from qiskit._accelerate.error_map import ErrorMap
 
 
-def build_interaction_graph(dag, strict_direction=True):
+def build_interaction_graph(dag, strict_direction: bool = True):
     """Build an interaction graph from a dag."""
     im_graph = PyDiGraph(multigraph=False) if strict_direction else PyGraph(multigraph=False)
     im_graph_node_map = {}
@@ -122,8 +122,8 @@ def score_layout(
     bit_map,
     _reverse_bit_map,
     im_graph,
-    strict_direction=False,
-    run_in_parallel=False,
+    strict_direction: bool = False,
+    run_in_parallel: bool = False,
     edge_list=None,
     bit_list=None,
 ):
@@ -217,7 +217,7 @@ def build_average_error_map(target, properties, coupling_map):
         return None
 
 
-def shuffle_coupling_graph(coupling_map, seed, strict_direction=True):
+def shuffle_coupling_graph(coupling_map, seed, strict_direction: bool = True):
     """Create a shuffled coupling graph from a coupling map."""
     if strict_direction:
         cm_graph = coupling_map.graph

@@ -76,7 +76,7 @@ class VF2Layout(AnalysisPass):
     def __init__(
         self,
         coupling_map=None,
-        strict_direction=False,
+        strict_direction: bool = False,
         seed=None,
         call_limit=None,
         time_limit=None,

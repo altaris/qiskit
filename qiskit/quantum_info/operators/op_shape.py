@@ -179,7 +179,7 @@ class OpShape:
         """Raise an exception if shape is not valid for the OpShape"""
         return self._validate(shape, raise_exception=True)
 
-    def _validate(self, shape, raise_exception=False):
+    def _validate(self, shape, raise_exception: bool = False):
         """Validate OpShape against a matrix or vector shape."""
         # pylint: disable=too-many-return-statements
         ndim = len(shape)
@@ -422,7 +422,7 @@ class OpShape:
             num_qargs_r = b._num_qargs_r + a._num_qargs_r
         return cls(dims_l=dims_l, dims_r=dims_r, num_qargs_l=num_qargs_l, num_qargs_r=num_qargs_r)
 
-    def compose(self, other, qargs=None, front=False):
+    def compose(self, other, qargs=None, front: bool = False):
         """Return composed OpShape."""
         ret = OpShape()
         if qargs is None:

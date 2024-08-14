@@ -85,7 +85,7 @@ class QuasiDistribution(dict):
                 raise TypeError("Input data's keys are of invalid type, must be str or int")
         super().__init__(data)
 
-    def nearest_probability_distribution(self, return_distance=False):
+    def nearest_probability_distribution(self, return_distance: bool = False):
         """Takes a quasiprobability distribution and maps
         it to the closest probability distribution as defined by
         the L2-norm.

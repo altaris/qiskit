@@ -31,7 +31,7 @@ class CSPLayout(AnalysisPass):
     def __init__(
         self,
         coupling_map,
-        strict_direction=False,
+        strict_direction: bool = False,
         seed=None,
         call_limit: int = 1000,
         time_limit: int = 10,
