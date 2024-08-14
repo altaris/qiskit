@@ -61,7 +61,9 @@ class Instruction(Operation):
     _directive = False
     _standard_gate = None
 
-    def __init__(self, name, num_qubits, num_clbits, params, duration=None, unit="dt", label=None):
+    def __init__(
+        self, name, num_qubits, num_clbits, params, duration=None, unit: str = "dt", label=None
+    ):
         """Create a new instruction.
 
         Args:

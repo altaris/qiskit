@@ -31,7 +31,7 @@ class Layout2qDistance(AnalysisPass):
     No CX direction is considered.
     """
 
-    def __init__(self, coupling_map, property_name="layout_score") -> None:
+    def __init__(self, coupling_map, property_name: str = "layout_score") -> None:
         """Layout2qDistance initializer.
 
         Args:

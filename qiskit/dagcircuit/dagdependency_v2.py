@@ -539,7 +539,7 @@ class _DAGDependencyV2:
 
         return target_dag
 
-    def draw(self, scale: float=0.7, filename=None, style="color"):
+    def draw(self, scale: float = 0.7, filename=None, style: str = "color"):
         """
         Draws the _DAGDependencyV2 graph.
 

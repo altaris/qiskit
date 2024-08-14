@@ -28,7 +28,7 @@ from qiskit.providers import basic_provider
 
 
 class _Credentials:
-    def __init__(self, token="123456", url="https://") -> None:
+    def __init__(self, token: str = "123456", url: str = "https://") -> None:
         self.token = token
         self.url = url
         self.hub = "hub"

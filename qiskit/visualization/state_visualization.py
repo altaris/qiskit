@@ -37,7 +37,9 @@ from .exceptions import VisualizationError
 
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
-def plot_state_hinton(state, title="", figsize=None, ax_real=None, ax_imag=None, *, filename=None):
+def plot_state_hinton(
+    state, title: str = "", figsize=None, ax_real=None, ax_imag=None, *, filename=None
+):
     """Plot a hinton diagram for the density matrix of a quantum state.
 
     The hinton diagram represents the values of a matrix using
@@ -186,7 +188,7 @@ def plot_state_hinton(state, title="", figsize=None, ax_real=None, ax_imag=None,
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def plot_bloch_vector(
-    bloch, title="", ax=None, figsize=None, coord_type="cartesian", font_size=None
+    bloch, title: str = "", ax=None, figsize=None, coord_type: str = "cartesian", font_size=None
 ):
     """Plot the Bloch sphere.
 
@@ -254,7 +256,7 @@ def plot_bloch_vector(
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def plot_bloch_multivector(
     state,
-    title="",
+    title: str = "",
     figsize=None,
     *,
     reverse_bits=False,
@@ -360,7 +362,7 @@ def plot_bloch_multivector(
 @_optionals.HAS_MATPLOTLIB.require_in_call
 def plot_state_city(
     state,
-    title="",
+    title: str = "",
     figsize=None,
     color=None,
     alpha=1,
@@ -609,7 +611,9 @@ def plot_state_city(
 
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
-def plot_state_paulivec(state, title="", figsize=None, color=None, ax=None, *, filename=None):
+def plot_state_paulivec(
+    state, title: str = "", figsize=None, color=None, ax=None, *, filename=None
+):
     r"""Plot the Pauli-vector representation of a quantum state as bar graph.
 
     The Pauli-vector of a density matrix :math:`\rho` is defined by the expectation of each
@@ -1346,7 +1350,7 @@ class TextMatrix:
     """Text representation of an array, with `__str__` method so it
     displays nicely in Jupyter notebooks"""
 
-    def __init__(self, state, max_size=8, dims=None, prefix="", suffix="") -> None:
+    def __init__(self, state, max_size=8, dims=None, prefix: str = "", suffix: str = "") -> None:
         self.state = state
         self.max_size = max_size
         if dims is None:  # show dims if state is not only qubits

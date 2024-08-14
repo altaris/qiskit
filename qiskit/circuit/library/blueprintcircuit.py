@@ -14,7 +14,7 @@
 
 from __future__ import annotations
 from abc import ABC, abstractmethod
-
+from typing import Literal
 from qiskit._accelerate.circuit import CircuitData
 from qiskit.circuit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit.parametertable import ParameterView
@@ -198,7 +198,12 @@ class BlueprintCircuit(QuantumCircuit, ABC):
             self._build()
         return super().num_connected_components(unitary_only=unitary_only)
 
-    def copy_empty_like(self, name=None, *, vars_mode="alike"):
+    def copy_empty_like(
+        self,
+        name=None,
+        *,
+        vars_mode: Literal["alike", "captures", "drop"] = "alike",
+    ):
         if not self._is_built:
             self._build()
         cpy = super().copy_empty_like(name=name, vars_mode=vars_mode)

@@ -51,6 +51,7 @@ __all__ = ["Bloch"]
 import math
 import os
 import re
+from typing import Literal
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -117,7 +118,7 @@ class Arrow3D(Patch3D, FancyArrowPatch):
     # this once 3.6 is the minimum supported version, because the deprecation period ends then.
     __module__ = "mpl_toolkits.mplot3d.art3d"
 
-    def __init__(self, xs, ys, zs, zdir="z", **kwargs) -> None:
+    def __init__(self, xs, ys, zs, zdir: Literal["x", "y", "z"] = "z", **kwargs) -> None:
         # The Patch3D.__init__() method just calls its own super() method and then
         # self.set_3d_properties, but its __init__ signature is actually pretty incompatible with
         # how it goes on to call set_3d_properties, so we just have to do things ourselves.  The
@@ -195,7 +196,13 @@ class Bloch:
     """
 
     def __init__(
-        self, fig=None, axes=None, view=None, figsize=None, background=False, font_size=20
+        self,
+        fig=None,
+        axes=None,
+        view=None,
+        figsize=None,
+        background=False,
+        font_size=20,
     ) -> None:
 
         # Figure and axes
@@ -245,7 +252,13 @@ class Bloch:
 
         # ---vector options---
         # List of colors for Bloch vectors, default = ['b','g','r','y']
-        self.vector_color = ["#dc267f", "#648fff", "#fe6100", "#785ef0", "#ffb000"]
+        self.vector_color = [
+            "#dc267f",
+            "#648fff",
+            "#fe6100",
+            "#785ef0",
+            "#ffb000",
+        ]
         #: Width of Bloch vectors, default = 5
         self.vector_width = 5
         #: Style of Bloch vectors, default = '-|>' (or 'simple')
@@ -318,7 +331,10 @@ class Bloch:
                 ketex % "\\nearrow\\hspace{-1.46}\\swarrow",
                 ketex % "\\nwarrow\\hspace{-1.46}\\searrow",
             ]
-            self.ylabel = [ketex % "\\circlearrowleft", ketex % "\\circlearrowright"]
+            self.ylabel = [
+                ketex % "\\circlearrowleft",
+                ketex % "\\circlearrowright",
+            ]
             self.zlabel = [ketex % "\\leftrightarrow", ketex % "\\updownarrow"]
         elif convention == "polarization jones letters":
             self.xlabel = [ketex % "D", ketex % "A"]
@@ -374,7 +390,7 @@ class Bloch:
         self.point_style = []
         self.annotations = []
 
-    def add_points(self, points, meth="s") -> None:
+    def add_points(self, points, meth: str = "s") -> None:
         """Add a list of data points to Bloch sphere.
 
         Args:
@@ -447,7 +463,7 @@ class Bloch:
         """
         self.render()
 
-    def render(self, title="") -> None:
+    def render(self, title: str = "") -> None:
         """
         Render the Bloch sphere and its data sets in on given figure and axes.
         """
@@ -464,7 +480,10 @@ class Bloch:
             version_match = VERSION_PATTERN_REGEX.search(matplotlib.__version__)
             if tuple(int(x) for x in version_match.group("release").split(".")) >= (3, 4, 0):
                 self.axes = Axes3D(
-                    self.fig, azim=self.view[0], elev=self.view[1], auto_add_to_figure=False
+                    self.fig,
+                    azim=self.view[0],
+                    elev=self.view[1],
+                    auto_add_to_figure=False,
                 )
                 self.fig.add_axes(self.axes)
             else:
@@ -594,13 +613,31 @@ class Bloch:
         """axes"""
         span = np.linspace(-1.0, 1.0, 2)
         self.axes.plot(
-            span, 0 * span, zs=0, zdir="z", label="X", lw=self.frame_width, color=self.frame_color
+            span,
+            0 * span,
+            zs=0,
+            zdir="z",
+            label="X",
+            lw=self.frame_width,
+            color=self.frame_color,
         )
         self.axes.plot(
-            0 * span, span, zs=0, zdir="z", label="Y", lw=self.frame_width, color=self.frame_color
+            0 * span,
+            span,
+            zs=0,
+            zdir="z",
+            label="Y",
+            lw=self.frame_width,
+            color=self.frame_color,
         )
         self.axes.plot(
-            0 * span, span, zs=0, zdir="y", label="Z", lw=self.frame_width, color=self.frame_color
+            0 * span,
+            span,
+            zs=0,
+            zdir="y",
+            label="Z",
+            lw=self.frame_width,
+            color=self.frame_color,
         )
 
     def plot_axes_labels(self) -> None:
@@ -641,7 +678,14 @@ class Bloch:
             if self.vector_style == "":
                 # simple line style
                 self.axes.plot(
-                    xs3d, ys3d, zs3d, zs=0, zdir="z", label="Z", lw=self.vector_width, color=color
+                    xs3d,
+                    ys3d,
+                    zs3d,
+                    zs=0,
+                    zdir="z",
+                    label="Z",
+                    lw=self.vector_width,
+                    color=color,
                 )
             else:
                 # decorated style, with arrow heads
@@ -730,7 +774,7 @@ class Bloch:
             opts.update(annotation["opts"])
             self.axes.text(vec[1], -vec[0], vec[2], annotation["text"], **opts)
 
-    def show(self, title="") -> None:
+    def show(self, title: str = "") -> None:
         """
         Display Bloch sphere and corresponding data sets.
         """
@@ -738,7 +782,7 @@ class Bloch:
         if self.fig:
             plt.show(self.fig)
 
-    def save(self, name=None, output="png", dirc=None) -> None:
+    def save(self, name=None, output: str = "png", dirc=None) -> None:
         """Saves Bloch sphere to file of type ``format`` in directory ``dirc``.
 
         Args:

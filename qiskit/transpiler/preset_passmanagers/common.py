@@ -184,7 +184,7 @@ def generate_unroll_3q(
     target,
     basis_gates=None,
     approximation_degree=None,
-    unitary_synthesis_method="default",
+    unitary_synthesis_method: str = "default",
     unitary_synthesis_plugin_config=None,
     hls_config=None,
 ):
@@ -407,11 +407,11 @@ def generate_pre_op_passmanager(target=None, coupling_map=None, remove_reset_in_
 def generate_translation_passmanager(
     target,
     basis_gates=None,
-    method="translator",
+    method: str = "translator",
     approximation_degree=None,
     coupling_map=None,
     backend_props=None,
-    unitary_synthesis_method="default",
+    unitary_synthesis_method: str = "default",
     unitary_synthesis_plugin_config=None,
     hls_config=None,
 ):

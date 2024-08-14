@@ -43,7 +43,7 @@ def plot_gate_map(
     qubit_color=None,
     qubit_labels=None,
     line_color=None,
-    font_color="white",
+    font_color: str = "white",
     ax=None,
     filename=None,
     qubit_coordinates=None,
@@ -963,7 +963,7 @@ def plot_coupling_map(
     qubit_color=None,
     qubit_labels=None,
     line_color=None,
-    font_color="white",
+    font_color: str = "white",
     ax=None,
     filename=None,
 ):
@@ -1117,7 +1117,7 @@ def plot_coupling_map(
         return fig
 
 
-def plot_circuit_layout(circuit, backend, view="virtual", qubit_coordinates=None):
+def plot_circuit_layout(circuit, backend, view: str = "virtual", qubit_coordinates=None):
     """Plot the layout of a circuit transpiled for a given
     target backend.
 

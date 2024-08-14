@@ -21,7 +21,7 @@ from qiskit.circuit.exceptions import CircuitError
 class Measure(SingletonInstruction):
     """Quantum measurement in the computational basis."""
 
-    def __init__(self, label=None, *, duration=None, unit="dt") -> None:
+    def __init__(self, label=None, *, duration=None, unit: str = "dt") -> None:
         """
         Args:
             label: optional string label for this instruction.

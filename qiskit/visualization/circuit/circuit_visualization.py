@@ -34,6 +34,8 @@ import tempfile
 import typing
 from warnings import warn
 
+from typing import Literal
+
 from qiskit import user_config
 from qiskit.circuit import ControlFlowOp, Measure
 from qiskit.utils import optionals as _optionals
@@ -365,7 +367,7 @@ def _text_circuit_drawer(
     reverse_bits=False,
     plot_barriers=True,
     justify=None,
-    vertical_compression="high",
+    vertical_compression: Literal["high", "medium", "low"] = "high",
     idle_wires=True,
     with_layout=True,
     fold=None,
@@ -451,7 +453,7 @@ def _text_circuit_drawer(
 @_optionals.HAS_PIL.require_in_call("LaTeX circuit drawing")
 def _latex_circuit_drawer(
     circuit,
-    scale: float=0.7,
+    scale: float = 0.7,
     style=None,
     filename=None,
     plot_barriers=True,
@@ -546,7 +548,14 @@ def _latex_circuit_drawer(
         base = os.path.join(tmpdirname, tmpfilename)
         try:
             subprocess.run(
-                ["pdftocairo", "-singlefile", "-png", "-q", base + ".pdf", base],
+                [
+                    "pdftocairo",
+                    "-singlefile",
+                    "-png",
+                    "-q",
+                    base + ".pdf",
+                    base,
+                ],
                 check=True,
             )
         except (OSError, subprocess.CalledProcessError) as exc:
@@ -571,7 +580,7 @@ def _latex_circuit_drawer(
 def _generate_latex_source(
     circuit,
     filename=None,
-    scale: float=0.7,
+    scale: float = 0.7,
     style=None,
     reverse_bits=False,
     plot_barriers=True,

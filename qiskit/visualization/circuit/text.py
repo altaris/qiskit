@@ -159,7 +159,7 @@ class BoxOnClWire(DrawElement):
         bot: └───┘   └───┘
     """
 
-    def __init__(self, label="", top_connect="─", bot_connect="─") -> None:
+    def __init__(self, label: str = "", top_connect: str = "─", bot_connect: str = "─") -> None:
         super().__init__(label)
         self.top_format = "┌─%s─┐"
         self.mid_format = "╡ %s ╞"
@@ -181,7 +181,7 @@ class BoxOnQuWire(DrawElement):
         bot: └───┘   └───┘
     """
 
-    def __init__(self, label="", top_connect="─", conditional=False) -> None:
+    def __init__(self, label: str = "", top_connect: str = "─", conditional=False) -> None:
         super().__init__(label)
         self.top_format = "┌─%s─┐"
         self.mid_format = "┤ %s ├"
@@ -204,7 +204,7 @@ class MeasureTo(DrawElement):
         bot:
     """
 
-    def __init__(self, label="") -> None:
+    def __init__(self, label: str = "") -> None:
         super().__init__()
         self.top_connect = " ║ "
         self.mid_content = "═╩═"
@@ -268,7 +268,7 @@ class MultiBox(DrawElement):
 class BoxOnQuWireTop(MultiBox, BoxOnQuWire):
     """Draws the top part of a box that affects more than one quantum wire"""
 
-    def __init__(self, label="", top_connect=None, wire_label="") -> None:
+    def __init__(self, label: str = "", top_connect=None, wire_label: str = "") -> None:
         super().__init__(label)
         self.wire_label = wire_label
         self.bot_connect = self.bot_pad = " "
@@ -284,7 +284,7 @@ class BoxOnQuWireTop(MultiBox, BoxOnQuWire):
 class BoxOnWireMid(MultiBox):
     """A generic middle box"""
 
-    def __init__(self, label, input_length, order, wire_label="") -> None:
+    def __init__(self, label, input_length, order, wire_label: str = "") -> None:
         super().__init__(label)
         self.top_pad = self.bot_pad = self.top_connect = self.bot_connect = " "
         self.wire_label = wire_label
@@ -298,7 +298,9 @@ class BoxOnWireMid(MultiBox):
 class BoxOnQuWireMid(BoxOnWireMid, BoxOnQuWire):
     """Draws the middle part of a box that affects more than one quantum wire"""
 
-    def __init__(self, label, input_length, order, wire_label="", control_label=None) -> None:
+    def __init__(
+        self, label, input_length, order, wire_label: str = "", control_label=None
+    ) -> None:
         super().__init__(label, input_length, order, wire_label=wire_label)
         if control_label:
             self.mid_format = f"{control_label}{self.wire_label} %s ├"
@@ -310,7 +312,7 @@ class BoxOnQuWireBot(MultiBox, BoxOnQuWire):
     """Draws the bottom part of a box that affects more than one quantum wire"""
 
     def __init__(
-        self, label, input_length, bot_connect=None, wire_label="", conditional=False
+        self, label, input_length, bot_connect=None, wire_label: str = "", conditional=False
     ) -> None:
         super().__init__(label)
         self.wire_label = wire_label
@@ -331,7 +333,7 @@ class BoxOnQuWireBot(MultiBox, BoxOnQuWire):
 class FlowOnQuWire(DrawElement):
     """Draws a box for a ControlFlowOp using a single qubit."""
 
-    def __init__(self, section, label="", top_connect="─", conditional=False) -> None:
+    def __init__(self, section, label: str = "", top_connect: str = "─", conditional=False) -> None:
         super().__init__(label)
         if section == CF_RIGHT:
             self.top_format = " ─%s─┐"
@@ -352,7 +354,7 @@ class FlowOnQuWire(DrawElement):
 class FlowOnQuWireTop(MultiBox, BoxOnQuWire):
     """Draws the top of a box for a ControlFlowOp that uses more than one qubit."""
 
-    def __init__(self, section, label="", top_connect=None, wire_label="") -> None:
+    def __init__(self, section, label: str = "", top_connect=None, wire_label: str = "") -> None:
         super().__init__(label)
         self.wire_label = wire_label
         self.bot_connect = self.bot_pad = " "
@@ -374,7 +376,7 @@ class FlowOnQuWireTop(MultiBox, BoxOnQuWire):
 class FlowOnQuWireMid(MultiBox, BoxOnQuWire):
     """Draws the middle of a box for a ControlFlowOp that uses more than one qubit."""
 
-    def __init__(self, section, label, input_length, order, wire_label="") -> None:
+    def __init__(self, section, label, input_length, order, wire_label: str = "") -> None:
         super().__init__(label)
         self.top_pad = self.bot_pad = self.top_connect = self.bot_connect = " "
         self.wire_label = wire_label
@@ -400,7 +402,7 @@ class FlowOnQuWireBot(MultiBox, BoxOnQuWire):
         label,
         input_length,
         bot_connect=None,
-        wire_label="",
+        wire_label: str = "",
         conditional=False,
     ) -> None:
         super().__init__(label)
@@ -428,7 +430,7 @@ class FlowOnQuWireBot(MultiBox, BoxOnQuWire):
 class BoxOnClWireTop(MultiBox, BoxOnClWire):
     """Draws the top part of a conditional box that affects more than one classical wire"""
 
-    def __init__(self, label="", top_connect=None, wire_label="") -> None:
+    def __init__(self, label: str = "", top_connect=None, wire_label: str = "") -> None:
         super().__init__(label)
         self.wire_label = wire_label
         self.mid_content = ""  # The label will be put by some other part of the box.
@@ -440,7 +442,7 @@ class BoxOnClWireTop(MultiBox, BoxOnClWire):
 class BoxOnClWireMid(BoxOnWireMid, BoxOnClWire):
     """Draws the middle part of a conditional box that affects more than one classical wire"""
 
-    def __init__(self, label, input_length, order, wire_label="", **_) -> None:
+    def __init__(self, label, input_length, order, wire_label: str = "", **_) -> None:
         super().__init__(label, input_length, order, wire_label=wire_label)
         self.mid_format = f"╡{self.wire_label} %s ╞"
 
@@ -448,7 +450,9 @@ class BoxOnClWireMid(BoxOnWireMid, BoxOnClWire):
 class BoxOnClWireBot(MultiBox, BoxOnClWire):
     """Draws the bottom part of a conditional box that affects more than one classical wire"""
 
-    def __init__(self, label, input_length, bot_connect="─", wire_label="", **_) -> None:
+    def __init__(
+        self, label, input_length, bot_connect: str = "─", wire_label: str = "", **_
+    ) -> None:
         super().__init__(label)
         self.wire_label = wire_label
         self.left_fill = len(self.wire_label)
@@ -471,7 +475,7 @@ class DirectOnQuWire(DrawElement):
     Element to the wire (without the box).
     """
 
-    def __init__(self, label="") -> None:
+    def __init__(self, label: str = "") -> None:
         super().__init__(label)
         self.top_format = " %s "
         self.mid_format = "─%s─"
@@ -491,7 +495,7 @@ class Barrier(DirectOnQuWire):
         bot:  ░     ░
     """
 
-    def __init__(self, label="") -> None:
+    def __init__(self, label: str = "") -> None:
         super().__init__("░")
         self.top_connect = label if label else "░"
         self.bot_connect = "░"
@@ -509,7 +513,7 @@ class Ex(DirectOnQuWire):
         bot:  │     │
     """
 
-    def __init__(self, bot_connect=" ", top_connect=" ", conditional=False) -> None:
+    def __init__(self, bot_connect: str = " ", top_connect: str = " ", conditional=False) -> None:
         super().__init__("X")
         self.bot_connect = "║" if conditional else bot_connect
         self.top_connect = top_connect
@@ -535,7 +539,12 @@ class Bullet(DirectOnQuWire):
     """
 
     def __init__(
-        self, top_connect="", bot_connect="", conditional=False, label=None, bottom=False
+        self,
+        top_connect: str = "",
+        bot_connect: str = "",
+        conditional=False,
+        label=None,
+        bottom=False,
     ) -> None:
         super().__init__("■")
         self.conditional = conditional
@@ -559,7 +568,12 @@ class OpenBullet(DirectOnQuWire):
     """
 
     def __init__(
-        self, top_connect="", bot_connect="", conditional=False, label=None, bottom=False
+        self,
+        top_connect: str = "",
+        bot_connect: str = "",
+        conditional=False,
+        label=None,
+        bottom=False,
     ) -> None:
         super().__init__("o")
         self.conditional = conditional
@@ -577,7 +591,7 @@ class DirectOnClWire(DrawElement):
     Element to the classical wire (without the box).
     """
 
-    def __init__(self, label="") -> None:
+    def __init__(self, label: str = "") -> None:
         super().__init__(label)
         self.top_format = " %s "
         self.mid_format = "═%s═"
@@ -598,7 +612,12 @@ class ClBullet(DirectOnClWire):
     """
 
     def __init__(
-        self, top_connect="", bot_connect="", conditional=False, label=None, bottom=False
+        self,
+        top_connect: str = "",
+        bot_connect: str = "",
+        conditional=False,
+        label=None,
+        bottom=False,
     ) -> None:
         super().__init__("■")
         self.top_connect = top_connect
@@ -621,7 +640,12 @@ class ClOpenBullet(DirectOnClWire):
     """
 
     def __init__(
-        self, top_connect="", bot_connect="", conditional=False, label=None, bottom=False
+        self,
+        top_connect: str = "",
+        bot_connect: str = "",
+        conditional=False,
+        label=None,
+        bottom=False,
     ) -> None:
         super().__init__("o")
         self.top_connect = top_connect
@@ -718,7 +742,7 @@ class TextDrawing:
         reverse_bits=False,
         plotbarriers=True,
         line_length=None,
-        vertical_compression="high",
+        vertical_compression: str = "high",
         initial_state=True,
         cregbundle=None,
         encoding=None,
@@ -982,7 +1006,7 @@ class TextDrawing:
         return labels.get(node_type, None)
 
     @staticmethod
-    def merge_lines(top, bot, icod="top"):
+    def merge_lines(top, bot, icod: str = "top"):
         """Merges two lines (top and bot) in a way that the overlapping makes sense.
 
         Args:
@@ -1695,7 +1719,7 @@ class Layer:
             )
         return bit_indices
 
-    def set_cl_multibox(self, condition, wire_map, top_connect="┴"):
+    def set_cl_multibox(self, condition, wire_map, top_connect: str = "┴"):
         """Sets the multi clbit box.
 
         Args:

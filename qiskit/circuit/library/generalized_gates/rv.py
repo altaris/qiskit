@@ -13,6 +13,7 @@
 """Rotation around an arbitrary axis on the Bloch sphere."""
 
 import math
+from typing import Optional
 import numpy
 from qiskit.circuit.gate import Gate
 from qiskit.circuit.exceptions import CircuitError
@@ -51,7 +52,7 @@ class RVGate(Gate):
                 \end{pmatrix}
     """
 
-    def __init__(self, v_x, v_y, v_z, basis="U") -> None:
+    def __init__(self, v_x, v_y, v_z, basis: Optional[str] = "U") -> None:
         """Create new rv single-qubit gate.
 
         Args:
@@ -62,7 +63,9 @@ class RVGate(Gate):
                 :class:`~qiskit.synthesis.one_qubit.one_qubit_decompose.OneQubitEulerDecomposer`)
         """
         # pylint: disable=cyclic-import
-        from qiskit.synthesis.one_qubit.one_qubit_decompose import OneQubitEulerDecomposer
+        from qiskit.synthesis.one_qubit.one_qubit_decompose import (
+            OneQubitEulerDecomposer,
+        )
 
         super().__init__("rv", 1, [v_x, v_y, v_z])
         self._decomposer = OneQubitEulerDecomposer(basis=basis)

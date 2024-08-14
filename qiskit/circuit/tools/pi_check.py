@@ -14,6 +14,7 @@
 """Check if number close to values of PI
 """
 
+from typing import Literal
 import numpy as np
 from qiskit.circuit.parameterexpression import ParameterExpression
 from qiskit.exceptions import QiskitError
@@ -25,7 +26,12 @@ RECIP_MESH = N / D / np.pi
 POW_LIST = np.pi ** np.arange(2, 5)
 
 
-def pi_check(inpt, eps: float=1e-9, output="text", ndigits=None):
+def pi_check(
+    inpt,
+    eps: float = 1e-9,
+    output: Literal["text", "latex", "mpl", "qasm"] = "text",
+    ndigits=None,
+):
     """Computes if a number is close to an integer
     fraction or multiple of PI and returns the
     corresponding string.

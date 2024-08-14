@@ -32,7 +32,7 @@ class Gate(Instruction):
         params: list,
         label: str | None = None,
         duration=None,
-        unit="dt",
+        unit: str = "dt",
     ) -> None:
         """Create a new gate.
 

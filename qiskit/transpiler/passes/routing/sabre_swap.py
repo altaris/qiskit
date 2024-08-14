@@ -15,6 +15,7 @@
 import logging
 from copy import deepcopy
 import time
+from typing import Literal
 
 import rustworkx
 
@@ -31,7 +32,13 @@ from qiskit.transpiler.passes.layout import disjoint_utils
 from qiskit.dagcircuit import DAGCircuit, DAGOpNode
 from qiskit.utils.parallel import CPU_COUNT
 
-from qiskit._accelerate.sabre import sabre_routing, Heuristic, SetScaling, NeighborTable, SabreDAG
+from qiskit._accelerate.sabre import (
+    sabre_routing,
+    Heuristic,
+    SetScaling,
+    NeighborTable,
+    SabreDAG,
+)
 from qiskit._accelerate.nlayout import NLayout
 
 logger = logging.getLogger(__name__)
@@ -75,7 +82,12 @@ class SabreSwap(TransformationPass):
     """
 
     def __init__(
-        self, coupling_map, heuristic="basic", seed=None, fake_run=False, trials=None
+        self,
+        coupling_map,
+        heuristic: Literal["basic", "lookahead", "decay"] = "basic",
+        seed=None,
+        fake_run=False,
+        trials=None,
     ) -> None:
         r"""SabreSwap initializer.
 
@@ -259,7 +271,10 @@ class SabreSwap(TransformationPass):
             self.seed,
         )
         sabre_stop = time.perf_counter()
-        logging.debug("Sabre swap algorithm execution complete in: %s", sabre_stop - sabre_start)
+        logging.debug(
+            "Sabre swap algorithm execution complete in: %s",
+            sabre_stop - sabre_start,
+        )
         final_layout = Layout(dict(zip(dag.qubits, final_permutation)))
         if self.property_set["final_layout"] is None:
             self.property_set["final_layout"] = final_layout

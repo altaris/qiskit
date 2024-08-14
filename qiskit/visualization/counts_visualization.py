@@ -16,6 +16,7 @@ Visualization functions for measurement counts.
 
 from collections import OrderedDict
 import functools
+from typing import Literal
 
 import numpy as np
 
@@ -61,7 +62,7 @@ def plot_histogram(
     figsize=None,
     color=None,
     number_to_keep=None,
-    sort="asc",
+    sort: Literal["asc", "desc", "hamming", "value", "value_desc"] = "asc",
     target_string=None,
     legend=None,
     bar_labels=True,
@@ -167,7 +168,7 @@ def plot_distribution(
     figsize=(7, 5),
     color=None,
     number_to_keep=None,
-    sort="asc",
+    sort: Literal["asc", "desc", "hamming", "value", "value_desc"] = "asc",
     target_string=None,
     legend=None,
     bar_labels=True,
@@ -264,7 +265,7 @@ def _plotting_core(
     figsize=(7, 5),
     color=None,
     number_to_keep=None,
-    sort="asc",
+    sort: Literal["asc", "desc", "hamming", "value", "value_desc"] = "asc",
     target_string=None,
     legend=None,
     bar_labels=True,
@@ -386,7 +387,12 @@ def _plotting_core(
     min_ylim = 0.0
     if kind == "distribution":
         min_ylim = min(0.0, min(1.1 * val for val in all_vals))
-    ax.set_ylim([min_ylim, min([1.1 * sum(all_vals), max(1.1 * val for val in all_vals)])])
+    ax.set_ylim(
+        [
+            min_ylim,
+            min([1.1 * sum(all_vals), max(1.1 * val for val in all_vals)]),
+        ]
+    )
     if "desc" in sort:
         ax.invert_xaxis()
 
@@ -431,7 +437,12 @@ def _unify_labels(data):
     return out
 
 
-def _plot_data(data, labels, number_to_keep, kind="counts"):
+def _plot_data(
+    data,
+    labels,
+    number_to_keep,
+    kind: Literal["counts", "distribution"] = "counts",
+):
     """Generate the data needed for plotting counts.
 
     Parameters:

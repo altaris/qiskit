@@ -64,7 +64,7 @@ def _num_to_latex(raw_value, decimals: int = 15, first_term=True, coefficient=Fa
     return element
 
 
-def _matrix_to_latex(matrix, decimals: int = 10, prefix="", max_size=(8, 8)):
+def _matrix_to_latex(matrix, decimals: int = 10, prefix: str = "", max_size=(8, 8)):
     """Latex representation of a complex numpy array (with maximum dimension 2)
 
     Args:
@@ -143,7 +143,7 @@ def _matrix_to_latex(matrix, decimals: int = 10, prefix="", max_size=(8, 8)):
     return out_string
 
 
-def array_to_latex(array, precision: int = 10, prefix="", source=False, max_size: int = 8):
+def array_to_latex(array, precision: int = 10, prefix: str = "", source=False, max_size: int = 8):
     """Latex representation of a complex numpy array (with dimension 1 or 2)
 
     Args:

@@ -14,6 +14,7 @@
 
 import logging
 import string
+from typing import Literal
 import warnings
 
 from qiskit.transpiler.basepasses import AnalysisPass
@@ -23,7 +24,7 @@ from qiskit.transpiler.exceptions import TranspilerError
 class Error(AnalysisPass):
     """Error pass to be called when an error happens."""
 
-    def __init__(self, msg=None, action="raise"):
+    def __init__(self, msg=None, action: Literal["raise", "warn", "log"] = "raise"):
         """Error pass.
 
         Args:

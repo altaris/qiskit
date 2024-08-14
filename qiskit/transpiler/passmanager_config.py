@@ -36,7 +36,7 @@ class PassManagerConfig:
         approximation_degree=None,
         seed_transpiler=None,
         timing_constraints=None,
-        unitary_synthesis_method="default",
+        unitary_synthesis_method: str = "default",
         unitary_synthesis_plugin_config=None,
         target=None,
         hls_config=None,

@@ -1755,7 +1755,15 @@ class MatplotlibDrawer:
             self._multiqubit_gate(node, node_data, glob_data, xy[num_ctrl_qubits:])
 
     def _set_ctrl_bits(
-        self, ctrl_state, num_ctrl_qubits, qbit, glob_data, ec=None, tc=None, text="", qargs=None
+        self,
+        ctrl_state,
+        num_ctrl_qubits,
+        qbit,
+        glob_data,
+        ec=None,
+        tc=None,
+        text: str = "",
+        qargs=None,
     ) -> None:
         """Determine which qubits are controls and whether they are open or closed"""
         # place the control label at the top or bottom of controls
@@ -1781,7 +1789,9 @@ class MatplotlibDrawer:
                 qbit[i], glob_data, fc=fc_open_close, ec=ec, tc=tc, text=text, text_top=text_top
             )
 
-    def _ctrl_qubit(self, xy, glob_data, fc=None, ec=None, tc=None, text="", text_top=None) -> None:
+    def _ctrl_qubit(
+        self, xy, glob_data, fc=None, ec=None, tc=None, text: str = "", text_top=None
+    ) -> None:
         """Draw a control circle and if top or bottom control, draw control label"""
         xpos, ypos = xy
         box = glob_data["patches_mod"].Circle(
@@ -1925,7 +1935,7 @@ class MatplotlibDrawer:
             zorder=PORDER_LINE_PLUS,
         )
 
-    def _sidetext(self, node, node_data, xy, tc=None, text="") -> None:
+    def _sidetext(self, node, node_data, xy, tc=None, text: str = "") -> None:
         """Draw the sidetext for symmetric gates"""
         xpos, ypos = xy
 

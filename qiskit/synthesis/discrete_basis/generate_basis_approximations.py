@@ -54,7 +54,7 @@ _1q_gates = {
 }
 
 
-def _check_candidate(candidate, existing_sequences, tol: float=1e-10):
+def _check_candidate(candidate, existing_sequences, tol: float = 1e-10):
     if optionals.HAS_SKLEARN:
         return _check_candidate_kdtree(candidate, existing_sequences, tol)
 
@@ -68,7 +68,7 @@ def _check_candidate(candidate, existing_sequences, tol: float=1e-10):
     return _check_candidate_greedy(candidate, existing_sequences, tol)
 
 
-def _check_candidate_greedy(candidate, existing_sequences, tol: float=1e-10):
+def _check_candidate_greedy(candidate, existing_sequences, tol: float = 1e-10):
     # do a quick, string-based check if the same sequence already exists
     if any(candidate.name == existing.name for existing in existing_sequences):
         return False
@@ -81,7 +81,7 @@ def _check_candidate_greedy(candidate, existing_sequences, tol: float=1e-10):
 
 
 @optionals.HAS_SKLEARN.require_in_call
-def _check_candidate_kdtree(candidate, existing_sequences, tol: float=1e-10):
+def _check_candidate_kdtree(candidate, existing_sequences, tol: float = 1e-10):
     """Check if there's a candidate implementing the same matrix up to ``tol``.
 
     This uses a k-d tree search and is much faster than the greedy, list-based search.

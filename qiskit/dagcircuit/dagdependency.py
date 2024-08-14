@@ -20,6 +20,7 @@ import typing
 from collections import OrderedDict, defaultdict
 from collections.abc import Iterator
 
+from typing import Literal
 import rustworkx as rx
 
 from qiskit.circuit.commutation_library import SessionCommutationChecker as scc
@@ -133,7 +134,9 @@ class DAGDependency:
         Args:
             angle (float, ParameterExpression)
         """
-        from qiskit.circuit.parameterexpression import ParameterExpression  # needed?
+        from qiskit.circuit.parameterexpression import (
+            ParameterExpression,
+        )  # needed?
 
         if isinstance(angle, ParameterExpression):
             self._global_phase = angle
@@ -523,7 +526,12 @@ class DAGDependency:
             dag._multi_graph.add_edge(edges[0], edges[1], edges[2])
         return dag
 
-    def draw(self, scale: float=0.7, filename=None, style="color"):
+    def draw(
+        self,
+        scale: float = 0.7,
+        filename=None,
+        style: Literal["plain", "color"] = "color",
+    ):
         """
         Draws the DAGDependency graph.
 
