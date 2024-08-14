@@ -14,6 +14,7 @@
 
 import configparser
 import os
+from typing import Optional
 from warnings import warn
 
 from qiskit import exceptions
@@ -62,7 +63,13 @@ class UserConfig:
             # Parse circuit_drawer
             circuit_drawer = self.config_parser.get("default", "circuit_drawer", fallback=None)
             if circuit_drawer:
-                if circuit_drawer not in ["text", "mpl", "latex", "latex_source", "auto"]:
+                if circuit_drawer not in [
+                    "text",
+                    "mpl",
+                    "latex",
+                    "latex_source",
+                    "auto",
+                ]:
                     raise exceptions.QiskitUserConfigError(
                         f"{circuit_drawer} is not a valid circuit drawer backend. Must be "
                         "either 'text', 'mpl', 'latex', 'latex_source', or "
@@ -177,7 +184,7 @@ class UserConfig:
                 self.settings["sabre_all_threads"] = sabre_all_threads
 
 
-def set_config(key, value, section=None, file_path=None):
+def set_config(key, value, section: Optional[str] = None, file_path: Optional[str] = None):
     """Adds or modifies a user configuration
 
     It will add configuration to the currently configured location
