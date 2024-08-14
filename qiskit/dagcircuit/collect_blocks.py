@@ -43,7 +43,7 @@ class BlockCollector:
     see https://github.com/Qiskit/qiskit-terra/issues/5775.
     """
 
-    def __init__(self, dag: DAGCircuit | DAGDependency):
+    def __init__(self, dag: DAGCircuit | DAGDependency) -> None:
         """
         Args:
             dag (Union[DAGCircuit, DAGDependency]): The input DAG.

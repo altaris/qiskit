@@ -34,7 +34,9 @@ class CorrelatedReadoutMitigator(BaseReadoutMitigator):
     :math:`2^N x 2^N` so the mitigation complexity is :math:`O(4^N)`.
     """
 
-    def __init__(self, assignment_matrix: np.ndarray, qubits: Optional[Iterable[int]] = None):
+    def __init__(
+        self, assignment_matrix: np.ndarray, qubits: Optional[Iterable[int]] = None
+    ) -> None:
         """Initialize a CorrelatedReadoutMitigator
 
         Args:

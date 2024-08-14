@@ -55,7 +55,7 @@ class ShapedMixin(Shaped):
 
     _shape: tuple[int, ...]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{type(self).__name__}(<{self.shape}>)"
 
     @property

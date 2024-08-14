@@ -64,7 +64,7 @@ class Type:
 
     # Enforcement of immutability.  The constructor methods need to manually skip this.
 
-    def __setattr__(self, _key, _value):
+    def __setattr__(self, _key, _value) -> None:
         raise AttributeError(f"'{self.kind.__name__}' instances are immutable")
 
     def __copy__(self):
@@ -86,7 +86,7 @@ class Bool(Type, metaclass=_Singleton):
 
     __slots__ = ()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Bool()"
 
     def __hash__(self):
@@ -102,12 +102,12 @@ class Uint(Type):
 
     __slots__ = ("width",)
 
-    def __init__(self, width: int):
+    def __init__(self, width: int) -> None:
         if isinstance(width, int) and width <= 0:
             raise ValueError("uint width must be greater than zero")
         super(Type, self).__setattr__("width", width)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Uint({self.width})"
 
     def __hash__(self):

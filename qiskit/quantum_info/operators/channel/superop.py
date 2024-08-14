@@ -65,7 +65,7 @@ class SuperOp(QuantumChannel):
         data: QuantumCircuit | Instruction | BaseOperator | np.ndarray,
         input_dims: tuple | None = None,
         output_dims: tuple | None = None,
-    ):
+    ) -> None:
         """Initialize a quantum channel Superoperator operator.
 
         Args:

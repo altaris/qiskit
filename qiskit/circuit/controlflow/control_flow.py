@@ -33,7 +33,7 @@ class ControlFlowOp(Instruction, ABC):
     of the control flow.
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         for block in self.blocks:
             if block.num_input_vars:

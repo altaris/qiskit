@@ -26,7 +26,7 @@ from qiskit.circuit.parameterexpression import ParameterExpression
 class Delay(Instruction):
     """Do nothing and just delay/wait/idle for a specified duration."""
 
-    def __init__(self, duration, unit: Literal["s", "ms", "us", "ns", "ps", "dt"] = "dt"):
+    def __init__(self, duration, unit: Literal["s", "ms", "us", "ns", "ps", "dt"] = "dt") -> None:
         """
         Args:
             duration: the length of time of the duration.  Given in units of ``unit``.
@@ -65,7 +65,7 @@ class Delay(Instruction):
         """
         return self.__array__(dtype=complex)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Return the official string representing the delay."""
         return f"{self.__class__.__name__}(duration={self.params[0]}[unit={self.unit}])"
 

@@ -46,7 +46,7 @@ class InstructionDurations:
         if instruction_durations:
             self.update(instruction_durations)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return a string representation of all stored durations."""
         string = ""
         for k, v in self.duration_by_name.items():

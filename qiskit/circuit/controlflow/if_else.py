@@ -14,7 +14,8 @@
 
 from __future__ import annotations
 
-from typing import Optional, Union, Iterable, TYPE_CHECKING
+from types import TracebackType
+from typing import Type, Optional, Union, Iterable, TYPE_CHECKING
 import itertools
 
 from qiskit.circuit.classicalregister import ClassicalRegister, Clbit
@@ -22,7 +23,11 @@ from qiskit.circuit.classical import expr
 from qiskit.circuit.instructionset import InstructionSet
 from qiskit.circuit.exceptions import CircuitError
 
-from .builder import ControlFlowBuilderBlock, InstructionPlaceholder, InstructionResources
+from .builder import (
+    ControlFlowBuilderBlock,
+    InstructionPlaceholder,
+    InstructionResources,
+)
 from .control_flow import ControlFlowOp
 from ._builder_utils import (
     partition_registers,
@@ -57,7 +62,7 @@ class IfElseOp(ControlFlowOp):
         true_body: QuantumCircuit,
         false_body: QuantumCircuit | None = None,
         label: str | None = None,
-    ):
+    ) -> None:
         """
         Args:
             condition: A condition to be evaluated in real time during circuit execution which,
@@ -85,7 +90,13 @@ class IfElseOp(ControlFlowOp):
         num_qubits = true_body.num_qubits
         num_clbits = true_body.num_clbits
 
-        super().__init__("if_else", num_qubits, num_clbits, [true_body, false_body], label=label)
+        super().__init__(
+            "if_else",
+            num_qubits,
+            num_clbits,
+            [true_body, false_body],
+            label=label,
+        )
 
         self.condition = validate_condition(condition)
 
@@ -197,7 +208,11 @@ class IfElsePlaceholder(InstructionPlaceholder):
         self.__false_block: Optional[ControlFlowBuilderBlock] = false_block
         self.__resources = self._calculate_placeholder_resources()
         super().__init__(
-            "if_else", len(self.__resources.qubits), len(self.__resources.clbits), [], label=label
+            "if_else",
+            len(self.__resources.qubits),
+            len(self.__resources.clbits),
+            [],
+            label=label,
         )
         # Set the condition after super().__init__() has initialized it to None.
         self.condition = validate_condition(condition)
@@ -323,7 +338,13 @@ class IfContext:
         Terra.
     """
 
-    __slots__ = ("_appended_instructions", "_circuit", "_condition", "_in_loop", "_label")
+    __slots__ = (
+        "_appended_instructions",
+        "_circuit",
+        "_condition",
+        "_in_loop",
+        "_label",
+    )
 
     def __init__(
         self,
@@ -349,7 +370,9 @@ class IfContext:
         return self._circuit
 
     @property
-    def condition(self) -> tuple[ClassicalRegister, int] | tuple[Clbit, int] | expr.Expr:
+    def condition(
+        self,
+    ) -> tuple[ClassicalRegister, int] | tuple[Clbit, int] | expr.Expr:
         """Get the expression that this statement is conditioned on."""
         return self._condition
 
@@ -373,7 +396,12 @@ class IfContext:
         )
         return ElseContext(self)
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ):
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, there's nothing
             # to do except restore the circuit state.
@@ -395,7 +423,12 @@ class IfContext:
             # resources because there can't be anything that will consume them.
             true_body = true_block.build(true_block.qubits(), true_block.clbits())
             self._appended_instructions = self._circuit.append(
-                IfElseOp(self._condition, true_body=true_body, false_body=None, label=self._label),
+                IfElseOp(
+                    self._condition,
+                    true_body=true_body,
+                    false_body=None,
+                    label=self._label,
+                ),
                 tuple(true_body.qubits),
                 tuple(true_body.clbits),
             )
@@ -462,7 +495,12 @@ class ElseContext:
             allow_jumps=self._if_context.in_loop,
         )
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ):
         circuit = self._if_context.circuit
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, we need to

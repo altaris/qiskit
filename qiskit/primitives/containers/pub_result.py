@@ -36,7 +36,7 @@ class PubResult:
         self._data = data
         self._metadata = metadata or {}
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         metadata = f", metadata={self.metadata}" if self.metadata else ""
         return f"{type(self).__name__}(data={self._data}{metadata})"
 

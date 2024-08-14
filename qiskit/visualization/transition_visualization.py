@@ -101,7 +101,7 @@ class _Quaternion:
         result = _Quaternion.from_value(np.array((w, -x, -y, -z)))
         return result
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         theta, v = self.get_axisangle()
         return f"(({theta}; {v[0]}, {v[1]}, {v[2]}))"
 

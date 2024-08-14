@@ -13,19 +13,38 @@
 """Circuit operation representing an ``switch/case`` statement."""
 
 from __future__ import annotations
+from types import TracebackType
 
 __all__ = ("SwitchCaseOp", "CASE_DEFAULT")
 
 import contextlib
-from typing import Union, Iterable, Any, Tuple, Optional, List, Literal, TYPE_CHECKING
+from typing import (
+    Union,
+    Iterable,
+    Any,
+    Tuple,
+    List,
+    Literal,
+    TYPE_CHECKING,
+    Type,
+    Optional,
+)
 
 from qiskit.circuit.classicalregister import ClassicalRegister, Clbit
 from qiskit.circuit.classical import expr, types
 from qiskit.circuit.exceptions import CircuitError
 
-from .builder import InstructionPlaceholder, InstructionResources, ControlFlowBuilderBlock
+from .builder import (
+    InstructionPlaceholder,
+    InstructionResources,
+    ControlFlowBuilderBlock,
+)
 from .control_flow import ControlFlowOp
-from ._builder_utils import unify_circuit_resources, partition_registers, node_resources
+from ._builder_utils import (
+    unify_circuit_resources,
+    partition_registers,
+    node_resources,
+)
 
 if TYPE_CHECKING:
     from qiskit.circuit import QuantumCircuit
@@ -40,7 +59,7 @@ class _DefaultCaseType:
     When using the builder interface of :meth:`.QuantumCircuit.switch`, this can also be accessed as
     the ``DEFAULT`` attribute of the bound case-builder object."""
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "<default case>"
 
 
@@ -59,7 +78,7 @@ class SwitchCaseOp(ControlFlowOp):
         cases: Iterable[Tuple[Any, QuantumCircuit]],
         *,
         label: Optional[str] = None,
-    ):
+    ) -> None:
         """
         Args:
             target: the real-time value to switch on.
@@ -324,7 +343,9 @@ class SwitchContext:
         return label in self._label_set
 
     def add_case(
-        self, labels: Tuple[Union[int, Literal[CASE_DEFAULT]], ...], block: ControlFlowBuilderBlock
+        self,
+        labels: Tuple[Union[int, Literal[CASE_DEFAULT]], ...],
+        block: ControlFlowBuilderBlock,
     ) -> None:
         """Add a sequence of conditions and the single block that should be run if they are
         triggered to the context.  The labels are assumed to have already been validated using
@@ -338,7 +359,12 @@ class SwitchContext:
         self.circuit._push_scope(forbidden_message="Cannot have instructions outside a case")
         return CaseBuilder(self)
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ):
         self.complete = True
         # The popped scope should be the forbidden scope.
         self.circuit._pop_scope()

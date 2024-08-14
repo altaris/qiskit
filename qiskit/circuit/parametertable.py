@@ -43,7 +43,7 @@ class ParameterView(MappingView):
         """Remove an existing element from the view."""
         self.data.remove(x)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Format the class as string."""
         return f"ParameterView({self.data})"
 
@@ -71,7 +71,7 @@ class ParameterView(MappingView):
                 self.remove(element)
         return self
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Get the length."""
         return len(self.data)
 
@@ -112,7 +112,7 @@ class ParameterView(MappingView):
     def __iter__(self):
         return iter(self.data)
 
-    def __contains__(self, x):
+    def __contains__(self, x) -> bool:
         return x in self.data
 
     __hash__: None  # type: ignore

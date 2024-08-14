@@ -82,7 +82,7 @@ class Nduv:
                 return True
         return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Nduv({repr(self.date)}, {self.name}, {self.unit}, {self.value})"
 
 

@@ -63,7 +63,7 @@ class Instruction(Operation):
 
     def __init__(
         self, name, num_qubits, num_clbits, params, duration=None, unit: str = "dt", label=None
-    ):
+    ) -> None:
         """Create a new instruction.
 
         Args:

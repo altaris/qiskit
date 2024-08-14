@@ -28,7 +28,7 @@ class Qubit(Bit):
 
     __slots__ = ()
 
-    def __init__(self, register=None, index=None):
+    def __init__(self, register=None, index=None) -> None:
         """Creates a qubit.
 
         Args:

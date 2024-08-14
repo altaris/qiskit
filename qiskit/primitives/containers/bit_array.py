@@ -64,7 +64,7 @@ class BitArray(ShapedMixin):
     correspond to the shape of the pub that was executed to sample these bits.
     """
 
-    def __init__(self, array: NDArray[np.uint8], num_bits: int):
+    def __init__(self, array: NDArray[np.uint8], num_bits: int) -> None:
         """
         Args:
             array: The ``uint8`` data array.
@@ -125,7 +125,7 @@ class BitArray(ShapedMixin):
     def __xor__(self, other: "BitArray") -> "BitArray":
         return BitArray(np.bitwise_xor(*self._prepare_broadcastable(other)), self.num_bits)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         desc = f"<shape={self.shape}, num_shots={self.num_shots}, num_bits={self.num_bits}>"
         return f"BitArray({desc})"
 

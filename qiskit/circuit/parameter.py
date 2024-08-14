@@ -128,7 +128,7 @@ class Parameter(ParameterExpression):
         """
         return self._uuid
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
     def __copy__(self):
@@ -137,7 +137,7 @@ class Parameter(ParameterExpression):
     def __deepcopy__(self, memo=None):
         return self
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.name})"
 
     def __eq__(self, other):

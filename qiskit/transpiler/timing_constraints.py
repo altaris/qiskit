@@ -24,7 +24,7 @@ class TimingConstraints:
         min_length: int = 1,
         pulse_alignment: int = 1,
         acquire_alignment: int = 1,
-    ):
+    ) -> None:
         """Initialize a TimingConstraints object
 
         Args:

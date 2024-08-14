@@ -29,7 +29,7 @@ class QuasiDistribution(dict):
     _bitstring_regex = re.compile(r"^[01]+$")
     __ndigits__ = 15
 
-    def __init__(self, data, shots=None, stddev_upper_bound=None):
+    def __init__(self, data, shots=None, stddev_upper_bound=None) -> None:
         """Builds a quasiprobability distribution object.
 
         .. note::
@@ -150,5 +150,5 @@ class QuasiDistribution(dict):
         """Return an upper bound on standard deviation of expval estimator."""
         return self._stddev_upper_bound
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return str({key: round(value, ndigits=self.__ndigits__) for key, value in self.items()})

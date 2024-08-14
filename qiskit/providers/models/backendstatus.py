@@ -26,7 +26,7 @@ class BackendStatus:
         operational: bool,
         pending_jobs: int,
         status_msg: str,
-    ):
+    ) -> None:
         """Initialize a BackendStatus object
 
         Args:

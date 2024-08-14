@@ -142,7 +142,7 @@ class BindingsArray(ShapedMixin):
             shape = ()
         return BindingsArray(data, shape)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         descriptions = [f"shape={self.shape}", f"num_parameters={self.num_parameters}"]
         if self.num_parameters:
             names = list(islice(map(repr, chain.from_iterable(map(_format_key, self._data))), 5))

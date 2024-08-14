@@ -110,7 +110,7 @@ def _generate_delay(time: float):
 
 
 class _U0Gate(Gate):
-    def __init__(self, count):
+    def __init__(self, count) -> None:
         if int(count) != count:
             raise QASM2ParseError("the number of single-qubit delay lengths must be an integer")
         super().__init__("u0", 1, [int(count)])

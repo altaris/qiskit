@@ -45,7 +45,7 @@ class Statevector(QuantumState, TolerancesMixin):
         self,
         data: np.ndarray | list | Statevector | Operator | QuantumCircuit | Instruction,
         dims: int | tuple | list | None = None,
-    ):
+    ) -> None:
         """Initialize a statevector object.
 
         Args:
@@ -114,7 +114,7 @@ class Statevector(QuantumState, TolerancesMixin):
             self._data, other._data, rtol=self.rtol, atol=self.atol
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         prefix = "Statevector("
         pad = len(prefix) * " "
         return (
@@ -223,7 +223,7 @@ class Statevector(QuantumState, TolerancesMixin):
     def __iter__(self):
         yield from self._data
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._data)
 
     @property

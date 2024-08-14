@@ -110,7 +110,7 @@ class BasePassManager(ABC):
     def __setitem__(self, index, item) -> None:
         self.replace(index, item)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._tasks)
 
     def __getitem__(self, index):

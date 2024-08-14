@@ -36,7 +36,7 @@ class ScalarOp(LinearOp):
     :meth:`tensor`, :meth:`expand` methods.
     """
 
-    def __init__(self, dims: int | tuple | None = None, coeff: Number = 1):
+    def __init__(self, dims: int | tuple | None = None, coeff: Number = 1) -> None:
         """Initialize an operator object.
 
         Args:
@@ -58,7 +58,7 @@ class ScalarOp(LinearOp):
         arr = self.to_matrix()
         return arr if dtype is None else arr.astype(dtype, copy=False)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"ScalarOp({self.input_dims()}, coeff={self.coeff})"
 
     @property

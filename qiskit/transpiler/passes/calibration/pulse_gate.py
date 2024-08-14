@@ -51,7 +51,7 @@ class PulseGates(CalibrationBuilder):
         self,
         inst_map: InstructionScheduleMap = None,
         target: Target = None,
-    ):
+    ) -> None:
         """Create new pass.
 
         Args:

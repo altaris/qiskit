@@ -70,7 +70,7 @@ class RZXCalibrationBuilder(CalibrationBuilder):
         instruction_schedule_map: InstructionScheduleMap = None,
         verbose: bool = True,
         target: Target = None,
-    ):
+    ) -> None:
         """
         Initializes a RZXGate calibration builder.
 

@@ -25,7 +25,7 @@ class InverseCancellation(TransformationPass):
     """Cancel specific Gates which are inverses of each other when they occur back-to-
     back."""
 
-    def __init__(self, gates_to_cancel: List[Union[Gate, Tuple[Gate, Gate]]]):
+    def __init__(self, gates_to_cancel: List[Union[Gate, Tuple[Gate, Gate]]]) -> None:
         """Initialize InverseCancellation pass.
 
         Args:

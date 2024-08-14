@@ -61,7 +61,7 @@ class Expr(abc.ABC):
 
     # Sentinel to prevent instantiation of the base class.
     @abc.abstractmethod
-    def __init__(self):  # pragma: no cover
+    def __init__(self) -> None:  # pragma: no cover
         pass
 
     def accept(
@@ -103,7 +103,7 @@ class Cast(Expr):
             and self.implicit == other.implicit
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Cast({self.operand}, {self.type}, implicit={self.implicit})"
 
 
@@ -158,7 +158,7 @@ class Var(Expr):
     def accept(self, visitor, /):
         return visitor.visit_var(self)
 
-    def __setattr__(self, key, value):
+    def __setattr__(self, key, value) -> None:
         if hasattr(self, key):
             raise AttributeError(f"'Var' object attribute '{key}' is read-only")
         raise AttributeError(f"'Var' object has no attribute '{key}'")
@@ -174,7 +174,7 @@ class Var(Expr):
             and self.name == other.name
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self.name is None:
             return f"Var({self.var}, {self.type})"
         return f"Var({self.var}, {self.type}, name='{self.name}')"
@@ -213,7 +213,7 @@ class Value(Expr):
     def __eq__(self, other):
         return isinstance(other, Value) and self.type == other.type and self.value == other.value
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Value({self.value}, {self.type})"
 
 
@@ -247,10 +247,10 @@ class Unary(Expr):
         LOGIC_NOT = 2
         """Logical negation. ``!operand``."""
 
-        def __str__(self):
+        def __str__(self) -> str:
             return f"Unary.{super().__str__()}"
 
-        def __repr__(self):
+        def __repr__(self) -> str:
             return f"Unary.{super().__repr__()}"
 
     def __init__(self, op: Unary.Op, operand: Expr, type: types.Type) -> None:
@@ -269,7 +269,7 @@ class Unary(Expr):
             and self.operand == other.operand
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Unary({self.op}, {self.operand}, {self.type})"
 
 
@@ -337,10 +337,10 @@ class Binary(Expr):
         SHIFT_RIGHT = 13
         """Zero-padding bitshift to the right.  ``lhs >> rhs``."""
 
-        def __str__(self):
+        def __str__(self) -> str:
             return f"Binary.{super().__str__()}"
 
-        def __repr__(self):
+        def __repr__(self) -> str:
             return f"Binary.{super().__repr__()}"
 
     def __init__(self, op: Binary.Op, left: Expr, right: Expr, type: types.Type) -> None:
@@ -361,7 +361,7 @@ class Binary(Expr):
             and self.right == other.right
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Binary({self.op}, {self.left}, {self.right}, {self.type})"
 
 
@@ -393,5 +393,5 @@ class Index(Expr):
             and self.index == other.index
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Index({self.target}, {self.index}, {self.type})"

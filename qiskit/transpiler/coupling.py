@@ -461,7 +461,7 @@ class CouplingMap:
             output_list.append(new_cmap)
         return output_list
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return a string representation of the coupling graph."""
         string = ""
         if self.get_edges():

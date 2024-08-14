@@ -36,5 +36,5 @@ class ResultError(QiskitError):
         self.status = error["status"]
         self.code = error["code"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.code}: {self.message}"

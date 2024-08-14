@@ -605,7 +605,7 @@ class ScalableSymbolicPulse(SymbolicPulse):
         envelope: sym.Expr | None = None,
         constraints: sym.Expr | None = None,
         valid_amp_conditions: sym.Expr | None = None,
-    ):
+    ) -> None:
         """Create a scalable symbolic pulse.
 
         Args:
@@ -684,7 +684,7 @@ class ScalableSymbolicPulse(SymbolicPulse):
 class _PulseType(type):
     """Metaclass to warn at isinstance check."""
 
-    def __instancecheck__(cls, instance):
+    def __instancecheck__(cls, instance) -> bool:
         cls_alias = getattr(cls, "alias", None)
 
         # TODO promote this to Deprecation warning in future.

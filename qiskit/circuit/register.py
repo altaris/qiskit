@@ -40,7 +40,7 @@ class Register:
     prefix = "reg"
     bit_type = None
 
-    def __init__(self, size: int | None = None, name: str | None = None, bits=None):
+    def __init__(self, size: int | None = None, name: str | None = None, bits=None) -> None:
         """Create a new generic register.
 
         Either the ``size`` or the ``bits`` argument must be provided. If
@@ -135,11 +135,11 @@ class Register:
         """Get the register size."""
         return self._size
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Return the official string representing the register."""
         return self._repr
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return register size."""
         return self._size
 
@@ -172,7 +172,7 @@ class Register:
         for idx in range(self._size):
             yield self._bits[idx]
 
-    def __contains__(self, bit):
+    def __contains__(self, bit) -> bool:
         if self._bit_indices is None:
             self._bit_indices = {bit: idx for idx, bit in enumerate(self._bits)}
 

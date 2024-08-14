@@ -63,7 +63,7 @@ class QuantumChannel(LinearOp):
         self._data = data
         super().__init__(num_qubits=num_qubits, op_shape=op_shape)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         prefix = f"{self._channel_rep}("
         pad = len(prefix) * " "
         return (

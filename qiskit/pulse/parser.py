@@ -63,7 +63,7 @@ class PulseExpression(ast.NodeTransformer):
     _unary_ops = {ast.UAdd: operator.pos, ast.USub: operator.neg}
     """Valid unary operations."""
 
-    def __init__(self, source: str | ast.Expression, partial_binding: bool = False):
+    def __init__(self, source: str | ast.Expression, partial_binding: bool = False) -> None:
         """Create new evaluator.
 
         Args:

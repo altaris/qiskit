@@ -67,7 +67,7 @@ class Result:
         self.header = header
         self._metadata.update(kwargs)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         out = (
             f"Result(backend_name='{self.backend_name}', backend_version='{self.backend_version}',"
             f" qobj_id='{self.qobj_id}', job_id='{self.job_id}', success={self.success},"

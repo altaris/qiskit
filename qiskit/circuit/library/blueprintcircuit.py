@@ -157,7 +157,7 @@ class BlueprintCircuit(QuantumCircuit, ABC):
             self._build()
         return super().inverse(annotated=annotated)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.data)
 
     def __getitem__(self, item):

@@ -39,7 +39,7 @@ class FastCNOTUnitObjective(CNOTUnitObjective):
     but several times faster.
     """
 
-    def __init__(self, num_qubits: int, cnots: np.ndarray):
+    def __init__(self, num_qubits: int, cnots: np.ndarray) -> None:
         super().__init__(num_qubits, cnots)
 
         if not 2 <= num_qubits <= 16:

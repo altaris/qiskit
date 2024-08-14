@@ -132,7 +132,7 @@ class ElementaryData(ABC):
             )
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}(type={self.data_type}, key={self.data_key})"
 
     def __eq__(self, other):
@@ -177,7 +177,7 @@ class BoxData(ElementaryData):
         bit: types.Bits,
         meta: Dict[str, Any] = None,
         styles: Dict[str, Any] = None,
-    ):
+    ) -> None:
         """Create new box.
 
         Args:

@@ -387,7 +387,7 @@ class StagedPassManager(PassManager):
             if pm is not None:
                 self._tasks += pm._tasks
 
-    def __setattr__(self, attr, value):
+    def __setattr__(self, attr, value) -> None:
         if value == self and attr in self.expanded_stages:
             raise TranspilerError("Recursive definition of StagedPassManager disallowed.")
         super().__setattr__(attr, value)
@@ -420,11 +420,11 @@ class StagedPassManager(PassManager):
         new_passmanager._tasks = self._tasks[index]
         return new_passmanager
 
-    def __len__(self):
+    def __len__(self) -> int:
         self._update_passmanager()
         return super().__len__()
 
-    def __setitem__(self, index, item):
+    def __setitem__(self, index, item) -> None:
         raise NotImplementedError
 
     def __add__(self, other):

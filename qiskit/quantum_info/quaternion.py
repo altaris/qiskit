@@ -27,10 +27,10 @@ class Quaternion:
     def __call__(self, idx):
         return self.data[idx]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return np.array_str(self.data)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return np.array_str(self.data)
 
     def __mul__(self, r):

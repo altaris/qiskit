@@ -51,7 +51,7 @@ class Ordering(enum.Enum):
     NONE = enum.auto()
     """There is no typing relationship between the two types."""
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return str(self)
 
 

@@ -62,7 +62,7 @@ class Operator(LinearOp):
         data: QuantumCircuit | Operation | BaseOperator | np.ndarray,
         input_dims: tuple | None = None,
         output_dims: tuple | None = None,
-    ):
+    ) -> None:
         """Initialize an operator object.
 
         Args:
@@ -125,7 +125,7 @@ class Operator(LinearOp):
         dtype = self.data.dtype if dtype is None else dtype
         return np.array(self.data, dtype=dtype, copy=copy)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         prefix = "Operator("
         pad = len(prefix) * " "
         return (

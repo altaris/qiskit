@@ -67,7 +67,7 @@ class Stinespring(QuantumChannel):
         data: QuantumCircuit | Instruction | BaseOperator | np.ndarray,
         input_dims: int | tuple | None = None,
         output_dims: int | tuple | None = None,
-    ):
+    ) -> None:
         """Initialize a quantum channel Stinespring operator.
 
         Args:

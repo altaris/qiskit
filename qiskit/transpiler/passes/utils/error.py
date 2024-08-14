@@ -24,7 +24,7 @@ from qiskit.transpiler.exceptions import TranspilerError
 class Error(AnalysisPass):
     """Error pass to be called when an error happens."""
 
-    def __init__(self, msg=None, action: Literal["raise", "warn", "log"] = "raise"):
+    def __init__(self, msg=None, action: Literal["raise", "warn", "log"] = "raise") -> None:
         """Error pass.
 
         Args:

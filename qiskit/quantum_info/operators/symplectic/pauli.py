@@ -159,7 +159,7 @@ class Pauli(BasePauli):
     _VALID_LABEL_PATTERN = re.compile(r"(?P<coeff>[+-]?1?[ij]?)(?P<pauli>[IXYZ]*)")
     _CANONICAL_PHASE_LABEL = {"": 0, "-i": 1, "-": 2, "i": 3}
 
-    def __init__(self, data: str | tuple | Pauli | ScalarOp | QuantumCircuit | None = None):
+    def __init__(self, data: str | tuple | Pauli | ScalarOp | QuantumCircuit | None = None) -> None:
         r"""Initialize the Pauli.
 
         When using the symplectic array input data both z and x arguments must
@@ -213,11 +213,11 @@ class Pauli(BasePauli):
         """Number of classical bits."""
         return 0
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Display representation."""
         return f"Pauli('{self.__str__()}')"
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Print representation."""
         if self.__truncate__ and self.num_qubits > self.__truncate__:
             front = self[-self.__truncate__ :].to_label()
@@ -306,7 +306,7 @@ class Pauli(BasePauli):
     # Pauli Array methods
     # ---------------------------------------------------------------------
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return the number of qubits in the Pauli."""
         return self.num_qubits
 

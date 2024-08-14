@@ -31,10 +31,10 @@ class CustomIterator(ABC):
         # iterator only at a given key value
         pass
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"<{type(self.obj)}_iterator at {hex(id(self))}>"
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.obj)
 
     def __iter__(self):

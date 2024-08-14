@@ -83,7 +83,7 @@ class AlignmentKind(abc.ABC):
             return False
         return True
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}({', '.join(self._context_params)})"
 
 

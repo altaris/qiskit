@@ -14,7 +14,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from types import TracebackType
+from typing import Optional, Type, TYPE_CHECKING
 
 from qiskit.circuit.classicalregister import Clbit, ClassicalRegister
 from qiskit.circuit.classical import expr
@@ -145,7 +146,12 @@ class WhileLoopContext:
         resources = condition_resources(self._condition)
         self._circuit._push_scope(clbits=resources.clbits, registers=resources.cregs)
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ):
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, there's nothing
             # to do except restore the circuit state.

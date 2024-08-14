@@ -30,7 +30,7 @@ class SpecialPolynomial:
     Maximum degree 3, n Z_2 variables, coefficients in Z_8.
     """
 
-    def __init__(self, n_vars):
+    def __init__(self, n_vars) -> None:
         """Construct the zero polynomial on n_vars variables."""
         #   1 constant term
         #   n linear terms x_1, ..., x_n
@@ -283,7 +283,7 @@ class SpecialPolynomial:
         """Test equality."""
         return isinstance(x, SpecialPolynomial) and self.key == x.key
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return formatted string representation."""
         out = str(self.weight_0)
         for i in range(self.n_vars):

@@ -33,7 +33,7 @@ class CouplingError(QiskitError):
         super().__init__(*msg)
         self.msg = " ".join(msg)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return the message."""
         return repr(self.msg)
 
@@ -46,7 +46,7 @@ class LayoutError(QiskitError):
         super().__init__(*msg)
         self.msg = " ".join(msg)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return the message."""
         return repr(self.msg)
 

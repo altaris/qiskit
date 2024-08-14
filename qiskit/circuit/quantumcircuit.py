@@ -995,7 +995,7 @@ class QuantumCircuit:
         inputs: Iterable[expr.Var] = (),
         captures: Iterable[expr.Var] = (),
         declarations: Mapping[expr.Var, expr.Expr] | Iterable[Tuple[expr.Var, expr.Expr]] = (),
-    ):
+    ) -> None:
         """
         Default constructor of :class:`QuantumCircuit`.
 

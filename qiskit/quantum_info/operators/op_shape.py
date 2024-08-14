@@ -61,7 +61,7 @@ class OpShape:
             "num_qargs_r": self._num_qargs_r,
         }
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self._dims_l:
             left = f"dims_l={self._dims_l}"
         elif self._num_qargs_l:

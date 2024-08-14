@@ -1374,7 +1374,7 @@ class TextMatrix:
         else:
             self.max_size = max_size[0]
 
-    def __str__(self):
+    def __str__(self) -> str:
         threshold = self.max_size
         data = np.array2string(
             self.state._data, prefix=self.prefix, threshold=threshold, separator=","
@@ -1391,7 +1391,7 @@ class TextMatrix:
 
         return self.prefix + data + dimstr + self.suffix
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.__str__()
 
 

@@ -87,13 +87,13 @@ class QuantumCircuitData(MutableSequence):
     def __delitem__(self, i) -> None:
         del self._circuit._data[i]
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._circuit._data)
 
     def __cast(self, other):
         return list(other._circuit._data) if isinstance(other, QuantumCircuitData) else other
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return repr(list(self._circuit._data))
 
     def __lt__(self, other):

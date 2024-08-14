@@ -146,7 +146,7 @@ class InstructionProperties(BaseInstructionProperties):
             new_entry = calibration
         self._calibration = new_entry
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"InstructionProperties(duration={self.duration}, error={self.error}"
             f", calibration={self._calibration})"
@@ -856,10 +856,10 @@ class Target(BaseTarget):
         except KeyError:
             return default
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._gate_map)
 
-    def __contains__(self, item):
+    def __contains__(self, item) -> bool:
         return item in self._gate_map
 
     def keys(self):
@@ -874,7 +874,7 @@ class Target(BaseTarget):
         """Returns pairs of Gate names and its property map (str, dict[tuple, InstructionProperties])"""
         return self._gate_map.items()
 
-    def __str__(self):
+    def __str__(self) -> str:
         output = io.StringIO()
         if self.description is not None:
             output.write(f"Target: {self.description}\n")

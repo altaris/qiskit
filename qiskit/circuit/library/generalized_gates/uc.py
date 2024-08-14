@@ -67,7 +67,7 @@ class UCGate(Gate):
 
     """
 
-    def __init__(self, gate_list: list[np.ndarray], up_to_diagonal: bool = False):
+    def __init__(self, gate_list: list[np.ndarray], up_to_diagonal: bool = False) -> None:
         r"""
         Args:
             gate_list: List of two qubit unitaries :math:`[U_0, ..., U_{2^{k-1}}]`, where each

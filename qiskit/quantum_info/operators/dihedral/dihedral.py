@@ -106,7 +106,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         data: CNOTDihedral | QuantumCircuit | Instruction | None = None,
         num_qubits: int | None = None,
         validate: bool = True,
-    ):
+    ) -> None:
         """Initialize a CNOTDihedral operator object.
 
         Args:
@@ -292,7 +292,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
             raise QiskitError("X qubit out of bounds.")
         self.shift[i] = (self.shift[i] + 1) % 2
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Return formatted string representation."""
         out = "phase polynomial = \n"
         out += str(self.poly)

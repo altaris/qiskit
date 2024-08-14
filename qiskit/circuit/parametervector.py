@@ -80,13 +80,13 @@ class ParameterVector:
     def __iter__(self):
         return iter(self.params)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._params)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}, {[str(item) for item in self.params]}"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}(name={repr(self.name)}, length={len(self)})"
 
     def resize(self, length) -> None:

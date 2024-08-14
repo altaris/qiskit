@@ -113,7 +113,7 @@ class PadDynamicalDecoupling(BasePadding):
         pulse_alignment: int = 1,
         extra_slack_distribution: str = "middle",
         target: Target = None,
-    ):
+    ) -> None:
         """Dynamical decoupling initializer.
 
         Args:

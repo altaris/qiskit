@@ -122,7 +122,7 @@ class ScheduleDef(CalibrationEntry):
 
     """
 
-    def __init__(self, arguments: Sequence[str] | None = None):
+    def __init__(self, arguments: Sequence[str] | None = None) -> None:
         """Define an empty entry.
 
         Args:
@@ -217,7 +217,7 @@ class ScheduleDef(CalibrationEntry):
             return self._definition == other._definition
         return False
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = f"Schedule {self._definition.name}"
         params_str = ", ".join(self.get_signature().parameters.keys())
         if params_str:
@@ -282,7 +282,7 @@ class CallableDef(CalibrationEntry):
             return self._definition == other._definition
         return False
 
-    def __str__(self):
+    def __str__(self) -> str:
         params_str = ", ".join(self.get_signature().parameters.keys())
         return f"Callable {self._definition.__name__}({params_str})"
 
@@ -369,7 +369,7 @@ class PulseQobjDef(ScheduleDef):
             return self._definition == other._definition
         return False
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self._definition is None:
             # Avoid parsing schedule for pretty print.
             return "PulseQobj"

@@ -42,7 +42,7 @@ class LocalReadoutMitigator(BaseReadoutMitigator):
         assignment_matrices: Optional[List[np.ndarray]] = None,
         qubits: Optional[Iterable[int]] = None,
         backend=None,
-    ):
+    ) -> None:
         """Initialize a LocalReadoutMitigator
 
         Args:

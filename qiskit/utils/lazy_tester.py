@@ -111,7 +111,7 @@ class LazyDependencyManager(abc.ABC):
         """
         return False
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         if self._bool is None:
             self._bool = self._is_available()
             if self._callback is not None:
@@ -252,7 +252,7 @@ class LazyImportTester(LazyDependencyManager):
         callback: Optional[Callable[[bool], None]] = None,
         install: Optional[str] = None,
         msg: Optional[str] = None,
-    ):
+    ) -> None:
         """
         Args:
             name_map_or_modules: if a name map, then a dictionary where the keys are modules or
@@ -338,7 +338,7 @@ class LazySubprocessTester(LazyDependencyManager):
         callback: Optional[Callable[[bool], None]] = None,
         install: Optional[str] = None,
         msg: Optional[str] = None,
-    ):
+    ) -> None:
         """
         Args:
             command: the strings that make up the command to be run.  For example,

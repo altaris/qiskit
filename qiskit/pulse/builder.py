@@ -419,7 +419,8 @@ import warnings
 from collections.abc import Generator, Callable, Iterable
 from contextlib import contextmanager
 from functools import singledispatchmethod
-from typing import TypeVar, ContextManager, TypedDict, Union, Optional, Dict
+from types import TracebackType
+from typing import Type, TypeVar, ContextManager, TypedDict, Union, Optional, Dict
 
 import numpy as np
 
@@ -483,7 +484,7 @@ class _PulseBuilder:
         block: ScheduleBlock | None = None,
         name: str | None = None,
         default_alignment: str | AlignmentKind = "left",
-    ):
+    ) -> None:
         """Initialize the builder context.
 
         .. note::
@@ -557,7 +558,12 @@ class _PulseBuilder:
 
         return output
 
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> None:
         """Exit the builder context and compile the built pulse program."""
         self.compile()
         BUILDER_CONTEXTVAR.reset(self._backend_ctx_token)

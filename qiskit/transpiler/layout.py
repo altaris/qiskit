@@ -32,7 +32,7 @@ class Layout:
 
     __slots__ = ("_regs", "_p2v", "_v2p")
 
-    def __init__(self, input_dict=None):
+    def __init__(self, input_dict=None) -> None:
         """construct a Layout from a bijective dictionary, mapping
         virtual qubits to physical qubits"""
         self._regs = []
@@ -43,7 +43,7 @@ class Layout:
                 raise LayoutError("Layout constructor takes a dict")
             self.from_dict(input_dict)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Representation of a Layout"""
         str_list = []
         for key, val in self._p2v.items():
@@ -110,7 +110,7 @@ class Layout:
             return self._v2p[item]
         raise KeyError(f"The item {item} does not exist in the Layout")
 
-    def __contains__(self, item):
+    def __contains__(self, item) -> bool:
         return item in self._p2v or item in self._v2p
 
     def __setitem__(self, key, value) -> None:
@@ -127,7 +127,7 @@ class Layout:
         if virtual is not None:
             self._v2p[virtual] = physical
 
-    def __delitem__(self, key):
+    def __delitem__(self, key) -> None:
         if isinstance(key, int):
             del self._v2p[self._p2v[key]]
             del self._p2v[key]
@@ -140,7 +140,7 @@ class Layout:
                 f" Qubit or integer) and {type(key)} was provided"
             )
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._p2v)
 
     def __eq__(self, other):

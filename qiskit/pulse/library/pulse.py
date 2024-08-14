@@ -41,7 +41,7 @@ class Pulse(ABC):
         duration: int | ParameterExpression,
         name: str | None = None,
         limit_amplitude: bool | None = None,
-    ):
+    ) -> None:
         """Abstract base class for pulses
         Args:
             duration: Duration of the pulse

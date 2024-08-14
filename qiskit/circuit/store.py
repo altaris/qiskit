@@ -62,7 +62,7 @@ class Store(Instruction):
     # This is a compiler/backend intrinsic operation, separate to any quantum processing.
     _directive = True
 
-    def __init__(self, lvalue: expr.Expr, rvalue: expr.Expr):
+    def __init__(self, lvalue: expr.Expr, rvalue: expr.Expr) -> None:
         """
         Args:
             lvalue: the memory location being stored into.

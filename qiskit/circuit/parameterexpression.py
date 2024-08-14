@@ -389,15 +389,15 @@ class ParameterExpression:
         """Sign of a ParameterExpression"""
         return self._call(symengine.sign)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}({str(self)})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         from sympy import sympify, sstr
 
         return sstr(sympify(self._symbol_expr), full_prec=False)
 
-    def __complex__(self):
+    def __complex__(self) -> complex:
         try:
             return complex(self._symbol_expr)
         # TypeError is for sympy, RuntimeError for symengine
@@ -409,7 +409,7 @@ class ParameterExpression:
                 ) from None
             raise TypeError("could not cast expression to complex") from exc
 
-    def __float__(self):
+    def __float__(self) -> float:
         try:
             return float(self._symbol_expr)
         # TypeError is for sympy, RuntimeError for symengine
@@ -429,7 +429,7 @@ class ParameterExpression:
                 return cval.real
             raise TypeError("could not cast expression to float") from exc
 
-    def __int__(self):
+    def __int__(self) -> int:
         try:
             return int(self._symbol_expr)
         # TypeError is for backwards compatibility, RuntimeError is raised by symengine

@@ -59,7 +59,7 @@ class ObservablesArray(ShapedMixin):
         observables: ObservablesArrayLike,
         copy: bool = True,
         validate: bool = True,
-    ):
+    ) -> None:
         """Initialize an observables array.
 
         Args:
@@ -91,7 +91,7 @@ class ObservablesArray(ShapedMixin):
                     )
                 self._array[ndi] = basis_obs
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         prefix = f"{type(self).__name__}("
         suffix = f", shape={self.shape})"
         array = np.array2string(self._array, prefix=prefix, suffix=suffix, threshold=50)

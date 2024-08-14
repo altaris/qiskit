@@ -46,7 +46,7 @@ class StatePreparation(Gate):
         inverse: bool = False,
         label: Optional[str] = None,
         normalize: bool = False,
-    ):
+    ) -> None:
         r"""
         Args:
             params:
@@ -269,7 +269,7 @@ class UniformSuperpositionGate(Gate):
         self,
         num_superpos_states: int = 2,
         num_qubits: Optional[int] = None,
-    ):
+    ) -> None:
         r"""
         Args:
             num_superpos_states (int):

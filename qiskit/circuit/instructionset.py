@@ -59,7 +59,7 @@ class InstructionSet:
         ] = []
         self._requester = resource_requester
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return number of instructions in set"""
         return len(self._instructions)
 

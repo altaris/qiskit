@@ -198,11 +198,11 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
             base_phase[i] = pauli._phase.item()
         return base_z, base_x, base_phase
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Display representation."""
         return self._truncated_str(True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Print representation."""
         return self._truncated_str(False)
 
@@ -292,7 +292,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         """The number of Pauli rows in the table."""
         return self._num_paulis
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return the number of Pauli rows in the table."""
         return self._num_paulis
 
@@ -327,7 +327,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         # Row and Qubit indexing
         return PauliList((self._z[index], self._x[index], 0))
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index, value) -> None:
         """Update PauliList."""
         if isinstance(index, tuple):
             if len(index) == 1:
@@ -1066,7 +1066,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         class LabelIterator(CustomIterator):
             """Label representation iteration and item access."""
 
-            def __repr__(self):
+            def __repr__(self) -> str:
                 return f"<PauliList_label_iterator at {hex(id(self))}>"
 
             def __getitem__(self, key):
@@ -1093,7 +1093,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         class MatrixIterator(CustomIterator):
             """Matrix representation iteration and item access."""
 
-            def __repr__(self):
+            def __repr__(self) -> str:
                 return f"<PauliList_matrix_iterator at {hex(id(self))}>"
 
             def __getitem__(self, key):

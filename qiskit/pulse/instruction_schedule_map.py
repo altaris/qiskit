@@ -357,7 +357,7 @@ class InstructionScheduleMap:
         signature = self._map[instruction][_to_tuple(qubits)].get_signature()
         return tuple(signature.parameters.keys())
 
-    def __str__(self):
+    def __str__(self) -> str:
         single_q_insts = "1Q instructions:\n"
         multi_q_insts = "Multi qubit instructions:\n"
         for qubits, insts in self._qubit_instructions.items():

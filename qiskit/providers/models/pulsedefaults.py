@@ -295,7 +295,7 @@ class PulseDefaults:
 
         return cls(**in_data)
 
-    def __str__(self):
+    def __str__(self) -> str:
         qubit_freqs = [freq / 1e9 for freq in self.qubit_freq_est]
         meas_freqs = [freq / 1e9 for freq in self.meas_freq_est]
         qfreq = f"Qubit Frequencies [GHz]\n{qubit_freqs}"

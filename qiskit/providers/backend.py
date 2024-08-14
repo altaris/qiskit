@@ -80,7 +80,7 @@ class BackendV1(Backend, ABC):
         "that gives access to execution, consider using Primitives instead. "
         "Alternatively, consider moving to BackendV2 (see https://qisk.it/backendV1-to-V2).",
     )
-    def __init__(self, configuration, provider=None, **fields):
+    def __init__(self, configuration, provider=None, **fields) -> None:
         """Initialize a backend class
 
         Args:
@@ -188,10 +188,10 @@ class BackendV1(Backend, ABC):
         """
         return self._configuration.backend_name
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Official string representation of a Backend.
 
         Note that, by Qiskit convention, it is consciously *not* a fully valid
@@ -269,7 +269,7 @@ class QubitProperties:
         self.t2 = t2
         self.frequency = frequency
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"QubitProperties(t1={self.t1}, t2={self.t2}, " f"frequency={self.frequency})"
 
 
@@ -332,7 +332,7 @@ class BackendV2(Backend, ABC):
         online_date: datetime.datetime = None,
         backend_version: str = None,
         **fields,
-    ):
+    ) -> None:
         """Initialize a BackendV2 based backend
 
         Args:

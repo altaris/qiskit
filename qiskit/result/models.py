@@ -63,7 +63,7 @@ class ExperimentResultData:
             setattr(self, key, value)
             self._data_attributes.append(key)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         string_list = []
         for field in self._data_attributes:
             string_list.append(f"{field}={getattr(self, field)}")
@@ -119,7 +119,7 @@ class ExperimentResult:
         meas_return=None,
         header=None,
         **kwargs,
-    ):
+    ) -> None:
         """Initialize an ExperimentResult object.
 
         Args:
@@ -156,7 +156,7 @@ class ExperimentResult:
             self.meas_return = meas_return
         self._metadata.update(kwargs)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         out = (
             f"ExperimentResult(shots={self.shots}, success={self.success},"
             f" meas_level={self.meas_level}, data={self.data}"

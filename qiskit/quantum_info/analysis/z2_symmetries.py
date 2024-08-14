@@ -55,7 +55,7 @@ class Z2Symmetries:
         tapering_values: Iterable[int] | None = None,
         *,
         tol: float = 1e-14,
-    ):
+    ) -> None:
         r"""
         Args:
             symmetries: Object representing the list of $Z_2$ symmetries. These correspond to
@@ -142,7 +142,7 @@ class Z2Symmetries:
             "tapering_values": self.tapering_values,
         }
 
-    def __str__(self):
+    def __str__(self) -> str:
         ret = ["Z2 symmetries:"]
         ret.append("Symmetries:")
         for symmetry in self._symmetries:

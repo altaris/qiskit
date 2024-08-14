@@ -144,7 +144,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         arr = self.to_matrix()
         return arr if dtype is None else arr.astype(dtype, copy=False)
 
-    def __init__(self, data, validate: bool = True, copy: bool = True):
+    def __init__(self, data, validate: bool = True, copy: bool = True) -> None:
         """Initialize an operator object."""
 
         # pylint: disable=cyclic-import
@@ -231,10 +231,10 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         """Number of classical bits."""
         return 0
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Clifford({repr(self.tableau)})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (
             f'Clifford: Stabilizer = {self.to_labels(mode="S")}, '
             f'Destabilizer = {self.to_labels(mode="D")}'

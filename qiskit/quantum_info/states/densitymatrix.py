@@ -45,7 +45,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
         self,
         data: np.ndarray | list | QuantumCircuit | Instruction | QuantumState,
         dims: int | tuple | list | None = None,
-    ):
+    ) -> None:
         """Initialize a density matrix object.
 
         Args:
@@ -120,7 +120,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
             self._data, other._data, rtol=self.rtol, atol=self.atol
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         prefix = "DensityMatrix("
         pad = len(prefix) * " "
         return (

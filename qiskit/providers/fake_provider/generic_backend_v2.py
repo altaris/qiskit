@@ -114,7 +114,7 @@ class GenericBackendV2(BackendV2):
         seed: int | None = None,
         pulse_channels: bool = True,
         noise_info: bool = True,
-    ):
+    ) -> None:
         """
         Args:
             num_qubits: Number of qubits that will be used to construct the backend's target.

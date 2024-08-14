@@ -32,7 +32,7 @@ class ReferenceManager(UserDict):
                 keys.append(key)
         return tuple(keys)
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key, value) -> None:
         if key in self and self[key] is not None:
             # Check subroutine conflict.
             if self[key] != value:
@@ -44,11 +44,11 @@ class ReferenceManager(UserDict):
             return
         super().__setitem__(key, value)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         keys = ", ".join(map(repr, self.keys()))
         return f"{self.__class__.__name__}(references=[{keys}])"
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = f"{self.__class__.__name__}:"
         for key, reference in self.items():
             prog_repr = repr(reference)

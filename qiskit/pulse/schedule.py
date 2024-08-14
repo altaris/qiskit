@@ -125,7 +125,7 @@ class Schedule:
         *schedules: "ScheduleComponent" | tuple[int, "ScheduleComponent"],
         name: str | None = None,
         metadata: dict | None = None,
-    ):
+    ) -> None:
         """Create an empty schedule.
 
         Args:
@@ -990,7 +990,7 @@ class ScheduleBlock:
 
     def __init__(
         self, name: str | None = None, metadata: dict | None = None, alignment_context=None
-    ):
+    ) -> None:
         """Create an empty schedule block.
 
         Args:

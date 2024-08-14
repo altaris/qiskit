@@ -141,7 +141,7 @@ class Channel(metaclass=ABCMeta):
         """Return the shorthand alias for this channel, which is based on its type and index."""
         return f"{self.__class__.prefix}{self._index}"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self._index})"
 
     def __eq__(self, other: object) -> bool:

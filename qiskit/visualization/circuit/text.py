@@ -752,7 +752,7 @@ class TextDrawing:
         encoding=None,
         with_layout: bool = False,
         expr_len=30,
-    ):
+    ) -> None:
         self.qubits = qubits
         self.clbits = clbits
         self.nodes = nodes
@@ -787,7 +787,7 @@ class TextDrawing:
         # for different backends. This var caches the output so the drawer only runs once.
         self._single_string = ""
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.single_string()
 
     def _repr_html_(self):
@@ -800,7 +800,7 @@ class TextDrawing:
             f"{self.single_string()}</pre>"
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.single_string()
 
     def single_string(self):

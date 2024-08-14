@@ -134,7 +134,7 @@ class GateConfig:
                 return True
         return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         out_str = f"GateConfig({self.name}, {self.parameters}, {self.qasm_def}"
         for i in ["coupling_map", "latency_map", "conditional", "description"]:
             if hasattr(self, i):
@@ -159,7 +159,7 @@ class UchannelLO:
         "workflow requires these representations it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, q, scale):
+    def __init__(self, q, scale) -> None:
         """Initialize a UchannelLOSchema object
 
         Args:
@@ -206,7 +206,7 @@ class UchannelLO:
                 return True
         return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"UchannelLO({self.q}, {self.scale})"
 
 
@@ -513,7 +513,7 @@ class QasmBackendConfiguration:
                 return True
         return False
 
-    def __contains__(self, item):
+    def __contains__(self, item) -> bool:
         return item in self.__dict__
 
 

@@ -164,7 +164,7 @@ class PassManagerConfig:
             res.translation_method = backend.get_translation_stage_plugin()
         return res
 
-    def __str__(self):
+    def __str__(self) -> str:
         newline = "\n"
         newline_tab = "\n\t"
         if self.backend_properties is not None:

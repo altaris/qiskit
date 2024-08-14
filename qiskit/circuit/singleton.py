@@ -311,7 +311,7 @@ def _impl_init_subclass(
                 args, kwargs = type(self)._singleton_init_arguments[id(self)]
                 return self.base_class(*args, **kwargs, _force_mutable=True)
 
-            def __setattr__(self, key, value):
+            def __setattr__(self, key, value) -> None:
                 raise TypeError(
                     f"This '{self.base_class.__name__}' object is immutable."
                     " You can get a mutable version by calling 'to_mutable()'."

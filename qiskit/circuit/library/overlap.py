@@ -65,7 +65,7 @@ class UnitaryOverlap(QuantumCircuit):
         prefix1: str = "p1",
         prefix2: str = "p2",
         insert_barrier: bool = False,
-    ):
+    ) -> None:
         """
         Args:
             unitary1: Unitary acting on the ket vector.

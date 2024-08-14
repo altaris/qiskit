@@ -326,7 +326,7 @@ class UnitarySynthesis(TransformationPass):
         min_qubits: int = 0,
         plugin_config: dict = None,
         target: Target = None,
-    ):
+    ) -> None:
         """Synthesize unitaries over some basis gates.
 
         This pass can approximate 2-qubit unitaries given some

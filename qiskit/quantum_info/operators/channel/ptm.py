@@ -70,7 +70,7 @@ class PTM(QuantumChannel):
         data: QuantumCircuit | Instruction | BaseOperator | np.ndarray,
         input_dims: int | tuple | None = None,
         output_dims: int | tuple | None = None,
-    ):
+    ) -> None:
         """Initialize a PTM quantum channel operator.
 
         Args:

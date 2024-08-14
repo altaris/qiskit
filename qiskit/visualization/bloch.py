@@ -350,7 +350,7 @@ class Bloch:
         else:
             raise ValueError("No such convention.")
 
-    def __str__(self):
+    def __str__(self) -> str:
         string = ""
         string += "Bloch data:\n"
         string += "-----------\n"

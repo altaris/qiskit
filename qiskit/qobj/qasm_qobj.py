@@ -139,7 +139,7 @@ class QasmQobjInstruction:
 
         return out_dict
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         out = f"QasmQobjInstruction(name='{self.name}'"
         for attr in [
             "params",
@@ -163,7 +163,7 @@ class QasmQobjInstruction:
         out += ")"
         return out
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = f"Instruction: {self.name}\n"
         for attr in [
             "params",
@@ -229,7 +229,7 @@ class QasmQobjExperiment:
         self.header = header or QasmQobjExperimentHeader()
         self.instructions = instructions or []
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         instructions_str = [repr(x) for x in self.instructions]
         instructions_repr = "[" + ", ".join(instructions_str) + "]"
         return (
@@ -237,7 +237,7 @@ class QasmQobjExperiment:
             f" instructions={instructions_repr})"
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = "\nOpenQASM2 Experiment:\n"
         config = pprint.pformat(self.config.to_dict())
         header = pprint.pformat(self.header.to_dict())
@@ -620,7 +620,7 @@ class QasmQobj:
         self.type = "QASM"
         self.schema_version = "1.3.0"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         experiments_str = [repr(x) for x in self.experiments]
         experiments_repr = "[" + ", ".join(experiments_str) + "]"
         return (
@@ -628,7 +628,7 @@ class QasmQobj:
             f" experiments={experiments_repr}, header={repr(self.header)})"
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = f"QASM Qobj: {self.qobj_id}:\n"
         config = pprint.pformat(self.config.to_dict())
         out += f"Config: {str(config)}\n"

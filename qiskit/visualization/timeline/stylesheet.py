@@ -117,7 +117,7 @@ class IQXStandard(dict):
         style.update(**kwargs)
         self.update(style)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Standard timeline style sheet."
 
 
@@ -148,7 +148,7 @@ class IQXSimple(dict):
         style.update(**kwargs)
         self.update(style)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Simplified timeline style sheet."
 
 
@@ -181,7 +181,7 @@ class IQXDebugging(dict):
         style.update(**kwargs)
         self.update(style)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Timeline style sheet for timeline programmers."
 
 

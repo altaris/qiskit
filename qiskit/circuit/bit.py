@@ -28,7 +28,7 @@ class Bit:
 
     __slots__ = {"_register", "_index", "_hash", "_repr"}
 
-    def __init__(self, register=None, index=None):
+    def __init__(self, register=None, index=None) -> None:
         """Create a new generic bit."""
         if (register, index) == (None, None):
             self._register = None
@@ -57,7 +57,7 @@ class Bit:
             self._hash = hash((self._register, self._index))
             self._repr = f"{self.__class__.__name__}({self._register}, {self._index})"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Return the official string representing the bit."""
         if (self._register, self._index) == (None, None):
             # Similar to __hash__, use default repr method for new-style Bits.

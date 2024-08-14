@@ -115,7 +115,7 @@ class ElementaryData(ABC):
             hash((self.__class__.__name__, self.data_type, tuple(self.xvals), tuple(self.yvals)))
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}(type={self.data_type}, key={self.data_key})"
 
     def __eq__(self, other):
@@ -224,7 +224,7 @@ class BoxData(ElementaryData):
         meta: dict[str, Any] | None = None,
         ignore_scaling: bool = False,
         styles: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         """Create new box.
 
         Args:

@@ -121,7 +121,7 @@ class IQXStandard(dict):
         style.update(**kwargs)
         self.update(style)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Standard Pulse style sheet."
 
 
@@ -162,7 +162,7 @@ class IQXSimple(dict):
         style.update(**kwargs)
         self.update(style)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Simple pulse style sheet for publication."
 
 
@@ -213,7 +213,7 @@ class IQXDebugging(dict):
         style.update(**kwargs)
         self.update(style)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Pulse style sheet for pulse programmers."
 
 

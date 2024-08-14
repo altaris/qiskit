@@ -213,7 +213,7 @@ class PulseQobjInstruction:
             out_dict["discriminators"] = [x.to_dict() for x in self.discriminators]
         return out_dict
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         out = f'PulseQobjInstruction(name="{self.name}", t0={self.t0}'
         for attr in self._COMMON_ATTRS:
             attr_val = getattr(self, attr, None)
@@ -225,7 +225,7 @@ class PulseQobjInstruction:
         out += ")"
         return out
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = f"Instruction: {self.name}\n"
         out += f"\t\tt0: {self.t0}\n"
         for attr in self._COMMON_ATTRS:
@@ -443,7 +443,7 @@ class PulseQobjExperiment:
             out_dict["header"] = self.header.to_dict()
         return out_dict
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         instructions_str = [repr(x) for x in self.instructions]
         instructions_repr = "[" + ", ".join(instructions_str) + "]"
         out = "PulseQobjExperiment("
@@ -457,7 +457,7 @@ class PulseQobjExperiment:
         out += ")"
         return out
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = "\nPulse Experiment:\n"
         if hasattr(self, "config"):
             config = pprint.pformat(self.config.to_dict())
@@ -575,10 +575,10 @@ class PulseLibraryItem:
         """
         return cls(**data)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"PulseLibraryItem({self.name}, {repr(self.samples)})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Pulse Library Item:\n\tname: {self.name}\n\tsamples: {self.samples}"
 
     def __eq__(self, other):
@@ -621,7 +621,7 @@ class PulseQobj:
         self.type = "PULSE"
         self.schema_version = "1.2.0"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         experiments_str = [repr(x) for x in self.experiments]
         experiments_repr = "[" + ", ".join(experiments_str) + "]"
         return (
@@ -629,7 +629,7 @@ class PulseQobj:
             f"experiments={experiments_repr}, header={repr(self.header)})"
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         out = f"Pulse Qobj: {self.qobj_id}:\n"
         config = pprint.pformat(self.config.to_dict())
         out += f"Config: {str(config)}\n"

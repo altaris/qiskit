@@ -15,7 +15,8 @@
 from __future__ import annotations
 
 import warnings
-from typing import Iterable, Optional, Union, TYPE_CHECKING
+from typing import Type, Iterable, Optional, Union, TYPE_CHECKING
+from types import TracebackType
 
 from qiskit.circuit.parameter import Parameter
 from qiskit.circuit.exceptions import CircuitError
@@ -49,7 +50,11 @@ class ForLoopOp(ControlFlowOp):
         num_qubits = body.num_qubits
         num_clbits = body.num_clbits
         super().__init__(
-            "for_loop", num_qubits, num_clbits, [indexset, loop_parameter, body], label=label
+            "for_loop",
+            num_qubits,
+            num_clbits,
+            [indexset, loop_parameter, body],
+            label=label,
         )
 
     @property
@@ -191,7 +196,12 @@ class ForLoopContext:
             type(self)._generated_loop_parameters += 1
         return self._loop_parameter
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ):
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, there's nothing
             # to do except restore the circuit state.

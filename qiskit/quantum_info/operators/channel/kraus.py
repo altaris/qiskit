@@ -67,7 +67,7 @@ class Kraus(QuantumChannel):
         data: QuantumCircuit | circuit.instruction.Instruction | BaseOperator | np.ndarray,
         input_dims: tuple | None = None,
         output_dims: tuple | None = None,
-    ):
+    ) -> None:
         """Initialize a quantum channel Kraus operator.
 
         Args:

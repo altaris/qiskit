@@ -29,7 +29,7 @@ class Counts(dict):
 
     bitstring_regex = re.compile(r"^[01\s]+$")
 
-    def __init__(self, data, time_taken=None, creg_sizes=None, memory_slots=None):
+    def __init__(self, data, time_taken=None, creg_sizes=None, memory_slots=None) -> None:
         """Build a counts object
 
         Args:

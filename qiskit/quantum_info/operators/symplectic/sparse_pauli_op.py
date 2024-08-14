@@ -97,7 +97,7 @@ class SparsePauliOp(LinearOp):
         *,
         ignore_pauli_phase: bool = False,
         copy: bool = True,
-    ):
+    ) -> None:
         """Initialize an operator object.
 
         Args:
@@ -183,7 +183,7 @@ class SparsePauliOp(LinearOp):
         arr = self.to_matrix()
         return arr if dtype is None else arr.astype(dtype, copy=False)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         prefix = "SparsePauliOp("
         pad = len(prefix) * " "
         return (
@@ -235,7 +235,7 @@ class SparsePauliOp(LinearOp):
         """The number of Pauli of Pauli terms in the operator."""
         return self._pauli_list.size
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return the size."""
         return self.size
 
@@ -985,7 +985,7 @@ class SparsePauliOp(LinearOp):
         class LabelIterator(CustomIterator):
             """Label representation iteration and item access."""
 
-            def __repr__(self):
+            def __repr__(self) -> str:
                 return f"<SparsePauliOp_label_iterator at {hex(id(self))}>"
 
             def __getitem__(self, key):
@@ -1014,7 +1014,7 @@ class SparsePauliOp(LinearOp):
         class MatrixIterator(CustomIterator):
             """Matrix representation iteration and item access."""
 
-            def __repr__(self):
+            def __repr__(self) -> str:
                 return f"<SparsePauliOp_matrix_iterator at {hex(id(self))}>"
 
             def __getitem__(self, key):

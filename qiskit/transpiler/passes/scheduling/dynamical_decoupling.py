@@ -120,7 +120,7 @@ class DynamicalDecoupling(TransformationPass):
         spacing=None,
         skip_reset_qubits: bool = True,
         target=None,
-    ):
+    ) -> None:
         """Dynamical decoupling initializer.
 
         Args:

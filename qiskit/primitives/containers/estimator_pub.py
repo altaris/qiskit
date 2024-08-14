@@ -51,7 +51,7 @@ class EstimatorPub(ShapedMixin):
         parameter_values: BindingsArray | None = None,
         precision: float | None = None,
         validate: bool = True,
-    ):
+    ) -> None:
         """Initialize an estimator pub.
 
         Args:

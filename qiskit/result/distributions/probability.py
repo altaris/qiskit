@@ -25,7 +25,7 @@ class ProbDistribution(dict):
 
     _bitstring_regex = re.compile(r"^[01]+$")
 
-    def __init__(self, data, shots=None):
+    def __init__(self, data, shots=None) -> None:
         """Builds a probability distribution object.
 
         Args:

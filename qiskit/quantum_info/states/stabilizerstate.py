@@ -138,7 +138,7 @@ class StabilizerState(QuantumState):
     def __eq__(self, other):
         return (self._data.stab == other._data.stab).all()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"StabilizerState({self._data.to_labels(mode='S')})"
 
     @property

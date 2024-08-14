@@ -108,7 +108,7 @@ class Options(Mapping):
     def __iter__(self):
         return iter(self._fields)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._fields)
 
     # Allow modifying the options (validated)
@@ -168,7 +168,7 @@ class Options(Mapping):
     #       super().__setattr__("x", y)
     # to avoid just setting a value in `_fields`.
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         items = (f"{k}={v!r}" for k, v in self._fields.items())
         return f"{type(self).__name__}({', '.join(items)})"
 
@@ -255,7 +255,7 @@ class Options(Mapping):
 
         self._fields.update(fields)
 
-    def __str__(self):
+    def __str__(self) -> str:
         no_validator = super().__str__()
         if not self.validator:
             return no_validator

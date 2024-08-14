@@ -241,7 +241,7 @@ class TwoQubitWeylDecomposition:
         trace = np.trace(Operator(circ).data.T.conj() @ self.unitary_matrix)
         return trace_to_fid(trace)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Represent with enough precision to allow copy-paste debugging of all corner cases"""
         prefix = f"{type(self).__qualname__}.from_bytes("
         with io.BytesIO() as f:
@@ -284,7 +284,7 @@ class TwoQubitWeylDecomposition:
             arr = np.load(f, allow_pickle=False)
         return cls(arr, fidelity=requested_fidelity, _specialization=_specialization)
 
-    def __str__(self):
+    def __str__(self) -> str:
         specialization = str(self._inner_decomposition.specialization).split(".")[1]
         pre = f"{self.__class__.__name__} [specialization={specialization}] (\n\t"
         circ_indent = "\n\t".join(self.circuit(simplify=True).draw("text").lines(-1))
@@ -296,7 +296,7 @@ class TwoQubitControlledUDecomposer:
     :math:`U \sim U_d(\alpha, 0, 0) \sim \text{Ctrl-U}`
     gate that is locally equivalent to an :class:`.RXXGate`."""
 
-    def __init__(self, rxx_equivalent_gate: Type[Gate]):
+    def __init__(self, rxx_equivalent_gate: Type[Gate]) -> None:
         r"""Initialize the KAK decomposition.
 
         Args:

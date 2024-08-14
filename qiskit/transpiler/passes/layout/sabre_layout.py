@@ -115,7 +115,7 @@ class SabreLayout(TransformationPass):
         swap_trials=None,
         layout_trials=None,
         skip_routing: bool = False,
-    ):
+    ) -> None:
         """SabreLayout initializer.
 
         Args:
