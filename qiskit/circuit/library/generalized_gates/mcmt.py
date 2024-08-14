@@ -84,7 +84,7 @@ class MCMT(QuantumCircuit):
         # build the circuit
         self._build()
 
-    def _build(self):
+    def _build(self) -> None:
         """Define the MCMT gate without ancillas."""
         if self.num_target_qubits == 1:
             # no broadcasting needed (makes for better circuit diagrams)
@@ -191,7 +191,7 @@ class MCMTVChain(MCMT):
                   └───┘          └───┘
     """
 
-    def _build(self):
+    def _build(self) -> None:
         """Define the MCMT gate."""
         control_qubits = self.qubits[: self.num_ctrl_qubits]
         target_qubits = self.qubits[

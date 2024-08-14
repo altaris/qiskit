@@ -47,7 +47,7 @@ class _lift_to_method:  # pylint: disable=invalid-name
             return method
         return super().__new__(cls)
 
-    def __init__(self, method):
+    def __init__(self, method) -> None:
         if method is self:
             # Prevent double-initialization if we are passed an instance of this object to lift.
             return
@@ -73,7 +73,7 @@ class _WrappedMethod:
 
     __slots__ = ("_method_decorator", "_method_has_get", "_method", "_before", "_after")
 
-    def __init__(self, method, before=None, after=None):
+    def __init__(self, method, before=None, after=None) -> None:
         if isinstance(method, (classmethod, staticmethod)):
             self._method_decorator = type(method)
         elif isinstance(method, type(self)):
@@ -117,7 +117,7 @@ class _WrappedMethod:
         return out
 
 
-def wrap_method(cls: Type, name: str, *, before: Callable = None, after: Callable = None):
+def wrap_method(cls: Type, name: str, *, before: Callable = None, after: Callable = None) -> None:
     """Wrap the functionality the instance- or class method ``cls.name`` with additional behavior
     ``before`` and ``after``.
 

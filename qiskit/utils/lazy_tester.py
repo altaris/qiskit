@@ -33,11 +33,11 @@ class _RequireNow:
 
     __slots__ = ("_tester", "_feature")
 
-    def __init__(self, tester, feature):
+    def __init__(self, tester, feature) -> None:
         self._tester = tester
         self._feature = feature
 
-    def __call__(self, *_args, **_kwargs):
+    def __call__(self, *_args, **_kwargs) -> None:
         self._tester.require_now(self._feature)
 
 
@@ -85,7 +85,7 @@ class LazyDependencyManager(abc.ABC):
 
     __slots__ = ("_bool", "_callback", "_name", "_install", "_msg")
 
-    def __init__(self, *, name=None, callback=None, install=None, msg=None):
+    def __init__(self, *, name=None, callback=None, install=None, msg=None) -> None:
         """
         Args:
             name: the name of this optional dependency.

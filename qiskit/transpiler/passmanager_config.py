@@ -42,7 +42,7 @@ class PassManagerConfig:
         hls_config=None,
         init_method=None,
         optimization_method=None,
-    ):
+    ) -> None:
         """Initialize a PassManagerConfig object
 
         Args:

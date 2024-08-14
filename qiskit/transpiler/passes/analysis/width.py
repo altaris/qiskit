@@ -22,6 +22,6 @@ class Width(AnalysisPass):
     contains the number of qubits + the number of clbits.
     """
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the Width pass on `dag`."""
         self.property_set["width"] = dag.width()

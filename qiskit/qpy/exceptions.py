@@ -18,7 +18,7 @@ from qiskit.exceptions import QiskitError, QiskitWarning
 class QpyError(QiskitError):
     """Errors raised by the qpy module."""
 
-    def __init__(self, *message):
+    def __init__(self, *message) -> None:
         """Set the error message."""
         super().__init__(*message)
         self.message = " ".join(message)
@@ -32,7 +32,7 @@ class UnsupportedFeatureForVersion(QpyError):
     """QPY error raised when the target dump version is too low for a feature that is present in the
     object to be serialized."""
 
-    def __init__(self, feature: str, required: int, target: int):
+    def __init__(self, feature: str, required: int, target: int) -> None:
         """
         Args:
             feature: a description of the problematic feature.

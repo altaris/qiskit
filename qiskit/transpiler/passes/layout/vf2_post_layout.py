@@ -109,7 +109,7 @@ class VF2PostLayout(AnalysisPass):
         time_limit=None,
         strict_direction=True,
         max_trials=0,
-    ):
+    ) -> None:
         """Initialize a ``VF2PostLayout`` pass instance
 
         Args:

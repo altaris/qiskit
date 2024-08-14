@@ -129,7 +129,7 @@ class BackendEstimatorV2(BaseEstimatorV2):
         *,
         backend: BackendV1 | BackendV2,
         options: dict | None = None,
-    ):
+    ) -> None:
         """
         Args:
             backend: The backend to run the primitive on.

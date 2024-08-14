@@ -208,7 +208,7 @@ class Operator(LinearOp):
             Please choose from: 'text', 'latex', or 'latex_source'."""
             )
 
-    def _ipython_display_(self):
+    def _ipython_display_(self) -> None:
         out = self.draw()
         if isinstance(out, str):
             print(out)

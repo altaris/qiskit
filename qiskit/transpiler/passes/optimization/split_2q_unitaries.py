@@ -29,7 +29,7 @@ class Split2QUnitaries(TransformationPass):
     :class:`.UnitaryGate`.
     """
 
-    def __init__(self, fidelity: Optional[float] = 1.0 - 1e-16):
+    def __init__(self, fidelity: Optional[float] = 1.0 - 1e-16) -> None:
         """Split2QUnitaries initializer.
 
         Args:

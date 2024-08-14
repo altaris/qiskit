@@ -29,7 +29,7 @@ class BasicSwap(TransformationPass):
     one or more swaps in front to make it compatible.
     """
 
-    def __init__(self, coupling_map, fake_run=False):
+    def __init__(self, coupling_map, fake_run=False) -> None:
         """BasicSwap initializer.
 
         Args:

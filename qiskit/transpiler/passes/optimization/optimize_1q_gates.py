@@ -34,7 +34,7 @@ _CHOP_THRESHOLD = 1e-15
 class Optimize1qGates(TransformationPass):
     """Optimize chains of single-qubit u1, u2, u3 gates by combining them into a single gate."""
 
-    def __init__(self, basis=None, eps=1e-15, target=None):
+    def __init__(self, basis=None, eps=1e-15, target=None) -> None:
         """Optimize1qGates initializer.
 
         Args:

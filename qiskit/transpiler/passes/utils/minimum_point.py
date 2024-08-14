@@ -50,7 +50,7 @@ class MinimumPoint(TransformationPass):
         and an earlier minimum is restored.
     """
 
-    def __init__(self, property_set_list, prefix, backtrack_depth=5):
+    def __init__(self, property_set_list, prefix, backtrack_depth=5) -> None:
         """Initialize an instance of this pass
 
         Args:

@@ -119,7 +119,7 @@ class BackendEstimator(BaseEstimator[PrimitiveJob[EstimatorResult]]):
         abelian_grouping: bool = True,
         bound_pass_manager: PassManager | None = None,
         skip_transpilation: bool = False,
-    ):
+    ) -> None:
         """Initialize a new BackendEstimator (V1) instance
 
         Args:
@@ -159,7 +159,7 @@ class BackendEstimator(BaseEstimator[PrimitiveJob[EstimatorResult]]):
         """Return the transpiler options for transpiling the circuits."""
         return self._transpile_options
 
-    def set_transpile_options(self, **fields):
+    def set_transpile_options(self, **fields) -> None:
         """Set the transpiler options for transpiler.
         Args:
             **fields: The fields to update the options

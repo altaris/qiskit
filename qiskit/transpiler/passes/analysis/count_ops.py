@@ -21,10 +21,10 @@ class CountOps(AnalysisPass):
     The result is saved in ``property_set['count_ops']`` as an integer.
     """
 
-    def __init__(self, *, recurse=True):
+    def __init__(self, *, recurse=True) -> None:
         super().__init__()
         self.recurse = recurse
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the CountOps pass on `dag`."""
         self.property_set["count_ops"] = dag.count_ops(recurse=self.recurse)

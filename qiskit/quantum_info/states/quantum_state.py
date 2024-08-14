@@ -30,7 +30,7 @@ from qiskit.result.counts import Counts
 class QuantumState:
     """Abstract quantum state base class"""
 
-    def __init__(self, op_shape: OpShape | None = None):
+    def __init__(self, op_shape: OpShape | None = None) -> None:
         """Initialize a QuantumState object.
 
         Args:
@@ -75,7 +75,7 @@ class QuantumState:
         """Make a copy of current operator."""
         return copy.deepcopy(self)
 
-    def seed(self, value=None):
+    def seed(self, value=None) -> None:
         """Set the seed for the quantum state RNG."""
         if value is None:
             self._rng_generator = None

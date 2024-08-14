@@ -28,7 +28,7 @@ class TranspilerError(TranspilerAccessError):
 class CouplingError(QiskitError):
     """Base class for errors raised by the coupling graph object."""
 
-    def __init__(self, *msg):
+    def __init__(self, *msg) -> None:
         """Set the error message."""
         super().__init__(*msg)
         self.msg = " ".join(msg)
@@ -41,7 +41,7 @@ class CouplingError(QiskitError):
 class LayoutError(QiskitError):
     """Errors raised by the layout object."""
 
-    def __init__(self, *msg):
+    def __init__(self, *msg) -> None:
         """Set the error message."""
         super().__init__(*msg)
         self.msg = " ".join(msg)

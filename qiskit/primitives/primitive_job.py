@@ -27,7 +27,7 @@ class PrimitiveJob(BasePrimitiveJob[ResultT, JobStatus]):
     Primitive job class for the reference implementations of Primitives.
     """
 
-    def __init__(self, function, *args, **kwargs):
+    def __init__(self, function, *args, **kwargs) -> None:
         """
         Args:
             function: A callable function to execute the job.

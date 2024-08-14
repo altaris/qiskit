@@ -131,7 +131,7 @@ class ParameterSetter(NodeVisitor):
     and assign values to operands of nodes found.
     """
 
-    def __init__(self, param_map: dict[ParameterExpression, ParameterValueType]):
+    def __init__(self, param_map: dict[ParameterExpression, ParameterValueType]) -> None:
         self._param_map = param_map
 
     # Top layer: Assign parameters to programs
@@ -261,12 +261,12 @@ class ParameterGetter(NodeVisitor):
     and add parameters found to the array.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.parameters = set()
 
     # Top layer: Get parameters from programs
 
-    def visit_ScheduleBlock(self, node: ScheduleBlock):
+    def visit_ScheduleBlock(self, node: ScheduleBlock) -> None:
         """Visit ``ScheduleBlock``. Recursively visit context blocks and search parameters.
 
         .. note:: ``ScheduleBlock`` can have parameters in blocks and its alignment.
@@ -275,11 +275,11 @@ class ParameterGetter(NodeVisitor):
         # The manager of main program is not aware of parameters in subroutines.
         self.parameters |= node._parameter_manager.parameters
 
-    def visit_Schedule(self, node: Schedule):
+    def visit_Schedule(self, node: Schedule) -> None:
         """Visit ``Schedule``. Recursively visit schedule children and search parameters."""
         self.parameters |= node.parameters
 
-    def visit_AlignmentKind(self, node: AlignmentKind):
+    def visit_AlignmentKind(self, node: AlignmentKind) -> None:
         """Get parameters from block's ``AlignmentKind`` specification."""
         for param in node._context_params:
             if isinstance(param, ParameterExpression):
@@ -287,7 +287,7 @@ class ParameterGetter(NodeVisitor):
 
     # Mid layer: Get parameters from instructions
 
-    def visit_Instruction(self, node: instructions.Instruction):
+    def visit_Instruction(self, node: instructions.Instruction) -> None:
         """Get parameters from general pulse instruction.
 
         .. note:: All parametrized object should be stored in the operands.
@@ -298,24 +298,24 @@ class ParameterGetter(NodeVisitor):
 
     # Lower layer: Get parameters from operands
 
-    def visit_Channel(self, node: channels.Channel):
+    def visit_Channel(self, node: channels.Channel) -> None:
         """Get parameters from ``Channel`` object."""
         self.parameters |= node.parameters
 
-    def visit_SymbolicPulse(self, node: SymbolicPulse):
+    def visit_SymbolicPulse(self, node: SymbolicPulse) -> None:
         """Get parameters from ``SymbolicPulse`` object."""
         for op_value in node.parameters.values():
             if isinstance(op_value, ParameterExpression):
                 self.parameters |= op_value.parameters
 
-    def visit_Waveform(self, node: Waveform):
+    def visit_Waveform(self, node: Waveform) -> None:
         """Get parameters from ``Waveform`` object.
 
         .. node:: No parameter can be assigned to ``Waveform`` object.
         """
         pass
 
-    def generic_visit(self, node: Any):
+    def generic_visit(self, node: Any) -> None:
         """Get parameters from object that doesn't belong to Qiskit Pulse module."""
         if isinstance(node, ParameterExpression):
             self.parameters |= node.parameters
@@ -331,7 +331,7 @@ class ParameterManager:
     Instruction data and its location are not directly associated with this object.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create new parameter table for pulse programs."""
         self._parameters = set()
 
@@ -340,7 +340,7 @@ class ParameterManager:
         """Parameters which determine the schedule behavior."""
         return self._parameters
 
-    def clear(self):
+    def clear(self) -> None:
         """Remove the parameters linked to this manager."""
         self._parameters.clear()
 
@@ -389,7 +389,7 @@ class ParameterManager:
             return visitor.visit(pulse_program)
         return pulse_program
 
-    def update_parameter_table(self, new_node: Any):
+    def update_parameter_table(self, new_node: Any) -> None:
         """A helper function to update parameter table with given data node.
 
         Args:

@@ -87,7 +87,7 @@ class Cast(Expr):
 
     __slots__ = ("operand", "implicit")
 
-    def __init__(self, operand: Expr, type: types.Type, implicit: bool = False):
+    def __init__(self, operand: Expr, type: types.Type, implicit: bool = False) -> None:
         self.type = type
         self.operand = operand
         self.implicit = implicit
@@ -139,7 +139,7 @@ class Var(Expr):
         type: types.Type,
         *,
         name: str | None = None,
-    ):
+    ) -> None:
         super().__setattr__("type", type)
         super().__setattr__("var", var)
         super().__setattr__("name", name)
@@ -182,7 +182,7 @@ class Var(Expr):
     def __getstate__(self):
         return (self.var, self.type, self.name)
 
-    def __setstate__(self, state):
+    def __setstate__(self, state) -> None:
         var, type, name = state
         super().__setattr__("type", type)
         super().__setattr__("var", var)
@@ -203,7 +203,7 @@ class Value(Expr):
 
     __slots__ = ("value",)
 
-    def __init__(self, value: typing.Any, type: types.Type):
+    def __init__(self, value: typing.Any, type: types.Type) -> None:
         self.type = type
         self.value = value
 
@@ -253,7 +253,7 @@ class Unary(Expr):
         def __repr__(self):
             return f"Unary.{super().__repr__()}"
 
-    def __init__(self, op: Unary.Op, operand: Expr, type: types.Type):
+    def __init__(self, op: Unary.Op, operand: Expr, type: types.Type) -> None:
         self.op = op
         self.operand = operand
         self.type = type
@@ -343,7 +343,7 @@ class Binary(Expr):
         def __repr__(self):
             return f"Binary.{super().__repr__()}"
 
-    def __init__(self, op: Binary.Op, left: Expr, right: Expr, type: types.Type):
+    def __init__(self, op: Binary.Op, left: Expr, right: Expr, type: types.Type) -> None:
         self.op = op
         self.left = left
         self.right = right
@@ -377,7 +377,7 @@ class Index(Expr):
 
     __slots__ = ("target", "index")
 
-    def __init__(self, target: Expr, index: Expr, type: types.Type):
+    def __init__(self, target: Expr, index: Expr, type: types.Type) -> None:
         self.target = target
         self.index = index
         self.type = type

@@ -83,7 +83,7 @@ class UGate(Gate):
         *,
         duration=None,
         unit="dt",
-    ):
+    ) -> None:
         """Create new U gate."""
         super().__init__("u", 1, [theta, phi, lam], label=label, duration=duration, unit=unit)
 
@@ -183,11 +183,11 @@ class _CUGateParams(list):
 
     __slots__ = ("_gate",)
 
-    def __init__(self, gate):
+    def __init__(self, gate) -> None:
         super().__init__(gate._params)
         self._gate = gate
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key, value) -> None:
         super().__setitem__(key, value)
         self._gate._params[key] = value
         # Magic numbers: CUGate has 4 parameters, UGate has 3, with the last of CUGate's missing.
@@ -286,7 +286,7 @@ class CUGate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CU gate."""
         super().__init__(
             "cu",
@@ -300,7 +300,7 @@ class CUGate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cu(theta,phi,lambda,gamma) c, t
         { phase(gamma) c;
@@ -379,7 +379,7 @@ class CUGate(ControlledGate):
         return _CUGateParams(self)
 
     @params.setter
-    def params(self, parameters):
+    def params(self, parameters) -> None:
         # We need to skip `ControlledGate` in the inheritance tree, since it defines
         # that all controlled gates are `(1-|c><c|).1 + |c><c|.base` for control-state `c`, which
         # this class does _not_ satisfy (so it shouldn't really be a `ControlledGate`).

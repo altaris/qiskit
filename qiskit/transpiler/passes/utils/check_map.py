@@ -29,7 +29,7 @@ class CheckMap(AnalysisPass):
     instead.
     """
 
-    def __init__(self, coupling_map, property_set_field=None):
+    def __init__(self, coupling_map, property_set_field=None) -> None:
         """CheckMap initializer.
 
         Args:
@@ -55,7 +55,7 @@ class CheckMap(AnalysisPass):
                 self.qargs.add(edge)
                 self.qargs.add((edge[1], edge[0]))
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the CheckMap pass on `dag`.
 
         If `dag` is mapped to `coupling_map`, the property

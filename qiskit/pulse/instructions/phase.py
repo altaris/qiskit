@@ -45,7 +45,7 @@ class ShiftPhase(Instruction):
         phase: Union[complex, ParameterExpression],
         channel: PulseChannel,
         name: Optional[str] = None,
-    ):
+    ) -> None:
         """Instantiate a shift phase instruction, increasing the output signal phase on ``channel``
         by ``phase`` [radians].
 
@@ -106,7 +106,7 @@ class SetPhase(Instruction):
         phase: Union[complex, ParameterExpression],
         channel: PulseChannel,
         name: Optional[str] = None,
-    ):
+    ) -> None:
         """Instantiate a set phase instruction, setting the output signal phase on ``channel``
         to ``phase`` [radians].
 

@@ -526,7 +526,7 @@ def _any_crossover(qubits, node, nodes):
 class _LayerSpooler(list):
     """Manipulate list of layer dicts for _get_layered_instructions."""
 
-    def __init__(self, dag, justification, measure_map):
+    def __init__(self, dag, justification, measure_map) -> None:
         """Create spool"""
         super().__init__()
         self.dag = dag
@@ -568,7 +568,7 @@ class _LayerSpooler(list):
         """True .IFF. we can add 'node' to layer 'nodes'"""
         return not _any_crossover(self.qubits, node, nodes)
 
-    def slide_from_left(self, node, index):
+    def slide_from_left(self, node, index) -> None:
         """Insert node into first layer where there is no conflict going l > r"""
         measure_layer = None
         if isinstance(node.op, Measure):
@@ -626,7 +626,7 @@ class _LayerSpooler(list):
             if measure_layer > self.measure_map[measure_bit]:
                 self.measure_map[measure_bit] = measure_layer
 
-    def slide_from_right(self, node, index):
+    def slide_from_right(self, node, index) -> None:
         """Insert node into rightmost layer as long there is no conflict."""
         if not self:
             self.insert(0, [node])
@@ -658,7 +658,7 @@ class _LayerSpooler(list):
         if not inserted:
             self.insert(0, [node])
 
-    def add(self, node, index):
+    def add(self, node, index) -> None:
         """Add 'node' where it belongs, starting the try at 'index'."""
         if self.justification == "left":
             self.slide_from_left(node, index)

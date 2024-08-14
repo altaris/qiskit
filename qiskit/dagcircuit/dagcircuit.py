@@ -73,7 +73,7 @@ class DAGCircuit:
 
     # pylint: disable=invalid-name
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create an empty circuit."""
 
         # Circuit name.  Generally, this corresponds to the name
@@ -170,7 +170,7 @@ class DAGCircuit:
         return self._global_phase
 
     @global_phase.setter
-    def global_phase(self, angle: float | ParameterExpression):
+    def global_phase(self, angle: float | ParameterExpression) -> None:
         """Set the global phase of the circuit.
 
         Args:
@@ -196,7 +196,7 @@ class DAGCircuit:
         return dict(self._calibrations)
 
     @calibrations.setter
-    def calibrations(self, calibrations: dict[str, dict[tuple, Schedule]]):
+    def calibrations(self, calibrations: dict[str, dict[tuple, Schedule]]) -> None:
         """Set the circuit calibration data from a dictionary of calibration definition.
 
         Args:
@@ -205,7 +205,7 @@ class DAGCircuit:
         """
         self._calibrations = defaultdict(dict, calibrations)
 
-    def add_calibration(self, gate, qubits, schedule, params=None):
+    def add_calibration(self, gate, qubits, schedule, params=None) -> None:
         """Register a low-level, custom pulse definition for the given gate.
 
         Args:
@@ -261,7 +261,7 @@ class DAGCircuit:
         params = tuple(params)
         return (qubits, params) in self.calibrations[node.op.name]
 
-    def remove_all_ops_named(self, opname):
+    def remove_all_ops_named(self, opname) -> None:
         """Remove all operation nodes with the given name."""
         for n in self.named_nodes(opname):
             self.remove_op_node(n)
@@ -348,7 +348,7 @@ class DAGCircuit:
             raise DAGCircuitError("cannot add captures to a circuit with inputs")
         self._add_var(var, _DAGVarType.CAPTURE)
 
-    def add_declared_var(self, var: expr.Var):
+    def add_declared_var(self, var: expr.Var) -> None:
         """Add a declared local variable to the circuit.
 
         Args:
@@ -593,7 +593,7 @@ class DAGCircuit:
             ) from e
         return child is self.output_map[wire]
 
-    def _remove_idle_wire(self, wire):
+    def _remove_idle_wire(self, wire) -> None:
         """Remove an idle qubit or bit from the circuit.
 
         Args:
@@ -644,13 +644,13 @@ class DAGCircuit:
             if wire not in amap:
                 raise DAGCircuitError(f"wire {wire} not found in {amap}")
 
-    def _increment_op(self, op_name):
+    def _increment_op(self, op_name) -> None:
         if op_name in self._op_names:
             self._op_names[op_name] += 1
         else:
             self._op_names[op_name] = 1
 
-    def _decrement_op(self, op_name):
+    def _decrement_op(self, op_name) -> None:
         if self._op_names[op_name] == 1:
             del self._op_names[op_name]
         else:
@@ -1997,7 +1997,7 @@ class DAGCircuit:
         self._multi_graph.remove_node_retain_edges_by_id(node._node_id)
         self._decrement_op(node.name)
 
-    def remove_ancestors_of(self, node):
+    def remove_ancestors_of(self, node) -> None:
         """Remove all of the ancestor operation nodes of node."""
         anc = rx.ancestors(self._multi_graph, node)
         # TODO: probably better to do all at once using
@@ -2007,14 +2007,14 @@ class DAGCircuit:
             if isinstance(anc_node, DAGOpNode):
                 self.remove_op_node(anc_node)
 
-    def remove_descendants_of(self, node):
+    def remove_descendants_of(self, node) -> None:
         """Remove all of the descendant operation nodes of node."""
         desc = rx.descendants(self._multi_graph, node)
         for desc_node in desc:
             if isinstance(desc_node, DAGOpNode):
                 self.remove_op_node(desc_node)
 
-    def remove_nonancestors_of(self, node):
+    def remove_nonancestors_of(self, node) -> None:
         """Remove all of the non-ancestors operation nodes of node."""
         anc = rx.ancestors(self._multi_graph, node)
         comp = list(set(self._multi_graph.nodes()) - set(anc))
@@ -2022,7 +2022,7 @@ class DAGCircuit:
             if isinstance(n, DAGOpNode):
                 self.remove_op_node(n)
 
-    def remove_nondescendants_of(self, node):
+    def remove_nondescendants_of(self, node) -> None:
         """Remove all of the non-descendants operation nodes of node."""
         dec = rx.descendants(self._multi_graph, node)
         comp = list(set(self._multi_graph.nodes()) - set(dec))
@@ -2354,7 +2354,9 @@ class _DAGVarType(enum.Enum):
 class _DAGVarInfo:
     __slots__ = ("var", "type", "in_node", "out_node")
 
-    def __init__(self, var: expr.Var, type_: _DAGVarType, in_node: DAGInNode, out_node: DAGOutNode):
+    def __init__(
+        self, var: expr.Var, type_: _DAGVarType, in_node: DAGInNode, out_node: DAGOutNode
+    ) -> None:
         self.var = var
         self.type = type_
         self.in_node = in_node

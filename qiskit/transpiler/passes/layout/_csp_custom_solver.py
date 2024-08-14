@@ -27,7 +27,7 @@ if _optionals.HAS_CONSTRAINT:
 
         # pylint: disable=invalid-name
 
-        def __init__(self, call_limit=None, time_limit=None):
+        def __init__(self, call_limit=None, time_limit=None) -> None:
             self.call_limit = call_limit
             self.time_limit = time_limit
             self.call_current = None

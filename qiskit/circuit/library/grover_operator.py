@@ -241,7 +241,7 @@ class GroverOperator(QuantumCircuit):
         """The oracle implementing a reflection about the bad state."""
         return self._oracle
 
-    def _build(self):
+    def _build(self) -> None:
         num_state_qubits = self.oracle.num_qubits - self.oracle.num_ancillas
         circuit = QuantumCircuit(QuantumRegister(num_state_qubits, name="state"), name="Q")
         num_ancillas = numpy.max(

@@ -187,7 +187,7 @@ class TwoQubitWeylDecomposition:
         fidelity: float | None = 1.0 - 1.0e-9,
         *,
         _specialization: two_qubit_decompose.Specialization | None = None,
-    ):
+    ) -> None:
         unitary_matrix = np.asarray(unitary_matrix, dtype=complex)
         self._inner_decomposition = two_qubit_decompose.TwoQubitWeylDecomposition(
             unitary_matrix, fidelity=fidelity, _specialization=_specialization
@@ -520,7 +520,7 @@ class TwoQubitBasisDecomposer:
         basis_fidelity: float = 1.0,
         euler_basis: str = "U",
         pulse_optimize: bool | None = None,
-    ):
+    ) -> None:
         self.gate = gate
         self.basis_fidelity = basis_fidelity
         self.pulse_optimize = pulse_optimize
@@ -710,10 +710,10 @@ class TwoQubitBasisDecomposer:
 class _LazyTwoQubitCXDecomposer(TwoQubitBasisDecomposer):
     __slots__ = ("_inner",)
 
-    def __init__(self):  # pylint: disable=super-init-not-called
+    def __init__(self) -> None:  # pylint: disable=super-init-not-called
         self._inner = None
 
-    def _load(self):
+    def _load(self) -> None:
         if self._inner is None:
             self._inner = TwoQubitBasisDecomposer(CXGate())
 

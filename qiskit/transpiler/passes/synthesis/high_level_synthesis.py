@@ -270,7 +270,7 @@ class HLSConfig:
         plugin_selection: str = "sequential",
         plugin_evaluation_fn: Optional[Callable[[QuantumCircuit], int]] = None,
         **kwargs,
-    ):
+    ) -> None:
         """Creates a high-level-synthesis config.
 
         Args:
@@ -297,7 +297,7 @@ class HLSConfig:
         for key, value in kwargs.items():
             self.set_methods(key, value)
 
-    def set_methods(self, hls_name, hls_methods):
+    def set_methods(self, hls_name, hls_methods) -> None:
         """Sets the list of synthesis methods for a given higher-level-object. This overwrites
         the lists of methods if also set previously."""
         self.methods[hls_name] = hls_methods
@@ -356,7 +356,7 @@ class HighLevelSynthesis(TransformationPass):
         equivalence_library: Optional[EquivalenceLibrary] = None,
         basis_gates: Optional[List[str]] = None,
         min_qubits: int = 0,
-    ):
+    ) -> None:
         """
         HighLevelSynthesis initializer.
 

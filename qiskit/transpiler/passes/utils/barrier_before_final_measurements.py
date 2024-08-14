@@ -27,7 +27,7 @@ class BarrierBeforeFinalMeasurements(TransformationPass):
     other measurements or barriers.)
     """
 
-    def __init__(self, label=None):
+    def __init__(self, label=None) -> None:
         super().__init__()
         self.label = label
 

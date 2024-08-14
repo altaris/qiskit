@@ -67,11 +67,11 @@ class RZGate(Gate):
 
     def __init__(
         self, phi: ParameterValueType, label: Optional[str] = None, *, duration=None, unit="dt"
-    ):
+    ) -> None:
         """Create new RZ gate."""
         super().__init__("rz", 1, [phi], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate rz(phi) a { u1(phi) a; }
         """
@@ -238,7 +238,7 @@ class CRZGate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CRZ gate."""
         super().__init__(
             "crz",
@@ -252,7 +252,7 @@ class CRZGate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate crz(lambda) a,b
         { rz(lambda/2) b; cx a,b;

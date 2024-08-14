@@ -46,7 +46,7 @@ class CollectAndCollapse(TransformationPass):
         collect_function,
         collapse_function,
         do_commutative_analysis=False,
-    ):
+    ) -> None:
         """
         Args:
             collect_function (callable): a function that takes a DAG and returns a list

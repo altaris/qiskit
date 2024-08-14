@@ -33,7 +33,7 @@ class SetIOLatency(AnalysisPass):
         self,
         clbit_write_latency: int = 0,
         conditional_latency: int = 0,
-    ):
+    ) -> None:
         """Create pass with latency information.
 
         Args:
@@ -54,7 +54,7 @@ class SetIOLatency(AnalysisPass):
         self._conditional_latency = conditional_latency
         self._clbit_write_latency = clbit_write_latency
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> None:
         """Add IO latency information.
 
         Args:

@@ -42,7 +42,7 @@ class ControlledGate(Gate):
         unit=None,
         *,
         _base_label=None,
-    ):
+    ) -> None:
         """Create a new ControlledGate. In the new gate the first ``num_ctrl_qubits``
         of the gate are the controls.
 
@@ -133,7 +133,7 @@ class ControlledGate(Gate):
             return super().definition
 
     @definition.setter
-    def definition(self, excited_def: "QuantumCircuit"):
+    def definition(self, excited_def: "QuantumCircuit") -> None:
         """Set controlled gate definition with closed controls.
 
         Args:
@@ -158,7 +158,7 @@ class ControlledGate(Gate):
             return self._name
 
     @name.setter
-    def name(self, name_str):
+    def name(self, name_str) -> None:
         """Set the name of the gate. Note the reported name may differ
         from the set name if the gate has open controls.
         """
@@ -200,7 +200,7 @@ class ControlledGate(Gate):
         return self._ctrl_state
 
     @ctrl_state.setter
-    def ctrl_state(self, ctrl_state: Union[int, str, None]):
+    def ctrl_state(self, ctrl_state: Union[int, str, None]) -> None:
         """Set the control state of this gate.
 
         Args:

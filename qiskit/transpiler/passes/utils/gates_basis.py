@@ -19,7 +19,7 @@ from qiskit.transpiler.basepasses import AnalysisPass
 class GatesInBasis(AnalysisPass):
     """Check if all gates in a DAG are in a given set of gates"""
 
-    def __init__(self, basis_gates=None, target=None):
+    def __init__(self, basis_gates=None, target=None) -> None:
         """Initialize the GatesInBasis pass.
 
         Args:
@@ -35,7 +35,7 @@ class GatesInBasis(AnalysisPass):
             )
         self._target = target
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the GatesInBasis pass on `dag`."""
         if self._basis_gates is None and self._target is None:
             self.property_set["all_gates_in_basis"] = True

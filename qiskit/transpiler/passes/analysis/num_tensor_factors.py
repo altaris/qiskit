@@ -21,6 +21,6 @@ class NumTensorFactors(AnalysisPass):
     The result is saved in ``property_set['num_tensor_factors']`` as an integer.
     """
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the NumTensorFactors pass on `dag`."""
         self.property_set["num_tensor_factors"] = dag.num_tensor_factors()

@@ -137,7 +137,7 @@ class UCGate(Gate):
         _, diag = self._dec_ucg()
         return diag
 
-    def _define(self):
+    def _define(self) -> None:
         ucg_circuit, _ = self._dec_ucg()
         self.definition = ucg_circuit
 

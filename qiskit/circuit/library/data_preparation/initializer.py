@@ -75,7 +75,7 @@ class Initialize(Instruction):
 
         super().__init__("initialize", self._stateprep.num_qubits, 0, self._stateprep.params)
 
-    def _define(self):
+    def _define(self) -> None:
         q = QuantumRegister(self.num_qubits, "q")
         initialize_circuit = QuantumCircuit(q, name="init_def")
         initialize_circuit.reset(q)

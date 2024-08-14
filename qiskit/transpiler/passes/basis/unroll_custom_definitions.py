@@ -22,7 +22,7 @@ from qiskit.converters.circuit_to_dag import circuit_to_dag
 class UnrollCustomDefinitions(TransformationPass):
     """Unrolls instructions with custom definitions."""
 
-    def __init__(self, equivalence_library, basis_gates=None, target=None, min_qubits=0):
+    def __init__(self, equivalence_library, basis_gates=None, target=None, min_qubits=0) -> None:
         """Unrolls instructions with custom definitions.
 
         Args:

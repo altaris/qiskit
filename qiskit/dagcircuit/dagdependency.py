@@ -91,7 +91,7 @@ class DAGDependency:
 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Create an empty DAGDependency.
         """
@@ -127,7 +127,7 @@ class DAGDependency:
         return self._global_phase
 
     @global_phase.setter
-    def global_phase(self, angle: float | ParameterExpression):
+    def global_phase(self, angle: float | ParameterExpression) -> None:
         """Set the global phase of the circuit.
 
         Args:
@@ -155,7 +155,7 @@ class DAGDependency:
         return dict(self._calibrations)
 
     @calibrations.setter
-    def calibrations(self, calibrations: dict[str, dict[tuple, Schedule]]):
+    def calibrations(self, calibrations: dict[str, dict[tuple, Schedule]]) -> None:
         """Set the circuit calibration data from a dictionary of calibration definition.
 
         Args:
@@ -255,7 +255,7 @@ class DAGDependency:
         """
         return self._multi_graph.get_node_data(node_id)
 
-    def _add_multi_graph_edge(self, src_id: int, dest_id: int, data):
+    def _add_multi_graph_edge(self, src_id: int, dest_id: int, data) -> None:
         """
         Function to add an edge from given data (dict) between two nodes.
 
@@ -423,7 +423,7 @@ class DAGDependency:
         )
         return new_node
 
-    def add_op_node(self, operation, qargs, cargs):
+    def add_op_node(self, operation, qargs, cargs) -> None:
         """Add a DAGDepNode to the graph and update the edges.
 
         Args:
@@ -435,7 +435,7 @@ class DAGDependency:
         self._add_multi_graph_node(new_node)
         self._update_edges()
 
-    def _update_edges(self):
+    def _update_edges(self) -> None:
         """
         Updates DagDependency by adding edges to the newly added node (max_node)
         from the previously added nodes.
@@ -484,7 +484,7 @@ class DAGDependency:
                 for predecessor_id in predecessor_ids:
                     reachable[predecessor_id] = False
 
-    def _add_successors(self):
+    def _add_successors(self) -> None:
         """
         Create the list of successors. Update DAGDependency 'successors' attribute. It has to
         be used when the DAGDependency() object is complete (i.e. converters).
@@ -494,7 +494,7 @@ class DAGDependency:
                 rx.descendants(self._multi_graph, node_id)
             )
 
-    def _add_predecessors(self):
+    def _add_predecessors(self) -> None:
         """
         Create the list of predecessors for each node. Update DAGDependency
         'predecessors' attribute. It has to be used when the DAGDependency() object

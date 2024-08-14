@@ -32,7 +32,7 @@ class FlowControllerLinear(BaseController):
         tasks: Task | Iterable[Task] = (),
         *,
         options: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(options)
 
         if not isinstance(tasks, Iterable):
@@ -62,7 +62,7 @@ class DoWhileController(BaseController):
         do_while: Callable[[PropertySet], bool] = None,
         *,
         options: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(options)
 
         if not isinstance(tasks, Iterable):
@@ -97,7 +97,7 @@ class ConditionalController(BaseController):
         condition: Callable[[PropertySet], bool] = None,
         *,
         options: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         super().__init__(options)
 
         if not isinstance(tasks, Iterable):

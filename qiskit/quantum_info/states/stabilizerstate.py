@@ -81,7 +81,7 @@ class StabilizerState(QuantumState):
         self,
         data: StabilizerState | Clifford | Pauli | QuantumCircuit | Instruction,
         validate: bool = True,
-    ):
+    ) -> None:
         """Initialize a StabilizerState object.
 
         Args:
@@ -623,7 +623,7 @@ class StabilizerState(QuantumState):
         return accum_pauli, accum_phase
 
     @staticmethod
-    def _rowsum_nondeterministic(clifford, accum, row):
+    def _rowsum_nondeterministic(clifford, accum, row) -> None:
         """Updating StabilizerState Clifford in the
         non-deterministic rowsum calculation.
         row and accum are rows in the StabilizerState Clifford."""
@@ -674,7 +674,7 @@ class StabilizerState(QuantumState):
         outcome_prob: float,
         probs: dict[str, float],
         outcome_bitstring: str = None,
-    ):
+    ) -> None:
         """Recursive helper function for calculating the probabilities
 
         Args:

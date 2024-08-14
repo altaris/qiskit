@@ -32,7 +32,7 @@ from .fake_backend import FakeBackend
 class FakeOpenPulse2Q(FakeBackend):
     """A fake 2 qubit backend for pulse test."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         configuration = PulseBackendConfiguration(
             backend_name="fake_openpulse_2q",
             backend_version="0.0.0",

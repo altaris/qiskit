@@ -46,7 +46,7 @@ class CouplingMap:
         "_is_symmetric",
     )
 
-    def __init__(self, couplinglist=None, description=None):
+    def __init__(self, couplinglist=None, description=None) -> None:
         """
         Create coupling graph. By default, the generated coupling has no nodes.
 
@@ -108,7 +108,7 @@ class CouplingMap:
         self._qubit_list = None  # invalidate
         self._size = None  # invalidate
 
-    def add_edge(self, src, dst):
+    def add_edge(self, src, dst) -> None:
         """
         Add directed edge to coupling graph.
 
@@ -159,7 +159,7 @@ class CouplingMap:
         self.compute_distance_matrix()
         return self._dist_matrix
 
-    def compute_distance_matrix(self):
+    def compute_distance_matrix(self) -> None:
         """Compute the full distance matrix on pairs of nodes.
 
         The distance map self._dist_matrix is computed from the graph using
@@ -228,7 +228,7 @@ class CouplingMap:
             self._is_symmetric = self._check_symmetry()
         return self._is_symmetric
 
-    def make_symmetric(self):
+    def make_symmetric(self) -> None:
         """
         Convert uni-directional edges into bi-directional.
         """

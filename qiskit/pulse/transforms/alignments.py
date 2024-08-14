@@ -25,7 +25,7 @@ from qiskit.pulse.utils import instruction_duration_validation
 class AlignmentKind(abc.ABC):
     """An abstract class for schedule alignment."""
 
-    def __init__(self, context_params: Tuple[ParameterValueType, ...]):
+    def __init__(self, context_params: Tuple[ParameterValueType, ...]) -> None:
         """Create new context."""
         self._context_params = tuple(context_params)
 
@@ -93,7 +93,7 @@ class AlignLeft(AlignmentKind):
     Instructions are placed at earliest available timeslots.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create new left-justified context."""
         super().__init__(context_params=())
 
@@ -160,7 +160,7 @@ class AlignRight(AlignmentKind):
     Instructions are placed at latest available timeslots.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create new right-justified context."""
         super().__init__(context_params=())
 
@@ -229,7 +229,7 @@ class AlignSequential(AlignmentKind):
     No buffer time is inserted in between instructions.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create new sequential context."""
         super().__init__(context_params=())
 
@@ -263,7 +263,7 @@ class AlignEquispaced(AlignmentKind):
     This alignment is convenient to create dynamical decoupling sequences such as PDD.
     """
 
-    def __init__(self, duration: int | ParameterExpression):
+    def __init__(self, duration: int | ParameterExpression) -> None:
         """Create new equispaced context.
 
         Args:
@@ -348,7 +348,7 @@ class AlignFunc(AlignmentKind):
 
     """
 
-    def __init__(self, duration: int | ParameterExpression, func: Callable):
+    def __init__(self, duration: int | ParameterExpression, func: Callable) -> None:
         """Create new equispaced context.
 
         Args:

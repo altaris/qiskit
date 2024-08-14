@@ -37,7 +37,7 @@ class QobjMeasurementOption:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, name, params=None):
+    def __init__(self, name, params=None) -> None:
         """Instantiate a new QobjMeasurementOption object.
 
         Args:
@@ -125,7 +125,7 @@ class PulseQobjInstruction:
         pulse_shape=None,
         parameters=None,
         frequency=None,
-    ):
+    ) -> None:
         """Instantiate a new PulseQobjInstruction object.
 
         Args:
@@ -321,7 +321,7 @@ class PulseQobjConfig(QobjDictField):
         seed_simulator=None,
         memory_slots=None,
         **kwargs,
-    ):
+    ) -> None:
         """Instantiate a PulseQobjConfig object.
 
         Args:
@@ -416,7 +416,7 @@ class PulseQobjExperiment:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, instructions, config=None, header=None):
+    def __init__(self, instructions, config=None, header=None) -> None:
         """Instantiate a PulseQobjExperiment.
 
         Args:
@@ -514,7 +514,7 @@ class PulseQobjExperimentConfig(QobjDictField):
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, qubit_lo_freq=None, meas_lo_freq=None, **kwargs):
+    def __init__(self, qubit_lo_freq=None, meas_lo_freq=None, **kwargs) -> None:
         """Instantiate a PulseQobjExperimentConfig object.
 
         Args:
@@ -541,7 +541,7 @@ class PulseLibraryItem:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, name, samples):
+    def __init__(self, name, samples) -> None:
         """Instantiate a pulse library item.
 
         Args:
@@ -599,7 +599,7 @@ class PulseQobj:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, qobj_id, config, experiments, header=None):
+    def __init__(self, qobj_id, config, experiments, header=None) -> None:
         """Instantiate a new Pulse Qobj Object.
 
         Each Pulse Qobj object is used to represent a single payload that will

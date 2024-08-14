@@ -49,6 +49,6 @@ class ClassicalElement(Gate, metaclass=ABCMeta):
         """
         pass
 
-    def _define(self):
+    def _define(self) -> None:
         """The definition of the boolean expression is its synthesis"""
         self.definition = self.synth()

@@ -116,7 +116,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
     # Set the max number of qubits * paulis before string truncation
     __truncate__ = 2000
 
-    def __init__(self, data: Pauli | list):
+    def __init__(self, data: Pauli | list) -> None:
         """Initialize the PauliList.
 
         Args:
@@ -256,7 +256,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         return np.mod(self._phase - self._count_y(dtype=self._phase.dtype), 4)
 
     @phase.setter
-    def phase(self, value):
+    def phase(self, value) -> None:
         # Convert group phase convetion to internal ZX-phase convention
         self._phase[:] = np.mod(value + self._count_y(dtype=self._phase.dtype), 4)
 
@@ -266,7 +266,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         return self._x
 
     @x.setter
-    def x(self, val):
+    def x(self, val) -> None:
         self._x[:] = val
 
     @property
@@ -275,7 +275,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         return self._z
 
     @z.setter
-    def z(self, val):
+    def z(self, val) -> None:
         self._z[:] = val
 
     # ---------------------------------------------------------------------

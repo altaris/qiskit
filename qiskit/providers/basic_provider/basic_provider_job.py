@@ -24,11 +24,11 @@ class BasicProviderJob(JobV1):
 
     _async = False
 
-    def __init__(self, backend, job_id, result):
+    def __init__(self, backend, job_id, result) -> None:
         super().__init__(backend, job_id)
         self._result = result
 
-    def submit(self):
+    def submit(self) -> None:
         """Submit the job to the backend for execution.
 
         Raises:

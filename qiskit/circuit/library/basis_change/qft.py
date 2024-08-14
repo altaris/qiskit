@@ -232,7 +232,7 @@ class QFT(BlueprintCircuit):
         inverted._inverse = not self._inverse
         return inverted
 
-    def _warn_if_precision_loss(self):
+    def _warn_if_precision_loss(self) -> None:
         """Issue a warning if constructing the circuit will lose precision.
 
         If we need an angle smaller than ``pi * 2**-1022``, we start to lose precision by going into
@@ -308,7 +308,7 @@ class QFTGate(Gate):
     def __init__(
         self,
         num_qubits: int,
-    ):
+    ) -> None:
         """
         Args:
             num_qubits: The number of qubits on which the QFT acts.
@@ -322,7 +322,7 @@ class QFTGate(Gate):
         outer = np.outer(nums, nums)
         return np.exp(2j * np.pi * outer * (0.5**n), dtype=dtype) * (0.5 ** (n / 2))
 
-    def _define(self):
+    def _define(self) -> None:
         """Provide a specific decomposition of the QFTGate into a quantum circuit."""
         from qiskit.synthesis.qft import synth_qft_full
 

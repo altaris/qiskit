@@ -83,7 +83,7 @@ class VF2Layout(AnalysisPass):
         properties=None,
         max_trials=None,
         target=None,
-    ):
+    ) -> None:
         """Initialize a ``VF2Layout`` pass instance
 
         Args:

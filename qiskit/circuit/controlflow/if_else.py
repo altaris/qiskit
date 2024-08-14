@@ -182,7 +182,7 @@ class IfElsePlaceholder(InstructionPlaceholder):
         false_block: ControlFlowBuilderBlock | None = None,
         *,
         label: Optional[str] = None,
-    ):
+    ) -> None:
         """
         Args:
             condition: the condition to execute the true block on.  This has the same semantics as
@@ -332,7 +332,7 @@ class IfContext:
         *,
         in_loop: bool,
         label: str | None = None,
-    ):
+    ) -> None:
         self._circuit = circuit
         self._condition = validate_condition(condition)
         self._label = label
@@ -421,7 +421,7 @@ class ElseContext:
 
     __slots__ = ("_if_instruction", "_if_registers", "_if_context", "_used")
 
-    def __init__(self, if_context: IfContext):
+    def __init__(self, if_context: IfContext) -> None:
         # We want to avoid doing any processing until we're actually used, because the `if` block
         # likely isn't finished yet, and we want to have as small a penalty a possible if you don't
         # use an `else` branch.

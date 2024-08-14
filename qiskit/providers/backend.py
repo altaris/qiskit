@@ -257,7 +257,7 @@ class QubitProperties:
 
     __slots__ = ("t1", "t2", "frequency")
 
-    def __init__(self, t1=None, t2=None, frequency=None):
+    def __init__(self, t1=None, t2=None, frequency=None) -> None:
         """Create a new :class:`QubitProperties` object.
 
         Args:

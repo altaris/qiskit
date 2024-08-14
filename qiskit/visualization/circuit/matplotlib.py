@@ -108,7 +108,7 @@ class MatplotlibDrawer:
         cregbundle=None,
         with_layout=False,
         expr_len=30,
-    ):
+    ) -> None:
         self._circuit = circuit
         self._qubits = qubits
         self._clbits = clbits
@@ -642,7 +642,7 @@ class MatplotlibDrawer:
 
         return layer_widths
 
-    def _set_bit_reg_info(self, wire_map, qubits_dict, clbits_dict, glob_data):
+    def _set_bit_reg_info(self, wire_map, qubits_dict, clbits_dict, glob_data) -> None:
         """Get all the info for drawing bit/reg names and numbers"""
 
         longest_wire_label_width = 0
@@ -867,7 +867,9 @@ class MatplotlibDrawer:
             sum_text *= glob_data["subfont_factor"]
         return sum_text
 
-    def _draw_regs_wires(self, num_folds, xmax, max_x_index, qubits_dict, clbits_dict, glob_data):
+    def _draw_regs_wires(
+        self, num_folds, xmax, max_x_index, qubits_dict, clbits_dict, glob_data
+    ) -> None:
         """Draw the register names and numbers, wires, and vertical lines at the ends"""
 
         for fold_num in range(num_folds + 1):
@@ -1010,7 +1012,7 @@ class MatplotlibDrawer:
         qubits_dict,
         clbits_dict,
         glob_data,
-    ):
+    ) -> None:
         """Add the nodes from ControlFlowOps and their coordinates to the main circuit"""
         for flow_drawers in self._flow_drawers.values():
             for flow_drawer in flow_drawers:
@@ -1048,7 +1050,7 @@ class MatplotlibDrawer:
         clbits_dict,
         glob_data,
         verbose=False,
-    ):
+    ) -> None:
         """Draw the gates in the circuit"""
 
         # Add the nodes from all the ControlFlowOps and their coordinates to the main nodes
@@ -1137,7 +1139,7 @@ class MatplotlibDrawer:
                 )
             prev_x_index = curr_x_index + (max(l_width) if l_width else 0) + barrier_offset - 1
 
-    def _get_colors(self, node, node_data):
+    def _get_colors(self, node, node_data) -> None:
         """Get all the colors needed for drawing the circuit"""
 
         op = node.op
@@ -1189,7 +1191,7 @@ class MatplotlibDrawer:
         node_data[node].sc = sc
         node_data[node].lc = lc
 
-    def _condition(self, node, node_data, wire_map, outer_circuit, cond_xy, glob_data):
+    def _condition(self, node, node_data, wire_map, outer_circuit, cond_xy, glob_data) -> None:
         """Add a conditional to a gate"""
 
         # For SwitchCaseOp convert the target to a fully closed Clbit or register
@@ -1298,7 +1300,7 @@ class MatplotlibDrawer:
         )
         self._line(qubit_b, clbit_b, lc=self._style["cc"], ls=self._style["cline"])
 
-    def _measure(self, node, node_data, outer_circuit, glob_data):
+    def _measure(self, node, node_data, outer_circuit, glob_data) -> None:
         """Draw the measure symbol and the line to the clbit"""
         qx, qy = node_data[node].q_xy[0]
         cx, cy = node_data[node].c_xy[0]
@@ -1358,7 +1360,7 @@ class MatplotlibDrawer:
                 zorder=PORDER_TEXT,
             )
 
-    def _barrier(self, node, node_data, glob_data):
+    def _barrier(self, node, node_data, glob_data) -> None:
         """Draw a barrier"""
         for i, xy in enumerate(node_data[node].q_xy):
             xpos, ypos = xy
@@ -1402,7 +1404,7 @@ class MatplotlibDrawer:
                     zorder=PORDER_TEXT,
                 )
 
-    def _gate(self, node, node_data, glob_data, xy=None):
+    def _gate(self, node, node_data, glob_data, xy=None) -> None:
         """Draw a 1-qubit gate"""
         if xy is None:
             xy = node_data[node].q_xy[0]
@@ -1447,7 +1449,7 @@ class MatplotlibDrawer:
                 zorder=PORDER_TEXT,
             )
 
-    def _multiqubit_gate(self, node, node_data, glob_data, xy=None):
+    def _multiqubit_gate(self, node, node_data, glob_data, xy=None) -> None:
         """Draw a gate covering more than one qubit"""
         op = node.op
         if xy is None:
@@ -1541,7 +1543,7 @@ class MatplotlibDrawer:
                 zorder=PORDER_TEXT,
             )
 
-    def _flow_op_gate(self, node, node_data, glob_data):
+    def _flow_op_gate(self, node, node_data, glob_data) -> None:
         """Draw the box for a flow op circuit"""
         xy = node_data[node].q_xy
         xpos = min(x[0] for x in xy)
@@ -1713,7 +1715,7 @@ class MatplotlibDrawer:
 
             fold_level += 1
 
-    def _control_gate(self, node, node_data, glob_data, mod_control):
+    def _control_gate(self, node, node_data, glob_data, mod_control) -> None:
         """Draw a controlled gate"""
         op = node.op
         xy = node_data[node].q_xy
@@ -1754,7 +1756,7 @@ class MatplotlibDrawer:
 
     def _set_ctrl_bits(
         self, ctrl_state, num_ctrl_qubits, qbit, glob_data, ec=None, tc=None, text="", qargs=None
-    ):
+    ) -> None:
         """Determine which qubits are controls and whether they are open or closed"""
         # place the control label at the top or bottom of controls
         if text:
@@ -1779,7 +1781,7 @@ class MatplotlibDrawer:
                 qbit[i], glob_data, fc=fc_open_close, ec=ec, tc=tc, text=text, text_top=text_top
             )
 
-    def _ctrl_qubit(self, xy, glob_data, fc=None, ec=None, tc=None, text="", text_top=None):
+    def _ctrl_qubit(self, xy, glob_data, fc=None, ec=None, tc=None, text="", text_top=None) -> None:
         """Draw a control circle and if top or bottom control, draw control label"""
         xpos, ypos = xy
         box = glob_data["patches_mod"].Circle(
@@ -1817,7 +1819,7 @@ class MatplotlibDrawer:
             zorder=PORDER_TEXT,
         )
 
-    def _x_tgt_qubit(self, xy, glob_data, ec=None, ac=None):
+    def _x_tgt_qubit(self, xy, glob_data, ec=None, ac=None) -> None:
         """Draw the cnot target symbol"""
         linewidth = self._lwidth2
         xpos, ypos = xy
@@ -1847,7 +1849,7 @@ class MatplotlibDrawer:
             zorder=PORDER_GATE_PLUS,
         )
 
-    def _symmetric_gate(self, node, node_data, base_type, glob_data):
+    def _symmetric_gate(self, node, node_data, base_type, glob_data) -> None:
         """Draw symmetric gates for cz, cu1, cp, and rzz"""
         op = node.op
         xy = node_data[node].q_xy
@@ -1882,7 +1884,7 @@ class MatplotlibDrawer:
             )
             self._line(qubit_b, qubit_t, lc=lc)
 
-    def _swap(self, xy, node, node_data, color=None):
+    def _swap(self, xy, node, node_data, color=None) -> None:
         """Draw a Swap gate"""
         self._swap_cross(xy[0], color=color)
         self._swap_cross(xy[1], color=color)
@@ -1904,7 +1906,7 @@ class MatplotlibDrawer:
                 zorder=PORDER_TEXT,
             )
 
-    def _swap_cross(self, xy, color=None):
+    def _swap_cross(self, xy, color=None) -> None:
         """Draw the Swap cross symbol"""
         xpos, ypos = xy
 
@@ -1923,7 +1925,7 @@ class MatplotlibDrawer:
             zorder=PORDER_LINE_PLUS,
         )
 
-    def _sidetext(self, node, node_data, xy, tc=None, text=""):
+    def _sidetext(self, node, node_data, xy, tc=None, text="") -> None:
         """Draw the sidetext for symmetric gates"""
         xpos, ypos = xy
 
@@ -1941,7 +1943,7 @@ class MatplotlibDrawer:
             zorder=PORDER_TEXT,
         )
 
-    def _line(self, xy0, xy1, lc=None, ls=None, zorder=PORDER_LINE):
+    def _line(self, xy0, xy1, lc=None, ls=None, zorder=PORDER_LINE) -> None:
         """Draw a line from xy0 to xy1"""
         x0, y0 = xy0
         x1, y1 = xy1
@@ -2003,7 +2005,7 @@ class MatplotlibDrawer:
 class NodeData:
     """Class containing drawing data on a per node basis"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Node data for positioning
         self.width = 0.0
         self.x_index = 0

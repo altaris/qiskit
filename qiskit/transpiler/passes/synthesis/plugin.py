@@ -638,7 +638,7 @@ class UnitarySynthesisPluginManager:
     ``ext_plugins`` which contains a list of stevedore plugin objects.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.ext_plugins = stevedore.ExtensionManager(
             "qiskit.unitary_synthesis", invoke_on_load=True, propagate_map_exceptions=True
         )
@@ -687,7 +687,7 @@ class HighLevelSynthesisPlugin(abc.ABC):
 class HighLevelSynthesisPluginManager:
     """Class tracking the installed high-level-synthesis plugins."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.plugins = stevedore.ExtensionManager(
             "qiskit.synthesis", invoke_on_load=True, propagate_map_exceptions=True
         )

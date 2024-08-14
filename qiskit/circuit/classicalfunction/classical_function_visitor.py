@@ -35,7 +35,7 @@ class ClassicalFunctionVisitor(ast.NodeVisitor):
         _ast.Not: "create_not",
     }
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.scopes = []
         self.args = []
         self._network = None

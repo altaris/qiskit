@@ -92,7 +92,7 @@ from typing import Optional
 class QiskitError(Exception):
     """Base class for errors raised by Qiskit."""
 
-    def __init__(self, *message):
+    def __init__(self, *message) -> None:
         """Set the error message."""
         super().__init__(" ".join(message))
         self.message = " ".join(message)

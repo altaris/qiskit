@@ -36,7 +36,7 @@ class TimeUnitConversion(TransformationPass):
     * raise error: if they are a mix of SI units and ``'dt'``.
     """
 
-    def __init__(self, inst_durations: InstructionDurations = None, target: Target = None):
+    def __init__(self, inst_durations: InstructionDurations = None, target: Target = None) -> None:
         """TimeUnitAnalysis initializer.
 
         Args:

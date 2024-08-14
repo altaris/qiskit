@@ -61,7 +61,7 @@ class GenericPass(Task, ABC):
     and may modify the input pass manager IR.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.property_set = PropertySet()
         self.requires: Iterable[Task] = []
 
@@ -165,7 +165,7 @@ class BaseController(Task, ABC):
     def __init__(
         self,
         options: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         """Create new flow controller.
 
         Args:

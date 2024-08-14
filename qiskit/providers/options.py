@@ -113,7 +113,7 @@ class Options(Mapping):
 
     # Allow modifying the options (validated)
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key, value) -> None:
         self.update_options(**{key: value})
 
     # backwards-compatibility with Qiskit Experiments:
@@ -136,7 +136,7 @@ class Options(Mapping):
             raise AttributeError(f"Option {name} is not defined") from ex
 
     # setting options with the namespace interface is not validated
-    def __setattr__(self, key, value):
+    def __setattr__(self, key, value) -> None:
         self._fields[key] = value
 
     # custom pickling:
@@ -144,7 +144,7 @@ class Options(Mapping):
     def __getstate__(self):
         return (self._fields, self.validator)
 
-    def __setstate__(self, state):
+    def __setstate__(self, state) -> None:
         _fields, validator = state
         super().__setattr__("_fields", _fields)
         super().__setattr__("validator", validator)
@@ -158,7 +158,7 @@ class Options(Mapping):
         out.__setstate__((self._fields.copy(), self.validator.copy()))
         return out
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__setattr__("_fields", kwargs)
         super().__setattr__("validator", {})
 

@@ -32,7 +32,7 @@ class Play(Instruction):
     cycle time, dt, of the backend.
     """
 
-    def __init__(self, pulse: Pulse, channel: PulseChannel, name: str | None = None):
+    def __init__(self, pulse: Pulse, channel: PulseChannel, name: str | None = None) -> None:
         """Create a new pulse instruction.
 
         Args:

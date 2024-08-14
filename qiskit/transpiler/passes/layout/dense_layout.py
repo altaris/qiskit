@@ -36,7 +36,7 @@ class DenseLayout(AnalysisPass):
         by being set in ``property_set``.
     """
 
-    def __init__(self, coupling_map=None, backend_prop=None, target=None):
+    def __init__(self, coupling_map=None, backend_prop=None, target=None) -> None:
         """DenseLayout initializer.
 
         Args:

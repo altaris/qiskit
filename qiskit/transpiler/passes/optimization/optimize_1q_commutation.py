@@ -61,7 +61,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
     # NOTE: A run from dag.collect_1q_runs is always nonempty, so we sometimes use an empty list
     #       to signify the absence of a run.
 
-    def __init__(self, basis=None, run_to_completion=False, target=None):
+    def __init__(self, basis=None, run_to_completion=False, target=None) -> None:
         """
         Args:
             basis (List[str]): See also `Optimize1qGatesDecomposition`.
@@ -170,7 +170,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
         )
 
     @staticmethod
-    def _replace_subdag(dag, old_run, new_dag):
+    def _replace_subdag(dag, old_run, new_dag) -> None:
         """
         Replaces a nonempty sequence `old_run` of `DAGNode`s, assumed to be a complete chain in
         `dag`, with the circuit `new_circ`.
@@ -258,7 +258,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
         return dag
 
 
-def mov_list(destination, source):
+def mov_list(destination, source) -> None:
     """
     Replace `destination` in-place with `source`.
     """

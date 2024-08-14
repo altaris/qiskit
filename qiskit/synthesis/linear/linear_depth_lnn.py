@@ -33,7 +33,7 @@ from qiskit.synthesis.linear.linear_matrix_utils import (
 )
 
 
-def _row_op_update_instructions(cx_instructions, mat, a, b):
+def _row_op_update_instructions(cx_instructions, mat, a, b) -> None:
     # Add a cx gate to the instructions and update the matrix mat
     cx_instructions.append((a, b))
     row_op(mat, a, b)

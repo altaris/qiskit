@@ -66,7 +66,7 @@ class ConstrainedReschedule(AnalysisPass):
         acquire_alignment: int = 1,
         pulse_alignment: int = 1,
         target: Target = None,
-    ):
+    ) -> None:
         """Create new rescheduler pass.
 
         The alignment values depend on the control electronics of your quantum processor.

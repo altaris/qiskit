@@ -557,7 +557,7 @@ class _PulseBuilder:
 
         return output
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """Exit the builder context and compile the built pulse program."""
         self.compile()
         BUILDER_CONTEXTVAR.reset(self._backend_ctx_token)
@@ -571,7 +571,7 @@ class _PulseBuilder:
         """
         return self._backend
 
-    def push_context(self, alignment: AlignmentKind):
+    def push_context(self, alignment: AlignmentKind) -> None:
         """Push new context to the stack."""
         self._context_stack.append(ScheduleBlock(alignment_context=alignment))
 
@@ -612,7 +612,7 @@ class _PulseBuilder:
 
         return self._context_stack[0]
 
-    def append_instruction(self, instruction: instructions.Instruction):
+    def append_instruction(self, instruction: instructions.Instruction) -> None:
         """Add an instruction to the builder's context schedule.
 
         Args:
@@ -620,7 +620,7 @@ class _PulseBuilder:
         """
         self._context_stack[-1].append(instruction)
 
-    def append_reference(self, name: str, *extra_keys: str):
+    def append_reference(self, name: str, *extra_keys: str) -> None:
         """Add external program as a :class:`~qiskit.pulse.instructions.Reference` instruction.
 
         Args:
@@ -741,7 +741,7 @@ class _PulseBuilder:
         name: Optional[str] = None,
         value_dict: Optional[Dict[ParameterExpression, ParameterValueType]] = None,
         **kw_params: ParameterValueType,
-    ):
+    ) -> None:
         if len(target_schedule) == 0:
             return
 
@@ -865,7 +865,7 @@ def active_backend():
     return builder
 
 
-def append_schedule(schedule: Schedule | ScheduleBlock):
+def append_schedule(schedule: Schedule | ScheduleBlock) -> None:
     """Call a schedule by appending to the active builder's context block.
 
     Args:
@@ -874,7 +874,7 @@ def append_schedule(schedule: Schedule | ScheduleBlock):
     _active_builder().append_subroutine(schedule)
 
 
-def append_instruction(instruction: instructions.Instruction):
+def append_instruction(instruction: instructions.Instruction) -> None:
     """Append an instruction to the active builder's context schedule.
 
     Examples:
@@ -1482,7 +1482,7 @@ def control_channels(*qubits: Iterable[int]) -> list[chans.ControlChannel]:
 
 
 # Base Instructions
-def delay(duration: int, channel: chans.Channel, name: str | None = None):
+def delay(duration: int, channel: chans.Channel, name: str | None = None) -> None:
     """Delay on a ``channel`` for a ``duration``.
 
     Examples:
@@ -1504,7 +1504,9 @@ def delay(duration: int, channel: chans.Channel, name: str | None = None):
     append_instruction(instructions.Delay(duration, channel, name=name))
 
 
-def play(pulse: library.Pulse | np.ndarray, channel: chans.PulseChannel, name: str | None = None):
+def play(
+    pulse: library.Pulse | np.ndarray, channel: chans.PulseChannel, name: str | None = None
+) -> None:
     """Play a ``pulse`` on a ``channel``.
 
     Examples:
@@ -1590,7 +1592,7 @@ def acquire(
         raise exceptions.PulseError(f'Register of type: "{type(register)}" is not supported')
 
 
-def set_frequency(frequency: float, channel: chans.PulseChannel, name: str | None = None):
+def set_frequency(frequency: float, channel: chans.PulseChannel, name: str | None = None) -> None:
     """Set the ``frequency`` of a pulse ``channel``.
 
     Examples:
@@ -1612,7 +1614,7 @@ def set_frequency(frequency: float, channel: chans.PulseChannel, name: str | Non
     append_instruction(instructions.SetFrequency(frequency, channel, name=name))
 
 
-def shift_frequency(frequency: float, channel: chans.PulseChannel, name: str | None = None):
+def shift_frequency(frequency: float, channel: chans.PulseChannel, name: str | None = None) -> None:
     """Shift the ``frequency`` of a pulse ``channel``.
 
     Examples:
@@ -1635,7 +1637,7 @@ def shift_frequency(frequency: float, channel: chans.PulseChannel, name: str | N
     append_instruction(instructions.ShiftFrequency(frequency, channel, name=name))
 
 
-def set_phase(phase: float, channel: chans.PulseChannel, name: str | None = None):
+def set_phase(phase: float, channel: chans.PulseChannel, name: str | None = None) -> None:
     """Set the ``phase`` of a pulse ``channel``.
 
     Examples:
@@ -1660,7 +1662,7 @@ def set_phase(phase: float, channel: chans.PulseChannel, name: str | None = None
     append_instruction(instructions.SetPhase(phase, channel, name=name))
 
 
-def shift_phase(phase: float, channel: chans.PulseChannel, name: str | None = None):
+def shift_phase(phase: float, channel: chans.PulseChannel, name: str | None = None) -> None:
     """Shift the ``phase`` of a pulse ``channel``.
 
     Examples:
@@ -1684,7 +1686,7 @@ def shift_phase(phase: float, channel: chans.PulseChannel, name: str | None = No
     append_instruction(instructions.ShiftPhase(phase, channel, name))
 
 
-def snapshot(label: str, snapshot_type: str = "statevector"):
+def snapshot(label: str, snapshot_type: str = "statevector") -> None:
     """Simulator snapshot.
 
     Examples:
@@ -1708,7 +1710,7 @@ def call(
     name: str | None = None,
     value_dict: dict[ParameterValueType, ParameterValueType] | None = None,
     **kw_params: ParameterValueType,
-):
+) -> None:
     """Call the subroutine within the currently active builder context with arbitrary
     parameters which will be assigned to the target program.
 
@@ -1897,7 +1899,7 @@ def call(
     _active_builder().call_subroutine(target, name, value_dict, **kw_params)
 
 
-def reference(name: str, *extra_keys: str):
+def reference(name: str, *extra_keys: str) -> None:
     """Refer to undefined subroutine by string keys.
 
     A :class:`~qiskit.pulse.instructions.Reference` instruction is implicitly created
@@ -1923,7 +1925,7 @@ def reference(name: str, *extra_keys: str):
 
 
 # Directives
-def barrier(*channels_or_qubits: chans.Channel | int, name: str | None = None):
+def barrier(*channels_or_qubits: chans.Channel | int, name: str | None = None) -> None:
     """Barrier directive for a set of channels and qubits.
 
     This directive prevents the compiler from moving instructions across
@@ -2183,7 +2185,7 @@ def measure_all() -> list[chans.MemorySlot]:
     return registers
 
 
-def delay_qubits(duration: int, *qubits: int):
+def delay_qubits(duration: int, *qubits: int) -> None:
     r"""Insert delays on all the :class:`channels.Channel`\s that correspond
     to the input ``qubits`` at the same time.
 

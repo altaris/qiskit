@@ -87,7 +87,7 @@ class BindingsArray(ShapedMixin):
         self,
         data: BindingsArrayLike | None = None,
         shape: ShapeInput | None = None,
-    ):
+    ) -> None:
         r"""
         Initialize a :class:`~.BindingsArray`.
 
@@ -350,7 +350,7 @@ def _infer_shape(data: dict[tuple[Parameter, ...], np.ndarray]) -> tuple[int, ..
     """
     only_possible_shapes = None
 
-    def examine_array(*possible_shapes):
+    def examine_array(*possible_shapes) -> None:
         nonlocal only_possible_shapes
         if only_possible_shapes is None:
             only_possible_shapes = set(possible_shapes)

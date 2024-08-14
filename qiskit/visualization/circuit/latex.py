@@ -62,7 +62,7 @@ class QCircuitImage:
         cregbundle=None,
         with_layout=False,
         circuit=None,
-    ):
+    ) -> None:
         """QCircuitImage initializer.
 
         Args:
@@ -195,7 +195,7 @@ class QCircuitImage:
         output.close()
         return contents
 
-    def _initialize_latex_array(self):
+    def _initialize_latex_array(self) -> None:
         """Initialize qubit and clbit labels and set wire separation"""
         self._img_depth, self._sum_column_widths = self._get_image_depth()
         self._sum_wire_heights = self._img_width
@@ -369,7 +369,7 @@ class QCircuitImage:
 
         return (height, width, self._scale)
 
-    def _build_latex_array(self):
+    def _build_latex_array(self) -> None:
         """Returns an array of strings containing \\LaTeX for this circuit."""
 
         column = 1
@@ -530,7 +530,7 @@ class QCircuitImage:
         self._latex[wire_max - 1][col + 1] = f"\\dstick{{\\hspace{{2.0em}}{gate_text}}} \\qw"
         return 4  # num_cols for side text gates
 
-    def _build_measure(self, node, col):
+    def _build_measure(self, node, col) -> None:
         """Build a meter and the lines to the creg"""
         wire1 = self._wire_map[node.qargs[0]]
         self._latex[wire1][col] = "\\meter"
@@ -552,7 +552,7 @@ class QCircuitImage:
             wire2 = self._wire_map[node.cargs[0]]
             self._latex[wire2][col] = "\\cw \\ar @{<=} [-" + str(wire2 - wire1) + ",0]"
 
-    def _build_barrier(self, node, col):
+    def _build_barrier(self, node, col) -> None:
         """Build a partial or full barrier if plot_barriers set"""
         if self._plot_barriers:
             indexes = [self._wire_map[qarg] for qarg in node.qargs if qarg in self._qubits]
@@ -573,7 +573,7 @@ class QCircuitImage:
                 label = node.op.label.replace(" ", "\\,")
                 self._latex[pos][col] = f"\\cds{{0}}{{^{{\\mathrm{{{label}}}}}}}"
 
-    def _add_controls(self, wire_list, ctrlqargs, ctrl_state, col):
+    def _add_controls(self, wire_list, ctrlqargs, ctrl_state, col) -> None:
         """Add one or more controls to a gate"""
         for index, ctrl_item in enumerate(zip(ctrlqargs, ctrl_state)):
             pos = ctrl_item[0]
@@ -591,7 +591,7 @@ class QCircuitImage:
             control = "\\ctrlo" if ctrl_item[1] == "0" else "\\ctrl"
             self._latex[pos][col] = f"{control}" + "{" + str(nxt - wire_list[index]) + "}"
 
-    def _add_condition(self, op, wire_list, col):
+    def _add_condition(self, op, wire_list, col) -> None:
         """Add a condition to the _latex list"""
         # cwire - the wire number for the first wire for the condition register
         #         or if cregbundle, wire number of the condition register itself

@@ -69,7 +69,7 @@ class CommutationChecker:
         cache_max_entries: int = 10**6,
         *,
         gates: Optional[Set[str]] = None,
-    ):
+    ) -> None:
         super().__init__()
         if standard_gate_commutations is None:
             self._standard_commutations = {}
@@ -190,7 +190,7 @@ class CommutationChecker:
         """Returns number of cached entries"""
         return self._current_cache_entries
 
-    def clear_cached_commutations(self):
+    def clear_cached_commutations(self) -> None:
         """Clears the dictionary holding cached commutations"""
         self._current_cache_entries = 0
         self._cache_miss = 0

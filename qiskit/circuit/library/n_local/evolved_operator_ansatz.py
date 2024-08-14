@@ -39,7 +39,7 @@ class EvolvedOperatorAnsatz(NLocal):
         parameter_prefix: str | Sequence[str] = "t",
         initial_state: QuantumCircuit | None = None,
         flatten: bool | None = None,
-    ):
+    ) -> None:
         """
         Args:
             operators (BaseOperator | QuantumCircuit | list | None): The operators
@@ -196,7 +196,7 @@ class EvolvedOperatorAnsatz(NLocal):
             evolved.compose(gate.definition, evolved.qubits, inplace=True)
         return evolved
 
-    def _build(self):
+    def _build(self) -> None:
         if self._is_built:
             return
 

@@ -62,7 +62,7 @@ class InstructionScheduleMap:
     These can usually be seen as gate calibrations.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize a circuit instruction to schedule mapper instance."""
         # The processed and reformatted circuit instruction definitions
 
@@ -275,7 +275,7 @@ class InstructionScheduleMap:
         instruction_name: str,
         qubits: tuple[int, ...],
         entry: CalibrationEntry,
-    ):
+    ) -> None:
         """A method to resister calibration entry.
 
         .. note::

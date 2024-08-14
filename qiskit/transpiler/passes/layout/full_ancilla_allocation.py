@@ -32,7 +32,7 @@ class FullAncillaAllocation(AnalysisPass):
         circuit.
     """
 
-    def __init__(self, coupling_map):
+    def __init__(self, coupling_map) -> None:
         """FullAncillaAllocation initializer.
 
         Args:

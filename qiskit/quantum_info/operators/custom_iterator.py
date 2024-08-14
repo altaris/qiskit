@@ -20,7 +20,7 @@ from abc import ABC, abstractmethod
 class CustomIterator(ABC):
     """Lazy custom iteration and item access."""
 
-    def __init__(self, obj):
+    def __init__(self, obj) -> None:
         self.obj = obj
         self._iter = 0
 

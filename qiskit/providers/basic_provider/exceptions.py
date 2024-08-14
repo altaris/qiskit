@@ -20,7 +20,7 @@ from qiskit.exceptions import QiskitError
 class BasicProviderError(QiskitError):
     """Base class for errors raised by the Basic Provider."""
 
-    def __init__(self, *message):
+    def __init__(self, *message) -> None:
         """Set the error message."""
         super().__init__(*message)
         self.message = " ".join(message)

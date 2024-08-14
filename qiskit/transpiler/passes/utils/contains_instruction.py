@@ -23,7 +23,7 @@ class ContainsInstruction(AnalysisPass):
     that instruction and ``False`` if it does not.
     """
 
-    def __init__(self, instruction_name, recurse: bool = True):
+    def __init__(self, instruction_name, recurse: bool = True) -> None:
         """ContainsInstruction initializer.
 
         Args:
@@ -38,7 +38,7 @@ class ContainsInstruction(AnalysisPass):
         )
         self._recurse = recurse
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the ContainsInstruction pass on dag."""
         names = dag.count_ops(recurse=self._recurse)
         for name in self._instruction_names:

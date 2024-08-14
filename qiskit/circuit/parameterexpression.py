@@ -35,7 +35,7 @@ class ParameterExpression:
 
     __slots__ = ["_parameter_symbols", "_parameter_keys", "_symbol_expr", "_name_map"]
 
-    def __init__(self, symbol_map: dict, expr):
+    def __init__(self, symbol_map: dict, expr) -> None:
         """Create a new :class:`ParameterExpression`.
 
         Not intended to be called directly, but to be instantiated via operations

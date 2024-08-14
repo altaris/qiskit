@@ -51,7 +51,7 @@ class PadDelay(BasePadding):
     See :class:`BasePadding` pass for details.
     """
 
-    def __init__(self, fill_very_end: bool = True, target: Target = None):
+    def __init__(self, fill_very_end: bool = True, target: Target = None) -> None:
         """Create new padding delay pass.
 
         Args:
@@ -71,7 +71,7 @@ class PadDelay(BasePadding):
         t_end: int,
         next_node: DAGNode,
         prev_node: DAGNode,
-    ):
+    ) -> None:
         if not self.fill_very_end and isinstance(next_node, DAGOutNode):
             return
 

@@ -70,7 +70,7 @@ class Optimize1qGatesDecomposition(TransformationPass):
      Error is computed as a multiplication of the errors of individual gates on that qubit.
     """
 
-    def __init__(self, basis=None, target=None):
+    def __init__(self, basis=None, target=None) -> None:
         """Optimize1qGatesDecomposition initializer.
 
         Args:

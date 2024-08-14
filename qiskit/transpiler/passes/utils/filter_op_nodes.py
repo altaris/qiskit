@@ -52,7 +52,7 @@ class FilterOpNodes(TransformationPass):
             circuit.draw('mpl')
     """
 
-    def __init__(self, predicate: Callable[[DAGOpNode], bool]):
+    def __init__(self, predicate: Callable[[DAGOpNode], bool]) -> None:
         super().__init__()
         self.predicate = predicate
 

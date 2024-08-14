@@ -22,7 +22,7 @@ class Match:
     clbits configuration.
     """
 
-    def __init__(self, match, qubit, clbit):
+    def __init__(self, match, qubit, clbit) -> None:
         """
         Create a Match with necessary arguments.
         Args:
@@ -42,7 +42,7 @@ class MaximalMatches:
     of matches obtained with the template matching algorithm.
     """
 
-    def __init__(self, template_matches):
+    def __init__(self, template_matches) -> None:
         """
         Initialize MaximalMatches with the necessary arguments.
         Args:
@@ -52,7 +52,7 @@ class MaximalMatches:
 
         self.max_match_list = []
 
-    def run_maximal_matches(self):
+    def run_maximal_matches(self) -> None:
         """
         Method that extracts and stores maximal matches in decreasing length order.
         """

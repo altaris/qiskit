@@ -32,7 +32,7 @@ class Mpl2DPlotter(BasePlotter):
     Each chart is map to X-Y axis of the canvas.
     """
 
-    def __init__(self, canvas: core.DrawerCanvas, axis: Optional[plt.Axes] = None):
+    def __init__(self, canvas: core.DrawerCanvas, axis: Optional[plt.Axes] = None) -> None:
         """Create new plotter.
 
         Args:
@@ -64,7 +64,7 @@ class Mpl2DPlotter(BasePlotter):
 
         self.initialize_canvas()
 
-    def initialize_canvas(self):
+    def initialize_canvas(self) -> None:
         """Format appearance of matplotlib canvas."""
         self.ax.set_facecolor(self.canvas.formatter["color.background"])
 

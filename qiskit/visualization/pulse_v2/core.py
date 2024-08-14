@@ -93,7 +93,7 @@ class DrawerCanvas:
     the appearance of the `Chart` output.
     """
 
-    def __init__(self, stylesheet: QiskitPulseStyle, device: device_info.DrawerBackendInfo):
+    def __init__(self, stylesheet: QiskitPulseStyle, device: device_info.DrawerBackendInfo) -> None:
         """Create new data container with backend system information.
 
         Args:
@@ -155,7 +155,7 @@ class DrawerCanvas:
         return new_t0, new_t1
 
     @time_range.setter
-    def time_range(self, new_range: tuple[int, int]):
+    def time_range(self, new_range: tuple[int, int]) -> None:
         """Update time range to draw."""
         self._time_range = new_range
 
@@ -199,7 +199,7 @@ class DrawerCanvas:
         return axis_breaks
 
     @time_breaks.setter
-    def time_breaks(self, new_breaks: list[tuple[int, int]]):
+    def time_breaks(self, new_breaks: list[tuple[int, int]]) -> None:
         """Set new time breaks."""
         self._time_breaks = sorted(new_breaks, key=lambda x: x[0])
 
@@ -231,7 +231,7 @@ class DrawerCanvas:
     def _waveform_loader(
         self,
         program: pulse.Waveform | pulse.SymbolicPulse,
-    ):
+    ) -> None:
         """Load Waveform instance.
 
         This function is sub-routine of py:method:`load_program`.
@@ -257,7 +257,7 @@ class DrawerCanvas:
 
         self.charts.append(chart)
 
-    def _schedule_loader(self, program: pulse.Schedule | pulse.ScheduleBlock):
+    def _schedule_loader(self, program: pulse.Schedule | pulse.ScheduleBlock) -> None:
         """Load Schedule instance.
 
         This function is sub-routine of py:method:`load_program`.
@@ -375,7 +375,7 @@ class DrawerCanvas:
                 )
         self.time_range = (t_start, t_end)
 
-    def set_disable_channel(self, channel: pulse.channels.Channel, remove: bool = True):
+    def set_disable_channel(self, channel: pulse.channels.Channel, remove: bool = True) -> None:
         """Interface method to control visibility of pulse channels.
 
         Specified object in the blocked list will not be shown.
@@ -389,7 +389,7 @@ class DrawerCanvas:
         else:
             self.disable_chans.discard(channel)
 
-    def set_disable_type(self, data_type: types.DataTypes, remove: bool = True):
+    def set_disable_type(self, data_type: types.DataTypes, remove: bool = True) -> None:
         """Interface method to control visibility of data types.
 
         Specified object in the blocked list will not be shown.
@@ -408,7 +408,7 @@ class DrawerCanvas:
         else:
             self.disable_types.discard(data_type_str)
 
-    def update(self):
+    def update(self) -> None:
         """Update all associated charts and generate actual drawing data from template object.
 
         This method should be called before the canvas is passed to the plotter.
@@ -437,7 +437,7 @@ class Chart:
         str(types.WaveformType.OPAQUE.value),
     ]
 
-    def __init__(self, parent: DrawerCanvas, name: str | None = None):
+    def __init__(self, parent: DrawerCanvas, name: str | None = None) -> None:
         """Create new chart.
 
         Args:
@@ -462,7 +462,7 @@ class Chart:
 
         self._increment_cls_index()
 
-    def add_data(self, data: drawings.ElementaryData):
+    def add_data(self, data: drawings.ElementaryData) -> None:
         """Add drawing to collections.
 
         If the given object already exists in the collections,
@@ -473,7 +473,7 @@ class Chart:
         """
         self._collections[data.data_key] = data
 
-    def load_program(self, program: pulse.Schedule, chan: pulse.channels.Channel):
+    def load_program(self, program: pulse.Schedule, chan: pulse.channels.Channel) -> None:
         """Load pulse schedule.
 
         This method internally generates `ChannelEvents` to parse the program
@@ -508,7 +508,7 @@ class Chart:
 
         self._channels.add(chan)
 
-    def update(self):
+    def update(self) -> None:
         """Update vertical data range and scaling factor of this chart.
 
         Those parameters are updated based on current time range in the parent canvas.
@@ -891,7 +891,7 @@ class Chart:
         return True
 
     @classmethod
-    def _increment_cls_index(cls):
+    def _increment_cls_index(cls) -> None:
         """Increment counter of the chart."""
         cls.chart_index += 1
 

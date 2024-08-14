@@ -139,7 +139,7 @@ class DiagonalGate(Gate):
 
         super().__init__("diagonal", num_qubits, diag)
 
-    def _define(self):
+    def _define(self) -> None:
         self.definition = Diagonal(self.params).decompose()
 
     def validate_parameter(self, parameter):

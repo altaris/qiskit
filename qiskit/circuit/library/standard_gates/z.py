@@ -76,13 +76,13 @@ class ZGate(SingletonGate):
 
     _standard_gate = StandardGate.ZGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new Z gate."""
         super().__init__("z", 1, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
 
@@ -194,7 +194,7 @@ class CZGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CZ gate."""
         super().__init__(
             "cz",
@@ -210,7 +210,7 @@ class CZGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=1)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cz a,b { h b; cx a,b; h b; }
         """
@@ -296,7 +296,7 @@ class CCZGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CCZ gate."""
         super().__init__(
             "ccz",
@@ -312,7 +312,7 @@ class CCZGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=2)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate ccz a,b,c { h c; ccx a,b,c; h c; }
         """

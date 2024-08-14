@@ -120,7 +120,7 @@ class InstructionToQobjConverter:
         self,
         qobj_model: PulseQobjInstruction,
         **run_config,
-    ):
+    ) -> None:
         """Create new converter.
 
         Args:
@@ -536,7 +536,7 @@ class QobjToInstructionConverter:
         self,
         pulse_library: Optional[List[PulseLibraryItem]] = None,
         **run_config,
-    ):
+    ) -> None:
         """Create new converter.
 
         Args:

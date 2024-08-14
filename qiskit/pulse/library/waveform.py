@@ -31,7 +31,7 @@ class Waveform(Pulse):
         name: str | None = None,
         epsilon: float = 1e-7,
         limit_amplitude: bool | None = None,
-    ):
+    ) -> None:
         """Create new sample pulse command.
 
         Args:

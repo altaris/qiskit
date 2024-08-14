@@ -40,7 +40,7 @@ class Reference(instruction.Instruction):
     # Delimiter for tuple keys.
     key_delimiter = ","
 
-    def __init__(self, name: str, *extra_keys: str):
+    def __init__(self, name: str, *extra_keys: str) -> None:
         """Create new reference.
 
         Args:

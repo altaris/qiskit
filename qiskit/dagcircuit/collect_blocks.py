@@ -66,7 +66,7 @@ class BlockCollector:
         else:
             raise DAGCircuitError("not a DAG.")
 
-    def _setup_in_degrees(self):
+    def _setup_in_degrees(self) -> None:
         """For an efficient implementation, for every node we keep the number of its
         unprocessed immediate predecessors (called ``_in_degree``). This ``_in_degree``
         is set up at the start and updated throughout the algorithm.
@@ -248,7 +248,7 @@ class BlockSplitter:
     """Splits a block of nodes into sub-blocks over disjoint qubits.
     The implementation is based on the Disjoint Set Union data structure."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.leader = {}  # qubit's group leader
         self.group = {}  # qubit's group
 
@@ -263,7 +263,7 @@ class BlockSplitter:
         self.leader[index] = self.find_leader(self.leader[index])
         return self.leader[index]
 
-    def union_leaders(self, index1, index2):
+    def union_leaders(self, index1, index2) -> None:
         """Union in DSU."""
         leader1 = self.find_leader(index1)
         leader2 = self.find_leader(index2)
@@ -328,7 +328,7 @@ class BlockCollapser:
     :class:`~qiskit.dagcircuit.DAGDependency` DAG representations.
     """
 
-    def __init__(self, dag):
+    def __init__(self, dag) -> None:
         """
         Args:
             dag (Union[DAGCircuit, DAGDependency]): The input DAG.

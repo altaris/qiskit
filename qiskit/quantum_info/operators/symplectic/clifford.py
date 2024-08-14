@@ -259,7 +259,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[:, :-1]
 
     @symplectic_matrix.setter
-    def symplectic_matrix(self, value):
+    def symplectic_matrix(self, value) -> None:
         self.tableau[:, :-1] = value
 
     @property
@@ -268,7 +268,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[:, -1]
 
     @phase.setter
-    def phase(self, value):
+    def phase(self, value) -> None:
         self.tableau[:, -1] = value
 
     @property
@@ -277,7 +277,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[:, 0 : self.num_qubits]
 
     @x.setter
-    def x(self, value):
+    def x(self, value) -> None:
         self.tableau[:, 0 : self.num_qubits] = value
 
     @property
@@ -286,7 +286,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[:, self.num_qubits : 2 * self.num_qubits]
 
     @z.setter
-    def z(self, value):
+    def z(self, value) -> None:
         self.tableau[:, self.num_qubits : 2 * self.num_qubits] = value
 
     @property
@@ -295,7 +295,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[: self.num_qubits, :]
 
     @destab.setter
-    def destab(self, value):
+    def destab(self, value) -> None:
         self.tableau[: self.num_qubits, :] = value
 
     @property
@@ -304,7 +304,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[: self.num_qubits, : self.num_qubits]
 
     @destab_x.setter
-    def destab_x(self, value):
+    def destab_x(self, value) -> None:
         self.tableau[: self.num_qubits, : self.num_qubits] = value
 
     @property
@@ -313,7 +313,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[: self.num_qubits, self.num_qubits : 2 * self.num_qubits]
 
     @destab_z.setter
-    def destab_z(self, value):
+    def destab_z(self, value) -> None:
         self.tableau[: self.num_qubits, self.num_qubits : 2 * self.num_qubits] = value
 
     @property
@@ -322,7 +322,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[: self.num_qubits, -1]
 
     @destab_phase.setter
-    def destab_phase(self, value):
+    def destab_phase(self, value) -> None:
         self.tableau[: self.num_qubits, -1] = value
 
     @property
@@ -331,7 +331,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[self.num_qubits :, :]
 
     @stab.setter
-    def stab(self, value):
+    def stab(self, value) -> None:
         self.tableau[self.num_qubits :, :] = value
 
     @property
@@ -340,7 +340,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[self.num_qubits :, : self.num_qubits]
 
     @stab_x.setter
-    def stab_x(self, value):
+    def stab_x(self, value) -> None:
         self.tableau[self.num_qubits :, : self.num_qubits] = value
 
     @property
@@ -349,7 +349,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[self.num_qubits :, self.num_qubits : 2 * self.num_qubits]
 
     @stab_z.setter
-    def stab_z(self, value):
+    def stab_z(self, value) -> None:
         self.tableau[self.num_qubits :, self.num_qubits : 2 * self.num_qubits] = value
 
     @property
@@ -358,7 +358,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return self.tableau[self.num_qubits :, -1]
 
     @stab_phase.setter
-    def stab_phase(self, value):
+    def stab_phase(self, value) -> None:
         self.tableau[self.num_qubits :, -1] = value
 
     # ---------------------------------------------------------------------

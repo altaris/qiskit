@@ -30,7 +30,7 @@ from .fake_backend import FakeBackend
 class FakeOpenPulse3Q(FakeBackend):
     """Trivial extension of the FakeOpenPulse2Q."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         configuration = PulseBackendConfiguration(
             backend_name="fake_openpulse_3q",
             backend_version="0.0.0",

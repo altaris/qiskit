@@ -67,7 +67,7 @@ class Parameter(ParameterExpression):
 
     def __init__(
         self, name: str, *, uuid: UUID | None = None
-    ):  # pylint: disable=super-init-not-called
+    ) -> None:  # pylint: disable=super-init-not-called
         """
         Args:
             name: name of the ``Parameter``, used for visual representation. This can
@@ -166,7 +166,7 @@ class Parameter(ParameterExpression):
     def __getstate__(self):
         return (self.name, self._uuid, self._symbol_expr)
 
-    def __setstate__(self, state):
+    def __setstate__(self, state) -> None:
         _, self._uuid, self._symbol_expr = state
         self._parameter_keys = frozenset((self._hash_key(),))
         self._hash = hash((self._parameter_keys, self._symbol_expr))

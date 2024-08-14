@@ -73,7 +73,7 @@ class GateDirection(TransformationPass):
 
     _KNOWN_REPLACEMENTS = frozenset(["cx", "cz", "ecr", "swap", "rzx", "rxx", "ryy", "rzz"])
 
-    def __init__(self, coupling_map, target=None):
+    def __init__(self, coupling_map, target=None) -> None:
         """GateDirection pass.
 
         Args:

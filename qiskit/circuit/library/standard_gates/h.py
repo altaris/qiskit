@@ -57,13 +57,13 @@ class HGate(SingletonGate):
 
     _standard_gate = StandardGate.HGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new H gate."""
         super().__init__("h", 1, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate h a { u2(0,pi) a; }
         """
@@ -198,7 +198,7 @@ class CHGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CH gate."""
         super().__init__(
             "ch",
@@ -215,7 +215,7 @@ class CHGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=1)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate ch a,b {
             s b;

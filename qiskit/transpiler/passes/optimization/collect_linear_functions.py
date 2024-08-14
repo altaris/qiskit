@@ -34,7 +34,7 @@ class CollectLinearFunctions(CollectAndCollapse):
         min_block_size=2,
         split_layers=False,
         collect_from_back=False,
-    ):
+    ) -> None:
         """CollectLinearFunctions initializer.
 
         Args:

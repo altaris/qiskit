@@ -223,7 +223,7 @@ class PolynomialPauliRotations(FunctionalPauliRotations):
             return len(self.coeffs) - 1
         return 0
 
-    def _reset_registers(self, num_state_qubits):
+    def _reset_registers(self, num_state_qubits) -> None:
         """Reset the registers."""
         if num_state_qubits is not None:
             # set new register of appropriate size
@@ -289,7 +289,7 @@ class PolynomialPauliRotations(FunctionalPauliRotations):
 
         return rotation_coeffs
 
-    def _build(self):
+    def _build(self) -> None:
         """If not already built, build the circuit."""
         if self._is_built:
             return

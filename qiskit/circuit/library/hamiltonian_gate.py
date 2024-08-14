@@ -125,7 +125,7 @@ class HamiltonianGate(Gate):
         """Return the transpose of the Hamiltonian."""
         return HamiltonianGate(np.transpose(self.params[0]), self.params[1])
 
-    def _define(self):
+    def _define(self) -> None:
         """Calculate a subcircuit that implements this unitary."""
         q = QuantumRegister(self.num_qubits, "q")
         qc = QuantumCircuit(q, name=self.name)

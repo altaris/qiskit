@@ -34,7 +34,7 @@ class MplPlotter(BasePlotter):
     This plotter arranges bits along y axis of 2D canvas with vertical offset.
     """
 
-    def __init__(self, canvas: core.DrawerCanvas, axis: Optional[plt.Axes] = None):
+    def __init__(self, canvas: core.DrawerCanvas, axis: Optional[plt.Axes] = None) -> None:
         """Create new plotter.
 
         Args:
@@ -58,7 +58,7 @@ class MplPlotter(BasePlotter):
 
         self.initialize_canvas()
 
-    def initialize_canvas(self):
+    def initialize_canvas(self) -> None:
         """Format appearance of matplotlib canvas."""
         self.ax.set_facecolor(self.canvas.formatter["color.background"])
 
@@ -169,7 +169,7 @@ class MplPlotter(BasePlotter):
 
         return xs, l1, l2
 
-    def save_file(self, filename: str):
+    def save_file(self, filename: str) -> None:
         """Save image to file.
         Args:
             filename: File path to output image data.

@@ -842,7 +842,7 @@ def _write_instruction(
     return custom_operations_list
 
 
-def _write_pauli_evolution_gate(file_obj, evolution_gate, version):
+def _write_pauli_evolution_gate(file_obj, evolution_gate, version) -> None:
     operator_list = evolution_gate.operator
     standalone = False
     if not isinstance(operator_list, list):
@@ -850,7 +850,7 @@ def _write_pauli_evolution_gate(file_obj, evolution_gate, version):
         standalone = True
     num_operators = len(operator_list)
 
-    def _write_elem(buffer, op):
+    def _write_elem(buffer, op) -> None:
         elem_data = common.data_to_binary(op.to_list(array=True), np.save)
         elem_metadata = struct.pack(formats.SPARSE_PAULI_OP_LIST_ELEM_PACK, len(elem_data))
         buffer.write(elem_metadata)
@@ -981,7 +981,7 @@ def _write_custom_operation(
     return new_custom_instruction
 
 
-def _write_calibrations(file_obj, calibrations, metadata_serializer, version):
+def _write_calibrations(file_obj, calibrations, metadata_serializer, version) -> None:
     flatten_dict = {}
     for gate, caldef in calibrations.items():
         for (qubits, params), schedule in caldef.items():
@@ -1042,7 +1042,7 @@ def _write_registers(file_obj, in_circ_regs, full_bits):
     return len(in_circ_regs) + len(out_circ_regs)
 
 
-def _write_layout(file_obj, circuit):
+def _write_layout(file_obj, circuit) -> None:
     if circuit.layout is None:
         # Write a null header if there is no layout present
         file_obj.write(struct.pack(formats.LAYOUT_V2_PACK, False, -1, -1, -1, 0, 0))
@@ -1122,7 +1122,7 @@ def _write_layout(file_obj, circuit):
         file_obj.write(struct.pack("!I", i))
 
 
-def _read_layout(file_obj, circuit):
+def _read_layout(file_obj, circuit) -> None:
     header = formats.LAYOUT._make(
         struct.unpack(formats.LAYOUT_PACK, file_obj.read(formats.LAYOUT_SIZE))
     )
@@ -1131,7 +1131,7 @@ def _read_layout(file_obj, circuit):
     _read_common_layout(file_obj, header, circuit)
 
 
-def _read_common_layout(file_obj, header, circuit):
+def _read_common_layout(file_obj, header, circuit) -> None:
     registers = {
         name: QuantumRegister(len(v[1]), name)
         for name, v in _read_registers_v4(file_obj, header.extra_registers)["q"].items()
@@ -1180,7 +1180,7 @@ def _read_common_layout(file_obj, header, circuit):
     circuit._layout = TranspileLayout(initial_layout, input_qubit_mapping, final_layout)
 
 
-def _read_layout_v2(file_obj, circuit):
+def _read_layout_v2(file_obj, circuit) -> None:
     header = formats.LAYOUT_V2._make(
         struct.unpack(formats.LAYOUT_V2_PACK, file_obj.read(formats.LAYOUT_V2_SIZE))
     )

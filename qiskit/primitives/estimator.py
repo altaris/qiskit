@@ -65,7 +65,7 @@ class Estimator(BaseEstimator[PrimitiveJob[EstimatorResult]]):
         "have been deprecated in favor of their V2 counterparts. "
         "The V2 alternative for the `Estimator` class is `StatevectorEstimator`.",
     )
-    def __init__(self, *, options: dict | None = None):
+    def __init__(self, *, options: dict | None = None) -> None:
         """
         Args:
             options: Default options.

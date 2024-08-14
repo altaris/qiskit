@@ -82,7 +82,7 @@ class ElementaryData(ABC):
         meta: dict[str, Any] | None = None,
         ignore_scaling: bool = False,
         styles: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         """Create new drawing.
 
         Args:
@@ -138,7 +138,7 @@ class LineData(ElementaryData):
         meta: dict[str, Any] | None = None,
         ignore_scaling: bool = False,
         styles: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         """Create new drawing.
 
         Args:
@@ -181,7 +181,7 @@ class TextData(ElementaryData):
         meta: dict[str, Any] | None = None,
         ignore_scaling: bool = False,
         styles: dict[str, Any] | None = None,
-    ):
+    ) -> None:
         """Create new drawing.
 
         Args:

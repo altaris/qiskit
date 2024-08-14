@@ -25,7 +25,7 @@ class ExperimentResultData:
 
     def __init__(
         self, counts=None, snapshots=None, memory=None, statevector=None, unitary=None, **kwargs
-    ):
+    ) -> None:
         """Initialize an ExperimentalResult Data class
 
         Args:

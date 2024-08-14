@@ -22,7 +22,7 @@ class ParameterVectorElement(Parameter):
 
     ___slots__ = ("_vector", "_index")
 
-    def __init__(self, vector, index, uuid=None):
+    def __init__(self, vector, index, uuid=None) -> None:
         super().__init__(f"{vector.name}[{index}]", uuid=uuid)
         self._vector = vector
         self._index = index
@@ -40,7 +40,7 @@ class ParameterVectorElement(Parameter):
     def __getstate__(self):
         return super().__getstate__() + (self._vector, self._index)
 
-    def __setstate__(self, state):
+    def __setstate__(self, state) -> None:
         *super_state, vector, index = state
         super().__setstate__(super_state)
         self._vector = vector
@@ -52,7 +52,7 @@ class ParameterVector:
 
     __slots__ = ("_name", "_params", "_root_uuid")
 
-    def __init__(self, name, length=0):
+    def __init__(self, name, length=0) -> None:
         self._name = name
         self._root_uuid = uuid4()
         root_uuid_int = self._root_uuid.int
@@ -89,7 +89,7 @@ class ParameterVector:
     def __repr__(self):
         return f"{self.__class__.__name__}(name={repr(self.name)}, length={len(self)})"
 
-    def resize(self, length):
+    def resize(self, length) -> None:
         """Resize the parameter vector.  If necessary, new elements are generated.
 
         Note that the UUID of each :class:`.Parameter` element will be generated

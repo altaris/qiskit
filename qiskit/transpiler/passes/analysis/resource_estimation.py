@@ -32,10 +32,10 @@ class ResourceEstimation(AnalysisPass):
     * NumTensorFactors()
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.requires += [Depth(), Width(), Size(), CountOps(), NumTensorFactors(), NumQubits()]
 
-    def run(self, _):
+    def run(self, _) -> None:
         """Run the ResourceEstimation pass on `dag`."""
         pass

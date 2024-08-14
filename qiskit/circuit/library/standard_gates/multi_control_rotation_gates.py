@@ -25,7 +25,7 @@ from qiskit.circuit.parameterexpression import ParameterValueType
 from qiskit.exceptions import QiskitError
 
 
-def _apply_cu(circuit, theta, phi, lam, control, target, use_basis_gates=True):
+def _apply_cu(circuit, theta, phi, lam, control, target, use_basis_gates=True) -> None:
     if use_basis_gates:
         # pylint: disable=cyclic-import
         #          ┌──────────────┐
@@ -43,7 +43,7 @@ def _apply_cu(circuit, theta, phi, lam, control, target, use_basis_gates=True):
         circuit.cu(theta, phi, lam, 0, control, target)
 
 
-def _apply_mcu_graycode(circuit, theta, phi, lam, ctls, tgt, use_basis_gates):
+def _apply_mcu_graycode(circuit, theta, phi, lam, ctls, tgt, use_basis_gates) -> None:
     """Apply multi-controlled u gate from ctls to tgt using graycode
     pattern with single-step angles theta, phi, lam."""
 

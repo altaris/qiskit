@@ -84,7 +84,7 @@ class XXDecomposer:
         euler_basis: str = "U",
         embodiments: dict[float, QuantumCircuit] | None = None,
         backup_optimizer: Callable[..., QuantumCircuit] | None = None,
-    ):
+    ) -> None:
         from qiskit.transpiler.passes.optimization.optimize_1q_decomposition import (
             Optimize1qGatesDecomposition,  # pylint: disable=cyclic-import
         )

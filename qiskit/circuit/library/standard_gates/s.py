@@ -62,13 +62,13 @@ class SGate(SingletonGate):
 
     _standard_gate = StandardGate.SGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new S gate."""
         super().__init__("s", 1, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate s a { u1(pi/2) a; }
         """
@@ -174,13 +174,13 @@ class SdgGate(SingletonGate):
 
     _standard_gate = StandardGate.SdgGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new Sdg gate."""
         super().__init__("sdg", 1, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate sdg a { u1(-pi/2) a; }
         """
@@ -293,7 +293,7 @@ class CSGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CS gate."""
         super().__init__(
             "cs",
@@ -310,7 +310,7 @@ class CSGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=1)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cs a,b { h b; cp(pi/2) a,b; h b; }
         """
@@ -381,7 +381,7 @@ class CSdgGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CSdg gate."""
         super().__init__(
             "csdg",
@@ -397,7 +397,7 @@ class CSdgGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=1)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate csdg a,b { h b; cp(-pi/2) a,b; h b; }
         """

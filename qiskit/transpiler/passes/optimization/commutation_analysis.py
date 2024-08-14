@@ -27,7 +27,7 @@ class CommutationAnalysis(AnalysisPass):
     are grouped into a set of gates that commute.
     """
 
-    def __init__(self, *, _commutation_checker=None):
+    def __init__(self, *, _commutation_checker=None) -> None:
         super().__init__()
         # allow setting a private commutation checker, this allows better performance if we
         # do not care about commutations of all gates, but just a subset
@@ -35,7 +35,7 @@ class CommutationAnalysis(AnalysisPass):
             _commutation_checker = scc
         self.comm_checker = _commutation_checker
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the CommutationAnalysis pass on `dag`.
 
         Run the pass on the DAG, and write the discovered commutation relations

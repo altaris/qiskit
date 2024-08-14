@@ -36,7 +36,7 @@ class InstructionDurations:
 
     def __init__(
         self, instruction_durations: "InstructionDurationsType" | None = None, dt: float = None
-    ):
+    ) -> None:
         self.duration_by_name: dict[str, tuple[float, str]] = {}
         self.duration_by_name_qubits: dict[tuple[str, tuple[int, ...]], tuple[float, str]] = {}
         self.duration_by_name_qubits_params: dict[

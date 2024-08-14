@@ -19,7 +19,7 @@ from qiskit.utils import optionals as _optionals
 
 
 @_optionals.HAS_MATPLOTLIB.require_in_call
-def _generate_circuit_library_visualization(circuit: QuantumCircuit):
+def _generate_circuit_library_visualization(circuit: QuantumCircuit) -> None:
     import matplotlib.pyplot as plt
 
     circuit = circuit.decompose()

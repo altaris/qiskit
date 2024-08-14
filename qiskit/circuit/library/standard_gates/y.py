@@ -73,13 +73,13 @@ class YGate(SingletonGate):
 
     _standard_gate = StandardGate.YGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new Y gate."""
         super().__init__("y", 1, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
         from .u3 import U3Gate
@@ -210,7 +210,7 @@ class CYGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CY gate."""
         super().__init__(
             "cy",
@@ -226,7 +226,7 @@ class CYGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=1)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cy a,b { sdg b; cx a,b; s b; }
         """

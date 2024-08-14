@@ -71,7 +71,7 @@ class MetaPass(abc.ABCMeta):
 class BasePass(GenericPass, metaclass=MetaPass):
     """Base class for transpiler passes."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.preserves: Iterable[GenericPass] = []
         self._hash = hash(None)

@@ -219,7 +219,7 @@ class LinearFunction(Gate):
         """Parameter validation"""
         return parameter
 
-    def _define(self):
+    def _define(self) -> None:
         """Populates self.definition with a decomposition of this gate."""
         self.definition = self.synthesize()
 

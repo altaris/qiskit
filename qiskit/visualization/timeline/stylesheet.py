@@ -45,7 +45,7 @@ from qiskit.visualization.timeline import generators, layouts
 class QiskitTimelineStyle(dict):
     """Stylesheet for pulse drawer."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         # to inform which stylesheet is applied. some plotter may not support specific style.
         self.stylesheet = None
@@ -100,7 +100,7 @@ class IQXStandard(dict):
     - Remove classical bits.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__()
         style = {
             "formatter.control.show_idle": True,
@@ -131,7 +131,7 @@ class IQXSimple(dict):
     - Remove classical bits.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__()
         style = {
             "formatter.control.show_idle": False,
@@ -164,7 +164,7 @@ class IQXDebugging(dict):
     - Show gate link.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__()
         style = {
             "formatter.control.show_idle": True,

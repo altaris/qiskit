@@ -113,7 +113,7 @@ class StatePreparation(Gate):
 
         super().__init__(self._name, num_qubits, params, label=self._label)
 
-    def _define(self):
+    def _define(self) -> None:
         if self._from_label:
             self.definition = self._define_from_label()
         elif self._from_int:
@@ -298,7 +298,7 @@ class UniformSuperpositionGate(Gate):
                 )
         super().__init__("USup", num_qubits, [num_superpos_states])
 
-    def _define(self):
+    def _define(self) -> None:
 
         qc = QuantumCircuit(self._num_qubits)
 

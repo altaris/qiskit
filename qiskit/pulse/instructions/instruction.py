@@ -42,7 +42,7 @@ class Instruction(ABC):
         self,
         operands: tuple,
         name: str | None = None,
-    ):
+    ) -> None:
         """Instruction initializer.
 
         Args:

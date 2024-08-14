@@ -134,7 +134,7 @@ class UnitaryGate(Gate):
         """Return the transpose of the unitary."""
         return UnitaryGate(numpy.transpose(self.to_matrix()))
 
-    def _define(self):
+    def _define(self) -> None:
         """Calculate a subcircuit that implements this unitary."""
         if self.num_qubits == 1:
             from qiskit.synthesis.one_qubit.one_qubit_decompose import OneQubitEulerDecomposer

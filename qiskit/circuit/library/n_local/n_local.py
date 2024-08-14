@@ -854,7 +854,7 @@ class NLocal(BlueprintCircuit):
 
         return block.copy()
 
-    def _build_rotation_layer(self, circuit, param_iter, i):
+    def _build_rotation_layer(self, circuit, param_iter, i) -> None:
         """Build a rotation layer."""
         # if the unentangled qubits are skipped, compute the set of qubits that are not entangled
         if self._skip_unentangled_qubits:
@@ -893,7 +893,7 @@ class NLocal(BlueprintCircuit):
                     parameterized_block = self._parameterize_block(block, param_iter, i, j, indices)
                     circuit.compose(parameterized_block, indices, inplace=True, copy=False)
 
-    def _build_entanglement_layer(self, circuit, param_iter, i):
+    def _build_entanglement_layer(self, circuit, param_iter, i) -> None:
         """Build an entanglement layer."""
         # iterate over all entanglement blocks
         target_qubits = circuit.qubits

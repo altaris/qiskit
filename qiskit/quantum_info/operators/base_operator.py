@@ -34,7 +34,7 @@ class BaseOperator(GroupMixin, ABC):
         num_qubits: int | None = None,
         shape: tuple | None = None,
         op_shape: OpShape | None = None,
-    ):
+    ) -> None:
         """Initialize a BaseOperator shape
 
         Args:

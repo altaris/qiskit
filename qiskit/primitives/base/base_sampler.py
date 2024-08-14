@@ -101,7 +101,7 @@ class BaseSamplerV1(BasePrimitive, Generic[T]):
         self,
         *,
         options: dict | None = None,
-    ):
+    ) -> None:
         """
         Args:
             options: Default options.
@@ -169,7 +169,7 @@ class BaseSampler(BaseSamplerV1[T]):
         self,
         *,
         options: dict | None = None,
-    ):
+    ) -> None:
         """
         Args:
             options: Default options.

@@ -104,7 +104,7 @@ _RESERVED = frozenset(
 )
 
 
-def dump(circuit: QuantumCircuit, filename_or_stream: os.PathLike | io.TextIOBase, /):
+def dump(circuit: QuantumCircuit, filename_or_stream: os.PathLike | io.TextIOBase, /) -> None:
     """Dump a circuit as an OpenQASM 2 program to a file or stream.
 
     Args:

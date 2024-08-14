@@ -21,6 +21,6 @@ class CountOpsLongestPath(AnalysisPass):
     The result is saved in ``property_set['count_ops_longest_path']`` as an integer.
     """
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the CountOpsLongestPath pass on `dag`."""
         self.property_set["count_ops_longest_path"] = dag.count_ops_longest_path()

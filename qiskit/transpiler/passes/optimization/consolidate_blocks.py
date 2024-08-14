@@ -54,7 +54,7 @@ class ConsolidateBlocks(TransformationPass):
         basis_gates=None,
         approximation_degree=1.0,
         target=None,
-    ):
+    ) -> None:
         """ConsolidateBlocks initializer.
 
         If ``kak_basis_gate`` is not ``None`` it will be used as the basis gate for KAK decomposition.

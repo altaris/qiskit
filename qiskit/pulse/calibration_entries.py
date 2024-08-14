@@ -178,7 +178,7 @@ class ScheduleDef(CalibrationEntry):
         self,
         definition: Schedule | ScheduleBlock,
         user_provided: bool = True,
-    ):
+    ) -> None:
         self._definition = definition
         self._parse_argument()
         self._user_provided = user_provided
@@ -238,7 +238,7 @@ class CallableDef(CalibrationEntry):
 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Define an empty entry."""
         self._definition = None
         self._signature = None
@@ -252,7 +252,7 @@ class CallableDef(CalibrationEntry):
         self,
         definition: Callable,
         user_provided: bool = True,
-    ):
+    ) -> None:
         self._definition = definition
         self._signature = inspect.signature(definition)
         self._user_provided = user_provided
@@ -305,7 +305,7 @@ class PulseQobjDef(ScheduleDef):
         arguments: Sequence[str] | None = None,
         converter: QobjToInstructionConverter | None = None,
         name: str | None = None,
-    ):
+    ) -> None:
         """Define an empty entry.
 
         Args:
@@ -319,7 +319,7 @@ class PulseQobjDef(ScheduleDef):
         self._name = name
         self._source: list[PulseQobjInstruction] | None = None
 
-    def _build_schedule(self):
+    def _build_schedule(self) -> None:
         """Build pulse schedule from cmd-def sequence."""
         schedule = Schedule(name=self._name)
         try:
@@ -341,7 +341,7 @@ class PulseQobjDef(ScheduleDef):
         self,
         definition: list[PulseQobjInstruction],
         user_provided: bool = False,
-    ):
+    ) -> None:
         # This doesn't generate signature immediately, because of lazy schedule build.
         self._source = definition
         self._user_provided = user_provided

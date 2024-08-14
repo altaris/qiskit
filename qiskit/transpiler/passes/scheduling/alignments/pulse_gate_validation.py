@@ -45,7 +45,7 @@ class ValidatePulseGates(AnalysisPass):
         granularity: int = 1,
         min_length: int = 1,
         target: Target = None,
-    ):
+    ) -> None:
         """Create new pass.
 
         Args:

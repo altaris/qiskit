@@ -23,7 +23,7 @@ class SetLayout(AnalysisPass):
     of the circuit (Qubit) in increasing order.
     """
 
-    def __init__(self, layout):
+    def __init__(self, layout) -> None:
         """SetLayout initializer.
 
         Args:

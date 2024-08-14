@@ -56,11 +56,11 @@ class RYGate(Gate):
 
     def __init__(
         self, theta: ParameterValueType, label: Optional[str] = None, *, duration=None, unit="dt"
-    ):
+    ) -> None:
         """Create new RY gate."""
         super().__init__("ry", 1, [theta], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate ry(theta) a { r(theta, pi/2) a; }
         """
@@ -219,7 +219,7 @@ class CRYGate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CRY gate."""
         super().__init__(
             "cry",
@@ -233,7 +233,7 @@ class CRYGate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cry(lambda) a,b
         { u3(lambda/2,0,0) b; cx a,b;

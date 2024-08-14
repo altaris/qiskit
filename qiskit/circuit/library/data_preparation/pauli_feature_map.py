@@ -212,7 +212,7 @@ class PauliFeatureMap(NLocal):
         return [self.pauli_block(pauli) for pauli in self._paulis]
 
     @entanglement_blocks.setter
-    def entanglement_blocks(self, entanglement_blocks):
+    def entanglement_blocks(self, entanglement_blocks) -> None:
         self._entanglement_blocks = entanglement_blocks
 
     @property
@@ -262,14 +262,14 @@ class PauliFeatureMap(NLocal):
         if len(trimmed) == 0:
             return evo
 
-        def basis_change(circuit, inverse=False):
+        def basis_change(circuit, inverse=False) -> None:
             for i, pauli in enumerate(pauli_string):
                 if pauli == "X":
                     circuit.h(i)
                 elif pauli == "Y":
                     circuit.rx(-np.pi / 2 if inverse else np.pi / 2, i)
 
-        def cx_chain(circuit, inverse=False):
+        def cx_chain(circuit, inverse=False) -> None:
             num_cx = len(indices) - 1
             for i in reversed(range(num_cx)) if inverse else range(num_cx):
                 circuit.cx(indices[i], indices[i + 1])

@@ -97,11 +97,11 @@ class U2Gate(Gate):
         *,
         duration=None,
         unit="dt",
-    ):
+    ) -> None:
         """Create new U2 gate."""
         super().__init__("u2", 1, [phi, lam], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
         from .u3 import U3Gate

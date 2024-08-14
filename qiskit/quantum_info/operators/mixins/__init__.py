@@ -37,7 +37,7 @@ def generate_apidocs(cls):
         cls: the original class with updated docstrings.
     """
 
-    def _replace_name(mixin, methods):
+    def _replace_name(mixin, methods) -> None:
         if issubclass(cls, mixin):
             for i in methods:
                 meth = getattr(cls, i)

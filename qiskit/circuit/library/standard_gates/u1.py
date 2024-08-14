@@ -97,11 +97,11 @@ class U1Gate(Gate):
 
     def __init__(
         self, theta: ParameterValueType, label: str | None = None, *, duration=None, unit="dt"
-    ):
+    ) -> None:
         """Create new U1 gate."""
         super().__init__("u1", 1, [theta], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
         from .u3 import U3Gate  # pylint: disable=cyclic-import
@@ -219,7 +219,7 @@ class CU1Gate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CU1 gate."""
         super().__init__(
             "cu1",
@@ -233,7 +233,7 @@ class CU1Gate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cu1(lambda) a,b
         { u1(lambda/2) a; cx a,b;
@@ -361,7 +361,7 @@ class MCU1Gate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new MCU1 gate."""
         super().__init__(
             "mcu1",
@@ -375,7 +375,7 @@ class MCU1Gate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
 

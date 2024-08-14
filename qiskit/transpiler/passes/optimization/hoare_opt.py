@@ -28,7 +28,7 @@ class HoareOptimizer(TransformationPass):
     https://arxiv.org/abs/1810.00375
     """
 
-    def __init__(self, size=10):
+    def __init__(self, size=10) -> None:
         """
         Args:
             size (int): size of gate cache, in number of gates
@@ -63,7 +63,7 @@ class HoareOptimizer(TransformationPass):
         self.variables[qubit].append(var)
         return var
 
-    def _initialize(self, dag):
+    def _initialize(self, dag) -> None:
         """create boolean variables for each qubit and apply qb == 0 condition
         Args:
             dag (DAGCircuit): input DAG to get qubits from
@@ -78,7 +78,7 @@ class HoareOptimizer(TransformationPass):
             x = self._gen_variable(qbt)
             self.solver.add(z3.Not(x))
 
-    def _add_postconditions(self, gate, ctrl_ones, trgtqb, trgtvar):
+    def _add_postconditions(self, gate, ctrl_ones, trgtqb, trgtvar) -> None:
         """create boolean variables for each qubit the gate is applied to
             and apply the relevant post conditions.
             a gate rotating out of the z-basis will not have any valid
@@ -192,7 +192,7 @@ class HoareOptimizer(TransformationPass):
 
         return remove
 
-    def _traverse_dag(self, dag):
+    def _traverse_dag(self, dag) -> None:
         """traverse DAG in topological order
             for each gate check: if any control is 0, or
                                  if triviality conditions are satisfied
@@ -234,7 +234,7 @@ class HoareOptimizer(TransformationPass):
 
             self._add_postconditions(gate, ctrl_ones, trgtqb, trgtvar)
 
-    def _remove_successive_identity(self, dag, qubit, from_idx=None):
+    def _remove_successive_identity(self, dag, qubit, from_idx=None) -> None:
         """remove gates that have the same set of target qubits, follow each
             other immediately on these target qubits, and combine to the
             identity (consider sequences of length 2 for now)
@@ -331,7 +331,7 @@ class HoareOptimizer(TransformationPass):
 
         return res
 
-    def _multigate_opt(self, dag, qubit, max_idx=None, dnt_rec=None):
+    def _multigate_opt(self, dag, qubit, max_idx=None, dnt_rec=None) -> None:
         """
         Args:
             dag (DAGCircuit): the directed acyclic graph to run on.
@@ -388,7 +388,7 @@ class HoareOptimizer(TransformationPass):
             trgtvar = [self.variables[qb][-1] for qb in trgtqb]
         return (ctrlqb, ctrlvar, trgtqb, trgtvar)
 
-    def _reset(self):
+    def _reset(self) -> None:
         """Reset HoareOptimize internal state,
         so it can be run multiple times.
         """

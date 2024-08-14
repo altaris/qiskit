@@ -41,7 +41,7 @@ class PassManager(BasePassManager):
         self,
         passes: Task | list[Task] = (),
         max_iteration: int = 1000,
-    ):
+    ) -> None:
         """Initialize an empty pass manager object.
 
         Args:
@@ -97,7 +97,7 @@ class PassManager(BasePassManager):
 
         return out_program
 
-    def _finalize_layouts(self, dag):
+    def _finalize_layouts(self, dag) -> None:
         if (virtual_permutation_layout := self.property_set["virtual_permutation_layout"]) is None:
             return
 
@@ -478,7 +478,7 @@ for _name, _method in inspect.getmembers(PassManager, predicate=inspect.isfuncti
 
 
 def _legacy_style_callback(callback: Callable):
-    def _wrapped_callable(task, passmanager_ir, property_set, running_time, count):
+    def _wrapped_callable(task, passmanager_ir, property_set, running_time, count) -> None:
         callback(
             pass_=task,
             dag=passmanager_ir,

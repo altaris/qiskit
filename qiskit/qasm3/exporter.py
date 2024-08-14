@@ -137,7 +137,7 @@ class Exporter:
         allow_aliasing: bool = None,
         indent: str = "  ",
         experimental: ExperimentalFeatures = ExperimentalFeatures(0),
-    ):
+    ) -> None:
         """
         Args:
             includes: the filenames that should be emitted as includes.  These files will be parsed
@@ -182,7 +182,7 @@ class Exporter:
             self.dump(circuit, stream)
             return stream.getvalue()
 
-    def dump(self, circuit, stream):
+    def dump(self, circuit, stream) -> None:
         """Convert the circuit to OpenQASM 3, dumping the result to a file or text stream."""
         builder = QASM3Builder(
             circuit,
@@ -265,7 +265,7 @@ class GateInfo:
 class SymbolTable:
     """Track Qiskit objects and the OQ3 identifiers used to refer to them."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.gates: collections.OrderedDict[str, GateInfo | None] = {}
         """Mapping of the symbol name to the "definition source" of the gate, which provides its
         signature and decomposition.  The definition source can be `None` if the user set the gate
@@ -292,12 +292,12 @@ class SymbolTable:
         # Quick-and-dirty method of getting unique salts for names.
         self._counter = itertools.count()
 
-    def push_scope(self):
+    def push_scope(self) -> None:
         """Enter a new variable scope."""
         self.variables.append({})
         self.objects.append({})
 
-    def pop_scope(self):
+    def pop_scope(self) -> None:
         """Exit the current scope, returning to a previous scope."""
         self.objects.pop()
         self.variables.pop()
@@ -408,7 +408,7 @@ class SymbolTable:
             self.objects[scope_index][variable] = identifier
         return identifier
 
-    def set_object_ident(self, ident: ast.Identifier, variable: object):
+    def set_object_ident(self, ident: ast.Identifier, variable: object) -> None:
         """Set the identifier used to refer to a given object for this scope.
 
         This overwrites any previously set identifier, such as during the original registration.
@@ -535,7 +535,7 @@ class QASM3Builder:
         disable_constants,
         allow_aliasing,
         experimental=ExperimentalFeatures(0),
-    ):
+    ) -> None:
         self.scope = BuildScope(
             quantumcircuit,
             {x: x for x in itertools.chain(quantumcircuit.qubits, quantumcircuit.clbits)},
@@ -753,7 +753,7 @@ class QASM3Builder:
         if len(self.symbols.variables) > 1:  # pragma: no cover
             raise RuntimeError("not currently in the global scope")
 
-    def hoist_global_parameter_declarations(self):
+    def hoist_global_parameter_declarations(self) -> None:
         """Extend ``self._global_io_declarations`` and ``self._global_classical_declarations`` with
         any implicit declarations used to support the early IBM efforts to use :class:`.Parameter`
         as an input variable."""
@@ -827,7 +827,7 @@ class QASM3Builder:
                 ast.ClassicalDeclaration(ast.BitArrayType(len(register)), name)
             )
 
-    def hoist_classical_io_var_declarations(self):
+    def hoist_classical_io_var_declarations(self) -> None:
         """Hoist the declarations of classical IO :class:`.expr.Var` nodes into the global state.
 
         Local :class:`.expr.Var` declarations are handled by the regular local-block scope builder,
@@ -1243,7 +1243,7 @@ class _ExprBuilder(expr.ExprVisitor[ast.Expression]):
     # up with some places where Terra's abstract type system needs to be lowered to OQ3 rather than
     # mapping 100% directly, which might need a more contextual visitor.
 
-    def __init__(self, lookup):
+    def __init__(self, lookup) -> None:
         self.lookup = lookup
 
     def visit_var(self, node, /):

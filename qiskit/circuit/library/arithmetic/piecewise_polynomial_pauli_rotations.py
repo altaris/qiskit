@@ -264,7 +264,7 @@ class PiecewisePolynomialPauliRotations(FunctionalPauliRotations):
                 qr_ancilla = AncillaRegister(num_ancillas)
                 self.add_register(qr_ancilla)
 
-    def _build(self):
+    def _build(self) -> None:
         """If not already built, build the circuit."""
         if self._is_built:
             return

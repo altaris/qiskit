@@ -106,7 +106,7 @@ class ChannelEvents:
         waveforms: dict[int, pulse.Instruction],
         frames: dict[int, list[pulse.Instruction]],
         channel: pulse.channels.Channel,
-    ):
+    ) -> None:
         """Create new event manager.
 
         Args:
@@ -151,7 +151,7 @@ class ChannelEvents:
 
         return ChannelEvents(waveforms, frames, channel)
 
-    def set_config(self, dt: float, init_frequency: float, init_phase: float):
+    def set_config(self, dt: float, init_frequency: float, init_phase: float) -> None:
         """Setup system status.
 
         Args:

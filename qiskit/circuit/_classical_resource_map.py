@@ -46,7 +46,7 @@ class VariableMapper(expr.ExprVisitor[expr.Expr]):
         var_map: typing.Mapping[expr.Var, expr.Var] | None = None,
         *,
         add_register: typing.Callable[[ClassicalRegister], None] | None = None,
-    ):
+    ) -> None:
         self.target_cregs = tuple(target_cregs)
         self.register_map = {}
         self.bit_map = bit_map

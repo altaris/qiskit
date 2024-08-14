@@ -111,7 +111,7 @@ class StatevectorEstimator(BaseEstimatorV2):
 
     def __init__(
         self, *, default_precision: float = 0.0, seed: np.random.Generator | int | None = None
-    ):
+    ) -> None:
         """
         Args:
             default_precision: The default precision for the estimator if not specified during run.

@@ -59,7 +59,9 @@ class StochasticSwap(TransformationPass):
            the circuit.
     """
 
-    def __init__(self, coupling_map, trials=20, seed=None, fake_run=False, initial_layout=None):
+    def __init__(
+        self, coupling_map, trials=20, seed=None, fake_run=False, initial_layout=None
+    ) -> None:
         """StochasticSwap initializer.
 
         The coupling map is a connected graph
@@ -249,7 +251,7 @@ class StochasticSwap(TransformationPass):
         best_lay = Layout({best_circuit.qubits[k]: v for (k, v) in layout_mapping})
         return True, best_circuit, best_depth, best_lay
 
-    def _layer_update(self, dag, layer, best_layout, best_depth, best_circuit):
+    def _layer_update(self, dag, layer, best_layout, best_depth, best_circuit) -> None:
         """Add swaps followed by the now mapped layer from the original circuit.
 
         Args:

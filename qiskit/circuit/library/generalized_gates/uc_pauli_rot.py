@@ -66,7 +66,7 @@ class UCPauliRotGate(Gate):
         num_qubits = int(num_contr) + 1
         super().__init__("ucr" + rot_axis.lower(), num_qubits, angle_list)
 
-    def _define(self):
+    def _define(self) -> None:
         ucr_circuit = self._dec_ucrot()
         gate = ucr_circuit.to_instruction()
         q = QuantumRegister(self.num_qubits, "q")
@@ -130,7 +130,7 @@ class UCPauliRotGate(Gate):
         return circuit
 
     @staticmethod
-    def _dec_uc_rotations(angles, start_index, end_index, reversed_dec):
+    def _dec_uc_rotations(angles, start_index, end_index, reversed_dec) -> None:
         """
         Calculates rotation angles for a uniformly controlled R_t gate with a C-NOT gate at
         the end of the circuit. The rotation angles of the gate R_t are stored in

@@ -36,7 +36,7 @@ class FakeQasmBackend(FakeBackend):
     props_filename = None
     backend_name = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         configuration = self._get_conf_from_json()
         self._defaults = None
         self._properties = None

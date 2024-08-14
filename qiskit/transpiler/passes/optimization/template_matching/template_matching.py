@@ -41,7 +41,7 @@ class TemplateMatching:
         template_dag_dep,
         heuristics_qubits_param=None,
         heuristics_backward_param=None,
-    ):
+    ) -> None:
         """
         Create a TemplateMatching object with necessary arguments.
         Args:
@@ -164,7 +164,7 @@ class TemplateMatching:
 
         return list_circuit
 
-    def _add_match(self, backward_match_list):
+    def _add_match(self, backward_match_list) -> None:
         """
         Method to add a match in list only if it is not already in it.
         If the match is already in the list, the qubit configuration
@@ -232,7 +232,7 @@ class TemplateMatching:
                     return list(qubit_set)
             return list(qubit_set)
 
-    def run_template_matching(self):
+    def run_template_matching(self) -> None:
         """
         Run the complete algorithm for finding all maximal matches for the given template and
         circuit. First it fixes the configuration of the circuit due to the first match.

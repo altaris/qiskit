@@ -228,6 +228,6 @@ class Register:
         # which may not have yet been initialized.
         return self._name, self._size, self._hash, self._repr, self._bits
 
-    def __setstate__(self, state):
+    def __setstate__(self, state) -> None:
         self._name, self._size, self._hash, self._repr, self._bits = state
         self._bit_indices = None

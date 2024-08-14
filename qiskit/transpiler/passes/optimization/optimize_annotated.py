@@ -64,7 +64,7 @@ class OptimizeAnnotated(TransformationPass):
         basis_gates: Optional[List[str]] = None,
         recurse: bool = True,
         do_conjugate_reduction: bool = True,
-    ):
+    ) -> None:
         """
         OptimizeAnnotated initializer.
 

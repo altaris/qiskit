@@ -25,7 +25,7 @@ class FixedPoint(AnalysisPass):
     as a boolean.
     """
 
-    def __init__(self, property_to_check):
+    def __init__(self, property_to_check) -> None:
         """FixedPoint initializer.
 
         Args:
@@ -34,7 +34,7 @@ class FixedPoint(AnalysisPass):
         super().__init__()
         self._property = property_to_check
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the FixedPoint pass on `dag`."""
         current_value = self.property_set[self._property]
         fixed_point_previous_property = f"_fixed_point_previous_{self._property}"

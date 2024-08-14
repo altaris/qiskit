@@ -45,7 +45,7 @@ class ControlModifier(Modifier):
     num_ctrl_qubits: int = 0
     ctrl_state: Union[int, str, None] = None
 
-    def __init__(self, num_ctrl_qubits: int = 0, ctrl_state: Union[int, str, None] = None):
+    def __init__(self, num_ctrl_qubits: int = 0, ctrl_state: Union[int, str, None] = None) -> None:
         self.num_ctrl_qubits = num_ctrl_qubits
         self.ctrl_state = _ctrl_state_to_int(ctrl_state, num_ctrl_qubits)
 
@@ -60,7 +60,7 @@ class PowerModifier(Modifier):
 class AnnotatedOperation(Operation):
     """Annotated operation."""
 
-    def __init__(self, base_op: Operation, modifiers: Union[Modifier, List[Modifier]]):
+    def __init__(self, base_op: Operation, modifiers: Union[Modifier, List[Modifier]]) -> None:
         """
         Create a new AnnotatedOperation.
 

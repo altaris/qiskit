@@ -37,7 +37,7 @@ class ForLoopOp(ControlFlowOp):
         loop_parameter: Union[Parameter, None],
         body: QuantumCircuit,
         label: Optional[str] = None,
-    ):
+    ) -> None:
         """
         Args:
             indexset: A collection of integers to loop over.
@@ -171,7 +171,7 @@ class ForLoopContext:
         loop_parameter: Optional[Parameter] = None,
         *,
         label: Optional[str] = None,
-    ):
+    ) -> None:
         self._circuit = circuit
         self._generate_loop_parameter = loop_parameter is None
         self._loop_parameter = loop_parameter

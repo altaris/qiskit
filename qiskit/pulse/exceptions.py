@@ -17,7 +17,7 @@ from qiskit.exceptions import QiskitError
 class PulseError(QiskitError):
     """Errors raised by the pulse module."""
 
-    def __init__(self, *message):
+    def __init__(self, *message) -> None:
         """Set the error message."""
         super().__init__(*message)
         self.message = " ".join(message)

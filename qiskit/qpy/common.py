@@ -113,7 +113,7 @@ def read_type_key(file_obj):
     return struct.unpack("!1c", file_obj.read(key_size))[0]
 
 
-def write_generic_typed_data(file_obj, type_key, data_binary):
+def write_generic_typed_data(file_obj, type_key, data_binary) -> None:
     """Write statically typed binary data to the file like object.
 
     Args:
@@ -126,7 +126,7 @@ def write_generic_typed_data(file_obj, type_key, data_binary):
     file_obj.write(data_binary)
 
 
-def write_sequence(file_obj, sequence, serializer, **kwargs):
+def write_sequence(file_obj, sequence, serializer, **kwargs) -> None:
     """Write a sequence of data in the file like object.
 
     Args:
@@ -144,7 +144,7 @@ def write_sequence(file_obj, sequence, serializer, **kwargs):
         write_generic_typed_data(file_obj, type_key, datum_bytes)
 
 
-def write_mapping(file_obj, mapping, serializer, **kwargs):
+def write_mapping(file_obj, mapping, serializer, **kwargs) -> None:
     """Write a mapping in the file like object.
 
     .. note::
@@ -173,7 +173,7 @@ def write_mapping(file_obj, mapping, serializer, **kwargs):
         file_obj.write(datum_bytes)
 
 
-def write_type_key(file_obj, type_key):
+def write_type_key(file_obj, type_key) -> None:
     """Write a type key in the file like object.
 
     Args:

@@ -21,7 +21,7 @@ from qiskit.visualization.pulse_v2 import core
 class BasePlotter(ABC):
     """Base class of Qiskit plotter."""
 
-    def __init__(self, canvas: core.DrawerCanvas):
+    def __init__(self, canvas: core.DrawerCanvas) -> None:
         """Create new plotter.
 
         Args:

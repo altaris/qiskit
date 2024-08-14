@@ -50,7 +50,7 @@ class TemplateOptimization(TransformationPass):
         heuristics_qubits_param=None,
         heuristics_backward_param=None,
         user_cost_dict=None,
-    ):
+    ) -> None:
         """
         Args:
             template_list (list[QuantumCircuit()]): list of the different template circuit to apply.

@@ -165,7 +165,7 @@ class Instruction(Operation):
         return self._condition
 
     @condition.setter
-    def condition(self, condition):
+    def condition(self, condition) -> None:
         self._condition = condition
 
     def __eq__(self, other):
@@ -271,7 +271,7 @@ class Instruction(Operation):
 
         return True
 
-    def _define(self):
+    def _define(self) -> None:
         """Populate the cached :attr:`_definition` field of this :class:`Instruction`.
 
         Subclasses should implement this method to provide lazy construction of their public
@@ -286,7 +286,7 @@ class Instruction(Operation):
         return self._params
 
     @params.setter
-    def params(self, parameters):
+    def params(self, parameters) -> None:
         self._params = []
         for single_param in parameters:
             if isinstance(single_param, ParameterExpression):
@@ -313,7 +313,7 @@ class Instruction(Operation):
         return self._definition
 
     @definition.setter
-    def definition(self, array):
+    def definition(self, array) -> None:
         """Set gate representation"""
         self._definition = array
 
@@ -326,14 +326,14 @@ class Instruction(Operation):
         return sel.get_entry(self)
 
     @decompositions.setter
-    def decompositions(self, decompositions):
+    def decompositions(self, decompositions) -> None:
         """Set the decompositions of the instruction from the SessionEquivalenceLibrary."""
         # pylint: disable=cyclic-import
         from qiskit.circuit.equivalence_library import SessionEquivalenceLibrary as sel
 
         sel.set_entry(self, decompositions)
 
-    def add_decomposition(self, decomposition):
+    def add_decomposition(self, decomposition) -> None:
         """Add a decomposition of the instruction to the SessionEquivalenceLibrary."""
         # pylint: disable=cyclic-import
         from qiskit.circuit.equivalence_library import SessionEquivalenceLibrary as sel
@@ -346,7 +346,7 @@ class Instruction(Operation):
         return self._duration
 
     @duration.setter
-    def duration(self, duration):
+    def duration(self, duration) -> None:
         """Set the duration."""
         self._duration = duration
 
@@ -356,7 +356,7 @@ class Instruction(Operation):
         return self._unit
 
     @unit.setter
-    def unit(self, unit):
+    def unit(self, unit) -> None:
         """Set the time unit of duration."""
         self._unit = unit
 
@@ -641,7 +641,7 @@ class Instruction(Operation):
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name) -> None:
         """Set the name."""
         self._name = name
 
@@ -651,7 +651,7 @@ class Instruction(Operation):
         return self._num_qubits
 
     @num_qubits.setter
-    def num_qubits(self, num_qubits):
+    def num_qubits(self, num_qubits) -> None:
         """Set num_qubits."""
         self._num_qubits = num_qubits
 
@@ -661,7 +661,7 @@ class Instruction(Operation):
         return self._num_clbits
 
     @num_clbits.setter
-    def num_clbits(self, num_clbits):
+    def num_clbits(self, num_clbits) -> None:
         """Set num_clbits."""
         self._num_clbits = num_clbits
 

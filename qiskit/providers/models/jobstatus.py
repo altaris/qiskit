@@ -24,7 +24,7 @@ class JobStatus:
 
     _data = {}
 
-    def __init__(self, job_id, status, status_msg, **kwargs):
+    def __init__(self, job_id, status, status_msg, **kwargs) -> None:
         self._data = {}
         self.job_id = job_id
         self.status = status

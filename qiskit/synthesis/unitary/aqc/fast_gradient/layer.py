@@ -62,7 +62,7 @@ class Layer1Q(LayerBase):
     interleaves with the identity ones.
     """
 
-    def __init__(self, num_qubits: int, k: int, g2x2: Optional[np.ndarray] = None):
+    def __init__(self, num_qubits: int, k: int, g2x2: Optional[np.ndarray] = None) -> None:
         """
         Args:
             num_qubits: number of qubits.
@@ -87,7 +87,7 @@ class Layer1Q(LayerBase):
         self._perm[row_perm] = col_perm
         self._inv_perm = inverse_permutation(self._perm)
 
-    def set_from_matrix(self, mat: np.ndarray):
+    def set_from_matrix(self, mat: np.ndarray) -> None:
         """See base class description."""
         np.copyto(self._gmat, mat)
 
@@ -102,7 +102,7 @@ class Layer2Q(LayerBase):
     interleaves with the identity ones.
     """
 
-    def __init__(self, num_qubits: int, j: int, k: int, g4x4: Optional[np.ndarray] = None):
+    def __init__(self, num_qubits: int, j: int, k: int, g4x4: Optional[np.ndarray] = None) -> None:
         """
         Args:
             num_qubits: number of qubits.
@@ -128,7 +128,7 @@ class Layer2Q(LayerBase):
         self._perm[row_perm] = col_perm
         self._inv_perm = inverse_permutation(self._perm)
 
-    def set_from_matrix(self, mat: np.ndarray):
+    def set_from_matrix(self, mat: np.ndarray) -> None:
         """See base class description."""
         np.copyto(self._gmat, mat)
 

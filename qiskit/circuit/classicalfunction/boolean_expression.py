@@ -94,7 +94,7 @@ class BooleanExpression(ClassicalElement):
             return tweedledum2qiskit(pkrm_synth(truth_table), name=self.name, qregs=qregs)
         return synthesizer(self)
 
-    def _define(self):
+    def _define(self) -> None:
         """The definition of the boolean expression is its synthesis"""
         self.definition = self.synth()
 

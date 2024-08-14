@@ -263,7 +263,7 @@ def _impl_init_subclass(
 
     def __init_subclass__(
         instruction_class, *, create_default_singleton=True, additional_singletons=(), **kwargs
-    ):
+    ) -> None:
         super(base, instruction_class).__init_subclass__(**kwargs)
         if not create_default_singleton and not additional_singletons:
             return

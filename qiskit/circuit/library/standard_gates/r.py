@@ -60,11 +60,11 @@ class RGate(Gate):
         *,
         duration=None,
         unit="dt",
-    ):
+    ) -> None:
         """Create new r single-qubit gate."""
         super().__init__("r", 1, [theta, phi], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate r(θ, φ) a {u3(θ, φ - π/2, -φ + π/2) a;}
         """

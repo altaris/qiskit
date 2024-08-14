@@ -40,7 +40,7 @@ class SetFrequency(Instruction):
         frequency: Union[float, ParameterExpression],
         channel: PulseChannel,
         name: Optional[str] = None,
-    ):
+    ) -> None:
         """Creates a new set channel frequency instruction.
 
         Args:
@@ -90,7 +90,7 @@ class ShiftFrequency(Instruction):
         frequency: Union[float, ParameterExpression],
         channel: PulseChannel,
         name: Optional[str] = None,
-    ):
+    ) -> None:
         """Creates a new shift frequency instruction.
 
         Args:

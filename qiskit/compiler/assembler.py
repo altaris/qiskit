@@ -35,7 +35,7 @@ from qiskit.assembler.assemble_circuits import _assemble_circuits
 logger = logging.getLogger(__name__)
 
 
-def _log_assembly_time(start_time, end_time):
+def _log_assembly_time(start_time, end_time) -> None:
     log_msg = f"Total Assembly Time - {((end_time - start_time) * 1000):.5f} (ms)"
     logger.info(log_msg)
 

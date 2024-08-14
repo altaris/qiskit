@@ -102,7 +102,7 @@ class BackendSamplerV2(BaseSamplerV2):
         *,
         backend: BackendV1 | BackendV2,
         options: dict | None = None,
-    ):
+    ) -> None:
         """
         Args:
             backend: The backend to run the primitive on.
@@ -133,7 +133,7 @@ class BackendSamplerV2(BaseSamplerV2):
         job._submit()
         return job
 
-    def _validate_pubs(self, pubs: list[SamplerPub]):
+    def _validate_pubs(self, pubs: list[SamplerPub]) -> None:
         for i, pub in enumerate(pubs):
             if len(pub.circuit.cregs) == 0:
                 warnings.warn(

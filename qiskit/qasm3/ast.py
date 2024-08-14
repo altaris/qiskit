@@ -42,7 +42,7 @@ class Pragma(ASTNode):
         : '#pragma' LBRACE statement* RBRACE  // match any valid openqasm statement
     """
 
-    def __init__(self, content):
+    def __init__(self, content) -> None:
         self.content = content
 
 
@@ -52,7 +52,7 @@ class CalibrationGrammarDeclaration(Statement):
         : 'defcalgrammar' calibrationGrammar SEMICOLON
     """
 
-    def __init__(self, name):
+    def __init__(self, name) -> None:
         self.name = name
 
 
@@ -62,7 +62,7 @@ class Program(ASTNode):
         : header (globalStatement | statement)*
     """
 
-    def __init__(self, header, statements=None):
+    def __init__(self, header, statements=None) -> None:
         self.header = header
         self.statements = statements or []
 
@@ -73,7 +73,7 @@ class Header(ASTNode):
         : version? include*
     """
 
-    def __init__(self, version, includes):
+    def __init__(self, version, includes) -> None:
         self.version = version
         self.includes = includes
 
@@ -84,7 +84,7 @@ class Include(ASTNode):
         : 'include' StringLiteral SEMICOLON
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename) -> None:
         self.filename = filename
 
 
@@ -94,7 +94,7 @@ class Version(ASTNode):
         : 'OPENQASM'(Integer | RealNumber) SEMICOLON
     """
 
-    def __init__(self, version_number):
+    def __init__(self, version_number) -> None:
         self.version_number = version_number
 
 
@@ -130,14 +130,14 @@ class BoolType(ClassicalType):
 class IntType(ClassicalType):
     """Type information for a signed integer."""
 
-    def __init__(self, size: Optional[int] = None):
+    def __init__(self, size: Optional[int] = None) -> None:
         self.size = size
 
 
 class UintType(ClassicalType):
     """Type information for an unsigned integer."""
 
-    def __init__(self, size: Optional[int] = None):
+    def __init__(self, size: Optional[int] = None) -> None:
         self.size = size
 
 
@@ -148,7 +148,7 @@ class BitType(ClassicalType):
 class BitArrayType(ClassicalType):
     """Type information for a sized number of classical bits."""
 
-    def __init__(self, size: int):
+    def __init__(self, size: int) -> None:
         self.size = size
 
 
@@ -160,7 +160,7 @@ class StringifyAndPray(Expression):
     # This is not a real AST node, yet is somehow very common. It's used when there are
     # `ParameterExpression` instances; instead of actually visiting the Sympy expression tree into
     # an OQ3 AST, we just convert it to a string, cross our fingers, and hope.
-    def __init__(self, obj):
+    def __init__(self, obj) -> None:
         self.obj = obj
 
 
@@ -170,21 +170,21 @@ class Range(Expression):
         start: Optional[Expression] = None,
         end: Optional[Expression] = None,
         step: Optional[Expression] = None,
-    ):
+    ) -> None:
         self.start = start
         self.step = step
         self.end = end
 
 
 class Identifier(Expression):
-    def __init__(self, string):
+    def __init__(self, string) -> None:
         self.string = string
 
 
 class SubscriptedIdentifier(Identifier):
     """An identifier with subscripted access."""
 
-    def __init__(self, string: str, subscript: Union[Range, Expression]):
+    def __init__(self, string: str, subscript: Union[Range, Expression]) -> None:
         super().__init__(string)
         self.subscript = subscript
 
@@ -198,17 +198,17 @@ class Constant(Expression, enum.Enum):
 
 
 class IntegerLiteral(Expression):
-    def __init__(self, value):
+    def __init__(self, value) -> None:
         self.value = value
 
 
 class BooleanLiteral(Expression):
-    def __init__(self, value):
+    def __init__(self, value) -> None:
         self.value = value
 
 
 class BitstringLiteral(Expression):
-    def __init__(self, value, width):
+    def __init__(self, value, width) -> None:
         self.value = value
         self.width = width
 
@@ -224,7 +224,7 @@ class DurationUnit(enum.Enum):
 
 
 class DurationLiteral(Expression):
-    def __init__(self, value: float, unit: DurationUnit):
+    def __init__(self, value: float, unit: DurationUnit) -> None:
         self.value = value
         self.unit = unit
 
@@ -234,7 +234,7 @@ class Unary(Expression):
         LOGIC_NOT = "!"
         BIT_NOT = "~"
 
-    def __init__(self, op: Op, operand: Expression):
+    def __init__(self, op: Op, operand: Expression) -> None:
         self.op = op
         self.operand = operand
 
@@ -255,20 +255,20 @@ class Binary(Expression):
         SHIFT_LEFT = "<<"
         SHIFT_RIGHT = ">>"
 
-    def __init__(self, op: Op, left: Expression, right: Expression):
+    def __init__(self, op: Op, left: Expression, right: Expression) -> None:
         self.op = op
         self.left = left
         self.right = right
 
 
 class Cast(Expression):
-    def __init__(self, type: ClassicalType, operand: Expression):
+    def __init__(self, type: ClassicalType, operand: Expression) -> None:
         self.type = type
         self.operand = operand
 
 
 class Index(Expression):
-    def __init__(self, target: Expression, index: Expression):
+    def __init__(self, target: Expression, index: Expression) -> None:
         self.target = target
         self.index = index
 
@@ -280,7 +280,7 @@ class IndexSet(ASTNode):
         { Expression (, Expression)* }
     """
 
-    def __init__(self, values: List[Expression]):
+    def __init__(self, values: List[Expression]) -> None:
         self.values = values
 
 
@@ -290,7 +290,7 @@ class QuantumMeasurement(ASTNode):
         : 'measure' indexIdentifierList
     """
 
-    def __init__(self, identifierList: List[Identifier]):
+    def __init__(self, identifierList: List[Identifier]) -> None:
         self.identifierList = identifierList
 
 
@@ -301,7 +301,7 @@ class QuantumMeasurementAssignment(Statement):
         | indexIdentifier EQUALS quantumMeasurement  # eg: bits = measure qubits;
     """
 
-    def __init__(self, identifier: Identifier, quantumMeasurement: QuantumMeasurement):
+    def __init__(self, identifier: Identifier, quantumMeasurement: QuantumMeasurement) -> None:
         self.identifier = identifier
         self.quantumMeasurement = quantumMeasurement
 
@@ -312,14 +312,14 @@ class Designator(ASTNode):
         : LBRACKET expression RBRACKET
     """
 
-    def __init__(self, expression: Expression):
+    def __init__(self, expression: Expression) -> None:
         self.expression = expression
 
 
 class ClassicalDeclaration(Statement):
     """Declaration of a classical type, optionally initializing it to a value."""
 
-    def __init__(self, type_: ClassicalType, identifier: Identifier, initializer=None):
+    def __init__(self, type_: ClassicalType, identifier: Identifier, initializer=None) -> None:
         self.type = type_
         self.identifier = identifier
         self.initializer = initializer
@@ -328,7 +328,7 @@ class ClassicalDeclaration(Statement):
 class AssignmentStatement(Statement):
     """Assignment of an expression to an l-value."""
 
-    def __init__(self, lvalue: SubscriptedIdentifier, rvalue: Expression):
+    def __init__(self, lvalue: SubscriptedIdentifier, rvalue: Expression) -> None:
         self.lvalue = lvalue
         self.rvalue = rvalue
 
@@ -340,7 +340,7 @@ class QuantumDeclaration(ASTNode):
          'qubit' designator? Identifier
     """
 
-    def __init__(self, identifier: Identifier, designator=None):
+    def __init__(self, identifier: Identifier, designator=None) -> None:
         self.identifier = identifier
         self.designator = designator
 
@@ -351,7 +351,7 @@ class AliasStatement(ASTNode):
         : 'let' Identifier EQUALS indexIdentifier SEMICOLON
     """
 
-    def __init__(self, identifier: Identifier, value: Expression):
+    def __init__(self, identifier: Identifier, value: Expression) -> None:
         self.identifier = identifier
         self.value = value
 
@@ -368,7 +368,9 @@ class QuantumGateModifierName(enum.Enum):
 class QuantumGateModifier(ASTNode):
     """A modifier of a gate. For example, in ``ctrl @ x $0``, the ``ctrl @`` is the modifier."""
 
-    def __init__(self, modifier: QuantumGateModifierName, argument: Optional[Expression] = None):
+    def __init__(
+        self, modifier: QuantumGateModifierName, argument: Optional[Expression] = None
+    ) -> None:
         self.modifier = modifier
         self.argument = argument
 
@@ -385,7 +387,7 @@ class QuantumGateCall(QuantumInstruction):
         indexIdentifierList: List[Identifier],
         parameters: List[Expression] = None,
         modifiers: Optional[List[QuantumGateModifier]] = None,
-    ):
+    ) -> None:
         self.quantumGateName = quantumGateName
         self.indexIdentifierList = indexIdentifierList
         self.parameters = parameters or []
@@ -398,21 +400,21 @@ class QuantumBarrier(QuantumInstruction):
         : 'barrier' indexIdentifierList
     """
 
-    def __init__(self, indexIdentifierList: List[Identifier]):
+    def __init__(self, indexIdentifierList: List[Identifier]) -> None:
         self.indexIdentifierList = indexIdentifierList
 
 
 class QuantumReset(QuantumInstruction):
     """A built-in ``reset q0;`` statement."""
 
-    def __init__(self, identifier: Identifier):
+    def __init__(self, identifier: Identifier) -> None:
         self.identifier = identifier
 
 
 class QuantumDelay(QuantumInstruction):
     """A built-in ``delay[duration] q0;`` statement."""
 
-    def __init__(self, duration: Expression, qubits: List[Identifier]):
+    def __init__(self, duration: Expression, qubits: List[Identifier]) -> None:
         self.duration = duration
         self.qubits = qubits
 
@@ -424,7 +426,7 @@ class ProgramBlock(ASTNode):
         | LBRACE(statement | controlDirective) * RBRACE
     """
 
-    def __init__(self, statements: List[Statement]):
+    def __init__(self, statements: List[Statement]) -> None:
         self.statements = statements
 
 
@@ -434,7 +436,7 @@ class ReturnStatement(ASTNode):  # TODO probably should be a subclass of Control
         : 'return' ( expression | quantumMeasurement )? SEMICOLON;
     """
 
-    def __init__(self, expression=None):
+    def __init__(self, expression=None) -> None:
         self.expression = expression
 
 
@@ -468,7 +470,7 @@ class QuantumGateDefinition(Statement):
         params: Tuple[Identifier, ...],
         qubits: Tuple[Identifier, ...],
         body: QuantumBlock,
-    ):
+    ) -> None:
         self.name = name
         self.params = params
         self.qubits = qubits
@@ -487,7 +489,7 @@ class SubroutineDefinition(Statement):
         identifier: Identifier,
         subroutineBlock: SubroutineBlock,
         arguments=None,  # [ClassicalArgument]
-    ):
+    ) -> None:
         self.identifier = identifier
         self.arguments = arguments or []
         self.subroutineBlock = subroutineBlock
@@ -516,7 +518,7 @@ class CalibrationDefinition(Statement):
         name: Identifier,
         identifierList: List[Identifier],
         calibrationArgumentList: Optional[List[CalibrationArgument]] = None,
-    ):
+    ) -> None:
         self.name = name
         self.identifierList = identifierList
         self.calibrationArgumentList = calibrationArgumentList or []
@@ -528,7 +530,7 @@ class BranchingStatement(Statement):
         : 'if' LPAREN booleanExpression RPAREN programBlock ( 'else' programBlock )?
     """
 
-    def __init__(self, condition: Expression, true_body: ProgramBlock, false_body=None):
+    def __init__(self, condition: Expression, true_body: ProgramBlock, false_body=None) -> None:
         self.condition = condition
         self.true_body = true_body
         self.false_body = false_body
@@ -552,7 +554,7 @@ class ForLoopStatement(Statement):
         indexset: Union[Identifier, IndexSet, Range],
         parameter: Identifier,
         body: ProgramBlock,
-    ):
+    ) -> None:
         self.indexset = indexset
         self.parameter = parameter
         self.body = body
@@ -567,7 +569,7 @@ class WhileLoopStatement(Statement):
         WhileLoop: "while" "(" Expression ")" ProgramBlock
     """
 
-    def __init__(self, condition: Expression, body: ProgramBlock):
+    def __init__(self, condition: Expression, body: ProgramBlock) -> None:
         self.condition = condition
         self.body = body
 
@@ -590,7 +592,7 @@ class IOModifier(enum.Enum):
 class IODeclaration(ClassicalDeclaration):
     """A declaration of an IO variable."""
 
-    def __init__(self, modifier: IOModifier, type_: ClassicalType, identifier: Identifier):
+    def __init__(self, modifier: IOModifier, type_: ClassicalType, identifier: Identifier) -> None:
         super().__init__(type_, identifier)
         self.modifier = modifier
 
@@ -607,7 +609,7 @@ class SwitchStatementPreview(Statement):
 
     def __init__(
         self, target: Expression, cases: Iterable[Tuple[Iterable[Expression], ProgramBlock]]
-    ):
+    ) -> None:
         self.target = target
         self.cases = [(tuple(values), case) for values, case in cases]
 
@@ -624,7 +626,7 @@ class SwitchStatement(Statement):
         target: Expression,
         cases: Iterable[Tuple[Iterable[Expression], ProgramBlock]],
         default: Optional[ProgramBlock] = None,
-    ):
+    ) -> None:
         self.target = target
         self.cases = [(tuple(values), case) for values, case in cases]
         self.default = default

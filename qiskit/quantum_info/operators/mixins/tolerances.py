@@ -22,7 +22,7 @@ from qiskit.quantum_info.operators.predicates import ATOL_DEFAULT, RTOL_DEFAULT
 class TolerancesMeta(ABCMeta):
     """Metaclass to handle tolerances"""
 
-    def __init__(cls, *args, **kwargs):
+    def __init__(cls, *args, **kwargs) -> None:
         cls._ATOL_DEFAULT = ATOL_DEFAULT
         cls._RTOL_DEFAULT = RTOL_DEFAULT
         cls._MAX_TOL = 1e-4
@@ -41,7 +41,7 @@ class TolerancesMeta(ABCMeta):
         return cls._ATOL_DEFAULT
 
     @atol.setter
-    def atol(cls, value):
+    def atol(cls, value) -> None:
         """Set default absolute tolerance parameter for float comparisons."""
         cls._check_value(value, "atol")  # pylint: disable=no-value-for-parameter
         cls._ATOL_DEFAULT = value
@@ -52,7 +52,7 @@ class TolerancesMeta(ABCMeta):
         return cls._RTOL_DEFAULT
 
     @rtol.setter
-    def rtol(cls, value):
+    def rtol(cls, value) -> None:
         """Set default relative tolerance parameter for float comparisons."""
         cls._check_value(value, "rtol")  # pylint: disable=no-value-for-parameter
         cls._RTOL_DEFAULT = value

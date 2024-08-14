@@ -38,7 +38,7 @@ from qiskit.visualization.pulse_v2 import generators, layouts
 class QiskitPulseStyle(dict):
     """Stylesheet for pulse drawer."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         # to inform which stylesheet is applied. some plotter may not support specific style.
         self.stylesheet = None
@@ -93,7 +93,7 @@ class IQXStandard(dict):
     - Channels are sorted by index and control channels are added to the end.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__()
         style = {
             "formatter.control.apply_phase_modulation": True,
@@ -137,7 +137,7 @@ class IQXSimple(dict):
     - Channels are sorted by qubit index.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__()
         style = {
             "formatter.general.fig_chart_height": 5,
@@ -181,7 +181,7 @@ class IQXDebugging(dict):
     - Channels are sorted by index and control channels are added to the end.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__()
         style = {
             "formatter.control.apply_phase_modulation": True,

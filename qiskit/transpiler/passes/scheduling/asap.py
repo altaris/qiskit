@@ -39,7 +39,7 @@ class ASAPSchedule(BaseSchedulerTransform):
         ),
         since="1.1.0",
     )
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
     def run(self, dag):

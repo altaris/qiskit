@@ -358,7 +358,7 @@ class BackendV2Converter(BackendV2):
         name_mapping: Optional[Dict[str, Any]] = None,
         add_delay: bool = True,
         filter_faulty: bool = True,
-    ):
+    ) -> None:
         """Initialize a BackendV2 converter instance based on a BackendV1 instance.
 
         Args:

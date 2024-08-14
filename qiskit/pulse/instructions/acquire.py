@@ -47,7 +47,7 @@ class Acquire(Instruction):
         kernel: Kernel | None = None,
         discriminator: Discriminator | None = None,
         name: str | None = None,
-    ):
+    ) -> None:
         """Create a new Acquire instruction.
 
         Args:

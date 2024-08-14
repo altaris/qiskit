@@ -66,7 +66,7 @@ from qiskit.visualization.timeline.stylesheet import QiskitTimelineStyle
 class DrawerCanvas:
     """Data container for drawings."""
 
-    def __init__(self, stylesheet: QiskitTimelineStyle):
+    def __init__(self, stylesheet: QiskitTimelineStyle) -> None:
         """Create new data container."""
         # stylesheet
         self.formatter = stylesheet.formatter
@@ -110,7 +110,7 @@ class DrawerCanvas:
         return new_t0, new_t1
 
     @time_range.setter
-    def time_range(self, new_range: tuple[int, int]):
+    def time_range(self, new_range: tuple[int, int]) -> None:
         """Update time range to draw."""
         self._time_range = new_range
 
@@ -124,7 +124,7 @@ class DrawerCanvas:
         """
         yield from self._output_dataset.items()
 
-    def add_data(self, data: drawings.ElementaryData):
+    def add_data(self, data: drawings.ElementaryData) -> None:
         """Add drawing to collections.
 
         If the given object already exists in the collections,
@@ -225,7 +225,7 @@ class DrawerCanvas:
         t_end = max(program.duration, self.formatter["margin.minimum_duration"])
         self.set_time_range(t_start=0, t_end=t_end)
 
-    def set_time_range(self, t_start: int, t_end: int):
+    def set_time_range(self, t_start: int, t_end: int) -> None:
         """Set time range to draw.
 
         Args:
@@ -234,7 +234,7 @@ class DrawerCanvas:
         """
         self.time_range = (t_start, t_end)
 
-    def set_disable_bits(self, bit: types.Bits, remove: bool = True):
+    def set_disable_bits(self, bit: types.Bits, remove: bool = True) -> None:
         """Interface method to control visibility of bits.
 
         Specified object in the blocked list will not be shown.
@@ -248,7 +248,7 @@ class DrawerCanvas:
         else:
             self.disable_bits.discard(bit)
 
-    def set_disable_type(self, data_type: types.DataTypes, remove: bool = True):
+    def set_disable_type(self, data_type: types.DataTypes, remove: bool = True) -> None:
         """Interface method to control visibility of data types.
 
         Specified object in the blocked list will not be shown.
@@ -267,7 +267,7 @@ class DrawerCanvas:
         else:
             self.disable_types.discard(data_type_str)
 
-    def update(self):
+    def update(self) -> None:
         """Update all collections.
 
         This method should be called before the canvas is passed to the plotter.

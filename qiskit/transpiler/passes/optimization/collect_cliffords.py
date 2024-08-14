@@ -37,7 +37,7 @@ class CollectCliffords(CollectAndCollapse):
         min_block_size=2,
         split_layers=False,
         collect_from_back=False,
-    ):
+    ) -> None:
         """CollectCliffords initializer.
 
         Args:

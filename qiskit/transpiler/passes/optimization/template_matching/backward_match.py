@@ -34,7 +34,7 @@ class Match:
     Object to represent a match and its qubit configurations.
     """
 
-    def __init__(self, match, qubit, clbit):
+    def __init__(self, match, qubit, clbit) -> None:
         """
         Create a Match class with necessary arguments.
         Args:
@@ -58,7 +58,7 @@ class MatchingScenarios:
 
     def __init__(
         self, circuit_matched, circuit_blocked, template_matched, template_blocked, matches, counter
-    ):
+    ) -> None:
         """
         Create a MatchingScenarios class with necessary arguments.
         Args:
@@ -83,13 +83,13 @@ class MatchingScenariosList:
     and pop elements.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Create an empty MatchingScenariosList.
         """
         self.matching_scenarios_list = []
 
-    def append_scenario(self, matching):
+    def append_scenario(self, matching) -> None:
         """
         Append a scenario to the list.
         Args:
@@ -125,7 +125,7 @@ class BackwardMatch:
         qubits,
         clbits=None,
         heuristics_backward_param=None,
-    ):
+    ) -> None:
         """
         Create a ForwardMatch class with necessary arguments.
         Args:
@@ -343,7 +343,7 @@ class BackwardMatch:
 
         return circuit_matched, circuit_blocked, template_matched, template_blocked
 
-    def _backward_heuristics(self, gate_indices, length, survivor):
+    def _backward_heuristics(self, gate_indices, length, survivor) -> None:
         """
         Heuristics to cut the tree in the backward match algorithm
         Args:
@@ -384,7 +384,7 @@ class BackwardMatch:
         """
         return len(scenario.matches)
 
-    def run_backward_match(self):
+    def run_backward_match(self) -> None:
         """
         Apply the forward match algorithm and returns the list of matches given an initial match
         and a circuit qubits configuration.

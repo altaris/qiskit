@@ -37,7 +37,7 @@ class BasePassManager(ABC):
         self,
         tasks: Task | list[Task] = (),
         max_iteration: int = 1000,
-    ):
+    ) -> None:
         """Initialize an empty pass manager object.
 
         Args:
@@ -107,7 +107,7 @@ class BasePassManager(ABC):
         except IndexError as ex:
             raise PassManagerError(f"Index to replace {index} does not exists") from ex
 
-    def __setitem__(self, index, item):
+    def __setitem__(self, index, item) -> None:
         self.replace(index, item)
 
     def __len__(self):

@@ -42,7 +42,7 @@ class QAOAAnsatz(EvolvedOperatorAnsatz):
         mixer_operator=None,
         name: str = "QAOA",
         flatten: bool | None = None,
-    ):
+    ) -> None:
         r"""
         Args:
             cost_operator (BaseOperator or OperatorBase, optional): The operator
@@ -258,7 +258,7 @@ class QAOAAnsatz(EvolvedOperatorAnsatz):
             return 0
         return self._cost_operator.num_qubits
 
-    def _build(self):
+    def _build(self) -> None:
         """If not already built, build the circuit."""
         if self._is_built:
             return

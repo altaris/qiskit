@@ -52,7 +52,7 @@ class ClassicalFunction(ClassicalElement):
             params=[],
         )
 
-    def compile(self):
+    def compile(self) -> None:
         """Parses and creates the logical circuit"""
         _classical_function_visitor = ClassicalFunctionVisitor()
         _classical_function_visitor.visit(self._ast)
@@ -160,7 +160,7 @@ class ClassicalFunction(ClassicalElement):
 
         return tweedledum2qiskit(pkrm_synth(self.truth_table[0]), name=self.name, qregs=qregs)
 
-    def _define(self):
+    def _define(self) -> None:
         """The definition of the classical function is its synthesis"""
         self.definition = self.synth()
 

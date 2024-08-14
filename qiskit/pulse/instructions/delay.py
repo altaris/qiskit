@@ -39,7 +39,7 @@ class Delay(Instruction):
         duration: int | ParameterExpression,
         channel: Channel,
         name: str | None = None,
-    ):
+    ) -> None:
         """Create a new delay instruction.
 
         No other instruction may be scheduled within a ``Delay``.

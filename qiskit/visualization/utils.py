@@ -36,7 +36,7 @@ MATPLOTLIB_INLINE_BACKENDS = {
 }
 
 
-def matplotlib_close_if_inline(figure):
+def matplotlib_close_if_inline(figure) -> None:
     """Close the given matplotlib figure if the backend in use draws figures inline.
 
     If the backend does not draw figures inline, this does nothing.  This function is to prevent

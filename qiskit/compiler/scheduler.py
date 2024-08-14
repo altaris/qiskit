@@ -30,7 +30,7 @@ from qiskit.utils.parallel import parallel_map
 logger = logging.getLogger(__name__)
 
 
-def _log_schedule_time(start_time, end_time):
+def _log_schedule_time(start_time, end_time) -> None:
     log_msg = f"Total Scheduling Time - {((end_time - start_time) * 1000):.5f} (ms)"
     logger.info(log_msg)
 

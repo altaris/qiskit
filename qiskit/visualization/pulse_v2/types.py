@@ -205,7 +205,7 @@ class WaveformChannel(pulse.channels.PulseChannel):
 
     prefix = "w"
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create new waveform channel."""
         super().__init__(0)
 

@@ -46,7 +46,7 @@ class QasmQobjInstruction:
         relation=None,
         val=None,
         snapshot_type=None,
-    ):
+    ) -> None:
         """Instantiate a new QasmQobjInstruction object.
 
         Args:
@@ -217,7 +217,7 @@ class QasmQobjExperiment:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, config=None, header=None, instructions=None):
+    def __init__(self, config=None, header=None, instructions=None) -> None:
         """Instantiate a QasmQobjExperiment.
 
         Args:
@@ -317,7 +317,7 @@ class QasmQobjConfig(SimpleNamespace):
         qubit_lo_freq=None,
         meas_lo_freq=None,
         **kwargs,
-    ):
+    ) -> None:
         """Model for RunConfig.
 
         Args:
@@ -443,7 +443,7 @@ class QasmQobjExperimentConfig(QobjDictField):
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, calibrations=None, qubit_lo_freq=None, meas_lo_freq=None, **kwargs):
+    def __init__(self, calibrations=None, qubit_lo_freq=None, meas_lo_freq=None, **kwargs) -> None:
         """
         Args:
             calibrations (QasmExperimentCalibrations): Information required for Pulse gates.
@@ -487,7 +487,7 @@ class QasmExperimentCalibrations:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, gates):
+    def __init__(self, gates) -> None:
         """
         Initialize a container for calibrations.
 
@@ -535,7 +535,7 @@ class GateCalibration:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, name, qubits, params, instructions):
+    def __init__(self, name, qubits, params, instructions) -> None:
         """
         Initialize a single gate calibration. Instructions may reference waveforms which should be
         made available in the pulse_library.
@@ -598,7 +598,7 @@ class QasmQobj:
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, qobj_id=None, config=None, experiments=None, header=None):
+    def __init__(self, qobj_id=None, config=None, experiments=None, header=None) -> None:
         """Instantiate a new OpenQASM 2 Qobj Object.
 
         Each OpenQASM 2 Qobj object is used to represent a single payload that will

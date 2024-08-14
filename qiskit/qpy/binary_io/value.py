@@ -33,13 +33,13 @@ from qiskit.circuit.parametervector import ParameterVector, ParameterVectorEleme
 from qiskit.qpy import common, formats, exceptions, type_keys
 
 
-def _write_parameter(file_obj, obj):
+def _write_parameter(file_obj, obj) -> None:
     name_bytes = obj.name.encode(common.ENCODE)
     file_obj.write(struct.pack(formats.PARAMETER_PACK, len(name_bytes), obj.uuid.bytes))
     file_obj.write(name_bytes)
 
 
-def _write_parameter_vec(file_obj, obj):
+def _write_parameter_vec(file_obj, obj) -> None:
     name_bytes = obj._vector._name.encode(common.ENCODE)
     file_obj.write(
         struct.pack(
@@ -53,7 +53,7 @@ def _write_parameter_vec(file_obj, obj):
     file_obj.write(name_bytes)
 
 
-def _write_parameter_expression(file_obj, obj, use_symengine, *, version):
+def _write_parameter_expression(file_obj, obj, use_symengine, *, version) -> None:
     if use_symengine:
         expr_bytes = obj._symbol_expr.__reduce__()[1][0]
     else:
@@ -97,7 +97,7 @@ def _write_parameter_expression(file_obj, obj, use_symengine, *, version):
 class _ExprWriter(expr.ExprVisitor[None]):
     __slots__ = ("file_obj", "clbit_indices", "standalone_var_indices", "version")
 
-    def __init__(self, file_obj, clbit_indices, standalone_var_indices, version):
+    def __init__(self, file_obj, clbit_indices, standalone_var_indices, version) -> None:
         self.file_obj = file_obj
         self.clbit_indices = clbit_indices
         self.standalone_var_indices = standalone_var_indices
@@ -162,7 +162,7 @@ class _ExprWriter(expr.ExprVisitor[None]):
         else:
             raise exceptions.QpyError(f"unhandled Value object '{node.value}'")
 
-    def visit_cast(self, node, /):
+    def visit_cast(self, node, /) -> None:
         self.file_obj.write(type_keys.Expression.CAST)
         _write_expr_type(self.file_obj, node.type)
         self.file_obj.write(
@@ -170,7 +170,7 @@ class _ExprWriter(expr.ExprVisitor[None]):
         )
         node.operand.accept(self)
 
-    def visit_unary(self, node, /):
+    def visit_unary(self, node, /) -> None:
         self.file_obj.write(type_keys.Expression.UNARY)
         _write_expr_type(self.file_obj, node.type)
         self.file_obj.write(
@@ -178,7 +178,7 @@ class _ExprWriter(expr.ExprVisitor[None]):
         )
         node.operand.accept(self)
 
-    def visit_binary(self, node, /):
+    def visit_binary(self, node, /) -> None:
         self.file_obj.write(type_keys.Expression.BINARY)
         _write_expr_type(self.file_obj, node.type)
         self.file_obj.write(
@@ -204,7 +204,7 @@ def _write_expr(
     clbit_indices: collections.abc.Mapping[Clbit, int],
     standalone_var_indices: collections.abc.Mapping[expr.Var, int],
     version: int,
-):
+) -> None:
     node.accept(_ExprWriter(file_obj, clbit_indices, standalone_var_indices, version))
 
 
@@ -472,7 +472,7 @@ def read_standalone_vars(file_obj, num_vars):
     return read_vars, var_order
 
 
-def _write_standalone_var(file_obj, var, type_key):
+def _write_standalone_var(file_obj, var, type_key) -> None:
     name = var.name.encode(common.ENCODE)
     file_obj.write(
         struct.pack(
@@ -581,7 +581,7 @@ def dumps_value(
 
 def write_value(
     file_obj, obj, *, version, index_map=None, use_symengine=False, standalone_var_indices=None
-):
+) -> None:
     """Write a value to the file like object.
 
     Args:

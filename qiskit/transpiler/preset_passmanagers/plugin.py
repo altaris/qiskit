@@ -210,7 +210,7 @@ class PassManagerStagePlugin(abc.ABC):
 class PassManagerStagePluginManager:
     """Manager class for preset pass manager stage plugins."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.init_plugins = stevedore.ExtensionManager(
             "qiskit.transpiler.init", invoke_on_load=True, propagate_map_exceptions=True

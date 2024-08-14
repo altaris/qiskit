@@ -34,7 +34,7 @@ class Nduv:
         value: value.
     """
 
-    def __init__(self, date, name, unit, value):
+    def __init__(self, date, name, unit, value) -> None:
         """Initialize a new name-date-unit-value object
 
         Args:
@@ -97,7 +97,7 @@ class GateProperties:
 
     _data = {}
 
-    def __init__(self, qubits, gate, parameters, **kwargs):
+    def __init__(self, qubits, gate, parameters, **kwargs) -> None:
         """Initialize a new :class:`GateProperties` object
 
         Args:
@@ -184,7 +184,7 @@ class BackendProperties:
     )
     def __init__(
         self, backend_name, backend_version, last_update_date, qubits, gates, general, **kwargs
-    ):
+    ) -> None:
         """Initialize a BackendProperties instance.
 
         Args:

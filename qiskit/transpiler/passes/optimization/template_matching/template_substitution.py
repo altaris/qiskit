@@ -40,7 +40,7 @@ class SubstitutionConfig:
         qubit_config,
         template_dag_dep,
         clbit_config=None,
-    ):
+    ) -> None:
         self.template_dag_dep = template_dag_dep
         self.circuit_config = circuit_config
         self.template_config = template_config
@@ -63,7 +63,7 @@ class TemplateSubstitution:
     Class to run the substitution algorithm from the list of maximal matches.
     """
 
-    def __init__(self, max_matches, circuit_dag_dep, template_dag_dep, user_cost_dict=None):
+    def __init__(self, max_matches, circuit_dag_dep, template_dag_dep, user_cost_dict=None) -> None:
         """
         Initialize TemplateSubstitution with necessary arguments.
         Args:
@@ -232,7 +232,7 @@ class TemplateSubstitution:
         total = left + right
         return total
 
-    def _substitution_sort(self):
+    def _substitution_sort(self) -> None:
         """
         Sort the substitution list.
         """
@@ -263,7 +263,7 @@ class TemplateSubstitution:
                     return False
         return True
 
-    def _remove_impossible(self):
+    def _remove_impossible(self) -> None:
         """
         Remove matched groups if they both have predecessors in the other one, they are not
         compatible.
@@ -300,7 +300,7 @@ class TemplateSubstitution:
                 scenario for scenario in self.substitution_list if scenario not in remove_list
             ]
 
-    def _substitution(self):
+    def _substitution(self) -> None:
         """
         From the list of maximal matches, it chooses which one will be used and gives the necessary
         details for each substitution(template inverse, predecessors of the match).
@@ -363,7 +363,7 @@ class TemplateSubstitution:
         # Unmatched gates that are not predecessors of any group of matches.
         self.unmatched_list = sorted(set(range(0, self.circuit_dag_dep.size())) - set(circuit_list))
 
-    def run_dag_opt(self):
+    def run_dag_opt(self) -> None:
         """
         It runs the substitution algorithm and creates the optimized DAGCircuit().
         """

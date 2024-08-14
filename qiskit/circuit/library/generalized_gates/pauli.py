@@ -38,10 +38,10 @@ class PauliGate(Gate):
     with the :meth:`~qiskit.circuit.QuantumCircuit.pauli` method.
     """
 
-    def __init__(self, label):
+    def __init__(self, label) -> None:
         super().__init__("pauli", len(label), [label])
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate pauli (p1 a1,...,pn an) { p1 a1; ... ; pn an; }
         """

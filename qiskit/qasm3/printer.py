@@ -90,7 +90,7 @@ class BasicPrinter:
         indent: str,
         chain_else_if: bool = False,
         experimental: ExperimentalFeatures = ExperimentalFeatures(0),
-    ):
+    ) -> None:
         """
         Args:
             stream (io.TextIOBase): the stream that the output will be written to.
@@ -282,10 +282,10 @@ class BasicPrinter:
     def _visit_IntegerLiteral(self, node: ast.IntegerLiteral) -> None:
         self.stream.write(str(node.value))
 
-    def _visit_BooleanLiteral(self, node: ast.BooleanLiteral):
+    def _visit_BooleanLiteral(self, node: ast.BooleanLiteral) -> None:
         self.stream.write("true" if node.value else "false")
 
-    def _visit_BitstringLiteral(self, node: ast.BitstringLiteral):
+    def _visit_BitstringLiteral(self, node: ast.BitstringLiteral) -> None:
         self.stream.write(f'"{node.value:0{node.width}b}"')
 
     def _visit_DurationLiteral(self, node: ast.DurationLiteral) -> None:
@@ -296,7 +296,7 @@ class BasicPrinter:
         self.visit(node.expression)
         self.stream.write("]")
 
-    def _visit_Unary(self, node: ast.Unary):
+    def _visit_Unary(self, node: ast.Unary) -> None:
         self.stream.write(node.op.value)
         if (
             isinstance(node.operand, (ast.Unary, ast.Binary))
@@ -308,7 +308,7 @@ class BasicPrinter:
         else:
             self.visit(node.operand)
 
-    def _visit_Binary(self, node: ast.Binary):
+    def _visit_Binary(self, node: ast.Binary) -> None:
         if (
             isinstance(node.left, (ast.Unary, ast.Binary))
             and _BINDING_POWER[node.left.op].right < _BINDING_POWER[node.op].left
@@ -329,13 +329,13 @@ class BasicPrinter:
         else:
             self.visit(node.right)
 
-    def _visit_Cast(self, node: ast.Cast):
+    def _visit_Cast(self, node: ast.Cast) -> None:
         self.visit(node.type)
         self.stream.write("(")
         self.visit(node.operand)
         self.stream.write(")")
 
-    def _visit_Index(self, node: ast.Index):
+    def _visit_Index(self, node: ast.Index) -> None:
         if isinstance(node.target, (ast.Unary, ast.Binary)):
             self.stream.write("(")
             self.visit(node.target)

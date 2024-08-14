@@ -35,7 +35,7 @@ class CSPLayout(AnalysisPass):
         seed=None,
         call_limit=1000,
         time_limit=10,
-    ):
+    ) -> None:
         """If possible, chooses a Layout as a CSP, using backtracking.
 
         If not possible, does not set the layout property. In all the cases,

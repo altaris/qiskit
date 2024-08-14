@@ -103,7 +103,7 @@ class BasisTranslator(TransformationPass):
     :ref:`custom_basis_gates` for details on adding custom equivalence rules.
     """
 
-    def __init__(self, equivalence_library, target_basis, target=None, min_qubits=0):
+    def __init__(self, equivalence_library, target_basis, target=None, min_qubits=0) -> None:
         """Initialize a BasisTranslator instance.
 
         Args:
@@ -461,7 +461,7 @@ class StopIfBasisRewritable(Exception):
 class BasisSearchVisitor(rustworkx.visit.DijkstraVisitor):
     """Handles events emitted during `rustworkx.dijkstra_search`."""
 
-    def __init__(self, graph, source_basis, target_basis):
+    def __init__(self, graph, source_basis, target_basis) -> None:
         self.graph = graph
         self.target_basis = set(target_basis)
         self._source_gates_remain = set(source_basis)
@@ -512,7 +512,7 @@ class BasisSearchVisitor(rustworkx.visit.DijkstraVisitor):
         if self._num_gates_remain_for_rule[edata.index] > 0 or target in self.target_basis:
             raise rustworkx.visit.PruneSearch
 
-    def edge_relaxed(self, edge):
+    def edge_relaxed(self, edge) -> None:
         _, target, edata = edge
         if edata is not None:
             gate = self.graph[target].key

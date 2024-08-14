@@ -26,7 +26,7 @@ class PubResult:
 
     __slots__ = ("_data", "_metadata")
 
-    def __init__(self, data: DataBin, metadata: dict[str, Any] | None = None):
+    def __init__(self, data: DataBin, metadata: dict[str, Any] | None = None) -> None:
         """Initialize a pub result.
 
         Args:

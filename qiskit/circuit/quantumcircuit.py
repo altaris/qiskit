@@ -1246,7 +1246,7 @@ class QuantumCircuit:
         return QuantumCircuitData(self)
 
     @data.setter
-    def data(self, data_input: Iterable):
+    def data(self, data_input: Iterable) -> None:
         """Sets the circuit data from a list of instructions and context.
 
         Args:
@@ -1306,7 +1306,7 @@ class QuantumCircuit:
         return dict(self._calibrations)
 
     @calibrations.setter
-    def calibrations(self, calibrations: dict):
+    def calibrations(self, calibrations: dict) -> None:
         """Set the circuit calibration data from a dictionary of calibration definition.
 
         Args:
@@ -1394,7 +1394,7 @@ class QuantumCircuit:
         return result
 
     @classmethod
-    def _increment_instances(cls):
+    def _increment_instances(cls) -> None:
         cls.instances += 1
 
     @classmethod
@@ -3445,7 +3445,7 @@ class QuantumCircuit:
             obj: 0 for objects in (self.qubits, self.clbits, self.iter_vars()) for obj in objects
         }
 
-        def update_from_expr(objects, node):
+        def update_from_expr(objects, node) -> None:
             for var in expr.iter_vars(node):
                 if var.standalone:
                     objects.add(var)
@@ -4094,7 +4094,7 @@ class QuantumCircuit:
         return self._data.global_phase
 
     @global_phase.setter
-    def global_phase(self, angle: ParameterValueType):
+    def global_phase(self, angle: ParameterValueType) -> None:
         """Set the phase of the current circuit scope.
 
         Args:
@@ -5895,7 +5895,7 @@ class QuantumCircuit:
         registers: Iterable[Register] = (),
         allow_jumps: bool = True,
         forbidden_message: Optional[str] = None,
-    ):
+    ) -> None:
         """Add a scope for collecting instructions into this circuit.
 
         This should only be done by the control-flow context managers, which will handle cleaning up
@@ -6590,7 +6590,7 @@ class _OuterCircuitScopeInterface(CircuitScopeInterface):
 
     __slots__ = ("circuit",)
 
-    def __init__(self, circuit: QuantumCircuit):
+    def __init__(self, circuit: QuantumCircuit) -> None:
         self.circuit = circuit
 
     @property
@@ -6601,7 +6601,7 @@ class _OuterCircuitScopeInterface(CircuitScopeInterface):
         # QuantumCircuit._append is semi-public, so we just call back to it.
         return self.circuit._append(instruction, _standard_gate=_standard_gate)
 
-    def extend(self, data: CircuitData):
+    def extend(self, data: CircuitData) -> None:
         self.circuit._data.extend(data)
         self.circuit.duration = None
         self.circuit.unit = "dt"
@@ -6630,11 +6630,11 @@ class _OuterCircuitScopeInterface(CircuitScopeInterface):
                 raise CircuitError(f"Classical bit index {specifier} is out-of-range.") from None
         raise CircuitError(f"Unknown classical resource specifier: '{specifier}'.")
 
-    def add_uninitialized_var(self, var):
+    def add_uninitialized_var(self, var) -> None:
         var = self.circuit._prepare_new_var(var, None)
         self.circuit._vars_local[var.name] = var
 
-    def remove_var(self, var):
+    def remove_var(self, var) -> None:
         self.circuit._vars_local.pop(var.name)
 
     def get_var(self, name):
@@ -6664,7 +6664,7 @@ def _validate_expr(circuit_scope: CircuitScopeInterface, node: expr.Expr) -> exp
 class _ParameterBindsDict:
     __slots__ = ("mapping", "allowed_keys")
 
-    def __init__(self, mapping, allowed_keys):
+    def __init__(self, mapping, allowed_keys) -> None:
         self.mapping = mapping
         self.allowed_keys = allowed_keys
 
@@ -6680,7 +6680,7 @@ class _ParameterBindsDict:
 class _ParameterBindsSequence:
     __slots__ = ("parameters", "values", "mapping_cache")
 
-    def __init__(self, parameters, values):
+    def __init__(self, parameters, values) -> None:
         self.parameters = parameters
         self.values = values
         self.mapping_cache = None

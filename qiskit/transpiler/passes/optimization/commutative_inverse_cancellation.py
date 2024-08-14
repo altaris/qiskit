@@ -21,7 +21,7 @@ from qiskit.transpiler.basepasses import TransformationPass
 class CommutativeInverseCancellation(TransformationPass):
     """Cancel pairs of inverse gates exploiting commutation relations."""
 
-    def __init__(self, matrix_based: bool = False, max_qubits: int = 4):
+    def __init__(self, matrix_based: bool = False, max_qubits: int = 4) -> None:
         """
         Args:
             matrix_based: If ``True``, uses matrix representations to check whether two

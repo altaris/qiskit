@@ -31,7 +31,7 @@ class QobjDictField(SimpleNamespace):
         "workflow requires `Qobj` it likely relies on deprecated functionality and "
         "should be updated to use `BackendV2`.",
     )
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         """Instantiate a new Qobj dict field object.
 
         Args:

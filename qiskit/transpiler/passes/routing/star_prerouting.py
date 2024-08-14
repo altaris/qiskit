@@ -28,7 +28,7 @@ from qiskit._accelerate.nlayout import NLayout
 class StarBlock:
     """Defines blocks representing star-shaped pieces of a circuit."""
 
-    def __init__(self, nodes=None, center=None, num2q=0):
+    def __init__(self, nodes=None, center=None, num2q=0) -> None:
         self.center = center
         self.num2q = num2q
         self.nodes = [] if nodes is None else nodes
@@ -108,14 +108,14 @@ class StarPreRouting(TransformationPass):
     Bellevue, WA, USA, 2023, pp. 1020-1032, doi: 10.1109/QCE57702.2023.00116.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """StarPreRouting"""
 
         self._pending_nodes: Optional[list[Union[DAGOpNode, DAGDepNode]]] = None
         self._in_degree: Optional[dict[Union[DAGOpNode, DAGDepNode], int]] = None
         super().__init__()
 
-    def _setup_in_degrees(self, dag):
+    def _setup_in_degrees(self, dag) -> None:
         """For an efficient implementation, for every node we keep the number of its
         unprocessed immediate predecessors (called ``_in_degree``). This ``_in_degree``
         is set up at the start and updated throughout the algorithm.

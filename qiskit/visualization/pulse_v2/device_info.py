@@ -52,7 +52,7 @@ class DrawerBackendInfo(ABC):
         dt: Optional[float] = None,
         channel_frequency_map: Optional[Dict[pulse.channels.Channel, float]] = None,
         qubit_channel_map: Optional[Dict[int, List[pulse.channels.Channel]]] = None,
-    ):
+    ) -> None:
         """Create new backend information.
 
         Args:

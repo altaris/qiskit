@@ -74,7 +74,9 @@ class SabreSwap(TransformationPass):
     `arXiv:1809.02573 <https://arxiv.org/pdf/1809.02573.pdf>`_
     """
 
-    def __init__(self, coupling_map, heuristic="basic", seed=None, fake_run=False, trials=None):
+    def __init__(
+        self, coupling_map, heuristic="basic", seed=None, fake_run=False, trials=None
+    ) -> None:
         r"""SabreSwap initializer.
 
         Args:
@@ -375,7 +377,7 @@ def _apply_sabre_result(
         empty._global_phase = block.global_phase
         return empty
 
-    def apply_swaps(dest_dag, swaps, layout):
+    def apply_swaps(dest_dag, swaps, layout) -> None:
         for a, b in swaps:
             qubits = (physical_qubits[a], physical_qubits[b])
             layout.swap_physical(a, b)

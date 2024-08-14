@@ -46,7 +46,7 @@ class SamplerPub(ShapedMixin):
         parameter_values: BindingsArray | None = None,
         shots: int | None = None,
         validate: bool = True,
-    ):
+    ) -> None:
         """Initialize a sampler pub.
 
         Args:

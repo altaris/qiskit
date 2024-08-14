@@ -91,7 +91,7 @@ class InstructionProperties(BaseInstructionProperties):
         duration: float | None = None,  # pylint: disable=unused-argument
         error: float | None = None,  # pylint: disable=unused-argument
         calibration: Schedule | ScheduleBlock | CalibrationEntry | None = None,
-    ):
+    ) -> None:
         """Create a new ``InstructionProperties`` object
 
         Args:
@@ -138,7 +138,7 @@ class InstructionProperties(BaseInstructionProperties):
         return self._calibration.get_schedule()
 
     @calibration.setter
-    def calibration(self, calibration: Schedule | ScheduleBlock | CalibrationEntry):
+    def calibration(self, calibration: Schedule | ScheduleBlock | CalibrationEntry) -> None:
         if isinstance(calibration, (Schedule, ScheduleBlock)):
             new_entry = ScheduleDef()
             new_entry.define(calibration, user_provided=True)
@@ -155,7 +155,7 @@ class InstructionProperties(BaseInstructionProperties):
     def __getstate__(self) -> tuple:
         return (super().__getstate__(), self.calibration, self._calibration)
 
-    def __setstate__(self, state: tuple):
+    def __setstate__(self, state: tuple) -> None:
         super().__setstate__(state[0])
         self.calibration = state[1]
         self._calibration = state[2]
@@ -334,7 +334,7 @@ class Target(BaseTarget):
         acquire_alignment=1,  # pylint: disable=unused-argument
         qubit_properties=None,  # pylint: disable=unused-argument
         concurrent_measurements=None,  # pylint: disable=unused-argument
-    ):
+    ) -> None:
         # A nested mapping of gate name -> qargs -> properties
         self._gate_map = {}
         self._coupling_graph = None
@@ -432,7 +432,7 @@ class Target(BaseTarget):
         self._instruction_durations = None
         self._instruction_schedule_map = None
 
-    def update_instruction_properties(self, instruction, qargs, properties):
+    def update_instruction_properties(self, instruction, qargs, properties) -> None:
         """Update the property object for an instruction qarg pair already in the Target
 
         Args:
@@ -735,7 +735,7 @@ class Target(BaseTarget):
         ]
         return instruction_properties[index]
 
-    def _build_coupling_graph(self):
+    def _build_coupling_graph(self) -> None:
         self._coupling_graph = rx.PyDiGraph(multigraph=False)
         if self.num_qubits is not None:
             self._coupling_graph.add_nodes_from([{} for _ in range(self.num_qubits)])
@@ -919,7 +919,7 @@ class Target(BaseTarget):
             "base": super().__getstate__(),
         }
 
-    def __setstate__(self, state: tuple):
+    def __setstate__(self, state: tuple) -> None:
         self._gate_map = state["_gate_map"]
         self._coupling_graph = state["coupling_graph"]
         self._instruction_durations = state["instruction_durations"]

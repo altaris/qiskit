@@ -22,7 +22,7 @@ from qiskit.converters.circuit_to_dag import circuit_to_dag
 class Unroll3qOrMore(TransformationPass):
     """Recursively expands 3q+ gates until the circuit only contains 2q or 1q gates."""
 
-    def __init__(self, target=None, basis_gates=None):
+    def __init__(self, target=None, basis_gates=None) -> None:
         """Initialize the Unroll3qOrMore pass
 
         Args:

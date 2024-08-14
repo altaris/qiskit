@@ -115,7 +115,7 @@ class _U0Gate(Gate):
             raise QASM2ParseError("the number of single-qubit delay lengths must be an integer")
         super().__init__("u0", 1, [int(count)])
 
-    def _define(self):
+    def _define(self) -> None:
         self._definition = QuantumCircuit(1)
         for _ in [None] * self.params[0]:
             self._definition.id(0)
@@ -289,7 +289,7 @@ class _DefinedGate(Gate):
     """A gate object defined by a `gate` statement in an OpenQASM 2 program.  This object lazily
     binds its parameters to its definition, so it is only synthesized when required."""
 
-    def __init__(self, name, num_qubits, params, gates, bytecode):
+    def __init__(self, name, num_qubits, params, gates, bytecode) -> None:
         self._gates = gates
         self._bytecode = bytecode
         super().__init__(name, num_qubits, list(params))
@@ -329,7 +329,7 @@ class _DefinedGate(Gate):
     def __getstate__(self):
         return (self.name, self.num_qubits, self.params, self.definition, self.condition)
 
-    def __setstate__(self, state):
+    def __setstate__(self, state) -> None:
         name, num_qubits, params, definition, condition = state
         super().__init__(name, num_qubits, params)
         self._gates = ()

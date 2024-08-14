@@ -51,7 +51,7 @@ class RVGate(Gate):
                 \end{pmatrix}
     """
 
-    def __init__(self, v_x, v_y, v_z, basis="U"):
+    def __init__(self, v_x, v_y, v_z, basis="U") -> None:
         """Create new rv single-qubit gate.
 
         Args:

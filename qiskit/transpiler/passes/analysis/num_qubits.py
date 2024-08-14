@@ -21,6 +21,6 @@ class NumQubits(AnalysisPass):
     The result is saved in ``property_set['num_qubits']`` as an integer.
     """
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the NumQubits pass on `dag`."""
         self.property_set["num_qubits"] = dag.num_qubits()

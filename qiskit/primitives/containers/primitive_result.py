@@ -25,7 +25,7 @@ T = TypeVar("T", bound=PubResult)
 class PrimitiveResult(Generic[T]):
     """A container for multiple pub results and global metadata."""
 
-    def __init__(self, pub_results: Iterable[T], metadata: dict[str, Any] | None = None):
+    def __init__(self, pub_results: Iterable[T], metadata: dict[str, Any] | None = None) -> None:
         """
         Args:
             pub_results: Pub results.

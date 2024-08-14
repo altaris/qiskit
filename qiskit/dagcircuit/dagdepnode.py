@@ -59,7 +59,7 @@ class DAGDepNode:
         qindices: list[int] | None = None,
         cindices: list[int] | None = None,
         nid: int = -1,
-    ):
+    ) -> None:
 
         self.type = type
         self._op = op
@@ -87,7 +87,7 @@ class DAGDepNode:
         return self._op
 
     @op.setter
-    def op(self, data):
+    def op(self, data) -> None:
         self._op = data
 
     @property
@@ -98,7 +98,7 @@ class DAGDepNode:
         return self._qargs
 
     @qargs.setter
-    def qargs(self, new_qargs):
+    def qargs(self, new_qargs) -> None:
         """Sets the qargs to be the given list of qargs."""
         self._qargs = tuple(new_qargs)
         self.sort_key = str(new_qargs)

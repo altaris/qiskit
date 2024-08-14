@@ -23,7 +23,7 @@ from qiskit.qobj.converters import QobjToInstructionConverter
 class MeasurementKernel:
     """Class representing a Measurement Kernel."""
 
-    def __init__(self, name, params):
+    def __init__(self, name, params) -> None:
         """Initialize a MeasurementKernel object
 
         Args:
@@ -59,7 +59,7 @@ class MeasurementKernel:
 class Discriminator:
     """Class representing a Discriminator."""
 
-    def __init__(self, name, params):
+    def __init__(self, name, params) -> None:
         """Initialize a Discriminator object
 
         Args:
@@ -101,7 +101,7 @@ class Command:
 
     _data = {}
 
-    def __init__(self, name: str, qubits=None, sequence=None, **kwargs):
+    def __init__(self, name: str, qubits=None, sequence=None, **kwargs) -> None:
         """Initialize a Command object
 
         Args:
@@ -179,7 +179,7 @@ class PulseDefaults:
         meas_kernel: MeasurementKernel = None,
         discriminator: Discriminator = None,
         **kwargs: Dict[str, Any],
-    ):
+    ) -> None:
         """
         Validate and reformat transport layer inputs to initialize.
         Args:

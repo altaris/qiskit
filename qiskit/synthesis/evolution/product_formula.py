@@ -99,7 +99,7 @@ class ProductFormula(EvolutionSynthesis):
 
         elif len(inspect.signature(atomic_evolution).parameters) == 2:
 
-            def wrap_atomic_evolution(output, operator, time):
+            def wrap_atomic_evolution(output, operator, time) -> None:
                 definition = atomic_evolution(operator, time)
                 output.compose(definition, wrap=wrap, inplace=True)
 
@@ -177,7 +177,7 @@ def evolve_pauli(
         _multi_qubit_evolution(output, pauli, time, cx_structure, wrap)
 
 
-def _single_qubit_evolution(output, pauli, time, wrap):
+def _single_qubit_evolution(output, pauli, time, wrap) -> None:
     dest = QuantumCircuit(1) if wrap else output
     # Note that all phases are removed from the pauli label and are only in the coefficients.
     # That's because the operators we evolved have all been translated to a SparsePauliOp.
@@ -204,7 +204,7 @@ def _single_qubit_evolution(output, pauli, time, wrap):
         output.append(gate, qargs=qubits, copy=False)
 
 
-def _two_qubit_evolution(output, pauli, time, cx_structure, wrap):
+def _two_qubit_evolution(output, pauli, time, cx_structure, wrap) -> None:
     # Get the Paulis and the qubits they act on.
     # Note that all phases are removed from the pauli label and are only in the coefficients.
     # That's because the operators we evolved have all been translated to a SparsePauliOp.
@@ -236,7 +236,7 @@ def _two_qubit_evolution(output, pauli, time, cx_structure, wrap):
         output.append(gate, qargs=qubits, copy=False)
 
 
-def _multi_qubit_evolution(output, pauli, time, cx_structure, wrap):
+def _multi_qubit_evolution(output, pauli, time, cx_structure, wrap) -> None:
     # get diagonalizing clifford
     cliff = diagonalizing_clifford(pauli)
 
@@ -373,7 +373,7 @@ def cnot_fountain(pauli: Pauli) -> QuantumCircuit:
     return chain
 
 
-def _default_atomic_evolution(output, operator, time, cx_structure, wrap):
+def _default_atomic_evolution(output, operator, time, cx_structure, wrap) -> None:
     if isinstance(operator, Pauli):
         # single Pauli operator: just exponentiate it
         evolve_pauli(output, operator, time, cx_structure, wrap)

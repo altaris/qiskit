@@ -51,7 +51,7 @@ class Delay(Instruction):
         return self.params[0]
 
     @duration.setter
-    def duration(self, duration):
+    def duration(self, duration) -> None:
         """Set the duration of this delay."""
         self.params = [duration]
 

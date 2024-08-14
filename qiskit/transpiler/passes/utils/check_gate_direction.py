@@ -22,7 +22,7 @@ class CheckGateDirection(AnalysisPass):
     respect to the coupling map.
     """
 
-    def __init__(self, coupling_map, target=None):
+    def __init__(self, coupling_map, target=None) -> None:
         """CheckGateDirection initializer.
 
         Args:
@@ -70,7 +70,7 @@ class CheckGateDirection(AnalysisPass):
                 return False
         return True
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the CheckGateDirection pass on `dag`.
 
         If `dag` is mapped and the direction is correct the property

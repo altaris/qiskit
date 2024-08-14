@@ -57,7 +57,7 @@ class GateConfig:
         latency_map=None,
         conditional=None,
         description=None,
-    ):
+    ) -> None:
         """Initialize a GateConfig object
 
         Args:
@@ -271,7 +271,7 @@ class QasmBackendConfiguration:
         processor_type=None,
         parametric_pulses=None,
         **kwargs,
-    ):
+    ) -> None:
         """Initialize a QasmBackendConfiguration Object
 
         Args:
@@ -529,7 +529,7 @@ class BackendConfiguration(QasmBackendConfiguration):
         "should be updated to use `BackendV2`.",
         stacklevel=3,
     )
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
 
@@ -588,7 +588,7 @@ class PulseBackendConfiguration(QasmBackendConfiguration):
         tags=None,
         channels: Dict[str, Any] = None,
         **kwargs,
-    ):
+    ) -> None:
         """
         Initialize a backend configuration that contains all the extra configuration that is made
         available for OpenPulse backends.

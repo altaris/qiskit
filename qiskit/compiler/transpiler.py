@@ -418,7 +418,7 @@ def _check_circuits_coupling_map(circuits, cmap, backend):
             )
 
 
-def _log_transpile_time(start_time, end_time):
+def _log_transpile_time(start_time, end_time) -> None:
     log_msg = f"Total Transpile Time - {((end_time - start_time) * 1000):.5f} (ms)"
     logger.info(log_msg)
 

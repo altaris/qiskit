@@ -333,7 +333,7 @@ class PiecewiseChebyshev(BlueprintCircuit):
                 qr_ancilla = AncillaRegister(num_ancillas)
                 self.add_register(qr_ancilla)
 
-    def _build(self):
+    def _build(self) -> None:
         """Build the circuit if not already build. The operation is considered successful
         when q_objective is :math:`|1>`"""
         if self._is_built:

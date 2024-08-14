@@ -101,7 +101,7 @@ def map_components(
     return out_mapping
 
 
-def split_barriers(dag: DAGCircuit):
+def split_barriers(dag: DAGCircuit) -> None:
     """Mutate an input dag to split barriers into single qubit barriers."""
     for node in dag.op_nodes(Barrier):
         num_qubits = len(node.qargs)
@@ -122,7 +122,7 @@ def split_barriers(dag: DAGCircuit):
         dag.substitute_node_with_dag(node, split_dag)
 
 
-def combine_barriers(dag: DAGCircuit, retain_uuid: bool = True):
+def combine_barriers(dag: DAGCircuit, retain_uuid: bool = True) -> None:
     """Mutate input dag to combine barriers with UUID labels into a single barrier."""
     qubit_indices = {bit: index for index, bit in enumerate(dag.qubits)}
     uuid_map: dict[uuid.UUID, DAGOpNode] = {}

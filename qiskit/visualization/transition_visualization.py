@@ -34,7 +34,7 @@ def _normalize(v, tolerance=0.00001):
 class _Quaternion:
     """For calculating vectors on unit sphere"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._val = None
 
     @staticmethod
@@ -53,7 +53,7 @@ class _Quaternion:
         new_quaternion._val = value
         return new_quaternion
 
-    def _axisangle_to_q(self, theta, v):
+    def _axisangle_to_q(self, theta, v) -> None:
         """Convert axis and angle to quaternion"""
         x = v[0]
         y = v[1]
@@ -284,7 +284,7 @@ def visualize_transition(circuit, trace=False, saveas=None, fpg=100, spg=2):
     class Namespace:
         """Helper class serving as scope container"""
 
-        def __init__(self):
+        def __init__(self) -> None:
             self.new_vec = []
             self.last_gate = -2
             self.colors = []

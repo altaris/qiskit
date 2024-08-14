@@ -76,7 +76,7 @@ class _DAGDependencyV2:
 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Create an empty _DAGDependencyV2.
         """
@@ -125,7 +125,7 @@ class _DAGDependencyV2:
         return self._global_phase
 
     @global_phase.setter
-    def global_phase(self, angle):
+    def global_phase(self, angle) -> None:
         """Set the global phase of the circuit.
 
         Args:
@@ -151,7 +151,7 @@ class _DAGDependencyV2:
         return dict(self._calibrations)
 
     @calibrations.setter
-    def calibrations(self, calibrations):
+    def calibrations(self, calibrations) -> None:
         """Set the circuit calibration data from a dictionary of calibration definition.
 
         Args:
@@ -160,7 +160,7 @@ class _DAGDependencyV2:
         """
         self._calibrations = defaultdict(dict, calibrations)
 
-    def add_calibration(self, gate, qubits, schedule, params=None):
+    def add_calibration(self, gate, qubits, schedule, params=None) -> None:
         """Register a low-level, custom pulse definition for the given gate.
 
         Args:
@@ -332,7 +332,7 @@ class _DAGDependencyV2:
                 f"Could not locate provided bit: {bit}. Has it been added to the DAGDependency?"
             ) from err
 
-    def apply_operation_back(self, operation, qargs=(), cargs=()):
+    def apply_operation_back(self, operation, qargs=(), cargs=()) -> None:
         """Add a DAGOpNode to the graph and update the edges.
 
         Args:
@@ -350,7 +350,7 @@ class _DAGDependencyV2:
         self._update_edges()
         self._increment_op(new_node.op)
 
-    def _update_edges(self):
+    def _update_edges(self) -> None:
         """
         Updates DagDependencyV2 by adding edges to the newly added node (max_node)
         from the previously added nodes.
@@ -421,13 +421,13 @@ class _DAGDependencyV2:
                 named_nodes.append(node)
         return named_nodes
 
-    def _increment_op(self, op):
+    def _increment_op(self, op) -> None:
         if op.name in self._op_names:
             self._op_names[op.name] += 1
         else:
             self._op_names[op.name] = 1
 
-    def _decrement_op(self, op):
+    def _decrement_op(self, op) -> None:
         if self._op_names[op.name] == 1:
             del self._op_names[op.name]
         else:

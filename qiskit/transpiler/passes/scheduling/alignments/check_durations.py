@@ -29,7 +29,9 @@ class InstructionDurationCheck(AnalysisPass):
     of the hardware alignment constraints, which is true in general.
     """
 
-    def __init__(self, acquire_alignment: int = 1, pulse_alignment: int = 1, target: Target = None):
+    def __init__(
+        self, acquire_alignment: int = 1, pulse_alignment: int = 1, target: Target = None
+    ) -> None:
         """Create new duration validation pass.
 
         The alignment values depend on the control electronics of your quantum processor.
@@ -50,7 +52,7 @@ class InstructionDurationCheck(AnalysisPass):
             self.acquire_align = target.acquire_alignment
             self.pulse_align = target.pulse_alignment
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> None:
         """Run duration validation passes.
 
         Args:

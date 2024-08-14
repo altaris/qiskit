@@ -150,7 +150,7 @@ class LambdifiedExpression:
     _`Descriptor`: https://docs.python.org/3/reference/datamodel.html#descriptors
     """
 
-    def __init__(self, attribute: str):
+    def __init__(self, attribute: str) -> None:
         """Create new descriptor.
 
         Args:
@@ -170,7 +170,7 @@ class LambdifiedExpression:
 
         return self.lambda_funcs[key]
 
-    def __set__(self, instance, value):
+    def __set__(self, instance, value) -> None:
         key = hash(value)
         if key not in self.lambda_funcs:
             params: list[Any] = []
@@ -413,7 +413,7 @@ class SymbolicPulse(Pulse):
         envelope: sym.Expr | None = None,
         constraints: sym.Expr | None = None,
         valid_amp_conditions: sym.Expr | None = None,
-    ):
+    ) -> None:
         """Create a parametric pulse.
 
         Args:

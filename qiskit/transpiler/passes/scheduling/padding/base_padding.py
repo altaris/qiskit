@@ -57,7 +57,7 @@ class BasePadding(TransformationPass):
     def __init__(
         self,
         target: Target = None,
-    ):
+    ) -> None:
         """BasePadding initializer.
 
         Args:
@@ -199,7 +199,7 @@ class BasePadding(TransformationPass):
         oper: Instruction,
         qubits: Qubit | Iterable[Qubit],
         clbits: Clbit | Iterable[Clbit] = (),
-    ):
+    ) -> None:
         """Add new operation to DAG with scheduled information.
 
         This is identical to apply_operation_back + updating the node_start_time property.

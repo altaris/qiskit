@@ -29,13 +29,13 @@ class QuantumCircuitData(MutableSequence):
     """A wrapper class for the purposes of validating modifications to
     QuantumCircuit.data while maintaining the interface of a python list."""
 
-    def __init__(self, circuit):
+    def __init__(self, circuit) -> None:
         self._circuit = circuit
 
     def __getitem__(self, i):
         return self._circuit._data[i]
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key, value) -> None:
         # For now (Terra 0.21), the `QuantumCircuit.data` setter is meant to perform validation, so
         # we do the same qubit checks that `QuantumCircuit.append` would do.
         if isinstance(value, CircuitInstruction):
@@ -84,7 +84,7 @@ class QuantumCircuitData(MutableSequence):
     def __iter__(self):
         return iter(self._circuit._data)
 
-    def __delitem__(self, i):
+    def __delitem__(self, i) -> None:
         del self._circuit._data[i]
 
     def __len__(self):
@@ -123,7 +123,7 @@ class QuantumCircuitData(MutableSequence):
     def __rmul__(self, n):
         return n * list(self._circuit._data)
 
-    def sort(self, *args, **kwargs):
+    def sort(self, *args, **kwargs) -> None:
         """In-place stable sort. Accepts arguments of list.sort."""
         data = list(self._circuit._data)
         data.sort(*args, **kwargs)

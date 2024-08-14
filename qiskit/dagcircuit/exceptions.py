@@ -19,7 +19,7 @@ from qiskit.exceptions import QiskitError
 class DAGCircuitError(QiskitError):
     """Base class for errors raised by the DAGCircuit object."""
 
-    def __init__(self, *msg):
+    def __init__(self, *msg) -> None:
         """Set the error message."""
         super().__init__(*msg)
         self.msg = " ".join(msg)
@@ -32,7 +32,7 @@ class DAGCircuitError(QiskitError):
 class DAGDependencyError(QiskitError):
     """Base class for errors raised by the DAGDependency object."""
 
-    def __init__(self, *msg):
+    def __init__(self, *msg) -> None:
         """Set the error message."""
         super().__init__(*msg)
         self.msg = " ".join(msg)

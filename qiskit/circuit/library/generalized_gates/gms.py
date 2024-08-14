@@ -106,11 +106,11 @@ class MSGate(Gate):
     and is thus reduced to the RXXGate.
     """
 
-    def __init__(self, num_qubits, theta, label=None):
+    def __init__(self, num_qubits, theta, label=None) -> None:
         """Create new MS gate."""
         super().__init__("ms", num_qubits, [theta], label=label)
 
-    def _define(self):
+    def _define(self) -> None:
         theta = self.params[0]
         q = QuantumRegister(self.num_qubits, "q")
         qc = QuantumCircuit(q, name=self.name)

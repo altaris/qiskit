@@ -78,7 +78,7 @@ class RXCalibrationBuilder(CalibrationBuilder):
     def __init__(
         self,
         target: Target = None,
-    ):
+    ) -> None:
         """Bootstrap single-pulse RX gate calibrations from the
         (hardware-calibrated) SX gate calibration.
 

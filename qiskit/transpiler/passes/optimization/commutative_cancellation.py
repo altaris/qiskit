@@ -41,7 +41,7 @@ class CommutativeCancellation(TransformationPass):
         H, X, Y, Z, CX, CY, CZ
     """
 
-    def __init__(self, basis_gates=None, target=None):
+    def __init__(self, basis_gates=None, target=None) -> None:
         """
         CommutativeCancellation initializer.
 

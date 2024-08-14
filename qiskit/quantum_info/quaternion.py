@@ -21,7 +21,7 @@ import numpy as np
 class Quaternion:
     """A class representing a Quaternion."""
 
-    def __init__(self, data):
+    def __init__(self, data) -> None:
         self.data = np.asarray(data, dtype=float)
 
     def __call__(self, idx):

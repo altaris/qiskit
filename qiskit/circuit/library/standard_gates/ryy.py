@@ -80,11 +80,11 @@ class RYYGate(Gate):
 
     def __init__(
         self, theta: ParameterValueType, label: Optional[str] = None, *, duration=None, unit="dt"
-    ):
+    ) -> None:
         """Create new RYY gate."""
         super().__init__("ryy", 2, [theta], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         """Calculate a subcircuit that implements this unitary."""
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit

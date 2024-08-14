@@ -41,7 +41,7 @@ class GlobalPhaseGate(Gate):
 
     def __init__(
         self, phase: ParameterValueType, label: Optional[str] = None, *, duration=None, unit="dt"
-    ):
+    ) -> None:
         """
         Args:
             phase: The value of phase it takes.
@@ -49,7 +49,7 @@ class GlobalPhaseGate(Gate):
         """
         super().__init__("global_phase", 0, [phase], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         q = QuantumRegister(0, "q")
         qc = QuantumCircuit(q, name=self.name, global_phase=self.params[0])
 

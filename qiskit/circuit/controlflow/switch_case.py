@@ -209,7 +209,7 @@ class SwitchCasePlaceholder(InstructionPlaceholder):
         cases: List[Tuple[Any, ControlFlowBuilderBlock]],
         *,
         label: Optional[str] = None,
-    ):
+    ) -> None:
         self.__target = target
         self.__cases = cases
         self.__resources = self._calculate_placeholder_resources()
@@ -300,7 +300,7 @@ class SwitchContext:
         *,
         in_loop: bool,
         label: Optional[str] = None,
-    ):
+    ) -> None:
         self.circuit = circuit
         self._target = target
         if isinstance(target, Clbit):
@@ -325,7 +325,7 @@ class SwitchContext:
 
     def add_case(
         self, labels: Tuple[Union[int, Literal[CASE_DEFAULT]], ...], block: ControlFlowBuilderBlock
-    ):
+    ) -> None:
         """Add a sequence of conditions and the single block that should be run if they are
         triggered to the context.  The labels are assumed to have already been validated using
         :meth:`label_in_use`."""
@@ -376,7 +376,7 @@ class CaseBuilder:
     DEFAULT = CASE_DEFAULT
     """Convenient re-exposure of the :data:`.CASE_DEFAULT` constant."""
 
-    def __init__(self, parent: SwitchContext):
+    def __init__(self, parent: SwitchContext) -> None:
         self.switch = parent
         self.entered = False
 

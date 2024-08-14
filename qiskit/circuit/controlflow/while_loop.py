@@ -39,7 +39,7 @@ class WhileLoopOp(ControlFlowOp):
         condition: tuple[ClassicalRegister, int] | tuple[Clbit, int] | expr.Expr,
         body: QuantumCircuit,
         label: str | None = None,
-    ):
+    ) -> None:
         """
         Args:
             condition: A condition to be checked prior to executing ``body``. Can be
@@ -135,13 +135,13 @@ class WhileLoopContext:
         condition: tuple[ClassicalRegister, int] | tuple[Clbit, int] | expr.Expr,
         *,
         label: str | None = None,
-    ):
+    ) -> None:
 
         self._circuit = circuit
         self._condition = validate_condition(condition)
         self._label = label
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         resources = condition_resources(self._condition)
         self._circuit._push_scope(clbits=resources.clbits, registers=resources.cregs)
 

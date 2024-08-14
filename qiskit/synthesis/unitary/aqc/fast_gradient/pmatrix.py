@@ -24,7 +24,7 @@ class PMatrix:
     matrices and block-diagonal ones.
     """
 
-    def __init__(self, num_qubits: int):
+    def __init__(self, num_qubits: int) -> None:
         """
         Initializes the internal structures of this object but does not set
         the matrix yet.
@@ -48,7 +48,7 @@ class PMatrix:
         self._idx_mat = self._init_index_matrix(dim)
         self._temp_block_diag = np.zeros(self._idx_mat.shape, dtype=np.complex128)
 
-    def set_matrix(self, mat: np.ndarray):
+    def set_matrix(self, mat: np.ndarray) -> None:
         """
         Copies specified matrix to internal storage. Once the matrix
         is set, the object is ready for use.
@@ -84,7 +84,7 @@ class PMatrix:
             idx[i // 4, :] = b.T.ravel()
         return idx
 
-    def mul_right_q1(self, layer: Layer1Q, temp_mat: np.ndarray, dagger: bool):
+    def mul_right_q1(self, layer: Layer1Q, temp_mat: np.ndarray, dagger: bool) -> None:
         """
         Multiplies ``NxN`` matrix, wrapped by this object, by a 1-qubit layer
         matrix of the right, where ``N`` is the actual size of matrices involved,
@@ -116,7 +116,7 @@ class PMatrix:
         # Update right permutation:
         self._right_perm[:] = inv_perm
 
-    def mul_right_q2(self, layer: Layer2Q, temp_mat: np.ndarray, dagger: bool = True):
+    def mul_right_q2(self, layer: Layer2Q, temp_mat: np.ndarray, dagger: bool = True) -> None:
         """
         Multiplies ``NxN`` matrix, wrapped by this object, by a 2-qubit layer
         matrix on the right, where ``N`` is the actual size of matrices involved,
@@ -148,7 +148,7 @@ class PMatrix:
         # Update right permutation:
         self._right_perm[:] = inv_perm
 
-    def mul_left_q1(self, layer: Layer1Q, temp_mat: np.ndarray):
+    def mul_left_q1(self, layer: Layer1Q, temp_mat: np.ndarray) -> None:
         """
         Multiplies ``NxN`` matrix, wrapped by this object, by a 1-qubit layer
         matrix of the left, where ``dim`` is the actual size of matrices involved,
@@ -185,7 +185,7 @@ class PMatrix:
         # Update left permutation:
         self._left_perm[:] = inv_perm
 
-    def mul_left_q2(self, layer: Layer2Q, temp_mat: np.ndarray):
+    def mul_left_q2(self, layer: Layer2Q, temp_mat: np.ndarray) -> None:
         """
         Multiplies ``NxN`` matrix, wrapped by this object, by a 2-qubit layer
         matrix on the left, where ``dim`` is the actual size of matrices involved,

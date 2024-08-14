@@ -80,11 +80,11 @@ class PhaseGate(Gate):
 
     def __init__(
         self, theta: ParameterValueType, label: str | None = None, *, duration=None, unit="dt"
-    ):
+    ) -> None:
         """Create new Phase gate."""
         super().__init__("p", 1, [theta], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
         from .u import UGate
@@ -211,7 +211,7 @@ class CPhaseGate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CPhase gate."""
         super().__init__(
             "cp",
@@ -225,7 +225,7 @@ class CPhaseGate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cphase(lambda) a,b
         { phase(lambda/2) a; cx a,b;
@@ -345,7 +345,7 @@ class MCPhaseGate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new MCPhase gate."""
         super().__init__(
             "mcphase",
@@ -359,7 +359,7 @@ class MCPhaseGate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
 

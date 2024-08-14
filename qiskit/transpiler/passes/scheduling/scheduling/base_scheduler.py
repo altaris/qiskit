@@ -29,7 +29,7 @@ class BaseScheduler(AnalysisPass):
 
     CONDITIONAL_SUPPORTED = (Gate, Delay)
 
-    def __init__(self, durations: InstructionDurations = None, target: Target = None):
+    def __init__(self, durations: InstructionDurations = None, target: Target = None) -> None:
         """Scheduler initializer.
 
         Args:

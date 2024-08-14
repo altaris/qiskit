@@ -34,7 +34,7 @@ class InstructionSet:
         self,
         *,
         resource_requester: Callable[..., ClassicalRegister | Clbit] | None = None,
-    ):
+    ) -> None:
         """New collection of instructions.
 
         The context (``qargs`` and ``cargs`` that each instruction is attached to) is also stored
@@ -81,7 +81,7 @@ class InstructionSet:
             instruction = CircuitInstruction(instruction, tuple(qargs), tuple(cargs))
         self._instructions.append(instruction)
 
-    def _add_ref(self, data: MutableSequence[CircuitInstruction], pos: int):
+    def _add_ref(self, data: MutableSequence[CircuitInstruction], pos: int) -> None:
         """Add a reference to an instruction and its context within a mutable sequence.
         Updates to the instruction set will modify the specified sequence in place."""
         self._instructions.append((data, pos))

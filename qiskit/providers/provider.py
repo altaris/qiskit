@@ -35,7 +35,7 @@ class Provider:
         "removed in 2.0. You can just remove it as the parent class and a `get_backend` "
         "method that returns the backends from `self.backend`.",
     )
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
 

@@ -31,7 +31,7 @@ class ResultError(QiskitError):
                          'code': 'MAX_CREDITS_EXCEEDED'}
     """
 
-    def __init__(self, error):
+    def __init__(self, error) -> None:
         super().__init__(error["message"])
         self.status = error["status"]
         self.code = error["code"]

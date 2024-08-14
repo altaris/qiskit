@@ -186,7 +186,7 @@ class Statevector(QuantumState, TolerancesMixin):
 
         return state_drawer(self, output=output, **drawer_args)
 
-    def _ipython_display_(self):
+    def _ipython_display_(self) -> None:
         out = self.draw()
         if isinstance(out, str):
             print(out)

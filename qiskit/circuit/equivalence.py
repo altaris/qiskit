@@ -33,7 +33,7 @@ class EquivalenceLibrary:
     """A library providing a one-way mapping of Gates to their equivalent
     implementations as QuantumCircuits."""
 
-    def __init__(self, *, base=None):
+    def __init__(self, *, base=None) -> None:
         """Create a new equivalence library.
 
         Args:
@@ -73,7 +73,7 @@ class EquivalenceLibrary:
             self._key_to_node_index[key] = self._graph.add_node(NodeData(key=key, equivs=[]))
         return self._key_to_node_index[key]
 
-    def add_equivalence(self, gate, equivalent_circuit):
+    def add_equivalence(self, gate, equivalent_circuit) -> None:
         """Add a new equivalence to the library. Future queries for the Gate
         will include the given circuit, in addition to all existing equivalences
         (including those from base).
@@ -126,7 +126,7 @@ class EquivalenceLibrary:
 
         return key in self._key_to_node_index
 
-    def set_entry(self, gate, entry):
+    def set_entry(self, gate, entry) -> None:
         """Set the equivalence record for a Gate. Future queries for the Gate
         will return only the circuits provided.
 

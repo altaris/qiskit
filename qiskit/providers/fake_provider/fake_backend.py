@@ -28,7 +28,7 @@ from qiskit.providers import basic_provider
 
 
 class _Credentials:
-    def __init__(self, token="123456", url="https://"):
+    def __init__(self, token="123456", url="https://") -> None:
         self.token = token
         self.url = url
         self.hub = "hub"
@@ -46,7 +46,7 @@ class FakeBackend(BackendV1):
         ":class:`.GenericBackendV2`. You can convert BackendV1 to "
         ":class:`.BackendV2` with :class:`.BackendV2Converter`.",
     )
-    def __init__(self, configuration, time_alive=10):
+    def __init__(self, configuration, time_alive=10) -> None:
         """FakeBackend initializer.
 
         Args:
@@ -58,7 +58,7 @@ class FakeBackend(BackendV1):
         self._credentials = _Credentials()
         self.sim = None
 
-    def _setup_sim(self):
+    def _setup_sim(self) -> None:
         if _optionals.HAS_AER:
             from qiskit_aer import AerSimulator
             from qiskit_aer.noise import NoiseModel

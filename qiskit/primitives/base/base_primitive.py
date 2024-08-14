@@ -22,7 +22,7 @@ from qiskit.providers import Options
 class BasePrimitive(ABC):
     """Primitive V1 abstract base class."""
 
-    def __init__(self, options: dict | None = None):
+    def __init__(self, options: dict | None = None) -> None:
         self._run_options = Options()
         if options is not None:
             self._run_options.update_options(**options)
@@ -36,7 +36,7 @@ class BasePrimitive(ABC):
         """
         return self._run_options
 
-    def set_options(self, **fields):
+    def set_options(self, **fields) -> None:
         """Set options values for the estimator.
 
         Args:

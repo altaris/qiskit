@@ -18,7 +18,7 @@ from qiskit.transpiler.basepasses import AnalysisPass
 class Depth(AnalysisPass):
     """Calculate the depth of a DAG circuit."""
 
-    def __init__(self, *, recurse=False):
+    def __init__(self, *, recurse=False) -> None:
         """
         Args:
             recurse: whether to allow recursion into control flow.  If this is ``False`` (default),
@@ -28,6 +28,6 @@ class Depth(AnalysisPass):
         super().__init__()
         self.recurse = recurse
 
-    def run(self, dag):
+    def run(self, dag) -> None:
         """Run the Depth pass on `dag`."""
         self.property_set["depth"] = dag.depth(recurse=self.recurse)

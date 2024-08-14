@@ -59,7 +59,7 @@ class Sampler(BaseSampler[PrimitiveJob[SamplerResult]]):
         "have been deprecated in favor of their V2 counterparts. "
         "The V2 alternative for the `Sampler` class is `StatevectorSampler`.",
     )
-    def __init__(self, *, options: dict | None = None):
+    def __init__(self, *, options: dict | None = None) -> None:
         """
         Args:
             options: Default options.

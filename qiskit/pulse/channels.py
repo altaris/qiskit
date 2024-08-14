@@ -90,7 +90,7 @@ class Channel(metaclass=ABCMeta):
 
         return super().__new__(cls)
 
-    def __init__(self, index: int):
+    def __init__(self, index: int) -> None:
         """Channel class.
 
         Args:
@@ -206,7 +206,7 @@ class SnapshotChannel(ClassicalIOChannel):
 
     prefix = "s"
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create new snapshot channel."""
         super().__init__(0)
 

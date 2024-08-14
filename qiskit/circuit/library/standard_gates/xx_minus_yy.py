@@ -105,7 +105,7 @@ class XXMinusYYGate(Gate):
         *,
         duration=None,
         unit="dt",
-    ):
+    ) -> None:
         """Create new XX-YY gate.
 
         Args:
@@ -115,7 +115,7 @@ class XXMinusYYGate(Gate):
         """
         super().__init__("xx_minus_yy", 2, [theta, beta], label=label, duration=duration, unit=unit)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate xx_minus_yy(theta, beta) a, b {
             rz(-beta) b;

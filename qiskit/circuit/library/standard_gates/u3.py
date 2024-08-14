@@ -95,7 +95,7 @@ class U3Gate(Gate):
         *,
         duration=None,
         unit="dt",
-    ):
+    ) -> None:
         """Create new U3 gate."""
         super().__init__("u3", 1, [theta, phi, lam], label=label, duration=duration, unit=unit)
 
@@ -154,7 +154,7 @@ class U3Gate(Gate):
             )
         return gate
 
-    def _define(self):
+    def _define(self) -> None:
         from qiskit.circuit.quantumcircuit import QuantumCircuit
 
         q = QuantumRegister(1, "q")
@@ -253,7 +253,7 @@ class CU3Gate(ControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CU3 gate."""
         super().__init__(
             "cu3",
@@ -267,7 +267,7 @@ class CU3Gate(ControlledGate):
             unit=unit,
         )
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate cu3(theta,phi,lambda) c, t
         { u1((lambda+phi)/2) c;

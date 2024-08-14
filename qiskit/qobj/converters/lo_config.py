@@ -40,7 +40,7 @@ class LoConfigConverter:
         qubit_lo_range=None,
         meas_lo_range=None,
         **run_config,
-    ):
+    ) -> None:
         """Create new converter.
 
         Args:

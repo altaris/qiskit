@@ -33,7 +33,7 @@ class RunConfig(SimpleNamespace):
         memory=None,
         parameter_binds=None,
         **kwargs,
-    ):
+    ) -> None:
         """Initialize a RunConfig object
 
         Args:

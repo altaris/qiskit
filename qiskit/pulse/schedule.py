@@ -598,7 +598,9 @@ class Schedule:
             if not channel_timeslots:
                 self._timeslots.pop(channel)
 
-    def _replace_timeslots(self, time: int, old: "ScheduleComponent", new: "ScheduleComponent"):
+    def _replace_timeslots(
+        self, time: int, old: "ScheduleComponent", new: "ScheduleComponent"
+    ) -> None:
         """Replace the timeslots of ``old`` if present with the timeslots of ``new``.
 
         Args:
@@ -609,7 +611,7 @@ class Schedule:
         self._remove_timeslots(time, old)
         self._add_timeslots(time, new)
 
-    def _renew_timeslots(self):
+    def _renew_timeslots(self) -> None:
         """Regenerate timeslots based on current instructions."""
         self._timeslots.clear()
         for t0, inst in self.instructions:

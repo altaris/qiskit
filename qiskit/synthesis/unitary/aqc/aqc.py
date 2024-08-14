@@ -107,7 +107,7 @@ class AQC:
         self,
         optimizer: Minimizer | None = None,
         seed: int | None = None,
-    ):
+    ) -> None:
         """
         Args:
             optimizer: an optimizer to be used in the optimization procedure of the search for

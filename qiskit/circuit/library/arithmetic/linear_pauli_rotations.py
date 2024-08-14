@@ -158,7 +158,7 @@ class LinearPauliRotations(FunctionalPauliRotations):
 
         return valid
 
-    def _build(self):
+    def _build(self) -> None:
         """If not already built, build the circuit."""
         if self._is_built:
             return

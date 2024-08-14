@@ -132,7 +132,9 @@ class StatevectorSampler(BaseSamplerV2):
 
     """
 
-    def __init__(self, *, default_shots: int = 1024, seed: np.random.Generator | int | None = None):
+    def __init__(
+        self, *, default_shots: int = 1024, seed: np.random.Generator | int | None = None
+    ) -> None:
         """
         Args:
             default_shots: The default shots for the sampler if not specified during run.

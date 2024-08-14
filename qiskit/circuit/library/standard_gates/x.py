@@ -74,13 +74,13 @@ class XGate(SingletonGate):
 
     _standard_gate = StandardGate.XGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create new X gate."""
         super().__init__("x", 1, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate x a { u3(pi,0,pi) a; }
         """
@@ -226,7 +226,7 @@ class CXGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CX gate."""
         super().__init__(
             "cx",
@@ -378,7 +378,7 @@ class CCXGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new CCX gate."""
         super().__init__(
             "ccx",
@@ -394,7 +394,7 @@ class CCXGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=2)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate ccx a,b,c
         {
@@ -525,13 +525,13 @@ class RCCXGate(SingletonGate):
 
     _standard_gate = StandardGate.RCCXGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create a new simplified CCX gate."""
         super().__init__("rccx", 3, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate rccx a,b,c
         { u2(0,pi) c;
@@ -592,7 +592,7 @@ class C3SXGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create a new 3-qubit controlled sqrt-X gate.
 
         Args:
@@ -616,7 +616,7 @@ class C3SXGate(SingletonControlledGate):
 
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=3)
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate c3sqrtx a,b,c,d
         {
@@ -698,7 +698,7 @@ class C3XGate(SingletonControlledGate):
         _base_label=None,
         duration=None,
         unit="dt",
-    ):
+    ) -> None:
         """Create a new 3-qubit controlled X gate."""
         super().__init__(
             "mcx",
@@ -715,7 +715,7 @@ class C3XGate(SingletonControlledGate):
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=3)
 
     # seems like open controls not happening?
-    def _define(self):
+    def _define(self) -> None:
         """
         gate c3x a,b,c,d
         {
@@ -879,13 +879,13 @@ class RC3XGate(SingletonGate):
 
     _standard_gate = StandardGate.RC3XGate
 
-    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt"):
+    def __init__(self, label: Optional[str] = None, *, duration=None, unit="dt") -> None:
         """Create a new RC3X gate."""
         super().__init__("rcccx", 4, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate rc3x a,b,c,d
         { u2(0,pi) d;
@@ -964,7 +964,7 @@ class C4XGate(SingletonControlledGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         """Create a new 4-qubit controlled X gate."""
         if unit is None:
             unit = "dt"
@@ -983,7 +983,7 @@ class C4XGate(SingletonControlledGate):
     _singleton_lookup_key = stdlib_singleton_key(num_ctrl_qubits=4)
 
     # seems like open controls not happening?
-    def _define(self):
+    def _define(self) -> None:
         """
         gate c3sqrtx a,b,c,d
         {
@@ -1140,7 +1140,7 @@ class MCXGate(ControlledGate):
         unit="dt",
         _name="mcx",
         _base_label=None,
-    ):
+    ) -> None:
         """Create new MCX gate."""
         num_ancilla_qubits = self.__class__.get_num_ancilla_qubits(num_ctrl_qubits)
         super().__init__(
@@ -1182,7 +1182,7 @@ class MCXGate(ControlledGate):
             return max(0, num_ctrl_qubits - 2)
         raise AttributeError(f"Unsupported mode ({mode}) specified!")
 
-    def _define(self):
+    def _define(self) -> None:
         """This definition is based on MCPhaseGate implementation."""
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
@@ -1285,7 +1285,7 @@ class MCXGrayCode(MCXGate):
         num_ctrl_qubits: int,
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
-    ):
+    ) -> None:
         super().__init__(num_ctrl_qubits, label=label, ctrl_state=ctrl_state, _name="mcx_gray")
 
     def inverse(self, annotated: bool = False):
@@ -1302,7 +1302,7 @@ class MCXGrayCode(MCXGate):
         """
         return MCXGrayCode(num_ctrl_qubits=self.num_ctrl_qubits, ctrl_state=self.ctrl_state)
 
-    def _define(self):
+    def _define(self) -> None:
         """Define the MCX gate using the Gray code."""
         # pylint: disable=cyclic-import
         from qiskit.circuit.quantumcircuit import QuantumCircuit
@@ -1339,7 +1339,7 @@ class MCXRecursive(MCXGate):
         duration=None,
         unit="dt",
         _base_label=None,
-    ):
+    ) -> None:
         super().__init__(
             num_ctrl_qubits,
             label=label,
@@ -1369,7 +1369,7 @@ class MCXRecursive(MCXGate):
         """
         return MCXRecursive(num_ctrl_qubits=self.num_ctrl_qubits, ctrl_state=self.ctrl_state)
 
-    def _define(self):
+    def _define(self) -> None:
         """Define the MCX gate using recursion."""
 
         # pylint: disable=cyclic-import
@@ -1421,7 +1421,7 @@ class MCXVChain(MCXGate):
         _base_label=None,
         relative_phase: bool = False,
         action_only: bool = False,
-    ):
+    ) -> None:
         """
         Args:
             dirty_ancillas: when set to ``True``, the method applies an optimized multicontrolled-X gate
@@ -1476,7 +1476,7 @@ class MCXVChain(MCXGate):
         """Get the number of required ancilla qubits."""
         return MCXGate.get_num_ancilla_qubits(num_ctrl_qubits, mode)
 
-    def _define(self):
+    def _define(self) -> None:
         """Define the MCX gate using a V-chain of CX gates."""
 
         if self._dirty_ancillas:

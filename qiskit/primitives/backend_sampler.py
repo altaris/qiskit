@@ -61,7 +61,7 @@ class BackendSampler(BaseSampler[PrimitiveJob[SamplerResult]]):
         options: dict | None = None,
         bound_pass_manager: PassManager | None = None,
         skip_transpilation: bool = False,
-    ):
+    ) -> None:
         """Initialize a new BackendSampler (V1) instance
 
         Args:
@@ -127,7 +127,7 @@ class BackendSampler(BaseSampler[PrimitiveJob[SamplerResult]]):
         """Return the transpiler options for transpiling the circuits."""
         return self._transpile_options
 
-    def set_transpile_options(self, **fields):
+    def set_transpile_options(self, **fields) -> None:
         """Set the transpiler options for transpiler.
         Args:
             **fields: The fields to update the options.
@@ -180,7 +180,7 @@ class BackendSampler(BaseSampler[PrimitiveJob[SamplerResult]]):
 
         return SamplerResult(probabilities, metadata)
 
-    def _transpile(self):
+    def _transpile(self) -> None:
         from qiskit.compiler import transpile
 
         start = len(self._transpiled_circuits)

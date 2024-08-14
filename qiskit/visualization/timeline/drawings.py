@@ -93,7 +93,7 @@ class ElementaryData(ABC):
         bits: Optional[Union[types.Bits, List[types.Bits]]] = None,
         meta: Optional[Dict[str, Any]] = None,
         styles: Optional[Dict[str, Any]] = None,
-    ):
+    ) -> None:
         """Create new drawing.
 
         Args:
@@ -150,7 +150,7 @@ class LineData(ElementaryData):
         bit: types.Bits,
         meta: Dict[str, Any] = None,
         styles: Dict[str, Any] = None,
-    ):
+    ) -> None:
         """Create new line.
 
         Args:
@@ -212,7 +212,7 @@ class TextData(ElementaryData):
         latex: Optional[str] = None,
         meta: Dict[str, Any] = None,
         styles: Dict[str, Any] = None,
-    ):
+    ) -> None:
         """Create new text.
 
         Args:
@@ -242,7 +242,7 @@ class GateLinkData(ElementaryData):
 
     def __init__(
         self, xval: types.Coordinate, bits: List[types.Bits], styles: Dict[str, Any] = None
-    ):
+    ) -> None:
         """Create new bit link.
 
         Args:

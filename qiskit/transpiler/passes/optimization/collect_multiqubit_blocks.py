@@ -39,7 +39,7 @@ class CollectMultiQBlocks(AnalysisPass):
     and the data structure allows these changes to be done quickly.
     """
 
-    def __init__(self, max_block_size=2):
+    def __init__(self, max_block_size=2) -> None:
         super().__init__()
         self.parent = {}  # parent array for the union
 
@@ -66,7 +66,7 @@ class CollectMultiQBlocks(AnalysisPass):
         self.parent[index] = self.find_set(self.parent[index])
         return self.parent[index]
 
-    def union_set(self, set1, set2):
+    def union_set(self, set1, set2) -> None:
         """DSU function for unioning two sets together
         Find the roots of each set. Then assign one to have the other
         as its parent, thus liking the sets.

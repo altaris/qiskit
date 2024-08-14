@@ -347,7 +347,7 @@ class ControlFlowBuilderBlock(CircuitScopeInterface):
         registers: Iterable[Register] = (),
         allow_jumps: bool = True,
         forbidden_message: Optional[str] = None,
-    ):
+    ) -> None:
         """
         Args:
             qubits: Any qubits this scope should consider itself as using from the beginning.
@@ -541,7 +541,7 @@ class ControlFlowBuilderBlock(CircuitScopeInterface):
             else:
                 raise TypeError(f"Can only add qubits or classical bits, but received '{bit}'.")
 
-    def add_register(self, register: Register):
+    def add_register(self, register: Register) -> None:
         """Add a :obj:`.Register` to the set of resources used by this block, ensuring that
         all bits contained within are also accounted for.
 
@@ -615,7 +615,7 @@ class ControlFlowBuilderBlock(CircuitScopeInterface):
         # Maps placeholder index to the newly concrete instruction.
         placeholder_to_concrete = {}
 
-        def update_registers(index, op):
+        def update_registers(index, op) -> None:
             if isinstance(op, InstructionPlaceholder):
                 op, resources = op.concrete_instruction(all_qubits, all_clbits)
                 qubits = tuple(resources.qubits)

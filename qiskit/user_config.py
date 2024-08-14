@@ -39,7 +39,7 @@ class UserConfig:
 
     """
 
-    def __init__(self, filename=None):
+    def __init__(self, filename=None) -> None:
         """Create a UserConfig
 
         Args:

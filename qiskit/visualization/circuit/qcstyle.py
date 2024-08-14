@@ -90,7 +90,7 @@ class StyleDict(dict):
 
         return super().__getitem__(key)
 
-    def update(self, other):
+    def update(self, other) -> None:
         # the attributes "displaycolor" and "displaytext" are dictionaries
         # themselves, therefore we need to propagate the update down to them
         nested_attrs = {"displaycolor", "displaytext"}
@@ -150,7 +150,7 @@ class DefaultStyle:
             which allows for custom colors for user-created gates.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         default_style_dict = "iqp.json"
         path = Path(__file__).parent / "styles" / default_style_dict
 

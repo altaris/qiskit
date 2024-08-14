@@ -264,7 +264,7 @@ class SparsePauliOp(LinearOp):
         return self._coeffs
 
     @coeffs.setter
-    def coeffs(self, value):
+    def coeffs(self, value) -> None:
         """Set Pauli coefficients."""
         self._coeffs[:] = value
 
@@ -276,7 +276,7 @@ class SparsePauliOp(LinearOp):
             key = [key]
         return SparsePauliOp(self.paulis[key], self.coeffs[key])
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key, value) -> None:
         """Update SparsePauliOp."""
         # Modify specified rows of the PauliList
         if not isinstance(value, SparsePauliOp):

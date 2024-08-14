@@ -97,7 +97,7 @@ class AlignMeasures(TransformationPass):
         ),
         since="1.1.0",
     )
-    def __init__(self, alignment: int = 1):
+    def __init__(self, alignment: int = 1) -> None:
         """Create new pass.
 
         Args:

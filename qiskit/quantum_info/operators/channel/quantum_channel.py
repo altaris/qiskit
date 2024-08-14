@@ -49,7 +49,7 @@ class QuantumChannel(LinearOp):
         data: list | np.ndarray,
         num_qubits: int | None = None,
         op_shape: OpShape | None = None,
-    ):
+    ) -> None:
         """Initialize a quantum channel Superoperator operator.
 
         Args:

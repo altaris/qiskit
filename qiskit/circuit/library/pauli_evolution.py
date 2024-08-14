@@ -139,7 +139,7 @@ class PauliEvolutionGate(Gate):
         """
         self.params = [time]
 
-    def _define(self):
+    def _define(self) -> None:
         """Unroll, where the default synthesis is matrix based."""
         self.definition = self.synthesis.synthesize(self)
 

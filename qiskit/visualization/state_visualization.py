@@ -1346,7 +1346,7 @@ class TextMatrix:
     """Text representation of an array, with `__str__` method so it
     displays nicely in Jupyter notebooks"""
 
-    def __init__(self, state, max_size=8, dims=None, prefix="", suffix=""):
+    def __init__(self, state, max_size=8, dims=None, prefix="", suffix="") -> None:
         self.state = state
         self.max_size = max_size
         if dims is None:  # show dims if state is not only qubits

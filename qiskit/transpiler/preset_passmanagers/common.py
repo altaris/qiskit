@@ -83,7 +83,7 @@ def _without_control_flow(property_set):
 class _InvalidControlFlowForBackend:
     # Explicitly stateful closure to allow pickling.
 
-    def __init__(self, basis_gates=(), target=None):
+    def __init__(self, basis_gates=(), target=None) -> None:
         if target is not None:
             self.unsupported = [op for op in CONTROL_FLOW_OP_NAMES if op not in target]
         elif basis_gates is not None:

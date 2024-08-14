@@ -87,13 +87,13 @@ class ECRGate(SingletonGate):
 
     _standard_gate = StandardGate.ECRGate
 
-    def __init__(self, label=None, *, duration=None, unit="dt"):
+    def __init__(self, label=None, *, duration=None, unit="dt") -> None:
         """Create new ECR gate."""
         super().__init__("ecr", 2, [], label=label, duration=duration, unit=unit)
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def _define(self):
+    def _define(self) -> None:
         """
         gate ecr a, b { rzx(pi/4) a, b; x a; rzx(-pi/4) a, b;}
         """

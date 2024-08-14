@@ -41,7 +41,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
     Base class for Pauli and PauliList.
     """
 
-    def __init__(self, z: np.ndarray, x: np.ndarray, phase: np.ndarray):
+    def __init__(self, z: np.ndarray, x: np.ndarray, phase: np.ndarray) -> None:
         """Initialize the BasePauli.
 
         This is an array of M N-qubit Paulis defined as

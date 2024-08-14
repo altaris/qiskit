@@ -23,7 +23,7 @@ class ParameterView(MappingView):
     warnings.
     """
 
-    def __init__(self, iterable=None):
+    def __init__(self, iterable=None) -> None:
         if iterable is not None:
             self.data = list(iterable)
         else:
@@ -39,7 +39,7 @@ class ParameterView(MappingView):
         """Check whether self and the input are disjoint."""
         return not any(element in self for element in x)
 
-    def remove(self, x):
+    def remove(self, x) -> None:
         """Remove an existing element from the view."""
         self.data.remove(x)
 

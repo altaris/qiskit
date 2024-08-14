@@ -117,7 +117,7 @@ class Arrow3D(Patch3D, FancyArrowPatch):
     # this once 3.6 is the minimum supported version, because the deprecation period ends then.
     __module__ = "mpl_toolkits.mplot3d.art3d"
 
-    def __init__(self, xs, ys, zs, zdir="z", **kwargs):
+    def __init__(self, xs, ys, zs, zdir="z", **kwargs) -> None:
         # The Patch3D.__init__() method just calls its own super() method and then
         # self.set_3d_properties, but its __init__ signature is actually pretty incompatible with
         # how it goes on to call set_3d_properties, so we just have to do things ourselves.  The
@@ -128,7 +128,7 @@ class Arrow3D(Patch3D, FancyArrowPatch):
         self.set_3d_properties(tuple(zip(xs, ys)), zs, zdir)
         self._path2d = None
 
-    def draw(self, renderer):
+    def draw(self, renderer) -> None:
         xs3d, ys3d, zs3d = zip(*self._segment3d)
         x_s, y_s, _ = proj3d.proj_transform(xs3d, ys3d, zs3d, self.axes.M)
         self._path2d = matplotlib.path.Path(np.column_stack([x_s, y_s]))
@@ -196,7 +196,7 @@ class Bloch:
 
     def __init__(
         self, fig=None, axes=None, view=None, figsize=None, background=False, font_size=20
-    ):
+    ) -> None:
 
         # Figure and axes
         self._ext_fig = False
@@ -367,14 +367,14 @@ class Bloch:
         string += "zlpos:           " + str(self.zlpos) + "\n"
         return string
 
-    def clear(self):
+    def clear(self) -> None:
         """Resets Bloch sphere data sets to empty."""
         self.points = []
         self.vectors = []
         self.point_style = []
         self.annotations = []
 
-    def add_points(self, points, meth="s"):
+    def add_points(self, points, meth="s") -> None:
         """Add a list of data points to Bloch sphere.
 
         Args:
@@ -402,7 +402,7 @@ class Bloch:
             self.points.append(points)
             self.point_style.append("m")
 
-    def add_vectors(self, vectors):
+    def add_vectors(self, vectors) -> None:
         """Add a list of vectors to Bloch sphere.
 
         Args:
@@ -441,13 +441,13 @@ class Bloch:
             raise TypeError("Position needs to be specified by a qubit state or a 3D vector.")
         self.annotations.append({"position": vec, "text": text, "opts": kwargs})
 
-    def make_sphere(self):
+    def make_sphere(self) -> None:
         """
         Plots Bloch sphere and data sets.
         """
         self.render()
 
-    def render(self, title=""):
+    def render(self, title="") -> None:
         """
         Render the Bloch sphere and its data sets in on given figure and axes.
         """
@@ -500,7 +500,7 @@ class Bloch:
         self.plot_annotations()
         self.axes.set_title(title, fontsize=self.font_size, y=1.08)
 
-    def plot_back(self):
+    def plot_back(self) -> None:
         """back half of sphere"""
         u_angle = np.linspace(0, np.pi, 25)
         v_angle = np.linspace(0, np.pi, 25)
@@ -545,7 +545,7 @@ class Bloch:
             color=self.frame_color,
         )
 
-    def plot_front(self):
+    def plot_front(self) -> None:
         """front half of sphere"""
         u_angle = np.linspace(-np.pi, 0, 25)
         v_angle = np.linspace(0, np.pi, 25)
@@ -590,7 +590,7 @@ class Bloch:
             color=self.frame_color,
         )
 
-    def plot_axes(self):
+    def plot_axes(self) -> None:
         """axes"""
         span = np.linspace(-1.0, 1.0, 2)
         self.axes.plot(
@@ -603,7 +603,7 @@ class Bloch:
             0 * span, span, zs=0, zdir="y", label="Z", lw=self.frame_width, color=self.frame_color
         )
 
-    def plot_axes_labels(self):
+    def plot_axes_labels(self) -> None:
         """axes labels"""
         opts = {
             "fontsize": self.font_size,
@@ -627,7 +627,7 @@ class Bloch:
         for item in self.axes.zaxis.get_ticklines() + self.axes.zaxis.get_ticklabels():
             item.set_visible(False)
 
-    def plot_vectors(self):
+    def plot_vectors(self) -> None:
         """Plot vector"""
         # -X and Y data are switched for plotting purposes
         for k, vector in enumerate(self.vectors):
@@ -657,7 +657,7 @@ class Bloch:
 
                 self.axes.add_artist(arr)
 
-    def plot_points(self):
+    def plot_points(self) -> None:
         """Plot points"""
         # -X and Y data are switched for plotting purposes
         for k, point in enumerate(self.points):
@@ -716,7 +716,7 @@ class Bloch:
                     color=color,
                 )
 
-    def plot_annotations(self):
+    def plot_annotations(self) -> None:
         """Plot annotations"""
         # -X and Y data are switched for plotting purposes
         for annotation in self.annotations:
@@ -730,7 +730,7 @@ class Bloch:
             opts.update(annotation["opts"])
             self.axes.text(vec[1], -vec[0], vec[2], annotation["text"], **opts)
 
-    def show(self, title=""):
+    def show(self, title="") -> None:
         """
         Display Bloch sphere and corresponding data sets.
         """
@@ -738,7 +738,7 @@ class Bloch:
         if self.fig:
             plt.show(self.fig)
 
-    def save(self, name=None, output="png", dirc=None):
+    def save(self, name=None, output="png", dirc=None) -> None:
         """Saves Bloch sphere to file of type ``format`` in directory ``dirc``.
 
         Args:
@@ -770,7 +770,7 @@ class Bloch:
             matplotlib_close_if_inline(self.fig)
 
 
-def _hide_tick_lines_and_labels(axis):
+def _hide_tick_lines_and_labels(axis) -> None:
     """
     Set visible property of ticklines and ticklabels of an axis to False
     """

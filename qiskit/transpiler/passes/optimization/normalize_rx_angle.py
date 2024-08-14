@@ -48,7 +48,7 @@ class NormalizeRXAngle(TransformationPass):
     Note that pulse calibration might be attached per each rotation angle.
     """
 
-    def __init__(self, target=None, resolution_in_radian=0):
+    def __init__(self, target=None, resolution_in_radian=0) -> None:
         """NormalizeRXAngle initializer.
 
         Args:

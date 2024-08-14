@@ -27,7 +27,7 @@ from qiskit.exceptions import QiskitError
 class OpShape:
     """Multipartite matrix and vector shape class."""
 
-    def __init__(self, dims_l=None, dims_r=None, num_qargs_l=None, num_qargs_r=None):
+    def __init__(self, dims_l=None, dims_r=None, num_qargs_l=None, num_qargs_r=None) -> None:
         """Initialize an operator object."""
         # The number of left and right qargs
         self._num_qargs_l = 0  # the number of left (output) subsystems

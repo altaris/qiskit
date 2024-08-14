@@ -54,7 +54,7 @@ class Result:
         status=None,
         header=None,
         **kwargs,
-    ):
+    ) -> None:
         self._metadata = {}
         self.backend_name = backend_name
         self.backend_version = backend_version

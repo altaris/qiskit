@@ -34,7 +34,7 @@ class ForwardMatch:
 
     def __init__(
         self, circuit_dag_dep, template_dag_dep, node_id_c, node_id_t, qubits, clbits=None
-    ):
+    ) -> None:
         """
         Create a ForwardMatch class with necessary arguments.
         Args:
@@ -79,7 +79,7 @@ class ForwardMatch:
         # Transformation of the carg indices of the circuit to be adapted to the template indices
         self.carg_indices = []
 
-    def _init_successors_to_visit(self):
+    def _init_successors_to_visit(self) -> None:
         """
         Initialize the attribute list 'SuccessorsToVisit'
         """
@@ -89,7 +89,7 @@ class ForwardMatch:
                     self.circuit_dag_dep.direct_successors(i)
                 )
 
-    def _init_matched_with_circuit(self):
+    def _init_matched_with_circuit(self) -> None:
         """
         Initialize the attribute 'MatchedWith' in the template DAG dependency.
         """
@@ -99,7 +99,7 @@ class ForwardMatch:
             else:
                 self.circuit_dag_dep.get_node(i).matchedwith = []
 
-    def _init_matched_with_template(self):
+    def _init_matched_with_template(self) -> None:
         """
         Initialize the attribute 'MatchedWith' in the circuit DAG dependency.
         """
@@ -109,28 +109,28 @@ class ForwardMatch:
             else:
                 self.template_dag_dep.get_node(i).matchedwith = []
 
-    def _init_is_blocked_circuit(self):
+    def _init_is_blocked_circuit(self) -> None:
         """
         Initialize the attribute 'IsBlocked' in the circuit DAG dependency.
         """
         for i in range(0, self.circuit_dag_dep.size()):
             self.circuit_dag_dep.get_node(i).isblocked = False
 
-    def _init_is_blocked_template(self):
+    def _init_is_blocked_template(self) -> None:
         """
         Initialize the attribute 'IsBlocked' in the template DAG dependency.
         """
         for i in range(0, self.template_dag_dep.size()):
             self.template_dag_dep.get_node(i).isblocked = False
 
-    def _init_list_match(self):
+    def _init_list_match(self) -> None:
         """
         Initialize the list of matched nodes between the circuit and the template
         with the first match found.
         """
         self.match.append([self.node_id_t, self.node_id_c])
 
-    def _find_forward_candidates(self, node_id_t):
+    def _find_forward_candidates(self, node_id_t) -> None:
         """
         Find the candidate nodes to be matched in the template for a given node.
         Args:
@@ -160,7 +160,7 @@ class ForwardMatch:
             set(self.template_dag_dep.direct_successors(node_id_t)) - set(matches) - set(block)
         )
 
-    def _init_matched_nodes(self):
+    def _init_matched_nodes(self) -> None:
         """
         Initialize the list of current matched nodes.
         """
@@ -180,7 +180,7 @@ class ForwardMatch:
         node = self.matched_nodes_list[list_id][1]
         return node
 
-    def _remove_node_forward(self, list_id):
+    def _remove_node_forward(self, list_id) -> None:
         """
         Remove a node of the current matched list for a given list id.
         Args:
@@ -215,7 +215,7 @@ class ForwardMatch:
         successor_id = node.successorstovisit[list_id]
         return successor_id
 
-    def _update_qarg_indices(self, qarg):
+    def _update_qarg_indices(self, qarg) -> None:
         """
         Change qubits indices of the current circuit node in order to
         be comparable with the indices of the template qubits list.
@@ -229,7 +229,7 @@ class ForwardMatch:
         if len(qarg) != len(self.qarg_indices):
             self.qarg_indices = []
 
-    def _update_carg_indices(self, carg):
+    def _update_carg_indices(self, carg) -> None:
         """
         Change clbits indices of the current circuit node in order to
         be comparable with the indices of the template qubits list.
@@ -324,7 +324,7 @@ class ForwardMatch:
                 return False
         return True
 
-    def run_forward_match(self):
+    def run_forward_match(self) -> None:
         """
         Apply the forward match algorithm and returns the list of matches given an initial match
         and a circuit qubits configuration.

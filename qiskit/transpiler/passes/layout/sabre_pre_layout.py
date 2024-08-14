@@ -41,7 +41,7 @@ class SabrePreLayout(AnalysisPass):
         max_trials_vf2=100,
         call_limit_vf2=None,
         improve_layout=True,
-    ):
+    ) -> None:
         """SabrePreLayout initializer.
 
         The pass works by augmenting the coupling map with more and more "extra" edges

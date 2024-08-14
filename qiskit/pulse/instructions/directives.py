@@ -35,7 +35,7 @@ class Directive(instruction.Instruction, ABC):
 class RelativeBarrier(Directive):
     """Pulse ``RelativeBarrier`` directive."""
 
-    def __init__(self, *channels: chans.Channel, name: str | None = None):
+    def __init__(self, *channels: chans.Channel, name: str | None = None) -> None:
         """Create a relative barrier directive.
 
         The barrier directive blocks instructions within the same schedule
@@ -107,7 +107,7 @@ class TimeBlockade(Directive):
         duration: int,
         channel: chans.Channel,
         name: str | None = None,
-    ):
+    ) -> None:
         """Create a time blockade directive.
 
         Args:

@@ -120,7 +120,7 @@ class _StructuralEquivalenceImpl(ExprVisitor[bool]):
         "other",
     )
 
-    def __init__(self, other: expr.Expr, self_key, other_key):
+    def __init__(self, other: expr.Expr, self_key, other_key) -> None:
         self.self_key = self_key
         self.other_key = other_key
         self.other = other

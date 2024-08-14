@@ -136,7 +136,7 @@ class OneQubitEulerDecomposer:
     .. automethod:: __call__
     """
 
-    def __init__(self, basis: str = "U3", use_dag: bool = False):
+    def __init__(self, basis: str = "U3", use_dag: bool = False) -> None:
         """Initialize decomposer
 
         Supported bases are: ``'U'``, ``'PSX'``, ``'ZSXX'``, ``'ZSX'``, ``'U321'``, ``'U3'``,

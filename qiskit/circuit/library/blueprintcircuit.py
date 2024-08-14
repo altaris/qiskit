@@ -77,7 +77,7 @@ class BlueprintCircuit(QuantumCircuit, ABC):
         return self._qregs
 
     @qregs.setter
-    def qregs(self, qregs):
+    def qregs(self, qregs) -> None:
         """Set the quantum registers associated with the circuit."""
         if not self._is_initialized:
             # Workaround to ignore calls from QuantumCircuit.__init__() which

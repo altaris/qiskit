@@ -31,7 +31,7 @@ class Barrier(Instruction):
 
     _directive = True
 
-    def __init__(self, num_qubits: int, label: str | None = None):
+    def __init__(self, num_qubits: int, label: str | None = None) -> None:
         """
         Args:
             num_qubits: the number of qubits for the barrier.

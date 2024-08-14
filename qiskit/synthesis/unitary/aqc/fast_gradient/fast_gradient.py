@@ -123,7 +123,7 @@ class FastCNOTUnitObjective(CNOTUnitObjective):
         self._calc_gradient3n(grad3n)
         return grad
 
-    def _init_layers(self):
+    def _init_layers(self) -> None:
         """
         Initializes C-layers and F-layers by corresponding gate matrices.
         """
@@ -137,7 +137,7 @@ class FastCNOTUnitObjective(CNOTUnitObjective):
         for q in range(self._num_qubits):
             f_layers[q].set_from_matrix(mat=f_gates[q])
 
-    def _calc_ucf_fuc(self):
+    def _calc_ucf_fuc(self) -> None:
         """
         Computes matrices ``ucf_mat`` and ``fuc_mat``. Both remain non-finalized.
         """
@@ -175,7 +175,7 @@ class FastCNOTUnitObjective(CNOTUnitObjective):
 
         return fobj
 
-    def _calc_gradient4d(self, grad4d: np.ndarray):
+    def _calc_gradient4d(self, grad4d: np.ndarray) -> None:
         """
         Calculates a part gradient contributed by 2-qubit gates.
         """
@@ -200,7 +200,7 @@ class FastCNOTUnitObjective(CNOTUnitObjective):
                     fuc.product_q2(layer=c_layers[q], tmp1=tmp1, tmp2=tmp2)
                 )
 
-    def _calc_gradient3n(self, grad3n: np.ndarray):
+    def _calc_gradient3n(self, grad3n: np.ndarray) -> None:
         """
         Calculates a part gradient contributed by 1-qubit gates.
         """

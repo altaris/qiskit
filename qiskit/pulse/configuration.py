@@ -44,7 +44,7 @@ class Kernel:
     into IQ points.
     """
 
-    def __init__(self, name: str | None = None, **params):
+    def __init__(self, name: str | None = None, **params) -> None:
         """Create new kernel.
 
         Args:
@@ -70,7 +70,7 @@ class Discriminator:
     into 0/1 state results.
     """
 
-    def __init__(self, name: str | None = None, **params):
+    def __init__(self, name: str | None = None, **params) -> None:
         """Create new discriminator.
 
         Args:
@@ -94,7 +94,7 @@ class Discriminator:
 class LoRange:
     """Range of LO frequency."""
 
-    def __init__(self, lower_bound: float, upper_bound: float):
+    def __init__(self, lower_bound: float, upper_bound: float) -> None:
         self._lb = lower_bound
         self._ub = upper_bound
 
@@ -146,7 +146,7 @@ class LoConfig:
         self,
         channel_los: dict[DriveChannel | MeasureChannel, float] | None = None,
         lo_ranges: dict[DriveChannel | MeasureChannel, LoRange | tuple[int, int]] | None = None,
-    ):
+    ) -> None:
         """Lo channel configuration data structure.
 
         Args:
@@ -184,7 +184,7 @@ class LoConfig:
 
     def add_lo_range(
         self, channel: DriveChannel | MeasureChannel, lo_range: LoRange | tuple[int, int]
-    ):
+    ) -> None:
         """Add lo range to configuration.
 
         Args:

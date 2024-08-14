@@ -52,7 +52,7 @@ class Layout:
             str_list[-1] = str_list[-1][:-1]
         return "Layout({\n" + "\n".join(str_list) + "\n})"
 
-    def from_dict(self, input_dict):
+    def from_dict(self, input_dict) -> None:
         """Populates a Layout from a dictionary.
 
         The dictionary must be a bijective mapping between
@@ -113,11 +113,11 @@ class Layout:
     def __contains__(self, item):
         return item in self._p2v or item in self._v2p
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key, value) -> None:
         virtual, physical = Layout.order_based_on_type(key, value)
         self._set_type_checked_item(virtual, physical)
 
-    def _set_type_checked_item(self, virtual, physical):
+    def _set_type_checked_item(self, virtual, physical) -> None:
         old = self._v2p.pop(virtual, None)
         self._p2v.pop(old, None)
         old = self._p2v.pop(physical, None)
@@ -158,7 +158,7 @@ class Layout:
 
         return layout_copy
 
-    def add(self, virtual_bit, physical_bit=None):
+    def add(self, virtual_bit, physical_bit=None) -> None:
         """
         Adds a map element between `bit` and `physical_bit`. If `physical_bit` is not
         defined, `bit` will be mapped to a new physical bit.
@@ -183,7 +183,7 @@ class Layout:
 
         self[virtual_bit] = physical_bit
 
-    def add_register(self, reg):
+    def add_register(self, reg) -> None:
         """Adds at the end physical_qubits that map each bit in reg.
 
         Args:

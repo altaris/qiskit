@@ -222,7 +222,7 @@ class BaseSchedulerTransform(TransformationPass):
         clbit_write_latency: int = 0,
         conditional_latency: int = 0,
         target: Target = None,
-    ):
+    ) -> None:
         """Scheduler initializer.
 
         Args:

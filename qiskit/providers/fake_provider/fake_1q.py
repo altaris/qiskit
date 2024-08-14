@@ -23,7 +23,7 @@ from .fake_backend import FakeBackend
 class Fake1Q(FakeBackend):
     """A fake 1Q backend."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         0
         """

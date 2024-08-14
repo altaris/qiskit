@@ -231,7 +231,7 @@ class Pauli(BasePauli):
         return arr if dtype is None else arr.astype(dtype, copy=False)
 
     @classmethod
-    def set_truncation(cls, val: int):
+    def set_truncation(cls, val: int) -> None:
         """Set the max number of Pauli characters to display before truncation/
 
         Args:
@@ -280,7 +280,7 @@ class Pauli(BasePauli):
         return np.mod(self._phase - self._count_y(dtype=self._phase.dtype), 4)[0]
 
     @phase.setter
-    def phase(self, value):
+    def phase(self, value) -> None:
         # Convert group phase convention to internal ZX-phase convention
         self._phase[:] = np.mod(value + self._count_y(dtype=self._phase.dtype), 4)
 
@@ -290,7 +290,7 @@ class Pauli(BasePauli):
         return self._x[0]
 
     @x.setter
-    def x(self, val):
+    def x(self, val) -> None:
         self._x[0, :] = val
 
     @property
@@ -299,7 +299,7 @@ class Pauli(BasePauli):
         return self._z[0]
 
     @z.setter
-    def z(self, val):
+    def z(self, val) -> None:
         self._z[0, :] = val
 
     # ---------------------------------------------------------------------
@@ -317,7 +317,7 @@ class Pauli(BasePauli):
             qubits = [qubits]
         return Pauli((self.z[qubits], self.x[qubits]))
 
-    def __setitem__(self, qubits, value):
+    def __setitem__(self, qubits, value) -> None:
         """Update the Pauli for a subset of qubits."""
         if not isinstance(value, Pauli):
             value = Pauli(value)
