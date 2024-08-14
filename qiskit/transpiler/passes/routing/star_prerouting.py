@@ -28,7 +28,7 @@ from qiskit._accelerate.nlayout import NLayout
 class StarBlock:
     """Defines blocks representing star-shaped pieces of a circuit."""
 
-    def __init__(self, nodes=None, center=None, num2q=0) -> None:
+    def __init__(self, nodes=None, center=None, num2q: int = 0) -> None:
         self.center = center
         self.num2q = num2q
         self.nodes = [] if nodes is None else nodes
@@ -202,7 +202,7 @@ class StarPreRouting(TransformationPass):
     def collect_all_matching_blocks(
         self,
         dag,
-        min_block_size=2,
+        min_block_size: int = 2,
     ):
         """Collects all blocks that match a given filtering function filter_fn.
         This iteratively finds the largest block that does not match filter_fn,

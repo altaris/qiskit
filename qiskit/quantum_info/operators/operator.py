@@ -666,7 +666,7 @@ class Operator(LinearOp):
         return self.data
 
     @classmethod
-    def _einsum_matmul(cls, tensor, mat, indices, shift=0, right_mul=False):
+    def _einsum_matmul(cls, tensor, mat, indices, shift: int = 0, right_mul=False):
         """Perform a contraction using Numpy.einsum
 
         Args:

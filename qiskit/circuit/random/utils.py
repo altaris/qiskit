@@ -24,7 +24,7 @@ from qiskit.quantum_info.operators.symplectic.clifford_circuits import _BASIS_1Q
 def random_circuit(
     num_qubits,
     depth,
-    max_operands=4,
+    max_operands: int = 4,
     measure=False,
     conditional=False,
     reset=False,

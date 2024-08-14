@@ -37,7 +37,7 @@ from .level3 import level_3_pass_manager
 
 
 def generate_preset_pass_manager(
-    optimization_level=2,
+    optimization_level: int = 2,
     backend=None,
     target=None,
     basis_gates=None,

@@ -136,7 +136,7 @@ def get_gate_ctrl_text(op, drawer, style=None, calibrations=None):
     return gate_text, ctrl_text, raw_gate_text
 
 
-def get_param_str(op, drawer, ndigits=3):
+def get_param_str(op, drawer, ndigits: int = 3):
     """Get the params as a string to add to the gate text display"""
     if (
         not hasattr(op, "params")

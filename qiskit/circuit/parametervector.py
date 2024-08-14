@@ -52,7 +52,7 @@ class ParameterVector:
 
     __slots__ = ("_name", "_params", "_root_uuid")
 
-    def __init__(self, name, length=0) -> None:
+    def __init__(self, name, length: int = 0) -> None:
         self._name = name
         self._root_uuid = uuid4()
         root_uuid_int = self._root_uuid.int

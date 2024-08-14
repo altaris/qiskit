@@ -654,7 +654,7 @@ class QCircuitImage:
                 str(gap),
             )
 
-    def _truncate_float(self, matchobj, ndigits=4):
+    def _truncate_float(self, matchobj, ndigits: int = 4):
         """Truncate long floats."""
         if matchobj.group(0):
             return f"%.{ndigits}g" % float(matchobj.group(0))

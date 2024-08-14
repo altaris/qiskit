@@ -126,7 +126,7 @@ class _Quaternion:
     since="1.2.0",
     removal_timeline="in the 2.0 release",
 )
-def visualize_transition(circuit, trace=False, saveas=None, fpg=100, spg=2):
+def visualize_transition(circuit, trace=False, saveas=None, fpg: int = 100, spg: int = 2):
     """
     Creates animation showing transitions between states of a single
     qubit by applying quantum gates.

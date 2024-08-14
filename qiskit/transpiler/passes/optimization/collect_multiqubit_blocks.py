@@ -39,7 +39,7 @@ class CollectMultiQBlocks(AnalysisPass):
     and the data structure allows these changes to be done quickly.
     """
 
-    def __init__(self, max_block_size=2) -> None:
+    def __init__(self, max_block_size: int = 2) -> None:
         super().__init__()
         self.parent = {}  # parent array for the union
 

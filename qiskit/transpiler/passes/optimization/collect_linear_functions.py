@@ -31,7 +31,7 @@ class CollectLinearFunctions(CollectAndCollapse):
         self,
         do_commutative_analysis=False,
         split_blocks=True,
-        min_block_size=2,
+        min_block_size: int = 2,
         split_layers=False,
         collect_from_back=False,
     ) -> None:

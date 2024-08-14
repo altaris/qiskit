@@ -28,7 +28,7 @@ class HoareOptimizer(TransformationPass):
     https://arxiv.org/abs/1810.00375
     """
 
-    def __init__(self, size=10) -> None:
+    def __init__(self, size: int = 10) -> None:
         """
         Args:
             size (int): size of gate cache, in number of gates

@@ -373,7 +373,7 @@ def _text_circuit_drawer(
     cregbundle=None,
     encoding=None,
     wire_order=None,
-    expr_len=30,
+    expr_len: int = 30,
 ):
     """Draws a circuit using ascii art.
 
@@ -656,7 +656,7 @@ def _matplotlib_circuit_drawer(
     initial_state=False,
     cregbundle=None,
     wire_order=None,
-    expr_len=30,
+    expr_len: int = 30,
 ):
     """Draw a quantum circuit based on matplotlib.
     If `%matplotlib inline` is invoked in a Jupyter notebook, it visualizes a circuit inline.

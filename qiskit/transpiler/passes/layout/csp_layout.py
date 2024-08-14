@@ -33,8 +33,8 @@ class CSPLayout(AnalysisPass):
         coupling_map,
         strict_direction=False,
         seed=None,
-        call_limit=1000,
-        time_limit=10,
+        call_limit: int = 1000,
+        time_limit: int = 10,
     ) -> None:
         """If possible, chooses a Layout as a CSP, using backtracking.
 

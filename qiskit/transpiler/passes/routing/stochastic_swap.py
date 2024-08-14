@@ -60,7 +60,7 @@ class StochasticSwap(TransformationPass):
     """
 
     def __init__(
-        self, coupling_map, trials=20, seed=None, fake_run=False, initial_layout=None
+        self, coupling_map, trials: int = 20, seed=None, fake_run=False, initial_layout=None
     ) -> None:
         """StochasticSwap initializer.
 
@@ -277,7 +277,7 @@ class StochasticSwap(TransformationPass):
             layer["graph"], qubits=best_layout.reorder_bits(dag.qubits), inline_captures=True
         )
 
-    def _mapper(self, circuit_graph, coupling_graph, trials=20):
+    def _mapper(self, circuit_graph, coupling_graph, trials: int = 20):
         """Map a DAGCircuit onto a CouplingMap using swap gates.
 
         Args:

@@ -103,7 +103,7 @@ class BasisTranslator(TransformationPass):
     :ref:`custom_basis_gates` for details on adding custom equivalence rules.
     """
 
-    def __init__(self, equivalence_library, target_basis, target=None, min_qubits=0) -> None:
+    def __init__(self, equivalence_library, target_basis, target=None, min_qubits: int = 0) -> None:
         """Initialize a BasisTranslator instance.
 
         Args:

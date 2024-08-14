@@ -1008,7 +1008,7 @@ class SabreLayoutPassManager(PassManagerStagePlugin):
         return layout
 
 
-def _get_trial_count(default_trials=5):
+def _get_trial_count(default_trials: int = 5):
     if CONFIG.get("sabre_all_threads", None) or os.getenv("QISKIT_SABRE_ALL_THREADS"):
         return max(CPU_COUNT, default_trials)
     return default_trials

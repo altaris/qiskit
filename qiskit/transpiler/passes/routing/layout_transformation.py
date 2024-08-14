@@ -36,7 +36,7 @@ class LayoutTransformation(TransformationPass):
         from_layout: Layout | str,
         to_layout: Layout | str,
         seed: int | np.random.Generator | None = None,
-        trials=4,
+        trials: int = 4,
     ) -> None:
         """LayoutTransformation initializer.
 

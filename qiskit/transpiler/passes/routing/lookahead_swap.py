@@ -83,7 +83,9 @@ class LookaheadSwap(TransformationPass):
     https://medium.com/qiskit/improving-a-quantum-compiler-48410d7a7084
     """
 
-    def __init__(self, coupling_map, search_depth=4, search_width=4, fake_run=False) -> None:
+    def __init__(
+        self, coupling_map, search_depth: int = 4, search_width: int = 4, fake_run=False
+    ) -> None:
         """LookaheadSwap initializer.
 
         Args:

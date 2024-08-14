@@ -40,7 +40,7 @@ def qs_decomposition(
     decomposer_1q: Callable[[np.ndarray], QuantumCircuit] | None = None,
     decomposer_2q: Callable[[np.ndarray], QuantumCircuit] | None = None,
     *,
-    _depth=0,
+    _depth: int = 0,
 ):
     r"""
     Decomposes a unitary matrix into one and two qubit gates using Quantum Shannon Decomposition,
@@ -149,7 +149,7 @@ def qs_decomposition(
     return circ
 
 
-def _demultiplex(um0, um1, opt_a1=False, opt_a2=False, *, _depth=0):
+def _demultiplex(um0, um1, opt_a1=False, opt_a2=False, *, _depth: int = 0):
     """Decompose a generic multiplexer.
 
           ────□────

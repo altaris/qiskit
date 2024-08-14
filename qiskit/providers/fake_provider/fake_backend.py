@@ -46,7 +46,7 @@ class FakeBackend(BackendV1):
         ":class:`.GenericBackendV2`. You can convert BackendV1 to "
         ":class:`.BackendV2` with :class:`.BackendV2Converter`.",
     )
-    def __init__(self, configuration, time_alive=10) -> None:
+    def __init__(self, configuration, time_alive: int = 10) -> None:
         """FakeBackend initializer.
 
         Args:

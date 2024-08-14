@@ -326,10 +326,10 @@ class Target(BaseTarget):
     def __init__(
         self,
         description=None,  # pylint: disable=unused-argument
-        num_qubits=0,  # pylint: disable=unused-argument
+        num_qubits: int = 0,  # pylint: disable=unused-argument
         dt=None,  # pylint: disable=unused-argument
         granularity=1,  # pylint: disable=unused-argument
-        min_length=1,  # pylint: disable=unused-argument
+        min_length: int = 1,  # pylint: disable=unused-argument
         pulse_alignment=1,  # pylint: disable=unused-argument
         acquire_alignment=1,  # pylint: disable=unused-argument
         qubit_properties=None,  # pylint: disable=unused-argument

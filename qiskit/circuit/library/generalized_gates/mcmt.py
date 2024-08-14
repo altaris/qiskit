@@ -142,7 +142,7 @@ class MCMT(QuantumCircuit):
 
         return base_gate
 
-    def control(self, num_ctrl_qubits=1, label=None, ctrl_state=None, annotated=False):
+    def control(self, num_ctrl_qubits: int = 1, label=None, ctrl_state=None, annotated=False):
         """Return the controlled version of the MCMT circuit."""
         if not annotated and ctrl_state is None:
             gate = MCMT(self.gate, self.num_ctrl_qubits + num_ctrl_qubits, self.num_target_qubits)

@@ -178,7 +178,7 @@ class BlockCollector:
         self,
         filter_fn,
         split_blocks=True,
-        min_block_size=2,
+        min_block_size: int = 2,
         split_layers=False,
         collect_from_back=False,
     ):
