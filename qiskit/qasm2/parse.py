@@ -100,7 +100,7 @@ class CustomInstruction:
     builtin: bool = False
 
 
-def _generate_delay(time: float):
+def _generate_delay(time: float) -> Delay:
     # This wrapper is just to ensure that the correct type of exception gets emitted; it would be
     # unnecessarily spaghetti-ish to check every emitted instruction in Rust for integer
     # compatibility, but only if its name is `delay` _and_ its constructor wraps Qiskit's `Delay`.
@@ -175,7 +175,7 @@ LEGACY_CUSTOM_CLASSICAL = (
 )
 
 
-def from_bytecode(bytecode, custom_instructions: Iterable[CustomInstruction]):
+def from_bytecode(bytecode, custom_instructions: Iterable[CustomInstruction]) -> QuantumCircuit:
     """Loop through the Rust bytecode iterator `bytecode` producing a
     :class:`~qiskit.circuit.QuantumCircuit` instance from it.  All the hard work is done in Rust
     space where operations are faster; here, we're just about looping through the instructions as
@@ -345,7 +345,7 @@ def _gate_builder(name: str, num_qubits: int, known_gates, bytecode):
 
     The indirection here is mostly needed to correctly close over `known_gates` and `bytecode`."""
 
-    def definer(*params):
+    def definer(*params) -> _DefinedGate:
         return _DefinedGate(name, num_qubits, params, known_gates, tuple(bytecode))
 
     return definer
@@ -355,7 +355,7 @@ def _opaque_builder(name: str, num_qubits: int):
     """Create a gate-builder function of the signature `*params -> Gate` for an opaque gate with a
     given `name`, which takes the given numbers of qubits."""
 
-    def definer(*params):
+    def definer(*params) -> Gate:
         return Gate(name, num_qubits, params)
 
     return definer
@@ -363,7 +363,7 @@ def _opaque_builder(name: str, num_qubits: int):
 
 # The natural way to reduce returns in this function would be to use a lookup table for the opcodes,
 # but the PyO3 enum entities aren't (currently) hashable.
-def _evaluate_argument(expr, parameters):  # pylint: disable=too-many-return-statements
+def _evaluate_argument(expr, parameters) -> float:  # pylint: disable=too-many-return-statements
     """Inner recursive function to calculate the value of a mathematical expression given the
     concrete values in the `parameters` field."""
     if isinstance(expr, ExprConstant):

@@ -91,7 +91,7 @@ class SGate(SingletonGate):
         label: str | None = None,
         ctrl_state: int | str | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CSGate:
         """Return a (multi-)controlled-S gate.
 
         One control qubit returns a :class:`.CSGate`.
@@ -118,7 +118,7 @@ class SGate(SingletonGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> SdgGate:
         """Return inverse of S (SdgGate).
 
         Args:
@@ -132,12 +132,12 @@ class SGate(SingletonGate):
         """
         return SdgGate()
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> "PhaseGate":
         from .p import PhaseGate
 
         return PhaseGate(0.5 * numpy.pi * exponent)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, SGate)
 
 
@@ -203,7 +203,7 @@ class SdgGate(SingletonGate):
         label: str | None = None,
         ctrl_state: int | str | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CSdgGate:
         """Return a (multi-)controlled-Sdg gate.
 
         One control qubit returns a :class:`.CSdgGate`.
@@ -230,7 +230,7 @@ class SdgGate(SingletonGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> SGate:
         """Return inverse of Sdg (SGate).
 
         Args:
@@ -244,12 +244,12 @@ class SdgGate(SingletonGate):
         """
         return SGate()
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> "PhaseGate":
         from .p import PhaseGate
 
         return PhaseGate(-0.5 * numpy.pi * exponent)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, SdgGate)
 
 
@@ -318,7 +318,7 @@ class CSGate(SingletonControlledGate):
 
         self.definition = CPhaseGate(theta=pi / 2).definition
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CSdgGate:
         """Return inverse of CSGate (CSdgGate).
 
         Args:
@@ -332,12 +332,12 @@ class CSGate(SingletonControlledGate):
         """
         return CSdgGate(ctrl_state=self.ctrl_state)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> "CPhaseGate":
         from .p import CPhaseGate
 
         return CPhaseGate(0.5 * numpy.pi * exponent)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CSGate) and self.ctrl_state == other.ctrl_state
 
 
@@ -405,7 +405,7 @@ class CSdgGate(SingletonControlledGate):
 
         self.definition = CPhaseGate(theta=-pi / 2).definition
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CSGate:
         """Return inverse of CSdgGate (CSGate).
 
         Args:
@@ -419,10 +419,10 @@ class CSdgGate(SingletonControlledGate):
         """
         return CSGate(ctrl_state=self.ctrl_state)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> "CPhaseGate":
         from .p import CPhaseGate
 
         return CPhaseGate(-0.5 * numpy.pi * exponent)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CSdgGate) and self.ctrl_state == other.ctrl_state

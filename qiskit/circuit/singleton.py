@@ -373,7 +373,7 @@ class _SingletonMeta(type(Instruction)):
 
     __slots__ = ()
 
-    def __new__(mcs, name, bases, namespace, *, overrides=None, **kwargs):
+    def __new__(mcs, name, bases, namespace, *, overrides=None, **kwargs) -> _SingletonMeta:
         cls = super().__new__(mcs, name, bases, namespace, **kwargs)
         if overrides is not None:
             # The `__init_subclass__` logic is shared between `SingletonInstruction` and
@@ -497,7 +497,7 @@ class _SingletonInstructionOverrides(Instruction):
     def c_if(self, classical, val):
         return self.to_mutable().c_if(classical, val)
 
-    def copy(self, name: Optional[str] = None):
+    def copy(self, name: Optional[str] = None) -> _SingletonInstructionOverrides:
         if name is None:
             return self
         out = self.to_mutable()

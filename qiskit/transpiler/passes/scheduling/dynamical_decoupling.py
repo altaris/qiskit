@@ -286,7 +286,7 @@ class DynamicalDecoupling(TransformationPass):
 
         return new_dag
 
-    def _update_inst_durations(self, dag):
+    def _update_inst_durations(self, dag) -> InstructionDurations:
         """Update instruction durations with circuit information. If the dag contains gate
         calibrations and no instruction durations were provided through the target or as a
         standalone input, the circuit calibration durations will be used.

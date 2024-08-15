@@ -74,7 +74,7 @@ class ParameterVector:
         """Returns first index of value."""
         return self._params.index(value)
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: slice):
         return self.params[key]
 
     def __iter__(self):

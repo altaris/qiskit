@@ -134,7 +134,7 @@ class Isometry(Instruction):
         self.params = [self.iso_data]
         return inv
 
-    def _gates_to_uncompute(self):
+    def _gates_to_uncompute(self) -> QuantumCircuit:
         """
         Call to create a circuit with gates that take the desired isometry to the first 2^m columns
          of the 2^n*2^n identity matrix (see https://arxiv.org/abs/1501.06911)
@@ -182,7 +182,7 @@ class Isometry(Instruction):
             )
         return remaining_isometry, diag
 
-    def _disentangle(self, circuit, q, diag, remaining_isometry, column_index, s):
+    def _disentangle(self, circuit, q, diag, remaining_isometry, column_index, s: int):
         """
         Disentangle the s-th significant qubit (starting with s = 0) into the zero or the one state
         (dependent on column_index)
@@ -332,7 +332,7 @@ class Isometry(Instruction):
         else:
             raise CircuitError(f"invalid param type {type(parameter)} for gate {self.name}")
 
-    def inv_gate(self):
+    def inv_gate(self) -> Instruction:
         """Return the adjoint of the unitary."""
         if self._inverse is None:
             # call to generate the circuit that takes the isometry to the first 2^m columns
@@ -350,7 +350,7 @@ class Isometry(Instruction):
 # be compatible with the standard convention of Qiskit.
 
 
-def _get_qubits_by_label(labels, qubits, num_qubits):
+def _get_qubits_by_label(labels, qubits, num_qubits: int):
     return [qubits[num_qubits - label - 1] for label in labels]
 
 
@@ -361,7 +361,7 @@ def _reverse_qubit_oder(qubits):
 # Convert list of binary digits to integer
 
 
-def _get_binary_rep_as_list(n, num_digits):
+def _get_binary_rep_as_list(n, num_digits: int):
     binary_string = np.binary_repr(n).zfill(num_digits)
     binary = []
     for line in binary_string:

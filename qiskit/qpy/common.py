@@ -17,6 +17,7 @@ Common functions across several serialization and deserialization modules.
 
 import io
 import struct
+from typing import Any, Tuple
 
 from qiskit.qpy import formats
 
@@ -100,7 +101,7 @@ def read_mapping(file_obj, deserializer, **kwargs):
     return mapping
 
 
-def read_type_key(file_obj):
+def read_type_key(file_obj) -> Tuple[Any, ...]:
     """Read a type key from the file like object.
 
     Args:
@@ -113,7 +114,7 @@ def read_type_key(file_obj):
     return struct.unpack("!1c", file_obj.read(key_size))[0]
 
 
-def write_generic_typed_data(file_obj, type_key, data_binary) -> None:
+def write_generic_typed_data(file_obj, type_key, data_binary: bytes) -> None:
     """Write statically typed binary data to the file like object.
 
     Args:
@@ -126,7 +127,7 @@ def write_generic_typed_data(file_obj, type_key, data_binary) -> None:
     file_obj.write(data_binary)
 
 
-def write_sequence(file_obj, sequence, serializer, **kwargs) -> None:
+def write_sequence(file_obj, sequence: list, serializer, **kwargs) -> None:
     """Write a sequence of data in the file like object.
 
     Args:
@@ -183,7 +184,7 @@ def write_type_key(file_obj, type_key) -> None:
     file_obj.write(struct.pack("!1c", type_key))
 
 
-def data_to_binary(obj, serializer, **kwargs):
+def data_to_binary(obj, serializer, **kwargs) -> bytes:
     """Convert object into binary data with specified serializer.
 
     Args:
@@ -201,7 +202,7 @@ def data_to_binary(obj, serializer, **kwargs):
     return binary_data
 
 
-def sequence_to_binary(sequence, serializer, **kwargs):
+def sequence_to_binary(sequence: tuple, serializer, **kwargs) -> bytes:
     """Convert sequence into binary data with specified serializer.
 
     Args:
@@ -220,7 +221,7 @@ def sequence_to_binary(sequence, serializer, **kwargs):
     return binary_data
 
 
-def mapping_to_binary(mapping, serializer, **kwargs):
+def mapping_to_binary(mapping, serializer, **kwargs) -> bytes:
     """Convert mapping into binary data with specified serializer.
 
     .. note::

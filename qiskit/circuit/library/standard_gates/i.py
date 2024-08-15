@@ -54,7 +54,7 @@ class IGate(SingletonGate):
 
     _singleton_lookup_key = stdlib_singleton_key()
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "IGate":
         """Returne the inverse gate (itself).
 
         Args:
@@ -68,8 +68,8 @@ class IGate(SingletonGate):
         ."""
         return IGate()  # self-inverse
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> "IGate":
         return IGate()
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, IGate)

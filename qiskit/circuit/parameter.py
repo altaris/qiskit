@@ -88,7 +88,7 @@ class Parameter(ParameterExpression):
         self._parameter_symbols = {self: symbol}
         self._name_map = None
 
-    def assign(self, parameter, value):
+    def assign(self, parameter, value) -> ParameterExpression:
         if parameter != self:
             # Corresponds to superclass calls to `subs` and `bind` that would implicitly set
             # `allow_unknown_parameters=False`.
@@ -102,7 +102,7 @@ class Parameter(ParameterExpression):
         # so we need to lift the given value to a symbolic expression.
         return ParameterExpression({}, symengine.sympify(value))
 
-    def subs(self, parameter_map: dict, allow_unknown_parameters: bool = False):
+    def subs(self, parameter_map: dict, allow_unknown_parameters: bool = False) -> Parameter:
         """Substitute self with the corresponding parameter in ``parameter_map``."""
         if self in parameter_map:
             return parameter_map[self]
@@ -131,16 +131,16 @@ class Parameter(ParameterExpression):
     def __str__(self) -> str:
         return self.name
 
-    def __copy__(self):
+    def __copy__(self) -> Parameter:
         return self
 
-    def __deepcopy__(self, memo=None):
+    def __deepcopy__(self, memo=None) -> Parameter:
         return self
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.name})"
 
-    def __eq__(self, other):
+    def __eq__(self, other: Parameter) -> bool:
         if isinstance(other, Parameter):
             return (self._uuid, self._symbol_expr) == (other._uuid, other._symbol_expr)
         elif isinstance(other, ParameterExpression):

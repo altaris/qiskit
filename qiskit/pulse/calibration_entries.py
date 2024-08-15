@@ -211,7 +211,7 @@ class ScheduleDef(CalibrationEntry):
                 out.metadata["publisher"] = CalibrationPublisher.BACKEND_PROVIDER
         return out
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         # This delegates equality check to Schedule or ScheduleBlock.
         if hasattr(other, "_definition"):
             return self._definition == other._definition
@@ -275,7 +275,7 @@ class CallableDef(CalibrationEntry):
                 out.metadata["publisher"] = CalibrationPublisher.BACKEND_PROVIDER
         return out
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         # We cannot evaluate function equality without parsing python AST.
         # This simply compares weather they are the same object.
         if hasattr(other, "_definition"):
@@ -358,7 +358,7 @@ class PulseQobjDef(ScheduleDef):
             return None
         return super().get_schedule(*args, **kwargs)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, PulseQobjDef):
             # If both objects are Qobj just check Qobj equality.
             return self._source == other._source

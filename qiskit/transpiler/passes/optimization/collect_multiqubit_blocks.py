@@ -50,7 +50,7 @@ class CollectMultiQBlocks(AnalysisPass):
 
         self.max_block_size = max_block_size  # maximum block size
 
-    def find_set(self, index):
+    def find_set(self, index: int):
         """DSU function for finding root of set of items
         If my parent is myself, I am the root. Otherwise we recursively
         find the root for my parent. After that, we assign my parent to be
@@ -105,7 +105,7 @@ class CollectMultiQBlocks(AnalysisPass):
 
         block_list = []
 
-        def collect_key(x):
+        def collect_key(x) -> str:
             """special key function for topological ordering.
             Heuristic for this is to push all gates involving measurement
             or barriers, etc. as far back as possible (because they force

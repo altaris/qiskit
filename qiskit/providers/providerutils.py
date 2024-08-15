@@ -41,7 +41,7 @@ def filter_backends(
             conditions.
     """
 
-    def _match_all(obj, criteria):
+    def _match_all(obj, criteria) -> bool:
         """Return True if all items in criteria matches items in obj."""
         return all(getattr(obj, key_, None) == value_ for key_, value_ in criteria.items())
 

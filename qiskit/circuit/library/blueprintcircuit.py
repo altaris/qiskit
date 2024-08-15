@@ -18,6 +18,8 @@ from typing import Optional, Literal
 from qiskit._accelerate.circuit import CircuitData
 from qiskit.circuit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit.parametertable import ParameterView
+from qiskit.circuit.instruction import Instruction
+from qiskit.circuit.gate import Gate
 
 
 class BlueprintCircuit(QuantumCircuit, ABC):
@@ -98,7 +100,7 @@ class BlueprintCircuit(QuantumCircuit, ABC):
             self._build()
         return super().data
 
-    def decompose(self, gates_to_decompose=None, reps: int = 1):
+    def decompose(self, gates_to_decompose=None, reps: int = 1) -> QuantumCircuit:
         if not self._is_built:
             self._build()
         return super().decompose(gates_to_decompose, reps)
@@ -152,7 +154,7 @@ class BlueprintCircuit(QuantumCircuit, ABC):
             inline_captures=False,
         )
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> QuantumCircuit:
         if not self._is_built:
             self._build()
         return super().inverse(annotated=annotated)
@@ -163,22 +165,22 @@ class BlueprintCircuit(QuantumCircuit, ABC):
     def __getitem__(self, item):
         return self.data[item]
 
-    def size(self, *args, **kwargs):
+    def size(self, *args, **kwargs) -> int:
         if not self._is_built:
             self._build()
         return super().size(*args, **kwargs)
 
-    def to_instruction(self, parameter_map=None, label: Optional[str] = None):
+    def to_instruction(self, parameter_map=None, label: Optional[str] = None) -> Instruction:
         if not self._is_built:
             self._build()
         return super().to_instruction(parameter_map, label=label)
 
-    def to_gate(self, parameter_map=None, label: Optional[str] = None):
+    def to_gate(self, parameter_map=None, label: Optional[str] = None) -> Gate:
         if not self._is_built:
             self._build()
         return super().to_gate(parameter_map, label=label)
 
-    def depth(self, *args, **kwargs):
+    def depth(self, *args, **kwargs) -> int:
         if not self._is_built:
             self._build()
         return super().depth(*args, **kwargs)
@@ -188,12 +190,12 @@ class BlueprintCircuit(QuantumCircuit, ABC):
             self._build()
         return super().count_ops()
 
-    def num_nonlocal_gates(self):
+    def num_nonlocal_gates(self) -> int:
         if not self._is_built:
             self._build()
         return super().num_nonlocal_gates()
 
-    def num_connected_components(self, unitary_only: bool = False):
+    def num_connected_components(self, unitary_only: bool = False) -> int:
         if not self._is_built:
             self._build()
         return super().num_connected_components(unitary_only=unitary_only)

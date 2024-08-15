@@ -19,7 +19,7 @@ from qiskit.circuit.quantumregister import QuantumRegister
 from qiskit.exceptions import QiskitError
 
 
-def _check_is_gate(op):
+def _check_is_gate(op) -> bool:
     """Checks whether op can be converted to Gate."""
     if isinstance(op, Gate):
         return True
@@ -29,8 +29,11 @@ def _check_is_gate(op):
 
 
 def circuit_to_gate(
-    circuit, parameter_map=None, equivalence_library=None, label: Optional[str] = None
-):
+    circuit: "QuantumCircuit",
+    parameter_map=None,
+    equivalence_library=None,
+    label: Optional[str] = None,
+) -> Gate:
     """Build a :class:`.Gate` object from a :class:`.QuantumCircuit`.
 
     The gate is anonymous (not tied to a named quantum register),

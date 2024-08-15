@@ -181,7 +181,7 @@ class VF2Layout(AnalysisPass):
         start_time = time.time()
         trials = 0
 
-        def mapping_to_layout(layout_mapping):
+        def mapping_to_layout(layout_mapping) -> Layout:
             return Layout({reverse_im_graph_node_map[k]: v for k, v in layout_mapping.items()})
 
         for mapping in mappings:

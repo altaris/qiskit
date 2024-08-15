@@ -113,12 +113,12 @@ class BasePassManager(ABC):
     def __len__(self) -> int:
         return len(self._tasks)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> BasePassManager:
         new_passmanager = self.__class__(max_iteration=self.max_iteration)
         new_passmanager._tasks = self._tasks[index]
         return new_passmanager
 
-    def __add__(self, other):
+    def __add__(self, other) -> BasePassManager:
         new_passmanager = self.__class__(max_iteration=self.max_iteration)
         new_passmanager._tasks = self._tasks
         if isinstance(other, self.__class__):

@@ -98,7 +98,7 @@ def random_density_matrix(
     return DensityMatrix(rho, dims=dims)
 
 
-def _ginibre_matrix(nrow, ncol, seed: int | np.random.Generator):
+def _ginibre_matrix(nrow: int, ncol: int, seed: int | np.random.Generator | None):
     """Return a normally distributed complex random matrix.
 
     Args:

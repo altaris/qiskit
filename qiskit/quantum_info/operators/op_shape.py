@@ -83,7 +83,7 @@ class OpShape:
             inner = right
         return f"OpShape({inner})"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Check types and subsystem dimensions are equal"""
         if not isinstance(other, OpShape):
             return False
@@ -94,7 +94,7 @@ class OpShape:
             and self._dims_l == other._dims_l
         )
 
-    def copy(self):
+    def copy(self) -> OpShape:
         """Make a deep copy of current operator."""
         return copy.copy(self)
 
@@ -180,7 +180,7 @@ class OpShape:
         """Raise an exception if shape is not valid for the OpShape"""
         return self._validate(shape, raise_exception=True)
 
-    def _validate(self, shape, raise_exception: bool = False):
+    def _validate(self, shape, raise_exception: bool = False) -> bool:
         """Validate OpShape against a matrix or vector shape."""
         # pylint: disable=too-many-return-statements
         ndim = len(shape)
@@ -294,7 +294,7 @@ class OpShape:
             matrix_shape.validate_shape(shape)
         return matrix_shape
 
-    def subset(self, qargs=None, qargs_l=None, qargs_r=None):
+    def subset(self, qargs=None, qargs_l=None, qargs_r=None) -> OpShape:
         """Return the reduced OpShape of the specified qargs"""
         if qargs:
             # Convert qargs to left and right qargs
@@ -336,7 +336,7 @@ class OpShape:
             dims_l=dims_l, dims_r=dims_r, num_qargs_l=num_qargs_l, num_qargs_r=num_qargs_r
         )
 
-    def remove(self, qargs=None, qargs_l=None, qargs_r=None):
+    def remove(self, qargs=None, qargs_l=None, qargs_r=None) -> OpShape:
         """Return a new :class:`OpShape` with the specified qargs removed"""
         if qargs:
             # Convert qargs to left and right qargs
@@ -380,7 +380,7 @@ class OpShape:
             dims_l=dims_l, dims_r=dims_r, num_qargs_l=num_qargs_l, num_qargs_r=num_qargs_r
         )
 
-    def reverse(self):
+    def reverse(self) -> OpShape:
         """Reverse order of left and right qargs"""
         ret = copy.copy(self)
         if self._dims_r:
@@ -389,7 +389,7 @@ class OpShape:
             ret._dims_l = tuple(reversed(self._dims_l))
         return ret
 
-    def transpose(self):
+    def transpose(self) -> OpShape:
         """Return the transposed OpShape."""
         ret = copy.copy(self)
         ret._dims_l = self._dims_r
@@ -423,7 +423,7 @@ class OpShape:
             num_qargs_r = b._num_qargs_r + a._num_qargs_r
         return cls(dims_l=dims_l, dims_r=dims_r, num_qargs_l=num_qargs_l, num_qargs_r=num_qargs_r)
 
-    def compose(self, other, qargs=None, front: bool = False):
+    def compose(self, other: OpShape, qargs=None, front: bool = False) -> OpShape:
         """Return composed OpShape."""
         ret = OpShape()
         if qargs is None:
@@ -491,11 +491,11 @@ class OpShape:
                 ret._num_qargs_l = self._num_qargs_l
         return ret
 
-    def dot(self, other, qargs=None):
+    def dot(self, other, qargs=None) -> OpShape:
         """Return the dot product operator OpShape"""
         return self.compose(other, qargs, front=True)
 
-    def _validate_add(self, other, qargs=None):
+    def _validate_add(self, other: OpShape, qargs=None) -> OpShape:
         # Validate shapes can be added
         if qargs:
             if self._num_qargs_l != self._num_qargs_r:

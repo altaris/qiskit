@@ -1157,7 +1157,7 @@ class QuantumCircuit:
         transpiler and reattach it to the output, so you can track your own metadata."""
 
     @classmethod
-    def _from_circuit_data(cls, data: CircuitData) -> typing.Self:
+    def _from_circuit_data(cls, data: CircuitData) -> "QuantumCircuit":
         """A private constructor from rust space circuit data."""
         out = QuantumCircuit()
         out._data = data
@@ -1315,7 +1315,7 @@ class QuantumCircuit:
         """
         self._calibrations = defaultdict(dict, calibrations)
 
-    def has_calibration_for(self, instruction: CircuitInstruction | tuple):
+    def has_calibration_for(self, instruction: CircuitInstruction | tuple) -> bool:
         """Return True if the circuit has a calibration defined for the instruction context. In this
         case, the operation does not need to be translated to the device basis.
         """
@@ -1359,7 +1359,7 @@ class QuantumCircuit:
     def __str__(self) -> str:
         return str(self.draw(output="text"))
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: QuantumCircuit) -> bool:
         if not isinstance(other, QuantumCircuit):
             return False
 
@@ -2523,7 +2523,9 @@ class QuantumCircuit:
         cargs: Sequence[Clbit],
     ) -> Operation: ...
 
-    def _append(self, instruction, qargs=(), cargs=(), *, _standard_gate: bool = False):
+    def _append(
+        self, instruction, qargs=(), cargs=(), *, _standard_gate: bool = False
+    ) -> CircuitInstruction:
         """Append an instruction to the end of the circuit, modifying the circuit in place.
 
         .. warning::
@@ -2678,7 +2680,7 @@ class QuantumCircuit:
     def get_var(self, name: str, default: type(...) = ...) -> expr.Var: ...
 
     # We use a _literal_ `Ellipsis` as the marker value to leave `None` available as a default.
-    def get_var(self, name: str, default: typing.Any = ...):
+    def get_var(self, name: str, default: typing.Any = ...) -> expr.Var:
         """Retrieve a variable that is accessible in this circuit scope by name.
 
         Args:
@@ -3622,7 +3624,7 @@ class QuantumCircuit:
         """
         return self.num_unitary_factors()
 
-    def copy(self, name: str | None = None) -> typing.Self:
+    def copy(self, name: str | None = None) -> "QuantumCircuit":
         """Copy the circuit.
 
         Args:
@@ -3640,7 +3642,7 @@ class QuantumCircuit:
         name: str | None = None,
         *,
         vars_mode: Literal["alike", "captures", "drop"] = "alike",
-    ) -> typing.Self:
+    ) -> "QuantumCircuit":
         """Return a copy of self with the same structure but empty.
 
         That structure includes:
@@ -5734,7 +5736,7 @@ class QuantumCircuit:
         params: Statevector | Sequence[complex] | str | int,
         qubits: Sequence[QubitSpecifier] | None = None,
         normalize: bool = False,
-    ):
+    ) -> InstructionSet:
         r"""Initialize qubits in a specific state.
 
         Qubit initialization is done by first resetting the qubits to :math:`|0\rangle`
@@ -5845,7 +5847,7 @@ class QuantumCircuit:
         obj: np.ndarray | Gate | BaseOperator,
         qubits: Sequence[QubitSpecifier],
         label: str | None = None,
-    ):
+    ) -> QuantumCircuit:
         """Apply unitary gate specified by ``obj`` to ``qubits``.
 
         Args:
@@ -6639,7 +6641,7 @@ class _OuterCircuitScopeInterface(CircuitScopeInterface):
                 raise CircuitError(f"Classical bit index {specifier} is out-of-range.") from None
         raise CircuitError(f"Unknown classical resource specifier: '{specifier}'.")
 
-    def add_uninitialized_var(self, var) -> None:
+    def add_uninitialized_var(self, var: expr.Var) -> None:
         var = self.circuit._prepare_new_var(var, None)
         self.circuit._vars_local[var.name] = var
 

@@ -168,7 +168,7 @@ class ForwardMatch:
             [self.node_id_c, self.circuit_dag_dep.get_node(self.node_id_c)]
         )
 
-    def _get_node_forward(self, list_id):
+    def _get_node_forward(self, list_id: int):
         """
         Return a node from the matched_node_list for a given list id.
         Args:
@@ -180,7 +180,7 @@ class ForwardMatch:
         node = self.matched_nodes_list[list_id][1]
         return node
 
-    def _remove_node_forward(self, list_id) -> None:
+    def _remove_node_forward(self, list_id: int) -> None:
         """
         Remove a node of the current matched list for a given list id.
         Args:
@@ -188,7 +188,7 @@ class ForwardMatch:
         """
         self.matched_nodes_list.pop(list_id)
 
-    def _update_successor(self, node, successor_id):
+    def _update_successor(self, node, successor_id: int):
         """
         Return a node with an updated attribute 'SuccessorToVisit'.
         Args:
@@ -202,7 +202,7 @@ class ForwardMatch:
         node_update.successorstovisit.pop(successor_id)
         return node_update
 
-    def _get_successors_to_visit(self, node, list_id):
+    def _get_successors_to_visit(self, node, list_id: int):
         """
         Return the successor for a given node and id.
         Args:
@@ -255,7 +255,7 @@ class ForwardMatch:
         """
         return node_circuit.op.soft_compare(node_template.op)
 
-    def _is_same_q_conf(self, node_circuit, node_template):
+    def _is_same_q_conf(self, node_circuit, node_template) -> bool:
         """
         Check if the qubits configurations are compatible.
         Args:
@@ -300,7 +300,7 @@ class ForwardMatch:
             else:
                 return self.qarg_indices == node_template.qindices
 
-    def _is_same_c_conf(self, node_circuit, node_template):
+    def _is_same_c_conf(self, node_circuit, node_template) -> bool:
         """
         Check if the clbits configurations are compatible.
         Args:

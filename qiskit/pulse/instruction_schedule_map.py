@@ -368,7 +368,7 @@ class InstructionScheduleMap:
         instructions = single_q_insts + multi_q_insts
         return f"<{self.__class__.__name__}({instructions})>"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not isinstance(other, InstructionScheduleMap):
             return False
 

@@ -55,7 +55,7 @@ class PolytopeData:
     convex_subpolytopes: list[ConvexPolytopeData]
 
 
-def polytope_has_element(polytope, point):
+def polytope_has_element(polytope: ConvexPolytopeData, point) -> bool:
     """
     Tests whether `polytope` contains `point.
     """
@@ -68,7 +68,7 @@ def polytope_has_element(polytope, point):
     )
 
 
-def manual_get_vertex(polytope, seed: int | None = 42):
+def manual_get_vertex(polytope: PolytopeData, seed: int | None = 42):
     """
     Returns a single random vertex from `polytope`.
     """
@@ -134,7 +134,7 @@ class XXPolytope:
             total_strength=total_strength, max_strength=max_strength, place_strength=place_strength
         )
 
-    def add_strength(self, new_strength: float = 0.0):
+    def add_strength(self, new_strength: float = 0.0) -> XXPolytope:
         """
         Returns a new XXPolytope with one new XX interaction appended.
         """

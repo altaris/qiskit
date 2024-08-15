@@ -150,7 +150,7 @@ class U1Gate(Gate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> U1Gate:
         r"""Return inverted U1 gate (:math:`U1(\lambda)^{\dagger} = U1(-\lambda))`
 
         Args:
@@ -271,7 +271,7 @@ class CU1Gate(ControlledGate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool = False,
-    ):
+    ) -> MCU1Gate:
         """Controlled version of this gate.
 
         Args:
@@ -297,7 +297,7 @@ class CU1Gate(ControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CU1Gate:
         r"""Return inverted CU1 gate (:math:`CU1(\lambda)^{\dagger} = CU1(-\lambda))`
 
         Args:
@@ -403,7 +403,7 @@ class MCU1Gate(ControlledGate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool = False,
-    ):
+    ) -> MCU1Gate:
         """Controlled version of this gate.
 
         Args:
@@ -436,7 +436,7 @@ class MCU1Gate(ControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> MCU1Gate:
         r"""Return inverted MCU1 gate (:math:`MCU1(\lambda)^{\dagger} = MCU1(-\lambda))`
 
         Args:

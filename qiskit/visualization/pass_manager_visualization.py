@@ -101,7 +101,7 @@ def pass_manager_drawer(pass_manager, filename=None, style=None, raw: bool = Fal
     return output
 
 
-def _get_node_color(pss, style):
+def _get_node_color(pss, style) -> str:
     # look in the user provided dict first
     for typ, color in style.items():
         if isinstance(pss, typ):
@@ -189,7 +189,7 @@ def staged_pass_manager_drawer(pass_manager, filename=None, style=None, raw: boo
     return output
 
 
-def draw_subgraph(controller_group, component_id, style, prev_node, idx: int):
+def draw_subgraph(controller_group, component_id: int, style, prev_node, idx: int):
     """Draw subgraph."""
     import pydot
 
@@ -288,7 +288,7 @@ def draw_subgraph(controller_group, component_id, style, prev_node, idx: int):
     return subgraph, component_id, prev_node
 
 
-def make_output(graph, raw, filename):
+def make_output(graph, raw: bool, filename):
     """Produce output for pass_manager."""
     if raw:
         if filename:

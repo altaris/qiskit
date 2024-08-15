@@ -112,7 +112,7 @@ class SuzukiTrotter(ProductFormula):
             )
         super().__init__(order, reps, insert_barriers, cx_structure, atomic_evolution, wrap)
 
-    def synthesize(self, evolution):
+    def synthesize(self, evolution) -> QuantumCircuit:
         # get operators and time to evolve
         operators = evolution.operator
         time = evolution.time
@@ -135,7 +135,7 @@ class SuzukiTrotter(ProductFormula):
         return single_rep.repeat(self.reps, insert_barriers=self.insert_barriers).decompose()
 
     @staticmethod
-    def _recurse(order, time, pauli_list):
+    def _recurse(order: int, time, pauli_list):
         if order == 1:
             return pauli_list
 

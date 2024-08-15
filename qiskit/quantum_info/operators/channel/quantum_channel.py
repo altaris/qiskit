@@ -20,6 +20,7 @@ import math
 import sys
 from abc import abstractmethod
 from numbers import Number, Integral
+from typing import TYPE_CHECKING, Union
 
 import numpy as np
 
@@ -34,6 +35,10 @@ from qiskit.quantum_info.operators.channel.transformations import _to_choi
 from qiskit.quantum_info.operators.channel.transformations import _to_kraus
 from qiskit.quantum_info.operators.channel.transformations import _to_operator
 from qiskit.quantum_info.operators.scalar_op import ScalarOp
+
+if TYPE_CHECKING:
+    from qiskit.quantum_info.states.densitymatrix import DensityMatrix
+    from qiskit.quantum_info.states.statevector import Statevector
 
 if sys.version_info >= (3, 11):
     from typing import Self
@@ -71,7 +76,7 @@ class QuantumChannel(LinearOp):
             f",\n{pad}input_dims={self.input_dims()}, output_dims={self.output_dims()})"
         )
 
-    def __eq__(self, other: Self):
+    def __eq__(self, other) -> bool:
         """Test if two QuantumChannels are equal."""
         if not super().__eq__(other):
             return False
@@ -179,7 +184,7 @@ class QuantumChannel(LinearOp):
             other = type(self)(other)
         return self._add(-other, qargs=qargs)
 
-    def _add(self, other, qargs=None):
+    def _add(self, other, qargs=None) -> QuantumChannel:
         # NOTE: this method must be overridden for subclasses
         # that don't have a linear matrix representation
         # ie Kraus and Stinespring
@@ -191,7 +196,7 @@ class QuantumChannel(LinearOp):
         ret._data = self._data + other._data
         return ret
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> QuantumChannel:
         # NOTE: this method must be overridden for subclasses
         # that don't have a linear matrix representation
         # ie Kraus and Stinespring
@@ -272,7 +277,7 @@ class QuantumChannel(LinearOp):
             rtol = self.rtol
         return is_positive_semidefinite_matrix(choi, rtol=rtol, atol=atol)
 
-    def _is_tp_helper(self, choi, atol, rtol):
+    def _is_tp_helper(self, choi, atol, rtol) -> bool:
         """Test if Choi-matrix is trace-preserving (TP)"""
         if atol is None:
             atol = self.atol
@@ -305,7 +310,7 @@ class QuantumChannel(LinearOp):
         return state
 
     @abstractmethod
-    def _evolve(self, state, qargs=None):
+    def _evolve(self, state: Union[DensityMatrix, Statevector], qargs=None) -> DensityMatrix:
         """Evolve a quantum state by the quantum channel.
 
         Args:

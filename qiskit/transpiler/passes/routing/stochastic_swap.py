@@ -140,7 +140,7 @@ class StochasticSwap(TransformationPass):
         new_dag = self._mapper(dag, self.coupling_map, trials=self.trials)
         return new_dag
 
-    def _layer_permutation(self, dag, layer_partition, layout, qubit_subset, coupling, trials):
+    def _layer_permutation(self, dag, layer_partition, layout, qubit_subset, coupling, trials: int):
         """Find a swap circuit that implements a permutation for this layer.
 
         The goal is to swap qubits such that qubits in the same two-qubit gates
@@ -463,7 +463,7 @@ class StochasticSwap(TransformationPass):
         dagcircuit_output.apply_operation_back(new_op, new_qargs, node.cargs, check=False)
         return final_layout
 
-    def _new_seed(self):
+    def _new_seed(self) -> int:
         """Get a seed for a new RNG instance."""
         return self.rng.integers(0x7FFF_FFFF_FFFF_FFFF)
 
@@ -483,7 +483,7 @@ class StochasticSwap(TransformationPass):
         )
 
 
-def _controlflow_exhaustive_acyclic(operation: ControlFlowOp):
+def _controlflow_exhaustive_acyclic(operation: ControlFlowOp) -> bool:
     """Return True if the entire control-flow operation represents a block that is guaranteed to be
     entered, and does not cycle back to the initial layout."""
     if isinstance(operation, IfElseOp):
@@ -504,7 +504,7 @@ def _controlflow_exhaustive_acyclic(operation: ControlFlowOp):
     return False
 
 
-def _dag_from_block(block, node, root_dag):
+def _dag_from_block(block, node, root_dag) -> DAGCircuit:
     """Get a :class:`DAGCircuit` that represents the :class:`.QuantumCircuit` ``block`` embedded
     within the ``root_dag`` for full-width routing purposes.  This means that all the qubits are in
     the output DAG, but only the necessary clbits and classical registers are."""

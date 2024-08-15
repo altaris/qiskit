@@ -135,7 +135,7 @@ class BlockCollector:
                     for succ_id in self.dag.direct_successors(node.node_id)
                 ]
 
-    def _have_uncollected_nodes(self):
+    def _have_uncollected_nodes(self) -> bool:
         """Returns whether there are uncollected (pending) nodes"""
         return len(self._pending_nodes) > 0
 
@@ -201,7 +201,7 @@ class BlockCollector:
         Returns the list of matching blocks only.
         """
 
-        def not_filter_fn(node):
+        def not_filter_fn(node) -> bool:
             """Returns the opposite of filter_fn."""
             return not filter_fn(node)
 

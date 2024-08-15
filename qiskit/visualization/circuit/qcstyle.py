@@ -90,7 +90,7 @@ class StyleDict(dict):
 
         return super().__getitem__(key)
 
-    def update(self, other) -> None:
+    def update(self, other: "StyleDict") -> None:
         # the attributes "displaycolor" and "displaytext" are dictionaries
         # themselves, therefore we need to propagate the update down to them
         nested_attrs = {"displaycolor", "displaytext"}

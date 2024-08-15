@@ -224,7 +224,7 @@ class Pauli(BasePauli):
             return front + "..."
         return self.to_label()
 
-    def __array__(self, dtype=None, copy: Optional[bool] = None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None) -> np.ndarray:
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
         arr = self.to_matrix()
@@ -243,7 +243,7 @@ class Pauli(BasePauli):
         """
         cls.__truncate__ = int(val)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Test if two Paulis are equal."""
         if not isinstance(other, BasePauli):
             return False
@@ -310,7 +310,7 @@ class Pauli(BasePauli):
         """Return the number of qubits in the Pauli."""
         return self.num_qubits
 
-    def __getitem__(self, qubits):
+    def __getitem__(self, qubits) -> Pauli:
         """Return the unsigned Pauli group Pauli for subset of qubits."""
         # Set group phase to 0 so returned Pauli is always +1 coeff
         if isinstance(qubits, (int, np.integer)):
@@ -398,7 +398,7 @@ class Pauli(BasePauli):
     # Representation conversions
     # ---------------------------------------------------------------------
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """Make hashable based on string representation."""
         return hash(self.to_label())
 
@@ -510,19 +510,19 @@ class Pauli(BasePauli):
             other = Pauli(other)
         return Pauli(super().expand(other))
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> Pauli:
         return Pauli(super()._multiply(other))
 
-    def conjugate(self):
+    def conjugate(self) -> Pauli:
         return Pauli(super().conjugate())
 
-    def transpose(self):
+    def transpose(self) -> Pauli:
         return Pauli(super().transpose())
 
-    def adjoint(self):
+    def adjoint(self) -> Pauli:
         return Pauli(super().adjoint())
 
-    def inverse(self):
+    def inverse(self) -> Pauli:
         """Return the inverse of the Pauli."""
         return Pauli(super().adjoint())
 

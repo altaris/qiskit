@@ -307,7 +307,7 @@ class RZXCalibrationBuilderNoEcho(RZXCalibrationBuilder):
         raise QiskitError("RZXCalibrationBuilderNoEcho only supports hardware-native RZX gates.")
 
 
-def _filter_cr_tone(time_inst_tup):
+def _filter_cr_tone(time_inst_tup) -> bool:
     """A helper function to filter pulses on control channels."""
     valid_types = ["GaussianSquare"]
 
@@ -319,7 +319,7 @@ def _filter_cr_tone(time_inst_tup):
     return False
 
 
-def _filter_comp_tone(time_inst_tup):
+def _filter_comp_tone(time_inst_tup) -> bool:
     """A helper function to filter pulses on drive channels."""
     valid_types = ["GaussianSquare"]
 

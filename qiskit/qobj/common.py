@@ -40,7 +40,7 @@ class QobjDictField(SimpleNamespace):
         """
         self.__dict__.update(kwargs)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """Return a dictionary format representation of the OpenQASM 2 Qobj.
 
         Returns:
@@ -49,7 +49,7 @@ class QobjDictField(SimpleNamespace):
         return self.__dict__
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new QobjHeader object from a dictionary.
 
         Args:
@@ -62,7 +62,7 @@ class QobjDictField(SimpleNamespace):
 
         return cls(**data)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
             if self.__dict__ == other.__dict__:
                 return True

@@ -151,12 +151,12 @@ class Choi(QuantumChannel):
     # BaseOperator methods
     # ---------------------------------------------------------------------
 
-    def conjugate(self):
+    def conjugate(self) -> Choi:
         ret = _copy.copy(self)
         ret._data = np.conj(self._data)
         return ret
 
-    def transpose(self):
+    def transpose(self) -> Choi:
         ret = _copy.copy(self)
         ret._op_shape = self._op_shape.transpose()
         # Make bipartite matrix

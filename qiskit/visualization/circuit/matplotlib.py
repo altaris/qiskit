@@ -728,7 +728,7 @@ class MatplotlibDrawer:
         clbits_dict,
         glob_data,
         flow_parent=None,
-    ):
+    ) -> int:
         """Load all the coordinate info needed to place the gates on the drawing."""
 
         prev_x_index = -1
@@ -822,8 +822,8 @@ class MatplotlibDrawer:
         return prev_x_index + 1
 
     def _get_text_width(
-        self, text, glob_data, fontsize, param: bool = False, reg_remove_under=None
-    ):
+        self, text: str, glob_data, fontsize, param: bool = False, reg_remove_under=None
+    ) -> float:
         """Compute the width of a string in the default font"""
 
         from pylatexenc.latex2text import LatexNodes2Text
@@ -1992,7 +1992,7 @@ class MatplotlibDrawer:
                 zorder=zorder,
             )
 
-    def _plot_coord(self, x_index, y_index, gate_width, glob_data, flow_op: bool = False):
+    def _plot_coord(self, x_index: int, y_index: int, gate_width, glob_data, flow_op: bool = False):
         """Get the coord positions for an index"""
 
         # Check folding

@@ -147,7 +147,7 @@ class Optimize1qGatesDecomposition(TransformationPass):
         )
         return best_synth_circuit
 
-    def _gate_sequence_to_dag(self, best_synth_circuit):
+    def _gate_sequence_to_dag(self, best_synth_circuit) -> DAGCircuit:
         qubits = (Qubit(),)
         out_dag = DAGCircuit()
         out_dag.add_qubits(qubits)
@@ -160,7 +160,7 @@ class Optimize1qGatesDecomposition(TransformationPass):
 
     def _substitution_checks(
         self, dag, old_run, new_circ, basis, qubit, old_error=None, new_error=None
-    ):
+    ) -> bool:
         """
         Returns `True` when it is recommended to replace `old_run` with `new_circ` over `basis`.
         """

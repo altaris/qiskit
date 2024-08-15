@@ -83,7 +83,7 @@ class RXGate(Gate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CRXGate:
         """Return a (multi-)controlled-RX gate.
 
         Args:
@@ -117,7 +117,7 @@ class RXGate(Gate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> RXGate:
         r"""Return inverted RX gate.
 
         :math:`RX(\lambda)^{\dagger} = RX(-\lambda)`
@@ -141,11 +141,11 @@ class RXGate(Gate):
         sin = math.sin(self.params[0] / 2)
         return numpy.array([[cos, -1j * sin], [-1j * sin, cos]], dtype=dtype)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> RXGate:
         (theta,) = self.params
         return RXGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, RXGate):
             return self._compare_parameters(other)
         return False
@@ -266,7 +266,7 @@ class CRXGate(ControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CRXGate:
         """Return inverse CRX gate (i.e. with the negative rotation angle).
 
         Args:
@@ -296,7 +296,7 @@ class CRXGate(ControlledGate):
                 [[cos, 0, -isin, 0], [0, 1, 0, 0], [-isin, 0, cos, 0], [0, 0, 0, 1]], dtype=dtype
             )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, CRXGate):
             return self._compare_parameters(other) and self.ctrl_state == other.ctrl_state
         return False

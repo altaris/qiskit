@@ -13,9 +13,10 @@
 """Helper function for converting a dag to a circuit."""
 
 from qiskit.circuit import QuantumCircuit
+from qiskit.dagcircuit.dagcircuit import DAGCircuit
 
 
-def dag_to_circuit(dag, copy_operations: bool = True):
+def dag_to_circuit(dag: DAGCircuit, copy_operations: bool = True) -> QuantumCircuit:
     """Build a ``QuantumCircuit`` object from a ``DAGCircuit``.
 
     Args:

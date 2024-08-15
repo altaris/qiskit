@@ -76,10 +76,10 @@ class BasePass(GenericPass, metaclass=MetaPass):
         self.preserves: Iterable[GenericPass] = []
         self._hash = hash(None)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return self._hash
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         # Note that this implementation is incorrect.
         # This must be reimplemented in the future release.
         # See the discussion below for details.

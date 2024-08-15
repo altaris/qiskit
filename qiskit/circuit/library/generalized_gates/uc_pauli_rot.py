@@ -75,7 +75,7 @@ class UCPauliRotGate(Gate):
         ucr_circuit.append(gate, q[:])
         self.definition = ucr_circuit
 
-    def _dec_ucrot(self):
+    def _dec_ucrot(self) -> QuantumCircuit:
         """
         Finds a decomposition of a UC rotation gate into elementary gates
         (C-NOTs and single-qubit rotations).
@@ -131,7 +131,9 @@ class UCPauliRotGate(Gate):
         return circuit
 
     @staticmethod
-    def _dec_uc_rotations(angles: Sequence[float], start_index, end_index, reversed_dec) -> None:
+    def _dec_uc_rotations(
+        angles: Sequence[float], start_index: int, end_index: int, reversed_dec: bool
+    ) -> None:
         """
         Calculates rotation angles for a uniformly controlled R_t gate with a C-NOT gate at
         the end of the circuit. The rotation angles of the gate R_t are stored in

@@ -20,7 +20,7 @@ from .channels import DriveChannel, MeasureChannel
 from .exceptions import PulseError
 
 
-def _assert_nested_dict_equal(a: dict, b: dict):
+def _assert_nested_dict_equal(a: dict, b: dict) -> bool:
     if len(a) != len(b):
         return False
     for key in a:
@@ -59,7 +59,7 @@ class Kernel:
         params_repr = ", ".join(f"{str(k)}={str(v)}" for k, v in self.params.items())
         return f"{self.__class__.__name__}({name_repr}{params_repr})"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, Kernel):
             return _assert_nested_dict_equal(self.__dict__, other.__dict__)
         return False
@@ -85,7 +85,7 @@ class Discriminator:
         params_repr = ", ".join(f"{str(k)}={str(v)}" for k, v in self.params.items())
         return f"{self.__class__.__name__}({name_repr}{params_repr})"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, Discriminator):
             return _assert_nested_dict_equal(self.__dict__, other.__dict__)
         return False
@@ -124,7 +124,7 @@ class LoRange:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self._lb:f}, {self._ub:f})"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Two LO ranges are the same if they are of the same type, and
         have the same frequency range
 

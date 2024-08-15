@@ -47,7 +47,7 @@ class SpecialPolynomial:
         self.weight_2 = np.zeros(self.nc2, dtype=np.int8)
         self.weight_3 = np.zeros(self.nc3, dtype=np.int8)
 
-    def mul_monomial(self, indices):
+    def mul_monomial(self, indices) -> SpecialPolynomial:
         """Multiply by a monomial given by indices.
 
         Returns the product.
@@ -74,7 +74,7 @@ class SpecialPolynomial:
                 result.set_term(new_term, (result.get_term(new_term) + value) % 8)
         return result
 
-    def __mul__(self, other):
+    def __mul__(self, other) -> SpecialPolynomial:
         """Multiply two polynomials."""
         if not isinstance(other, SpecialPolynomial):
             other = int(other)
@@ -100,14 +100,14 @@ class SpecialPolynomial:
                     result = result + temp
         return result
 
-    def __rmul__(self, other):
+    def __rmul__(self, other: int) -> SpecialPolynomial:
         """Right multiplication.
 
         This operation is commutative.
         """
         return self.__mul__(other)
 
-    def __add__(self, other):
+    def __add__(self, other) -> SpecialPolynomial:
         """Add two polynomials."""
         if not isinstance(other, SpecialPolynomial):
             raise QiskitError("Element to add is not a SpecialPolynomial.")
@@ -184,7 +184,7 @@ class SpecialPolynomial:
         for j in subsets_3:
             self.set_term(list(j), 4)
 
-    def get_term(self, indices):
+    def get_term(self, indices) -> int:
         """Get the value of a term given the list of variables.
 
         Example: indices = [] returns the constant
@@ -227,7 +227,7 @@ class SpecialPolynomial:
 
         return self.weight_3[offset]
 
-    def set_term(self, indices, value):
+    def set_term(self, indices, value: int):
         """Set the value of a term given the list of variables.
 
         Example: indices = [] returns the constant
@@ -279,7 +279,7 @@ class SpecialPolynomial:
         tup = (self.weight_0, tuple(self.weight_1), tuple(self.weight_2), tuple(self.weight_3))
         return tup
 
-    def __eq__(self, x):
+    def __eq__(self, x) -> bool:
         """Test equality."""
         return isinstance(x, SpecialPolynomial) and self.key == x.key
 

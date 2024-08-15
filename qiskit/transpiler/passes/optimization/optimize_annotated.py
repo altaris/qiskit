@@ -95,7 +95,7 @@ class OptimizeAnnotated(TransformationPass):
             basic_insts = {"measure", "reset", "barrier", "snapshot", "delay", "store"}
             self._device_insts = basic_insts | set(self._basis_gates)
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """Run the OptimizeAnnotated pass on `dag`.
 
         Args:
@@ -111,7 +111,7 @@ class OptimizeAnnotated(TransformationPass):
         dag, _ = self._run_inner(dag)
         return dag
 
-    def _run_inner(self, dag) -> Tuple[DAGCircuit, bool]:
+    def _run_inner(self, dag: DAGCircuit) -> Tuple[DAGCircuit, bool]:
         """
         Optimizes annotated operations.
         Returns True if did something.
@@ -356,7 +356,7 @@ class OptimizeAnnotated(TransformationPass):
         op_new.definition = circ
         return op_new
 
-    def _conjugate_reduction(self, dag) -> Tuple[DAGCircuit, bool]:
+    def _conjugate_reduction(self, dag: DAGCircuit) -> Tuple[DAGCircuit, bool]:
         """
         Looks for annotated operations whose base operation has a nontrivial conjugate decomposition.
         In such cases, the modifiers of the annotated operation can be moved to the "middle" part of
@@ -432,7 +432,7 @@ class OptimizeAnnotated(TransformationPass):
 
         return opt
 
-    def _recurse(self, dag) -> Tuple[DAGCircuit, bool]:
+    def _recurse(self, dag: DAGCircuit) -> Tuple[DAGCircuit, bool]:
         """
         Recursively handles gate definitions.
         Returns True if did something.

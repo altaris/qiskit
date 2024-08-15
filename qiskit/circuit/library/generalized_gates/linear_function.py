@@ -187,7 +187,7 @@ class LinearFunction(Gate):
         return mat
 
     @staticmethod
-    def _clifford_to_mat(cliff):
+    def _clifford_to_mat(cliff: Clifford):
         """This creates a nxn matrix corresponding to the given Clifford, when Clifford
         can be converted to a linear function. This is possible when the clifford has
         tableau of the form [[A, B], [C, D]], with B = C = 0 and D = A^{-1}^t, and zero
@@ -201,7 +201,7 @@ class LinearFunction(Gate):
         return np.transpose(cliff.destab_x)
 
     @staticmethod
-    def _permutation_to_mat(perm):
+    def _permutation_to_mat(perm: PermutationGate):
         """This creates a nxn matrix from a given permutation gate."""
         nq = len(perm.pattern)
         mat = np.zeros((nq, nq), dtype=bool)
@@ -209,7 +209,7 @@ class LinearFunction(Gate):
             mat[i, j] = True
         return mat
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Check if two linear functions represent the same matrix."""
         if not isinstance(other, LinearFunction):
             return False
@@ -223,7 +223,7 @@ class LinearFunction(Gate):
         """Populates self.definition with a decomposition of this gate."""
         self.definition = self.synthesize()
 
-    def synthesize(self):
+    def synthesize(self) -> QuantumCircuit:
         """Synthesizes the linear function into a quantum circuit.
 
         Returns:
@@ -286,13 +286,13 @@ class LinearFunction(Gate):
 
         return LinearFunction(extended_mat)
 
-    def mat_str(self):
+    def mat_str(self) -> str:
         """Return string representation of the linear function
         viewed as a matrix with 0/1 entries.
         """
         return str(self.linear.astype(int))
 
-    def function_str(self):
+    def function_str(self) -> str:
         """Return string representation of the linear function
         viewed as a linear transformation.
         """

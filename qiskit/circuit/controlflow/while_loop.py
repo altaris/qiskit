@@ -87,7 +87,7 @@ class WhileLoopOp(ControlFlowOp):
     def blocks(self):
         return (self._params[0],)
 
-    def replace_blocks(self, blocks):
+    def replace_blocks(self, blocks) -> WhileLoopOp:
         (body,) = blocks
         return WhileLoopOp(self.condition, body, label=self.label)
 
@@ -151,7 +151,7 @@ class WhileLoopContext:
         exc_type: Optional[Type[BaseException]],
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
-    ):
+    ) -> bool:
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, there's nothing
             # to do except restore the circuit state.

@@ -114,7 +114,7 @@ class U2Gate(Gate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "U2Gate":
         r"""Return inverted U2 gate.
 
         :math:`U2(\phi, \lambda)^{\dagger} =U2(-\lambda-\pi, -\phi+\pi))`

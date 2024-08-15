@@ -52,7 +52,7 @@ class BasicProviderJob(JobV1):
 
         return self._result
 
-    def status(self):
+    def status(self) -> JobStatus:
         """Gets the status of the job by querying the Python's future
 
         Returns:

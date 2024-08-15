@@ -20,8 +20,8 @@ from qiskit.exceptions import MissingOptionalLibraryError
 
 
 def _num_to_latex(
-    raw_value, decimals: int = 15, first_term: bool = True, coefficient: bool = False
-):
+    raw_value: complex, decimals: int = 15, first_term: bool = True, coefficient: bool = False
+) -> str:
     """Convert a complex number to latex code suitable for a ket expression
 
     Args:
@@ -69,7 +69,7 @@ def _num_to_latex(
 
 def _matrix_to_latex(
     matrix, decimals: int = 10, prefix: str = "", max_size: Tuple[int, int] = (8, 8)
-):
+) -> str:
     """Latex representation of a complex numpy array (with maximum dimension 2)
 
     Args:
@@ -95,7 +95,7 @@ def _matrix_to_latex(
     out_string = f"\n{prefix}\n"
     out_string += "\\begin{bmatrix}\n"
 
-    def _elements_to_latex(elements):
+    def _elements_to_latex(elements) -> str:
         # Takes a list of elements (a row) and creates a latex
         # string from it; Each element separated by `&`
         el_string = ""
@@ -105,7 +105,7 @@ def _matrix_to_latex(
         el_string = el_string[:-2]  # remove trailing ampersands
         return el_string
 
-    def _rows_to_latex(rows, max_width):
+    def _rows_to_latex(rows, max_width) -> str:
         # Takes a list of lists (list of 'rows') and creates a
         # latex string from it
         row_string = ""

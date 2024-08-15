@@ -121,7 +121,7 @@ from .exceptions import (
 from .boolean_expression import BooleanExpression
 
 
-def classical_function(func):
+def classical_function(func) -> ClassicalFunction:
     """
     Parses and type checks the callable ``func`` to compile it into an ``ClassicalFunction``
     that can be synthesized into a ``QuantumCircuit``.

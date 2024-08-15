@@ -174,7 +174,7 @@ class Kraus(QuantumChannel):
             # Otherwise return the tuple of both kraus sets
             return self._data
 
-    def is_cptp(self, atol=None, rtol=None):
+    def is_cptp(self, atol=None, rtol=None) -> bool:
         """Return True if completely-positive trace-preserving."""
         if self._data[1] is not None:
             return False
@@ -194,7 +194,7 @@ class Kraus(QuantumChannel):
     # BaseOperator methods
     # ---------------------------------------------------------------------
 
-    def conjugate(self):
+    def conjugate(self) -> Kraus:
         ret = copy.copy(self)
         kraus_l, kraus_r = self._data
         kraus_l = [np.conj(k) for k in kraus_l]
@@ -203,7 +203,7 @@ class Kraus(QuantumChannel):
         ret._data = (kraus_l, kraus_r)
         return ret
 
-    def transpose(self):
+    def transpose(self) -> Kraus:
         ret = copy.copy(self)
         ret._op_shape = self._op_shape.transpose()
         kraus_l, kraus_r = self._data
@@ -213,7 +213,7 @@ class Kraus(QuantumChannel):
         ret._data = (kraus_l, kraus_r)
         return ret
 
-    def adjoint(self):
+    def adjoint(self) -> Kraus:
         ret = copy.copy(self)
         ret._op_shape = self._op_shape.transpose()
         kraus_l, kraus_r = self._data
@@ -297,13 +297,13 @@ class Kraus(QuantumChannel):
             other = Choi(other)
         return self._add(-other, qargs=qargs)
 
-    def _add(self, other, qargs=None):
+    def _add(self, other, qargs=None) -> Kraus:
         # Since we cannot directly add two channels in the Kraus
         # representation we try and use the other channels method
         # or convert to the Choi representation
         return Kraus(Choi(self)._add(other, qargs=qargs))
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> Kraus:
         if not isinstance(other, Number):
             raise QiskitError("other is not a number")
 
@@ -325,7 +325,7 @@ class Kraus(QuantumChannel):
         return ret
 
 
-def _is_matrix(data):
+def _is_matrix(data) -> bool:
     # return True if data is a 2-d array/tuple/list
     if not isinstance(data, np.ndarray):
         data = np.array(data, dtype=object)

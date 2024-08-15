@@ -52,7 +52,7 @@ class Layout:
             str_list[-1] = str_list[-1][:-1]
         return "Layout({\n" + "\n".join(str_list) + "\n})"
 
-    def from_dict(self, input_dict) -> None:
+    def from_dict(self, input_dict: dict) -> None:
         """Populates a Layout from a dictionary.
 
         The dictionary must be a bijective mapping between
@@ -143,7 +143,7 @@ class Layout:
     def __len__(self) -> int:
         return len(self._p2v)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, Layout):
             return self._p2v == other._p2v and self._v2p == other._v2p
         return False
@@ -183,7 +183,7 @@ class Layout:
 
         self[virtual_bit] = physical_bit
 
-    def add_register(self, reg) -> None:
+    def add_register(self, reg: QuantumRegister) -> None:
         """Adds at the end physical_qubits that map each bit in reg.
 
         Args:
@@ -388,7 +388,7 @@ class Layout:
         other_v2p = other.get_virtual_bits()
         return Layout({virt: other_v2p[qubits[phys]] for virt, phys in self._v2p.items()})
 
-    def inverse(self, source_qubits: List[Qubit], target_qubits: List[Qubit]):
+    def inverse(self, source_qubits: List[Qubit], target_qubits: List[Qubit]) -> Layout:
         """Finds the inverse of this layout.
 
         This is possible when the layout is a bijective mapping, however the input

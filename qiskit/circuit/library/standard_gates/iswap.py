@@ -127,8 +127,8 @@ class iSwapGate(SingletonGate):
 
         self.definition = qc
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> XXPlusYYGate:
         return XXPlusYYGate(-np.pi * exponent)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, iSwapGate)

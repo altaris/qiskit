@@ -31,7 +31,7 @@ def pi_check(
     eps: float = 1e-9,
     output: Literal["text", "latex", "mpl", "qasm"] = "text",
     ndigits=None,
-):
+) -> str:
     """Computes if a number is close to an integer
     fraction or multiple of PI and returns the
     corresponding string.
@@ -73,7 +73,7 @@ def pi_check(
     elif isinstance(inpt, str):
         return inpt
 
-    def normalize(single_inpt):
+    def normalize(single_inpt) -> str:
         if abs(single_inpt) < eps:
             return "0"
 

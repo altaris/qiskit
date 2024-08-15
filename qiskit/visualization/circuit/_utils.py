@@ -14,6 +14,7 @@
 
 import re
 from collections import OrderedDict
+from typing import Union
 from warnings import warn
 
 import numpy as np
@@ -29,6 +30,7 @@ from qiskit.circuit import (
     Measure,
     QuantumCircuit,
     Qubit,
+    QuantumRegister,
 )
 from qiskit.circuit.annotated_operation import AnnotatedOperation, InverseModifier, PowerModifier
 from qiskit.circuit.controlflow import condition_resources
@@ -40,7 +42,7 @@ from qiskit.utils import optionals as _optionals
 from ..exceptions import VisualizationError
 
 
-def _is_boolean_expression(gate_text, op):
+def _is_boolean_expression(gate_text, op) -> bool:
     if not _optionals.HAS_TWEEDLEDUM:
         return False
     from qiskit.circuit.classicalfunction import BooleanExpression
@@ -48,7 +50,7 @@ def _is_boolean_expression(gate_text, op):
     return isinstance(op, BooleanExpression) and gate_text == op.name
 
 
-def get_gate_ctrl_text(op, drawer, style=None, calibrations=None):
+def get_gate_ctrl_text(op, drawer: str, style=None, calibrations=None):
     """Load the gate_text and ctrl_text strings based on names and labels"""
     anno_list = []
     anno_text = ""
@@ -136,7 +138,7 @@ def get_gate_ctrl_text(op, drawer, style=None, calibrations=None):
     return gate_text, ctrl_text, raw_gate_text
 
 
-def get_param_str(op, drawer, ndigits: int = 3):
+def get_param_str(op, drawer: str, ndigits: int = 3) -> str:
     """Get the params as a string to add to the gate text display"""
     if (
         not hasattr(op, "params")
@@ -216,7 +218,7 @@ def get_bit_register(circuit, bit):
     return bit_loc.registers[0][0] if bit_loc.registers else None
 
 
-def get_bit_reg_index(circuit, bit):
+def get_bit_reg_index(circuit, bit: Union[Qubit, Clbit]):
     """Get the register for a bit if there is one, and the index of the bit
     from the top of the circuit, or the index of the bit within a register.
 
@@ -235,7 +237,13 @@ def get_bit_reg_index(circuit, bit):
     return register, bit_index, reg_index
 
 
-def get_wire_label(drawer, register, index, layout=None, cregbundle: bool = True):
+def get_wire_label(
+    drawer: str,
+    register: Union[QuantumRegister, ClassicalRegister],
+    index: int,
+    layout=None,
+    cregbundle: bool = True,
+) -> str:
     """Get the bit labels to display to the left of the wires.
 
     Args:
@@ -334,7 +342,7 @@ def get_condition_label_val(condition, circuit, cregbundle):
     return label, val_bits
 
 
-def fix_special_characters(label: str):
+def fix_special_characters(label: str) -> str:
     """
     Convert any special characters for mpl and latex drawers.
     Currently only checks for multiple underscores in register names
@@ -374,7 +382,7 @@ def generate_latex_label(label: str):
     return final_str.replace(" ", "\\,")  # Put in proper spaces
 
 
-def _get_valid_justify_arg(justify):
+def _get_valid_justify_arg(justify) -> str:
     """Returns a valid `justify` argument, warning if necessary."""
     if isinstance(justify, str):
         justify = justify.lower()
@@ -518,7 +526,7 @@ def _get_gate_span(qubits, node):
     return span
 
 
-def _any_crossover(qubits, node, nodes):
+def _any_crossover(qubits, node, nodes) -> bool:
     """Return True .IFF. 'node' crosses over any 'nodes'."""
     gate_span = _get_gate_span(qubits, node)
     all_indices = []
@@ -561,7 +569,7 @@ class _LayerSpooler(list):
                 for node in dag_nodes:
                     self.add(node, current_index)
 
-    def is_found_in(self, node, nodes):
+    def is_found_in(self, node, nodes) -> bool:
         """Is any qreq in node found in any of nodes?"""
         all_qargs = []
         for a_node in nodes:
@@ -569,7 +577,7 @@ class _LayerSpooler(list):
                 all_qargs.append(qarg)
         return any(i in node.qargs for i in all_qargs)
 
-    def insertable(self, node, nodes):
+    def insertable(self, node, nodes) -> bool:
         """True .IFF. we can add 'node' to layer 'nodes'"""
         return not _any_crossover(self.qubits, node, nodes)
 
@@ -663,7 +671,7 @@ class _LayerSpooler(list):
         if not inserted:
             self.insert(0, [node])
 
-    def add(self, node, index) -> None:
+    def add(self, node, index: int) -> None:
         """Add 'node' where it belongs, starting the try at 'index'."""
         if self.justification == "left":
             self.slide_from_left(node, index)

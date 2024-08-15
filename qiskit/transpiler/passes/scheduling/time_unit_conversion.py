@@ -53,7 +53,7 @@ class TimeUnitConversion(TransformationPass):
             self.inst_durations = target.durations()
         self._durations_provided = inst_durations is not None or target is not None
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """Run the TimeUnitAnalysis pass on `dag`.
 
         Args:
@@ -113,7 +113,7 @@ class TimeUnitConversion(TransformationPass):
         self.property_set["time_unit"] = time_unit
         return dag
 
-    def _update_inst_durations(self, dag):
+    def _update_inst_durations(self, dag: DAGCircuit) -> InstructionDurations:
         """Update instruction durations with circuit information. If the dag contains gate
         calibrations and no instruction durations were provided through the target or as a
         standalone input, the circuit calibration durations will be used.

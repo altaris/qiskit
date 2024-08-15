@@ -35,7 +35,7 @@ from qiskit.assembler.assemble_circuits import _assemble_circuits
 logger = logging.getLogger(__name__)
 
 
-def _log_assembly_time(start_time, end_time) -> None:
+def _log_assembly_time(start_time: float, end_time: float) -> None:
     log_msg = f"Total Assembly Time - {((end_time - start_time) * 1000):.5f} (ms)"
     logger.info(log_msg)
 
@@ -303,7 +303,7 @@ def _parse_common_args(
     shots,
     memory,
     seed_simulator,
-    init_qubits,
+    init_qubits: bool,
     rep_delay,
     qubit_lo_freq,
     meas_lo_freq,
@@ -482,11 +482,11 @@ def _parse_pulse_args(
     meas_level,
     meas_return,
     meas_map,
-    memory_slot_size,
+    memory_slot_size: int,
     rep_time,
     parametric_pulses,
     **run_config,
-):
+) -> RunConfig:
     """Build a pulse RunConfig replacing unset arguments with defaults derived from the `backend`.
     See `assemble` for more information on the required arguments.
 
@@ -541,7 +541,7 @@ def _parse_pulse_args(
 
 def _parse_circuit_args(
     parameter_binds, backend, meas_level, meas_return, parametric_pulses, **run_config
-):
+) -> RunConfig:
     """Build a circuit RunConfig replacing unset arguments with defaults derived from the `backend`.
     See `assemble` for more information on the required arguments.
 

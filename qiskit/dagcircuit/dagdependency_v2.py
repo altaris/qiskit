@@ -200,7 +200,7 @@ class _DAGDependencyV2:
 
         self._calibrations[gate][(tuple(qubits), params)] = schedule
 
-    def has_calibration_for(self, node):
+    def has_calibration_for(self, node) -> bool:
         """Return True if the dag has a calibration defined for the node operation. In this
         case, the operation does not need to be translated to the device basis.
         """
@@ -216,11 +216,11 @@ class _DAGDependencyV2:
         params = tuple(params)
         return (qubits, params) in self.calibrations[node.op.name]
 
-    def size(self):
+    def size(self) -> int:
         """Returns the number of gates in the circuit"""
         return len(self._multi_graph)
 
-    def depth(self):
+    def depth(self) -> int:
         """Return the circuit depth.
         Returns:
             int: the circuit depth
@@ -228,15 +228,15 @@ class _DAGDependencyV2:
         depth = rx.dag_longest_path_length(self._multi_graph)
         return depth if depth >= 0 else 0
 
-    def width(self):
+    def width(self) -> int:
         """Return the total number of qubits + clbits used by the circuit."""
         return len(self.qubits) + len(self.clbits)
 
-    def num_qubits(self):
+    def num_qubits(self) -> int:
         """Return the total number of qubits used by the circuit."""
         return len(self.qubits)
 
-    def num_clbits(self):
+    def num_clbits(self) -> int:
         """Return the total number of classical bits used by the circuit."""
         return len(self.clbits)
 
@@ -403,7 +403,7 @@ class _DAGDependencyV2:
                 for predecessor_id in predecessor_ids:
                     reachable[predecessor_id] = False
 
-    def _get_node(self, node_id):
+    def _get_node(self, node_id: int):
         """
         Args:
             node_id (int): label of considered node.
@@ -485,11 +485,11 @@ class _DAGDependencyV2:
         """Returns iterator of the predecessors of a node as DAGOpNodes."""
         return iter(self._multi_graph.predecessors(node._node_id))
 
-    def is_successor(self, node, node_succ):
+    def is_successor(self, node, node_succ) -> bool:
         """Checks if a second node is in the successors of node."""
         return self._multi_graph.has_edge(node._node_id, node_succ._node_id)
 
-    def is_predecessor(self, node, node_pred):
+    def is_predecessor(self, node, node_pred) -> bool:
         """Checks if a second node is in the predecessors of node."""
         return self._multi_graph.has_edge(node_pred._node_id, node._node_id)
 
@@ -508,7 +508,7 @@ class _DAGDependencyV2:
         """
         return iter(rx.bfs_successors(self._multi_graph, node._node_id))
 
-    def copy_empty_like(self):
+    def copy_empty_like(self) -> "_DAGDependencyV2":
         """Return a copy of self with the same structure but empty.
 
         That structure includes:
@@ -559,7 +559,9 @@ class _DAGDependencyV2:
 
         return dag_drawer(dag=self, scale=scale, filename=filename, style=style)
 
-    def replace_block_with_op(self, node_block, op, wire_pos_map, cycle_check: bool = True):
+    def replace_block_with_op(
+        self, node_block, op, wire_pos_map, cycle_check: bool = True
+    ) -> DAGOpNode:
         """Replace a block of nodes with a single node.
 
         This is used to consolidate a block of DAGOpNodes into a single

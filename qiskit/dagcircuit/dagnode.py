@@ -92,7 +92,7 @@ def _make_expr_key(bit_indices):
     return key
 
 
-def _condition_op_eq(node1, node2, bit_indices1, bit_indices2):
+def _condition_op_eq(node1, node2, bit_indices1, bit_indices2) -> bool:
     cond1 = node1.op.condition
     cond2 = node2.op.condition
     if isinstance(cond1, expr.Expr) and isinstance(cond2, expr.Expr):
@@ -111,7 +111,7 @@ def _condition_op_eq(node1, node2, bit_indices1, bit_indices2):
     )
 
 
-def _switch_case_eq(node1, node2, bit_indices1, bit_indices2):
+def _switch_case_eq(node1, node2, bit_indices1, bit_indices2) -> bool:
     target1 = node1.op.target
     target2 = node2.op.target
     if isinstance(target1, expr.Expr) and isinstance(target2, expr.Expr):
@@ -143,7 +143,7 @@ def _switch_case_eq(node1, node2, bit_indices1, bit_indices2):
     )
 
 
-def _for_loop_eq(node1, node2, bit_indices1, bit_indices2):
+def _for_loop_eq(node1, node2, bit_indices1, bit_indices2) -> bool:
     indexset1, param1, body1 = node1.op.params
     indexset2, param2, body2 = node2.op.params
     if indexset1 != indexset2:
@@ -178,7 +178,7 @@ _SEMANTIC_EQ_SYMMETRIC = frozenset({"barrier", "swap", "break_loop", "continue_l
 
 
 # Note: called from dag_node.rs.
-def _semantic_eq(node1, node2, bit_indices1, bit_indices2):
+def _semantic_eq(node1, node2, bit_indices1, bit_indices2) -> bool:
     """
     Check if DAG nodes are considered equivalent, e.g., as a node_match for
     :func:`rustworkx.is_isomorphic_node_match`.

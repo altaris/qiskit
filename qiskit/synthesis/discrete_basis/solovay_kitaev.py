@@ -185,7 +185,7 @@ class SolovayKitaevDecomposition:
         return best
 
 
-def _remove_inverse_follows_gate(sequence) -> None:
+def _remove_inverse_follows_gate(sequence: GateSequence) -> None:
     index = 0
     while index < len(sequence.gates) - 1:
         curr_gate = sequence.gates[index]
@@ -208,7 +208,7 @@ def _remove_inverse_follows_gate(sequence) -> None:
             index += 1
 
 
-def _remove_identities(sequence) -> None:
+def _remove_identities(sequence: GateSequence) -> None:
     index = 0
     while index < len(sequence.gates):
         if sequence.gates[index].name == "id":

@@ -245,7 +245,7 @@ class DAGCircuit:
 
         self._calibrations[gate][(tuple(qubits), params)] = schedule
 
-    def has_calibration_for(self, node):
+    def has_calibration_for(self, node: DAGOpNode) -> bool:
         """Return True if the dag has a calibration defined for the node operation. In this
         case, the operation does not need to be translated to the device basis.
         """
@@ -294,7 +294,7 @@ class DAGCircuit:
             self._clbit_indices[clbit] = BitLocations(len(self.clbits) - 1, [])
             self._add_wire(clbit)
 
-    def add_qreg(self, qreg):
+    def add_qreg(self, qreg: QuantumRegister):
         """Add all wires in a quantum register."""
         if not isinstance(qreg, QuantumRegister):
             raise DAGCircuitError("not a QuantumRegister instance.")
@@ -312,7 +312,7 @@ class DAGCircuit:
                 )
                 self._add_wire(qreg[j])
 
-    def add_creg(self, creg):
+    def add_creg(self, creg: ClassicalRegister):
         """Add all wires in a classical register."""
         if not isinstance(creg, ClassicalRegister):
             raise DAGCircuitError("not a ClassicalRegister instance.")
@@ -570,7 +570,7 @@ class DAGCircuit:
                 bit_position = self._qubit_indices[bit]
                 bit_position.registers.remove((qreg, j))
 
-    def _is_wire_idle(self, wire):
+    def _is_wire_idle(self, wire) -> bool:
         """Check if a wire is idle.
 
         Args:
@@ -656,7 +656,7 @@ class DAGCircuit:
         else:
             self._op_names[op_name] -= 1
 
-    def copy_empty_like(self, *, vars_mode: _VarsMode = "alike"):
+    def copy_empty_like(self, *, vars_mode: _VarsMode = "alike") -> DAGCircuit:
         """Return a copy of self with the same structure but empty.
 
         That structure includes:
@@ -719,7 +719,7 @@ class DAGCircuit:
 
         return target_dag
 
-    def _apply_op_node_back(self, node: DAGOpNode, *, check: bool = False):
+    def _apply_op_node_back(self, node: DAGOpNode, *, check: bool = False) -> DAGOpNode:
         additional = ()
         if _may_have_additional_wires(node):
             # This is the slow path; most of the time, this won't happen.
@@ -835,7 +835,7 @@ class DAGCircuit:
 
     def compose(
         self,
-        other,
+        other: DAGCircuit,
         qubits=None,
         clbits=None,
         front: bool = False,
@@ -1051,7 +1051,7 @@ class DAGCircuit:
                 else:
                     yield wire
 
-    def size(self, *, recurse: bool = False):
+    def size(self, *, recurse: bool = False) -> int:
         """Return the number of operations.  If there is control flow present, this count may only
         be an estimate, as the complete control-flow path cannot be statically known.
 
@@ -1095,7 +1095,7 @@ class DAGCircuit:
             length += inner - 1
         return length
 
-    def depth(self, *, recurse: bool = False):
+    def depth(self, *, recurse: bool = False) -> int:
         """Return the circuit depth.  If there is control flow present, this count may only be an
         estimate, as the complete control-flow path cannot be statically known.
 
@@ -1147,7 +1147,7 @@ class DAGCircuit:
             raise DAGCircuitError("not a DAG") from ex
         return depth if depth >= 0 else 0
 
-    def width(self):
+    def width(self) -> int:
         """Return the total number of qubits + clbits used by the circuit.
         This function formerly returned the number of qubits by the calculation
         return len(self._wires) - self.num_clbits()
@@ -1157,7 +1157,7 @@ class DAGCircuit:
         """
         return len(self._wires)
 
-    def num_qubits(self):
+    def num_qubits(self) -> int:
         """Return the total number of qubits used by the circuit.
         num_qubits() replaces former use of width().
         DAGCircuit.width() now returns qubits + clbits for
@@ -1165,7 +1165,7 @@ class DAGCircuit:
         """
         return len(self.qubits)
 
-    def num_clbits(self):
+    def num_clbits(self) -> int:
         """Return the total number of classical bits used by the circuit."""
         return len(self.clbits)
 
@@ -1219,7 +1219,7 @@ class DAGCircuit:
             return var in self._vars_info
         return (info := self._vars_info.get(var.name, False)) and info.var is var
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         # Try to convert to float, but in case of unbound ParameterExpressions
         # a TypeError will be raise, fallback to normal equality in those
         # cases
@@ -1306,7 +1306,7 @@ class DAGCircuit:
 
     def replace_block_with_op(
         self, node_block: list[DAGOpNode], op: Operation, wire_pos_map, cycle_check: bool = True
-    ):
+    ) -> DAGOpNode:
         """Replace a block of nodes with a single node.
 
         This is used to consolidate a block of DAGOpNodes into a single
@@ -1395,7 +1395,7 @@ class DAGCircuit:
         return new_node
 
     def substitute_node_with_dag(
-        self, node, input_dag, wires=None, propagate_condition: bool = True
+        self, node: DAGOpNode, input_dag: DAGCircuit, wires=None, propagate_condition: bool = True
     ):
         """Replace one node with dag.
 
@@ -1561,7 +1561,7 @@ class DAGCircuit:
 
         # Exclude any nodes from in_dag that are not a DAGOpNode or are on
         # wires outside the set specified by the wires kwarg
-        def filter_fn(node):
+        def filter_fn(node: DAGOpNode) -> bool:
             if not isinstance(node, DAGOpNode):
                 return False
             for _, _, wire in in_dag.edges(node):
@@ -1642,7 +1642,7 @@ class DAGCircuit:
 
     def substitute_node(
         self, node: DAGOpNode, op, inplace: bool = False, propagate_condition: bool = True
-    ):
+    ) -> DAGOpNode:
         """Replace an DAGOpNode with a single operation. qargs, cargs and
         conditions for the new operation will be inferred from the node to be
         replaced. The new operation will be checked to match the shape of the
@@ -1919,31 +1919,31 @@ class DAGCircuit:
         """Returns the longest path in the dag as a list of DAGOpNodes, DAGInNodes, and DAGOutNodes."""
         return [self._multi_graph[x] for x in rx.dag_longest_path(self._multi_graph)]
 
-    def successors(self, node):
+    def successors(self, node: DAGOpNode):
         """Returns iterator of the successors of a node as DAGOpNodes and DAGOutNodes."""
         return iter(self._multi_graph.successors(node._node_id))
 
-    def predecessors(self, node):
+    def predecessors(self, node: DAGOpNode):
         """Returns iterator of the predecessors of a node as DAGOpNodes and DAGInNodes."""
         return iter(self._multi_graph.predecessors(node._node_id))
 
-    def op_successors(self, node):
+    def op_successors(self, node: DAGOpNode):
         """Returns iterator of "op" successors of a node in the dag."""
         return (succ for succ in self.successors(node) if isinstance(succ, DAGOpNode))
 
-    def op_predecessors(self, node):
+    def op_predecessors(self, node: DAGOpNode):
         """Returns the iterator of "op" predecessors of a node in the dag."""
         return (pred for pred in self.predecessors(node) if isinstance(pred, DAGOpNode))
 
-    def is_successor(self, node, node_succ):
+    def is_successor(self, node: DAGOpNode, node_succ: DAGOpNode) -> bool:
         """Checks if a second node is in the successors of node."""
         return self._multi_graph.has_edge(node._node_id, node_succ._node_id)
 
-    def is_predecessor(self, node, node_pred):
+    def is_predecessor(self, node: DAGOpNode, node_pred: DAGOpNode) -> bool:
         """Checks if a second node is in the predecessors of node."""
         return self._multi_graph.has_edge(node_pred._node_id, node._node_id)
 
-    def quantum_predecessors(self, node):
+    def quantum_predecessors(self, node: DAGOpNode):
         """Returns iterator of the predecessors of a node that are
         connected by a quantum edge as DAGOpNodes and DAGInNodes."""
         return iter(
@@ -1952,7 +1952,7 @@ class DAGCircuit:
             )
         )
 
-    def classical_predecessors(self, node):
+    def classical_predecessors(self, node: DAGOpNode):
         """Returns iterator of the predecessors of a node that are
         connected by a classical edge as DAGOpNodes and DAGInNodes."""
         return iter(
@@ -1961,22 +1961,22 @@ class DAGCircuit:
             )
         )
 
-    def ancestors(self, node):
+    def ancestors(self, node: DAGOpNode):
         """Returns set of the ancestors of a node as DAGOpNodes and DAGInNodes."""
         return {self._multi_graph[x] for x in rx.ancestors(self._multi_graph, node._node_id)}
 
-    def descendants(self, node):
+    def descendants(self, node: DAGOpNode):
         """Returns set of the descendants of a node as DAGOpNodes and DAGOutNodes."""
         return {self._multi_graph[x] for x in rx.descendants(self._multi_graph, node._node_id)}
 
-    def bfs_successors(self, node):
+    def bfs_successors(self, node: DAGOpNode):
         """
         Returns an iterator of tuples of (DAGNode, [DAGNodes]) where the DAGNode is the current node
         and [DAGNode] is its successors in  BFS order.
         """
         return iter(rx.bfs_successors(self._multi_graph, node._node_id))
 
-    def quantum_successors(self, node):
+    def quantum_successors(self, node: DAGOpNode):
         """Returns iterator of the successors of a node that are
         connected by a quantum edge as Opnodes and DAGOutNodes."""
         return iter(
@@ -1985,7 +1985,7 @@ class DAGCircuit:
             )
         )
 
-    def classical_successors(self, node):
+    def classical_successors(self, node: DAGOpNode):
         """Returns iterator of the successors of a node that are
         connected by a classical edge as DAGOpNodes and DAGInNodes."""
         return iter(
@@ -1994,7 +1994,7 @@ class DAGCircuit:
             )
         )
 
-    def remove_op_node(self, node):
+    def remove_op_node(self, node: DAGOpNode):
         """Remove an operation node n.
 
         Add edges from predecessors to successors.
@@ -2008,7 +2008,7 @@ class DAGCircuit:
         self._multi_graph.remove_node_retain_edges_by_id(node._node_id)
         self._decrement_op(node.name)
 
-    def remove_ancestors_of(self, node) -> None:
+    def remove_ancestors_of(self, node: DAGOpNode) -> None:
         """Remove all of the ancestor operation nodes of node."""
         anc = rx.ancestors(self._multi_graph, node)
         # TODO: probably better to do all at once using
@@ -2018,14 +2018,14 @@ class DAGCircuit:
             if isinstance(anc_node, DAGOpNode):
                 self.remove_op_node(anc_node)
 
-    def remove_descendants_of(self, node) -> None:
+    def remove_descendants_of(self, node: DAGOpNode) -> None:
         """Remove all of the descendant operation nodes of node."""
         desc = rx.descendants(self._multi_graph, node)
         for desc_node in desc:
             if isinstance(desc_node, DAGOpNode):
                 self.remove_op_node(desc_node)
 
-    def remove_nonancestors_of(self, node) -> None:
+    def remove_nonancestors_of(self, node: DAGOpNode) -> None:
         """Remove all of the non-ancestors operation nodes of node."""
         anc = rx.ancestors(self._multi_graph, node)
         comp = list(set(self._multi_graph.nodes()) - set(anc))
@@ -2033,7 +2033,7 @@ class DAGCircuit:
             if isinstance(n, DAGOpNode):
                 self.remove_op_node(n)
 
-    def remove_nondescendants_of(self, node) -> None:
+    def remove_nondescendants_of(self, node: DAGOpNode) -> None:
         """Remove all of the non-descendants operation nodes of node."""
         dec = rx.descendants(self._multi_graph, node)
         comp = list(set(self._multi_graph.nodes()) - set(dec))
@@ -2156,7 +2156,7 @@ class DAGCircuit:
         Nodes must have only one successor to continue the run.
         """
 
-        def filter_fn(node):
+        def filter_fn(node: DAGOpNode) -> bool:
             return isinstance(node, DAGOpNode) and node.name in namelist and node.condition is None
 
         group_list = rx.collect_runs(self._multi_graph, filter_fn)
@@ -2374,7 +2374,7 @@ class _DAGVarInfo:
         self.out_node = out_node
 
 
-def _may_have_additional_wires(node) -> bool:
+def _may_have_additional_wires(node: DAGOpNode) -> bool:
     """Return whether a given :class:`.DAGOpNode` may contain references to additional wires
     locations within its :class:`.Operation`.  If this is ``True``, it doesn't necessarily mean
     that the operation _will_ access memory inherently, but a ``False`` return guarantees that it

@@ -135,7 +135,7 @@ class AnnotatedOperation(Operation):
         """Return a copy of the :class:`~.AnnotatedOperation`."""
         return AnnotatedOperation(base_op=self.base_op.copy(), modifiers=self.modifiers.copy())
 
-    def to_matrix(self):
+    def to_matrix(self) -> "Operator":
         """Return a matrix representation (allowing to construct Operator)."""
         from qiskit.quantum_info.operators import Operator  # pylint: disable=cyclic-import
 
@@ -185,7 +185,7 @@ class AnnotatedOperation(Operation):
         )
         return AnnotatedOperation(self.base_op, extended_modifiers)
 
-    def inverse(self, annotated: bool = True):
+    def inverse(self, annotated: bool = True) -> AnnotatedOperation:
         """
         Return the inverse version of itself.
 
@@ -202,7 +202,7 @@ class AnnotatedOperation(Operation):
         extended_modifiers.append(InverseModifier())
         return AnnotatedOperation(self.base_op, extended_modifiers)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> AnnotatedOperation:
         """
         Raise this gate to the power of ``exponent``.
 

@@ -19,6 +19,8 @@ from rustworkx.visualization import graphviz_draw
 import rustworkx as rx
 
 from qiskit.exceptions import InvalidFileError
+from qiskit.circuit.quantumcircuit import QuantumCircuit
+from qiskit.circuit import Gate
 from .exceptions import CircuitError
 from .parameter import Parameter
 from .parameterexpression import ParameterExpression
@@ -67,13 +69,13 @@ class EquivalenceLibrary:
         """
         return self._graph
 
-    def _set_default_node(self, key):
+    def _set_default_node(self, key: Key) -> int:
         """Create a new node if key not found"""
         if key not in self._key_to_node_index:
             self._key_to_node_index[key] = self._graph.add_node(NodeData(key=key, equivs=[]))
         return self._key_to_node_index[key]
 
-    def add_equivalence(self, gate, equivalent_circuit) -> None:
+    def add_equivalence(self, gate, equivalent_circuit: QuantumCircuit) -> None:
         """Add a new equivalence to the library. Future queries for the Gate
         will include the given circuit, in addition to all existing equivalences
         (including those from base).
@@ -112,7 +114,7 @@ class EquivalenceLibrary:
         self._graph.add_edges_from(edges)
         self._rule_id += 1
 
-    def has_entry(self, gate):
+    def has_entry(self, gate) -> bool:
         """Check if a library contains any decompositions for gate.
 
         Args:
@@ -126,7 +128,7 @@ class EquivalenceLibrary:
 
         return key in self._key_to_node_index
 
-    def set_entry(self, gate, entry) -> None:
+    def set_entry(self, gate: Gate, entry) -> None:
         """Set the equivalence record for a Gate. Future queries for the Gate
         will return only the circuits provided.
 
@@ -153,7 +155,7 @@ class EquivalenceLibrary:
         for equivalence in entry:
             self.add_equivalence(gate, equivalence)
 
-    def get_entry(self, gate):
+    def get_entry(self, gate: Gate):
         """Gets the set of QuantumCircuits circuits from the library which
         equivalently implement the given Gate.
 
@@ -223,7 +225,7 @@ class EquivalenceLibrary:
             image_type=image_type,
         )
 
-    def _build_basis_graph(self):
+    def _build_basis_graph(self) -> rx.PyDiGraph:
         graph = rx.PyDiGraph()
 
         node_map = {}
@@ -258,7 +260,7 @@ class EquivalenceLibrary:
 
         return graph
 
-    def _get_equivalences(self, key):
+    def _get_equivalences(self, key: Key):
         """Get all the equivalences for the given key"""
         return (
             self._graph[self._key_to_node_index[key]].equivs

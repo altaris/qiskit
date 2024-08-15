@@ -39,7 +39,7 @@ class Delay(Instruction):
 
     broadcast_arguments = Gate.broadcast_arguments
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "Delay":
         """Special case. Return self."""
         return self
 

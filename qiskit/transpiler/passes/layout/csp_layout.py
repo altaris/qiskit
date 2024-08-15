@@ -104,12 +104,12 @@ class CSPLayout(AnalysisPass):
 
         if self.strict_direction:
 
-            def constraint(control, target):
+            def constraint(control, target) -> bool:
                 return (control, target) in edges
 
         else:
 
-            def constraint(control, target):
+            def constraint(control, target) -> bool:
                 return (control, target) in edges or (target, control) in edges
 
         for pair in cxs:

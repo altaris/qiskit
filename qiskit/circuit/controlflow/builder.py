@@ -58,7 +58,7 @@ class CircuitScopeInterface(abc.ABC):
 
     @abc.abstractmethod
     def append(
-        self, instruction: CircuitInstruction, *, _standard_gate=False
+        self, instruction: CircuitInstruction, *, _standard_gate: bool = False
     ) -> CircuitInstruction:
         """Low-level 'append' primitive; this may assume that the qubits, clbits and operation are
         all valid for the circuit.
@@ -451,7 +451,7 @@ class ControlFlowBuilderBlock(CircuitScopeInterface):
                 self.instructions.add_clbit(b, strict=False)
         self.instructions.extend(data)
 
-    def resolve_classical_resource(self, specifier):
+    def resolve_classical_resource(self, specifier) -> Clbit | ClassicalRegister:
         if self._built:
             raise CircuitError("Cannot add resources after the scope has been built.")
         # Allow the inner resolve to propagate exceptions.

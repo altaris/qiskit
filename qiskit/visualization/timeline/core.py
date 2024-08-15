@@ -324,20 +324,20 @@ class DrawerCanvas:
 
         _delays = [str(types.BoxType.DELAY.value), str(types.LabelType.DELAY.value)]
 
-        def _time_range_check(_data):
+        def _time_range_check(_data) -> bool:
             """If data is located outside the current time range."""
             t0, t1 = self.time_range
             if np.max(_data.xvals) < t0 or np.min(_data.xvals) > t1:
                 return False
             return True
 
-        def _associated_bit_check(_data):
+        def _associated_bit_check(_data) -> bool:
             """If any associated bit is not shown."""
             if all(bit not in self.assigned_coordinates for bit in _data.bits):
                 return False
             return True
 
-        def _data_check(_data):
+        def _data_check(_data) -> bool:
             """If data is valid."""
             if _data.data_type == str(types.LineType.GATE_LINK.value):
                 active_bits = [bit for bit in _data.bits if bit not in self.disable_bits]
@@ -387,7 +387,7 @@ class DrawerCanvas:
             Numpy data array with substituted values.
         """
 
-        def substitute(val: types.Coordinate):
+        def substitute(val: types.Coordinate) -> types.AbstractCoordinate:
             if val == types.AbstractCoordinate.LEFT:
                 return self.time_range[0]
             if val == types.AbstractCoordinate.RIGHT:

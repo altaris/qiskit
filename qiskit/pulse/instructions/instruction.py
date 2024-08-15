@@ -148,7 +148,7 @@ class Instruction(ABC):
         """
         yield (time, self)
 
-    def shift(self, time: int, name: str | None = None):
+    def shift(self, time: int, name: str | None = None) -> "Schedule":
         """Return a new schedule shifted forward by `time`.
 
         Args:
@@ -164,7 +164,7 @@ class Instruction(ABC):
             name = self.name
         return Schedule((time, self), name=name)
 
-    def insert(self, start_time: int, schedule, name: str | None = None):
+    def insert(self, start_time: int, schedule, name: str | None = None) -> "Schedule":
         """Return a new :class:`~qiskit.pulse.Schedule` with ``schedule`` inserted within
         ``self`` at ``start_time``.
 
@@ -182,7 +182,7 @@ class Instruction(ABC):
             name = self.name
         return Schedule(self, (start_time, schedule), name=name)
 
-    def append(self, schedule, name: str | None = None):
+    def append(self, schedule, name: str | None = None) -> "Schedule":
         """Return a new :class:`~qiskit.pulse.Schedule` with ``schedule`` inserted at the
         maximum time over all channels shared between ``self`` and ``schedule``.
 
@@ -232,7 +232,7 @@ class Instruction(ABC):
     def __hash__(self) -> int:
         return hash((type(self), self.operands, self.name))
 
-    def __add__(self, other):
+    def __add__(self, other) -> "Schedule":
         """Return a new schedule with `other` inserted within `self` at `start_time`.
 
         Args:
@@ -243,7 +243,7 @@ class Instruction(ABC):
         """
         return self.append(other)
 
-    def __or__(self, other):
+    def __or__(self, other) -> "Schedule":
         """Return a new schedule which is the union of `self` and `other`.
 
         Args:
@@ -254,7 +254,7 @@ class Instruction(ABC):
         """
         return self.insert(0, other)
 
-    def __lshift__(self, time: int):
+    def __lshift__(self, time: int) -> "Schedule":
         """Return a new schedule which is shifted forward by `time`.
 
         Returns:

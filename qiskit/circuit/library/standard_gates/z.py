@@ -102,7 +102,7 @@ class ZGate(SingletonGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> "CZGate":
         """Return a (multi-)controlled-Z gate.
 
         One control returns a CZ gate.
@@ -129,7 +129,7 @@ class ZGate(SingletonGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "ZGate":
         """Return inverted Z gate (itself).
 
         Args:
@@ -143,10 +143,10 @@ class ZGate(SingletonGate):
         """
         return ZGate()  # self-inverse
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> PhaseGate:
         return PhaseGate(numpy.pi * exponent)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, ZGate)
 
 
@@ -228,7 +228,7 @@ class CZGate(SingletonControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "CZGate":
         """Return inverted CZ gate (itself).
 
         Args:
@@ -242,7 +242,7 @@ class CZGate(SingletonControlledGate):
         """
         return CZGate(ctrl_state=self.ctrl_state)  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CZGate) and self.ctrl_state == other.ctrl_state
 
 
@@ -330,7 +330,7 @@ class CCZGate(SingletonControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "CCZGate":
         """Return inverted CCZ gate (itself).
 
         Args:
@@ -344,5 +344,5 @@ class CCZGate(SingletonControlledGate):
         """
         return CCZGate(ctrl_state=self.ctrl_state)  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CCZGate) and self.ctrl_state == other.ctrl_state

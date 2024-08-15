@@ -16,13 +16,14 @@ Optimized list of Pauli operators
 
 from __future__ import annotations
 import copy
-from typing import Literal, TYPE_CHECKING
+from typing import Literal, TYPE_CHECKING, Union
 
 import numpy as np
 
 from qiskit.circuit import QuantumCircuit
 from qiskit.circuit.barrier import Barrier
 from qiskit.circuit.delay import Delay
+from qiskit.circuit.instruction import Instruction
 from qiskit.exceptions import QiskitError
 from qiskit.quantum_info.operators.base_operator import BaseOperator
 from qiskit.quantum_info.operators.mixins import AdjointMixin, MultiplyMixin
@@ -58,7 +59,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         self._num_paulis, num_qubits = self._z.shape
         super().__init__(num_qubits=num_qubits)
 
-    def copy(self):
+    def copy(self) -> BasePauli:
         """Make a deep copy of current operator."""
         # Deepcopy has terrible performance on objects with Numpy arrays
         # attributes so we make a shallow copy and then manually copy the
@@ -96,7 +97,9 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         phase = np.mod(phase1 + phase2, 4)
         return BasePauli(z, x, phase)
 
-    def compose(self, other, qargs: list | None = None, front: bool = False, inplace: bool = False):
+    def compose(
+        self, other, qargs: list | None = None, front: bool = False, inplace: bool = False
+    ) -> BasePauli:
         """Return the composition of Paulis.
 
         Args:
@@ -163,7 +166,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         ret._phase = np.mod(phase, 4)
         return ret
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> BasePauli:
         """Return the {cls} other * self.
 
         Args:
@@ -183,14 +186,14 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
             phase = self._phase_from_complex(other)
         return BasePauli(self._z, self._x, np.mod(self._phase + phase, 4))
 
-    def conjugate(self):
+    def conjugate(self) -> BasePauli:
         """Return the conjugate of each Pauli in the list."""
         complex_phase = np.mod(self._phase, 2)
         if np.all(complex_phase == 0):
             return self
         return BasePauli(self._z, self._x, np.mod(self._phase + 2 * complex_phase, 4))
 
-    def transpose(self):
+    def transpose(self) -> BasePauli:
         """Return the transpose of each Pauli in the list."""
         # Transpose sets Y -> -Y. This has effect on changing the phase
         parity_y = self._count_y(dtype=self._phase.dtype) % 2
@@ -292,7 +295,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
             return self.copy()._append_circuit(other, qargs=qargs)
         return self.copy()._append_circuit(other.inverse(), qargs=qargs)
 
-    def _evolve_clifford(self, other, qargs=None, frame="h"):
+    def _evolve_clifford(self, other: Clifford, qargs=None, frame: str = "h") -> BasePauli:
         """Heisenberg picture evolution of a Pauli by a Clifford."""
 
         if frame == "s":
@@ -329,7 +332,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
 
         return ret
 
-    def _eq(self, other):
+    def _eq(self, other) -> bool:
         """Entrywise comparison of Pauli equality."""
         return (
             self.num_qubits == other.num_qubits
@@ -342,10 +345,10 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
     # Helper Methods
     # ---------------------------------------------------------------------
 
-    def __imul__(self, other):
+    def __imul__(self, other) -> BasePauli:
         return self.compose(other, front=True, inplace=True)
 
-    def __neg__(self):
+    def __neg__(self) -> BasePauli:
         ret = copy.copy(self)
         ret._phase = np.mod(self._phase + 2, 4)
         return ret
@@ -377,7 +380,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         raise QiskitError("Pauli can only be multiplied by 1, -1j, -1, 1j.")
 
     @staticmethod
-    def _from_array(z, x, phase=0):
+    def _from_array(z: np.ndarray, x: np.ndarray, phase=0):
         """Convert array data to BasePauli data."""
         if isinstance(z, np.ndarray) and z.dtype == bool:
             base_z = z
@@ -406,7 +409,13 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
         return base_z, base_x, base_phase
 
     @staticmethod
-    def _to_matrix(z, x, phase=0, group_phase: bool = False, sparse: bool = False):
+    def _to_matrix(
+        z: np.ndarray,
+        x: np.ndarray,
+        phase: int = 0,
+        group_phase: bool = False,
+        sparse: bool = False,
+    ):
         """Return the matrix from symplectic representation.
 
         The Pauli is defined as :math:`P = (-i)^{phase + z.x} * Z^z.x^x`
@@ -471,7 +480,12 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
 
     @staticmethod
     def _to_label(
-        z, x, phase, group_phase: bool = False, full_group: bool = True, return_phase: bool = False
+        z: np.ndarray,
+        x: np.ndarray,
+        phase: int,
+        group_phase: bool = False,
+        full_group: bool = True,
+        return_phase: bool = False,
     ):
         """Return the label string for a Pauli.
 
@@ -521,7 +535,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
             return label, phase
         return label
 
-    def _append_circuit(self, circuit, qargs=None):
+    def _append_circuit(self, circuit: Union[QuantumCircuit, Instruction], qargs=None) -> BasePauli:
         """Update BasePauli inplace by applying a Clifford circuit.
 
         Args:
@@ -596,7 +610,7 @@ class BasePauli(BaseOperator, AdjointMixin, MultiplyMixin):
 # ---------------------------------------------------------------------
 
 
-def _evolve_h(base_pauli, qubit):
+def _evolve_h(base_pauli: BasePauli, qubit):
     """Update P -> H.P.H"""
     x = base_pauli._x[:, qubit].copy()
     z = base_pauli._z[:, qubit].copy()
@@ -606,7 +620,7 @@ def _evolve_h(base_pauli, qubit):
     return base_pauli
 
 
-def _evolve_s(base_pauli, qubit):
+def _evolve_s(base_pauli: BasePauli, qubit):
     """Update P -> S.P.Sdg"""
     x = base_pauli._x[:, qubit]
     base_pauli._z[:, qubit] ^= x
@@ -614,7 +628,7 @@ def _evolve_s(base_pauli, qubit):
     return base_pauli
 
 
-def _evolve_sdg(base_pauli, qubit):
+def _evolve_sdg(base_pauli: BasePauli, qubit):
     """Update P -> Sdg.P.S"""
     x = base_pauli._x[:, qubit]
     base_pauli._z[:, qubit] ^= x
@@ -623,18 +637,18 @@ def _evolve_sdg(base_pauli, qubit):
 
 
 # pylint: disable=unused-argument
-def _evolve_i(base_pauli, qubit):
+def _evolve_i(base_pauli: BasePauli, qubit):
     """Update P -> P"""
     return base_pauli
 
 
-def _evolve_x(base_pauli, qubit):
+def _evolve_x(base_pauli: BasePauli, qubit):
     """Update P -> X.P.X"""
     base_pauli._phase += 2 * base_pauli._z[:, qubit].T.astype(base_pauli._phase.dtype)
     return base_pauli
 
 
-def _evolve_y(base_pauli, qubit):
+def _evolve_y(base_pauli: BasePauli, qubit):
     """Update P -> Y.P.Y"""
     xp = base_pauli._x[:, qubit].T.astype(base_pauli._phase.dtype)
     zp = base_pauli._z[:, qubit].T.astype(base_pauli._phase.dtype)
@@ -642,20 +656,20 @@ def _evolve_y(base_pauli, qubit):
     return base_pauli
 
 
-def _evolve_z(base_pauli, qubit):
+def _evolve_z(base_pauli: BasePauli, qubit):
     """Update P -> Z.P.Z"""
     base_pauli._phase += 2 * base_pauli._x[:, qubit].T.astype(base_pauli._phase.dtype)
     return base_pauli
 
 
-def _evolve_cx(base_pauli, qctrl, qtrgt):
+def _evolve_cx(base_pauli: BasePauli, qctrl, qtrgt):
     """Update P -> CX.P.CX"""
     base_pauli._x[:, qtrgt] ^= base_pauli._x[:, qctrl]
     base_pauli._z[:, qctrl] ^= base_pauli._z[:, qtrgt]
     return base_pauli
 
 
-def _evolve_cz(base_pauli, q1, q2):
+def _evolve_cz(base_pauli: BasePauli, q1, q2):
     """Update P -> CZ.P.CZ"""
     x1 = base_pauli._x[:, q1].copy()
     x2 = base_pauli._x[:, q2].copy()
@@ -665,7 +679,7 @@ def _evolve_cz(base_pauli, q1, q2):
     return base_pauli
 
 
-def _evolve_cy(base_pauli, qctrl, qtrgt):
+def _evolve_cy(base_pauli: BasePauli, qctrl, qtrgt):
     """Update P -> CY.P.CY"""
     x1 = base_pauli._x[:, qctrl].copy()
     x2 = base_pauli._x[:, qtrgt].copy()
@@ -677,7 +691,7 @@ def _evolve_cy(base_pauli, qctrl, qtrgt):
     return base_pauli
 
 
-def _evolve_swap(base_pauli, q1, q2):
+def _evolve_swap(base_pauli: BasePauli, q1, q2):
     """Update P -> SWAP.P.SWAP"""
     x1 = base_pauli._x[:, q1].copy()
     z1 = base_pauli._z[:, q1].copy()
@@ -688,7 +702,7 @@ def _evolve_swap(base_pauli, q1, q2):
     return base_pauli
 
 
-def _evolve_ecr(base_pauli, q1, q2):
+def _evolve_ecr(base_pauli: BasePauli, q1, q2):
     """Update P -> ECR.P.ECR"""
     base_pauli = _evolve_s(base_pauli, q1)
     base_pauli = _evolve_h(base_pauli, q2)

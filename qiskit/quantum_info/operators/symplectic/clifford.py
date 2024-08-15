@@ -31,6 +31,7 @@ from qiskit.quantum_info.operators.mixins import AdjointMixin, generate_apidocs
 from qiskit.quantum_info.operators.operator import Operator
 from qiskit.quantum_info.operators.scalar_op import ScalarOp
 from qiskit.quantum_info.operators.symplectic.base_pauli import _count_y
+from qiskit.circuit.gate import Gate
 
 from .base_pauli import BasePauli
 from .clifford_circuits import _append_circuit, _append_operation
@@ -640,7 +641,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
             raise QiskitError("Non-Clifford operator is not convertible")
         return cls(tableau)
 
-    def to_circuit(self):
+    def to_circuit(self) -> QuantumCircuit:
         """Return a QuantumCircuit implementing the Clifford.
 
         For N <= 3 qubits this is based on optimal CX cost decomposition
@@ -663,7 +664,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
 
         return synth_clifford_full(self)
 
-    def to_instruction(self):
+    def to_instruction(self) -> Gate:
         """Return a Gate instruction implementing the Clifford."""
         return self.to_circuit().to_gate()
 
@@ -861,7 +862,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return np.array_equal(np.mod(arr.T.dot(seye).dot(arr), 2), seye)
 
     @staticmethod
-    def _conjugate_transpose(clifford, method):
+    def _conjugate_transpose(clifford: Clifford, method: str):
         """Return the adjoint, conjugate, or transpose of the Clifford.
 
         Args:
@@ -887,7 +888,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
             ret.phase ^= np.mod(_count_y(ret.x, ret.z), 2).astype(bool)
         return ret
 
-    def _pad_with_identity(self, clifford, qargs):
+    def _pad_with_identity(self, clifford: Clifford, qargs) -> Clifford:
         """Pad Clifford with identities on other subsystems."""
         if qargs is None:
             return clifford
@@ -998,7 +999,7 @@ class Clifford(BaseOperator, AdjointMixin, Operation):
         return np.hstack([xbits, zbits, phase])
 
     @staticmethod
-    def _unitary_matrix_to_tableau(matrix):
+    def _unitary_matrix_to_tableau(matrix: np.ndarray):
         # pylint: disable=invalid-name
         num_qubits = int(math.log2(len(matrix)))
 

@@ -153,7 +153,7 @@ class PauliEvolutionGate(Gate):
         return super().validate_parameter(parameter)
 
 
-def _to_sparse_pauli_op(operator):
+def _to_sparse_pauli_op(operator: Pauli | SparsePauliOp) -> SparsePauliOp:
     """Cast the operator to a SparsePauliOp."""
 
     if isinstance(operator, Pauli):
@@ -171,7 +171,7 @@ def _to_sparse_pauli_op(operator):
     return sparse_pauli
 
 
-def _get_default_label(operator):
+def _get_default_label(operator) -> str:
     if isinstance(operator, list):
         label = f"exp(-it ({[' + '.join(op.paulis.to_labels()) for op in operator]}))"
     else:

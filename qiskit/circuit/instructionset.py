@@ -86,7 +86,7 @@ class InstructionSet:
         Updates to the instruction set will modify the specified sequence in place."""
         self._instructions.append((data, pos))
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> InstructionSet:
         """Invert all instructions.
 
         .. note::

@@ -71,7 +71,7 @@ class CouplingMap:
         if couplinglist is not None:
             self.graph.extend_from_edge_list([tuple(x) for x in couplinglist])
 
-    def size(self):
+    def size(self) -> int:
         """Return the number of physical qubits in this graph."""
         if self._size is None:
             self._size = len(self.graph)
@@ -130,7 +130,7 @@ class CouplingMap:
             self._qubit_list = self.graph.node_indexes()
         return self._qubit_list
 
-    def is_connected(self):
+    def is_connected(self) -> bool:
         """
         Test if the graph is connected.
 
@@ -174,7 +174,7 @@ class CouplingMap:
                 self.graph, as_undirected=True, null_value=math.inf
             )
 
-    def distance(self, physical_qubit1, physical_qubit2):
+    def distance(self, physical_qubit1: int, physical_qubit2: int) -> int:
         """Returns the undirected distance between physical_qubit1 and physical_qubit2.
 
         Args:
@@ -251,7 +251,7 @@ class CouplingMap:
         """
         return self.graph.is_symmetric()
 
-    def reduce(self, mapping, check_if_connected: bool = True):
+    def reduce(self, mapping, check_if_connected: bool = True) -> "CouplingMap":
         """Returns a reduced coupling map that
         corresponds to the subgraph of qubits
         selected in the mapping.
@@ -472,7 +472,7 @@ class CouplingMap:
             string += "]"
         return string
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Check if the graph in ``other`` has the same node labels and edges as the graph in
         ``self``.
 

@@ -82,7 +82,7 @@ class RYGate(Gate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CRYGate:
         """Return a (multi-)controlled-RY gate.
 
         Args:
@@ -116,7 +116,7 @@ class RYGate(Gate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> RYGate:
         r"""Return inverse RY gate.
 
         :math:`RY(\lambda)^{\dagger} = RY(-\lambda)`
@@ -140,11 +140,11 @@ class RYGate(Gate):
         sin = math.sin(self.params[0] / 2)
         return numpy.array([[cos, -sin], [sin, cos]], dtype=dtype)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> RYGate:
         (theta,) = self.params
         return RYGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, RYGate):
             return self._compare_parameters(other)
         return False
@@ -261,7 +261,7 @@ class CRYGate(ControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CRYGate:
         """Return inverse CRY gate (i.e. with the negative rotation angle)
 
         Args:
@@ -291,7 +291,7 @@ class CRYGate(ControlledGate):
                 [[cos, 0, -sin, 0], [0, 1, 0, 0], [sin, 0, cos, 0], [0, 0, 0, 1]], dtype=dtype
             )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, CRYGate):
             return self._compare_parameters(other) and self.ctrl_state == other.ctrl_state
         return False

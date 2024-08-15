@@ -31,7 +31,7 @@ def random_circuit(
     reset: bool = False,
     seed: Optional[int] = None,
     num_operand_distribution: dict = None,
-):
+) -> QuantumCircuit:
     """Generate random circuit of arbitrary size and form.
 
     This function will generate a random circuit by randomly selecting gates
@@ -291,7 +291,7 @@ def random_circuit(
 
 def random_clifford_circuit(
     num_qubits: int, num_gates: int, gates="all", seed: Union[int, np.random.Generator, None] = None
-):
+) -> QuantumCircuit:
     """Generate a pseudo-random Clifford circuit.
 
     This function will generate a Clifford circuit by randomly selecting the chosen amount of Clifford

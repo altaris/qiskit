@@ -174,7 +174,7 @@ class PermutationGate(Gate):
         """Returns the permutation pattern defining this permutation."""
         return self.params[0]
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> PermutationGate:
         """Returns the inverse of the permutation."""
 
         # pylint: disable=cyclic-import
@@ -182,7 +182,7 @@ class PermutationGate(Gate):
 
         return PermutationGate(pattern=_inverse_pattern(self.pattern))
 
-    def _qasm2_decomposition(self):
+    def _qasm2_decomposition(self) -> Gate:
         # pylint: disable=cyclic-import
         from qiskit.synthesis.permutation import synth_permutation_basic
 

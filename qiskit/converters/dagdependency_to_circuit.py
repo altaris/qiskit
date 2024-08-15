@@ -14,7 +14,7 @@
 from qiskit.circuit import QuantumCircuit, CircuitInstruction
 
 
-def dagdependency_to_circuit(dagdependency):
+def dagdependency_to_circuit(dagdependency: "DAGDependency") -> QuantumCircuit:
     """Build a ``QuantumCircuit`` object from a ``DAGDependency``.
 
     Args:

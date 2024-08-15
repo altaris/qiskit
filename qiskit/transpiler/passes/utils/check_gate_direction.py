@@ -34,7 +34,7 @@ class CheckGateDirection(AnalysisPass):
         self.coupling_map = coupling_map
         self.target = target
 
-    def _coupling_map_visit(self, dag, wire_map, edges=None):
+    def _coupling_map_visit(self, dag, wire_map, edges=None) -> bool:
         if edges is None:
             edges = self.coupling_map.get_edges()
         # Don't include directives to avoid things like barrier, which are assumed always supported.
@@ -54,7 +54,7 @@ class CheckGateDirection(AnalysisPass):
                 return False
         return True
 
-    def _target_visit(self, dag, wire_map):
+    def _target_visit(self, dag, wire_map) -> bool:
         # Don't include directives to avoid things like barrier, which are assumed always supported.
         for node in dag.op_nodes(include_directives=False):
             if node.name in CONTROL_FLOW_OP_NAMES:

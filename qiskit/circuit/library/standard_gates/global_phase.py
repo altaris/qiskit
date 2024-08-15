@@ -55,7 +55,7 @@ class GlobalPhaseGate(Gate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "GlobalPhaseGate":
         r"""Return inverse GlobalPhaseGate gate.
 
         :math:`\text{GlobalPhaseGate}(\lambda)^{\dagger} = \text{GlobalPhaseGate}(-\lambda)`
@@ -79,7 +79,7 @@ class GlobalPhaseGate(Gate):
         theta = self.params[0]
         return numpy.array([[numpy.exp(1j * theta)]], dtype=dtype or complex)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, GlobalPhaseGate):
             return self._compare_parameters(other)
         return False

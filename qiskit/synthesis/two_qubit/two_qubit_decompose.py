@@ -353,7 +353,7 @@ class TwoQubitControlledUDecomposer:
 
         self.rxx_equivalent_gate = rxx_equivalent_gate
 
-    def __call__(self, unitary, *, atol=DEFAULT_ATOL) -> QuantumCircuit:
+    def __call__(self, unitary, *, atol: float = DEFAULT_ATOL) -> QuantumCircuit:
         """Returns the Weyl decomposition in circuit form.
 
         Note: atol ist passed to OneQubitEulerDecomposer.
@@ -417,7 +417,7 @@ class TwoQubitControlledUDecomposer:
 
         return rxx_circ
 
-    def _weyl_gate(self, circ: QuantumCircuit, atol: float = 1.0e-13):
+    def _weyl_gate(self, circ: QuantumCircuit, atol: float = 1.0e-13) -> QuantumCircuit:
         """Appends U_d(a, b, c) to the circuit."""
 
         circ_rxx = self._to_rxx_gate(-2 * self.decomposer.a)

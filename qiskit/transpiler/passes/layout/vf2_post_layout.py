@@ -40,7 +40,7 @@ class VF2PostLayoutStopReason(Enum):
     MORE_THAN_2Q = ">2q gates in basis"
 
 
-def _target_match(node_a, node_b):
+def _target_match(node_a, node_b) -> bool:
     # Node A is the set of operations in the target. Node B is the count dict
     # of operations on the node or edge in the circuit.
     if isinstance(node_a, set):
@@ -375,7 +375,7 @@ class VF2PostLayout(AnalysisPass):
             # else the initial layout is optimal -> don't set post_layout, return 'no better solution'
         self.property_set["VF2PostLayout_stop_reason"] = stop_reason
 
-    def _score_layout(self, layout, bit_map, reverse_bit_map, im_graph):
+    def _score_layout(self, layout: Layout, bit_map, reverse_bit_map, im_graph) -> int:
         bits = layout.get_virtual_bits()
         fidelity = 1
         if self.target is not None:

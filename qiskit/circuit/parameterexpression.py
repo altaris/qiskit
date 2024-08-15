@@ -203,7 +203,7 @@ class ParameterExpression:
                 "expression."
             )
 
-    def _raise_if_passed_nan(self, parameter_values):
+    def _raise_if_passed_nan(self, parameter_values: dict):
         nan_parameter_values = {
             p: v for p, v in parameter_values.items() if not isinstance(v, numbers.Number)
         }
@@ -312,80 +312,80 @@ class ParameterExpression:
         else:
             return float(expr_grad)
 
-    def __add__(self, other):
+    def __add__(self, other) -> ParameterExpression:
         return self._apply_operation(operator.add, other)
 
-    def __radd__(self, other):
+    def __radd__(self, other) -> ParameterExpression:
         return self._apply_operation(operator.add, other, reflected=True)
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> ParameterExpression:
         return self._apply_operation(operator.sub, other)
 
-    def __rsub__(self, other):
+    def __rsub__(self, other) -> ParameterExpression:
         return self._apply_operation(operator.sub, other, reflected=True)
 
-    def __mul__(self, other):
+    def __mul__(self, other) -> ParameterExpression:
         return self._apply_operation(operator.mul, other)
 
-    def __pos__(self):
+    def __pos__(self) -> ParameterExpression:
         return self._apply_operation(operator.mul, 1)
 
-    def __neg__(self):
+    def __neg__(self) -> ParameterExpression:
         return self._apply_operation(operator.mul, -1)
 
-    def __rmul__(self, other):
+    def __rmul__(self, other) -> ParameterExpression:
         return self._apply_operation(operator.mul, other, reflected=True)
 
-    def __truediv__(self, other):
+    def __truediv__(self, other) -> ParameterExpression:
         if other == 0:
             raise ZeroDivisionError("Division of a ParameterExpression by zero.")
         return self._apply_operation(operator.truediv, other)
 
-    def __rtruediv__(self, other):
+    def __rtruediv__(self, other: int) -> ParameterExpression:
         return self._apply_operation(operator.truediv, other, reflected=True)
 
-    def __pow__(self, other):
+    def __pow__(self, other) -> ParameterExpression:
         return self._apply_operation(pow, other)
 
-    def __rpow__(self, other):
+    def __rpow__(self, other) -> ParameterExpression:
         return self._apply_operation(pow, other, reflected=True)
 
-    def _call(self, ufunc):
+    def _call(self, ufunc) -> ParameterExpression:
         return ParameterExpression(self._parameter_symbols, ufunc(self._symbol_expr))
 
-    def sin(self):
+    def sin(self) -> ParameterExpression:
         """Sine of a ParameterExpression"""
         return self._call(symengine.sin)
 
-    def cos(self):
+    def cos(self) -> ParameterExpression:
         """Cosine of a ParameterExpression"""
         return self._call(symengine.cos)
 
-    def tan(self):
+    def tan(self) -> ParameterExpression:
         """Tangent of a ParameterExpression"""
         return self._call(symengine.tan)
 
-    def arcsin(self):
+    def arcsin(self) -> ParameterExpression:
         """Arcsin of a ParameterExpression"""
         return self._call(symengine.asin)
 
-    def arccos(self):
+    def arccos(self) -> ParameterExpression:
         """Arccos of a ParameterExpression"""
         return self._call(symengine.acos)
 
-    def arctan(self):
+    def arctan(self) -> ParameterExpression:
         """Arctan of a ParameterExpression"""
         return self._call(symengine.atan)
 
-    def exp(self):
+    def exp(self) -> ParameterExpression:
         """Exponential of a ParameterExpression"""
         return self._call(symengine.exp)
 
-    def log(self):
+    def log(self) -> ParameterExpression:
         """Logarithm of a ParameterExpression"""
         return self._call(symengine.log)
 
-    def sign(self):
+    def sign(self) -> ParameterExpression:
         """Sign of a ParameterExpression"""
         return self._call(symengine.sign)
 
@@ -441,27 +441,27 @@ class ParameterExpression:
                 ) from None
             raise TypeError("could not cast expression to int") from exc
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         if not self._parameter_symbols:
             # For fully bound expressions, fall back to the underlying value
             return hash(self.numeric())
         return hash((self._parameter_keys, self._symbol_expr))
 
-    def __copy__(self):
+    def __copy__(self) -> ParameterExpression:
         return self
 
-    def __deepcopy__(self, memo=None):
+    def __deepcopy__(self, memo=None) -> ParameterExpression:
         return self
 
-    def __abs__(self):
+    def __abs__(self) -> ParameterExpression:
         """Absolute of a ParameterExpression"""
         return self._call(symengine.Abs)
 
-    def abs(self):
+    def abs(self) -> ParameterExpression:
         """Absolute of a ParameterExpression"""
         return self.__abs__()
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Check if this parameter expression is equal to another parameter expression
            or a fixed value (only if this is a bound expression).
         Args:

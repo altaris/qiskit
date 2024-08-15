@@ -41,7 +41,7 @@ def qs_decomposition(
     decomposer_2q: Callable[[np.ndarray], QuantumCircuit] | None = None,
     *,
     _depth: int = 0,
-):
+) -> QuantumCircuit:
     r"""
     Decomposes a unitary matrix into one and two qubit gates using Quantum Shannon Decomposition,
 
@@ -109,7 +109,7 @@ def qs_decomposition(
                     UnitaryGate,
                 )  # pylint: disable=cyclic-import
 
-                def decomp_2q(mat):
+                def decomp_2q(mat) -> QuantumCircuit:
                     ugate = UnitaryGate(mat)
                     qc = QuantumCircuit(2, name="qsd2q")
                     qc.append(ugate, [0, 1])
@@ -149,7 +149,9 @@ def qs_decomposition(
     return circ
 
 
-def _demultiplex(um0, um1, opt_a1: bool = False, opt_a2: bool = False, *, _depth: int = 0):
+def _demultiplex(
+    um0, um1, opt_a1: bool = False, opt_a2: bool = False, *, _depth: int = 0
+) -> QuantumCircuit:
     """Decompose a generic multiplexer.
 
           ────□────
@@ -220,7 +222,7 @@ def _demultiplex(um0, um1, opt_a1: bool = False, opt_a2: bool = False, *, _depth
     return circ
 
 
-def _get_ucry_cz(nqubits, angles: list):
+def _get_ucry_cz(nqubits: int, angles: list) -> QuantumCircuit:
     """
     Get uniformly controlled Ry gate in CZ-Ry as in UCPauliRotGate.
     """
@@ -249,7 +251,7 @@ def _get_ucry_cz(nqubits, angles: list):
     return qc
 
 
-def _apply_a2(circ):
+def _apply_a2(circ: QuantumCircuit):
     from qiskit.compiler import transpile
     from qiskit.quantum_info import Operator
     from qiskit.circuit.library.generalized_gates.unitary import UnitaryGate

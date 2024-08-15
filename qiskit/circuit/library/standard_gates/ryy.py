@@ -147,7 +147,7 @@ class RYYGate(Gate):
         )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> RYYGate:
         """Return inverse RYY gate (i.e. with the negative rotation angle).
 
         Args:
@@ -173,11 +173,11 @@ class RYYGate(Gate):
             dtype=dtype,
         )
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> RYYGate:
         (theta,) = self.params
         return RYYGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, RYYGate):
             return self._compare_parameters(other)
         return False

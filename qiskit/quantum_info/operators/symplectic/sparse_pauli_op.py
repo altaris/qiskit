@@ -177,7 +177,7 @@ class SparsePauliOp(LinearOp):
         # Initialize LinearOp
         super().__init__(num_qubits=self._pauli_list.num_qubits)
 
-    def __array__(self, dtype=None, copy: Optional[bool] = None):
+    def __array__(self, dtype=None, copy: Optional[bool] = None) -> np.ndarray:
         if copy is False:
             raise ValueError("unable to avoid copy while creating an array as requested")
         arr = self.to_matrix()
@@ -191,7 +191,7 @@ class SparsePauliOp(LinearOp):
             f"coeffs={np.array2string(self.coeffs, separator=', ')})"
         )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Entrywise comparison of two SparsePauliOp operators"""
         return (
             super().__eq__(other)
@@ -268,7 +268,7 @@ class SparsePauliOp(LinearOp):
         """Set Pauli coefficients."""
         self._coeffs[:] = value
 
-    def __getitem__(self, key):
+    def __getitem__(self, key) -> SparsePauliOp:
         """Return a view of the SparsePauliOp."""
         # Returns a view of specified rows of the PauliList
         # This supports all slicing operations the underlying array supports.
@@ -382,7 +382,7 @@ class SparsePauliOp(LinearOp):
         coeffs = np.kron(a.coeffs, b.coeffs)
         return SparsePauliOp(paulis, coeffs, ignore_pauli_phase=True, copy=False)
 
-    def _add(self, other, qargs=None):
+    def _add(self, other, qargs=None) -> SparsePauliOp:
         if qargs is None:
             qargs = getattr(other, "qargs", None)
 
@@ -395,7 +395,7 @@ class SparsePauliOp(LinearOp):
         coeffs = np.hstack((self.coeffs, other.coeffs))
         return SparsePauliOp(paulis, coeffs, ignore_pauli_phase=True, copy=False)
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> SparsePauliOp:
         if not isinstance(other, (Number, ParameterExpression)):
             raise QiskitError("other is neither a Number nor a Parameter/ParameterExpression")
         if other == 0:
@@ -583,7 +583,7 @@ class SparsePauliOp(LinearOp):
         sort_pauli_inds = pauli_list.argsort(weight=weight, phase=False)
         return sort_coeffs_inds[sort_pauli_inds]
 
-    def sort(self, weight: bool = False):
+    def sort(self, weight: bool = False) -> SparsePauliOp:
         """Sort the rows of the table.
 
         After sorting the coefficients using numpy's argsort, sort by Pauli.

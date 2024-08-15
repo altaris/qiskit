@@ -20,7 +20,7 @@ from numpy.random import default_rng
 from .dihedral import CNOTDihedral
 
 
-def random_cnotdihedral(num_qubits: int, seed: Optional[int] = None):
+def random_cnotdihedral(num_qubits: int, seed: Optional[int] = None) -> CNOTDihedral:
     """Return a random CNOTDihedral element.
 
     Args:

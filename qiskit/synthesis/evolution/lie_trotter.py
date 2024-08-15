@@ -21,6 +21,7 @@ import numpy as np
 from qiskit.circuit.quantumcircuit import QuantumCircuit
 from qiskit.quantum_info.operators import SparsePauliOp, Pauli
 from qiskit.utils.deprecation import deprecate_arg
+from qiskit.circuit.library.pauli_evolution import PauliEvolutionGate
 
 from .product_formula import ProductFormula
 
@@ -100,7 +101,7 @@ class LieTrotter(ProductFormula):
         """
         super().__init__(1, reps, insert_barriers, cx_structure, atomic_evolution, wrap)
 
-    def synthesize(self, evolution):
+    def synthesize(self, evolution: PauliEvolutionGate) -> QuantumCircuit:
         # get operators and time to evolve
         operators = evolution.operator
         time = evolution.time

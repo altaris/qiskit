@@ -87,8 +87,8 @@ class CommutationChecker:
 
     def commute_nodes(
         self,
-        op1,
-        op2,
+        op1: "DAGOpNode",
+        op2: "DAGOpNode",
         max_num_qubits: int = 3,
     ) -> bool:
         """Checks if two DAGOpNodes commute."""
@@ -186,7 +186,7 @@ class CommutationChecker:
 
         return is_commuting
 
-    def num_cached_entries(self):
+    def num_cached_entries(self) -> int:
         """Returns number of cached entries"""
         return self._current_cache_entries
 
@@ -264,7 +264,7 @@ def _hashable_parameters(params):
     return ("fallback", str(params))
 
 
-def is_commutation_supported(op, qargs, max_num_qubits):
+def is_commutation_supported(op: Operation, qargs: list, max_num_qubits) -> bool:
     """
     Filter operations whose commutation is not supported due to bugs in transpiler passes invoking
     commutation analysis.
@@ -305,7 +305,7 @@ def _commutation_precheck(
     op2: Operation,
     qargs2: List,
     cargs2: List,
-    max_num_qubits,
+    max_num_qubits: int,
 ):
     # Bug in CommutativeCancellation, e.g. see gh-8553
     if getattr(op1, "condition", False) or getattr(op2, "condition", False):
@@ -437,7 +437,7 @@ def _query_commutation(
 
 def _commute_matmul(
     first_ops: Operation, first_qargs: List, second_op: Operation, second_qargs: List
-):
+) -> bool:
     qarg = {q: i for i, q in enumerate(first_qargs)}
     num_qubits = len(qarg)
     for q in second_qargs:

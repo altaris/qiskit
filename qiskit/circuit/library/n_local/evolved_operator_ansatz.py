@@ -174,7 +174,7 @@ class EvolvedOperatorAnsatz(NLocal):
             self._build()
             return np.zeros(self.reps * len(self.operators), dtype=float)
 
-    def _evolve_operator(self, operator, time):
+    def _evolve_operator(self, operator, time: Parameter) -> QuantumCircuit:
 
         # pylint: disable=cyclic-import
         from qiskit.circuit.library.hamiltonian_gate import HamiltonianGate
@@ -245,7 +245,7 @@ def _validate_prefix(parameter_prefix, operators):
     return parameter_prefix
 
 
-def _is_pauli_identity(operator):
+def _is_pauli_identity(operator) -> bool:
     if isinstance(operator, SparsePauliOp):
         if len(operator.paulis) == 1:
             operator = operator.paulis[0]  # check if the single Pauli is identity below

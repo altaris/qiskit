@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import typing
 
+from qiskit.circuit.classical.expr.expr import Var, Value, Unary, Binary, Cast, Index
 from .bit import Bit
 from .classical import expr
 from .classicalregister import ClassicalRegister, Clbit
@@ -125,24 +126,24 @@ class VariableMapper(expr.ExprVisitor[expr.Expr]):
         """Map the variables in an :class:`~.expr.Expr` node to the new circuit."""
         return node.accept(self)
 
-    def visit_var(self, node, /):
+    def visit_var(self, node, /) -> Var:
         if isinstance(node.var, Clbit):
             return expr.Var(self.bit_map[node.var], node.type)
         if isinstance(node.var, ClassicalRegister):
             return expr.Var(self._map_register(node.var), node.type)
         return self.var_map.get(node, node)
 
-    def visit_value(self, node, /):
+    def visit_value(self, node, /) -> Value:
         return expr.Value(node.value, node.type)
 
-    def visit_unary(self, node, /):
+    def visit_unary(self, node, /) -> Unary:
         return expr.Unary(node.op, node.operand.accept(self), node.type)
 
-    def visit_binary(self, node, /):
+    def visit_binary(self, node, /) -> Binary:
         return expr.Binary(node.op, node.left.accept(self), node.right.accept(self), node.type)
 
-    def visit_cast(self, node, /):
+    def visit_cast(self, node, /) -> Cast:
         return expr.Cast(node.operand.accept(self), node.type, implicit=node.implicit)
 
-    def visit_index(self, node, /):
+    def visit_index(self, node, /) -> Index:
         return expr.Index(node.target.accept(self), node.index.accept(self), node.type)

@@ -330,7 +330,9 @@ class SymbolTable:
             and name not in _RESERVED_KEYWORDS
         )
 
-    def escaped_declarable_name(self, name: str, *, allow_rename: bool, unique: bool = False):
+    def escaped_declarable_name(
+        self, name: str, *, allow_rename: bool, unique: bool = False
+    ) -> str:
         """Get an identifier based on ``name`` that can be safely shadowed within this scope.
 
         If ``unique`` is ``True``, then the name is required to be unique across all live scopes,
@@ -597,7 +599,7 @@ class QASM3Builder:
             variable = self.scope.bit_map[variable]
         return self.symbols.get_variable(variable)
 
-    def build_program(self):
+    def build_program(self) -> ast.Program:
         """Builds a Program"""
         circuit = self.scope.circuit
         if circuit.num_captured_vars:
@@ -1130,7 +1132,7 @@ class QASM3Builder:
             raise QASM3ExporterError(f"'{value}' is not an integer")  # pragma: no cover
         return ast.IntegerLiteral(int(value))
 
-    def _rebind_scoped_parameters(self, expression):
+    def _rebind_scoped_parameters(self, expression) -> ParameterExpression:
         """If the input is a :class:`.ParameterExpression`, rebind any internal
         :class:`.Parameter`\\ s so that their names match their names in the scope.  Other inputs
         are returned unchanged."""
@@ -1145,7 +1147,7 @@ class QASM3Builder:
             }
         )
 
-    def build_gate_call(self, instruction: CircuitInstruction):
+    def build_gate_call(self, instruction: CircuitInstruction) -> ast.QuantumGateCall:
         """Builds a gate-call AST node.
 
         This will also push the gate into the symbol table (if required), including recursively
@@ -1195,7 +1197,7 @@ def _infer_variable_declaration(
         declared, then ``None``.
     """
 
-    def is_loop_variable(circuit, parameter):
+    def is_loop_variable(circuit, parameter) -> bool:
         """Recurse into the instructions a parameter is used in, checking at every level if it is
         used as the loop variable of a ``for`` loop."""
         # This private access is hacky, and shouldn't need to happen; the type of a parameter
@@ -1222,7 +1224,7 @@ def _infer_variable_declaration(
     return ast.IODeclaration(ast.IOModifier.INPUT, ast.FloatType.DOUBLE, parameter_name)
 
 
-def _lift_condition(condition):
+def _lift_condition(condition) -> expr.Expr:
     if isinstance(condition, expr.Expr):
         return condition
     return expr.lift_legacy_condition(condition)
@@ -1256,18 +1258,18 @@ class _ExprBuilder(expr.ExprVisitor[ast.Expression]):
             return ast.IntegerLiteral(node.value)
         raise RuntimeError(f"unhandled Value type '{node}'")
 
-    def visit_cast(self, node, /):
+    def visit_cast(self, node, /) -> ast.Cast:
         if node.implicit:
             return node.operand.accept(self)
         return ast.Cast(_build_ast_type(node.type), node.operand.accept(self))
 
-    def visit_unary(self, node, /):
+    def visit_unary(self, node, /) -> ast.Unary:
         return ast.Unary(ast.Unary.Op[node.op.name], node.operand.accept(self))
 
-    def visit_binary(self, node, /):
+    def visit_binary(self, node, /) -> ast.Binary:
         return ast.Binary(
             ast.Binary.Op[node.op.name], node.left.accept(self), node.right.accept(self)
         )
 
-    def visit_index(self, node, /):
+    def visit_index(self, node, /) -> ast.Index:
         return ast.Index(node.target.accept(self), node.index.accept(self))

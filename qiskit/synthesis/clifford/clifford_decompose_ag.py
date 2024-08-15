@@ -85,7 +85,7 @@ def synth_clifford_ag(clifford: Clifford) -> QuantumCircuit:
 # ---------------------------------------------------------------------
 
 
-def _set_qubit_x_true(clifford, circuit, qubit) -> None:
+def _set_qubit_x_true(clifford, circuit: QuantumCircuit, qubit) -> None:
     """Set destabilizer.X[qubit, qubit] to be True.
 
     This is done by permuting columns l > qubit or if necessary applying
@@ -115,7 +115,7 @@ def _set_qubit_x_true(clifford, circuit, qubit) -> None:
             return
 
 
-def _set_row_x_zero(clifford, circuit, qubit) -> None:
+def _set_row_x_zero(clifford, circuit: QuantumCircuit, qubit) -> None:
     r"""Set destabilizer.X[qubit, i] to False for all i > qubit.
 
     This is done by applying CNOTs assuming :math:`k \leq N` and A[k][k]=1
@@ -146,7 +146,7 @@ def _set_row_x_zero(clifford, circuit, qubit) -> None:
         circuit.s(qubit)
 
 
-def _set_row_z_zero(clifford, circuit, qubit) -> None:
+def _set_row_z_zero(clifford, circuit: QuantumCircuit, qubit) -> None:
     """Set stabilizer.Z[qubit, i] to False for all i > qubit.
 
     Implemented by applying (reverse) CNOTS assumes qubit < num_qubits

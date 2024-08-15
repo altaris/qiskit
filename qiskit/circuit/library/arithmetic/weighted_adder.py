@@ -198,7 +198,7 @@ class WeightedAdder(BlueprintCircuit):
         """
         return int(self.num_sum_qubits > 2)
 
-    def _check_configuration(self, raise_on_failure: bool = True):
+    def _check_configuration(self, raise_on_failure: bool = True) -> bool:
         """Check if the current configuration is valid."""
         valid = True
         if self._num_state_qubits is None:

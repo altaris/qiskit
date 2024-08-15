@@ -115,7 +115,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
         dtype = self.data.dtype if dtype is None else dtype
         return np.array(self.data, dtype=dtype, copy=copy)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return super().__eq__(other) and np.allclose(
             self._data, other._data, rtol=self.rtol, atol=self.atol
         )
@@ -189,7 +189,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
         """Return data."""
         return self._data
 
-    def is_valid(self, atol=None, rtol=None):
+    def is_valid(self, atol=None, rtol=None) -> bool:
         """Return True if trace 1 and positive semidefinite."""
         if atol is None:
             atol = self.atol
@@ -209,7 +209,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
         dims = self.dims()
         return Operator(self.data, input_dims=dims, output_dims=dims)
 
-    def conjugate(self):
+    def conjugate(self) -> DensityMatrix:
         """Return the conjugate of the density matrix."""
         return DensityMatrix(np.conj(self.data), dims=self.dims())
 
@@ -263,7 +263,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
         ret._op_shape = self._op_shape.expand(other._op_shape)
         return ret
 
-    def _add(self, other):
+    def _add(self, other: DensityMatrix) -> DensityMatrix:
         """Return the linear combination self + other.
 
         Args:
@@ -283,7 +283,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
         ret._data = self.data + other.data
         return ret
 
-    def _multiply(self, other):
+    def _multiply(self, other: complex) -> DensityMatrix:
         """Return the scalar multiplied state other * self.
 
         Args:
@@ -364,7 +364,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
         ret._op_shape = self._op_shape.reverse()
         return ret
 
-    def _expectation_value_pauli(self, pauli, qargs=None):
+    def _expectation_value_pauli(self, pauli: Pauli, qargs=None):
         """Compute the expectation value of a Pauli.
 
         Args:
@@ -706,7 +706,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
             self.data, self._op_shape.dims_l(), decimals=decimals, string_labels=True
         )
 
-    def _evolve_operator(self, other, qargs=None):
+    def _evolve_operator(self, other, qargs=None) -> DensityMatrix:
         """Evolve density matrix by an operator"""
         # Get shape of output density matrix
         new_shape = self._op_shape.compose(other._op_shape, qargs=qargs)
@@ -785,7 +785,7 @@ class DensityMatrix(QuantumState, TolerancesMixin):
                 new_qargs = [qargs[qubit_indices[tup]] for tup in instruction.qubits]
             self._append_instruction(instruction.operation, qargs=new_qargs)
 
-    def _evolve_instruction(self, obj, qargs=None):
+    def _evolve_instruction(self, obj, qargs=None) -> DensityMatrix:
         """Return a new statevector by applying an instruction."""
         if isinstance(obj, QuantumCircuit):
             obj = obj.to_instruction()

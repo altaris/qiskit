@@ -49,7 +49,7 @@ class QuantumState:
     # Set higher priority than Numpy array and matrix classes
     __array_priority__ = 20
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, self.__class__) and self.dims() == other.dims()
 
     @property
@@ -72,7 +72,7 @@ class QuantumState:
         """Return tuple of input dimension for specified subsystems."""
         return self._op_shape.dims_l(qargs)
 
-    def copy(self):
+    def copy(self) -> QuantumState:
         """Make a copy of current operator."""
         return copy.deepcopy(self)
 
@@ -154,7 +154,7 @@ class QuantumState:
         """
         raise NotImplementedError(f"{type(self)} does not support addition")
 
-    def _multiply(self, other):
+    def _multiply(self, other: complex):
         """Return the scalar multipled state other * self.
 
         Args:
@@ -375,7 +375,9 @@ class QuantumState:
         return kets.T
 
     @staticmethod
-    def _vector_to_dict(vec, dims: Sequence[int], decimals=None, string_labels: bool = False):
+    def _vector_to_dict(
+        vec: np.ndarray, dims: Sequence[int], decimals=None, string_labels: bool = False
+    ):
         """Convert a vector to a ket dictionary.
 
         This representation will not show zero values in the output dict.
@@ -479,10 +481,10 @@ class QuantumState:
         return new_probs
 
     # Overloads
-    def __and__(self, other):
+    def __and__(self, other) -> QuantumState:
         return self.evolve(other)
 
-    def __xor__(self, other):
+    def __xor__(self, other) -> QuantumState:
         return self.tensor(other)
 
     def __mul__(self, other):

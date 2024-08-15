@@ -136,7 +136,7 @@ class ParameterSetter(NodeVisitor):
 
     # Top layer: Assign parameters to programs
 
-    def visit_ScheduleBlock(self, node: ScheduleBlock):
+    def visit_ScheduleBlock(self, node: ScheduleBlock) -> ScheduleBlock:
         """Visit ``ScheduleBlock``. Recursively visit context blocks and overwrite.
 
         .. note:: ``ScheduleBlock`` can have parameters in blocks and its alignment.
@@ -148,7 +148,7 @@ class ParameterSetter(NodeVisitor):
         self._update_parameter_manager(node)
         return node
 
-    def visit_Schedule(self, node: Schedule):
+    def visit_Schedule(self, node: Schedule) -> Schedule:
         """Visit ``Schedule``. Recursively visit schedule children and overwrite."""
         # accessing to private member
         # TODO: consider updating Schedule to handle this more gracefully
@@ -158,7 +158,7 @@ class ParameterSetter(NodeVisitor):
         self._update_parameter_manager(node)
         return node
 
-    def visit_AlignmentKind(self, node: AlignmentKind):
+    def visit_AlignmentKind(self, node: AlignmentKind) -> AlignmentKind:
         """Assign parameters to block's ``AlignmentKind`` specification."""
         new_parameters = tuple(self.visit(param) for param in node._context_params)
         node._context_params = new_parameters
@@ -167,7 +167,7 @@ class ParameterSetter(NodeVisitor):
 
     # Mid layer: Assign parameters to instructions
 
-    def visit_Instruction(self, node: instructions.Instruction):
+    def visit_Instruction(self, node: instructions.Instruction) -> instructions.Instruction:
         """Assign parameters to general pulse instruction.
 
         .. note:: All parametrized object should be stored in the operands.
@@ -179,8 +179,7 @@ class ParameterSetter(NodeVisitor):
         return node
 
     # Lower layer: Assign parameters to operands
-
-    def visit_Channel(self, node: channels.Channel):
+    def visit_Channel(self, node: channels.Channel) -> channels.Channel:
         """Assign parameters to ``Channel`` object."""
         if node.is_parameterized():
             new_index = self._assign_parameter_expression(node.index)
@@ -195,7 +194,7 @@ class ParameterSetter(NodeVisitor):
 
         return node
 
-    def visit_SymbolicPulse(self, node: SymbolicPulse):
+    def visit_SymbolicPulse(self, node: SymbolicPulse) -> SymbolicPulse:
         """Assign parameters to ``SymbolicPulse`` object."""
         if node.is_parameterized():
             # Assign duration
@@ -212,7 +211,7 @@ class ParameterSetter(NodeVisitor):
 
         return node
 
-    def visit_Waveform(self, node: Waveform):
+    def visit_Waveform(self, node: Waveform) -> Waveform:
         """Assign parameters to ``Waveform`` object.
 
         .. node:: No parameter can be assigned to ``Waveform`` object.

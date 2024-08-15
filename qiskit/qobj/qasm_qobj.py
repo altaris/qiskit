@@ -184,7 +184,7 @@ class QasmQobjInstruction:
         return out
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new QasmQobjInstruction object from a dictionary.
 
         Args:
@@ -196,7 +196,7 @@ class QasmQobjInstruction:
         name = data.pop("name")
         return cls(name, **data)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, QasmQobjInstruction):
             if self.to_dict() == other.to_dict():
                 return True
@@ -262,7 +262,7 @@ class QasmQobjExperiment:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new QasmQobjExperiment object from a dictionary.
 
         Args:
@@ -284,7 +284,7 @@ class QasmQobjExperiment:
             ]
         return cls(config, header, instructions)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, QasmQobjExperiment):
             if self.to_dict() == other.to_dict():
                 return True
@@ -384,7 +384,7 @@ class QasmQobjConfig(SimpleNamespace):
         if kwargs:
             self.__dict__.update(kwargs)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """Return a dictionary format representation of the OpenQASM 2 Qobj config.
 
         Returns:
@@ -400,7 +400,7 @@ class QasmQobjConfig(SimpleNamespace):
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new QasmQobjConfig object from a dictionary.
 
         Args:
@@ -420,7 +420,7 @@ class QasmQobjConfig(SimpleNamespace):
 
         return cls(**data)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, QasmQobjConfig):
             if self.to_dict() == other.to_dict():
                 return True
@@ -461,14 +461,14 @@ class QasmQobjExperimentConfig(QobjDictField):
 
         super().__init__(**kwargs)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         out_dict = copy.copy(self.__dict__)
         if hasattr(self, "calibrations"):
             out_dict["calibrations"] = self.calibrations.to_dict()
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         if "calibrations" in data:
             calibrations = data.pop("calibrations")
             data["calibrations"] = QasmExperimentCalibrations.from_dict(calibrations)
@@ -497,7 +497,7 @@ class QasmExperimentCalibrations:
         """
         self.gates = gates
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """Return a dictionary format representation of the calibrations.
 
         Returns:
@@ -509,7 +509,7 @@ class QasmExperimentCalibrations:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new GateCalibration object from a dictionary.
 
         Args:
@@ -552,7 +552,7 @@ class GateCalibration:
         self.params = params
         self.instructions = instructions
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(
             (
                 self.name,
@@ -562,7 +562,7 @@ class GateCalibration:
             )
         )
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """Return a dictionary format representation of the Gate Calibration.
 
         Returns:
@@ -573,7 +573,7 @@ class GateCalibration:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new GateCalibration object from a dictionary.
 
         Args:
@@ -678,7 +678,7 @@ class QasmQobj:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new QASMQobj object from a dictionary.
 
         Args:
@@ -702,7 +702,7 @@ class QasmQobj:
             qobj_id=data.get("qobj_id"), config=config, experiments=experiments, header=header
         )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, QasmQobj):
             if self.to_dict() == other.to_dict():
                 return True

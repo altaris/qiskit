@@ -119,7 +119,7 @@ def synth_stabilizer_layers(
     return layeredCircuit
 
 
-def _calc_pauli_diff_stabilizer(cliff, cliff_target):
+def _calc_pauli_diff_stabilizer(cliff, cliff_target: "Clifford") -> QuantumCircuit:
     """Given two Cliffords whose stabilizers differ by a Pauli, we find this Pauli."""
 
     # pylint: disable=cyclic-import

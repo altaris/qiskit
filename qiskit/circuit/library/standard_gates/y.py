@@ -98,7 +98,7 @@ class YGate(SingletonGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> "CYGate":
         """Return a (multi-)controlled-Y gate.
 
         One control returns a CY gate.
@@ -125,7 +125,7 @@ class YGate(SingletonGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "YGate":
         r"""Return inverted Y gate (:math:`Y^{\dagger} = Y`)
 
         Args:
@@ -139,7 +139,7 @@ class YGate(SingletonGate):
         """
         return YGate()  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, YGate)
 
 
@@ -243,7 +243,7 @@ class CYGate(SingletonControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "CYGate":
         """Return inverted CY gate (itself).
 
         Args:
@@ -257,5 +257,5 @@ class CYGate(SingletonControlledGate):
         """
         return CYGate(ctrl_state=self.ctrl_state)  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CYGate) and self.ctrl_state == other.ctrl_state

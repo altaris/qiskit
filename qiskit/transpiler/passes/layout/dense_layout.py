@@ -105,7 +105,7 @@ class DenseLayout(AnalysisPass):
         }
         return layout_mapping
 
-    def _best_subset(self, num_qubits: int, num_meas: int, num_cx, coupling_map):
+    def _best_subset(self, num_qubits: int, num_meas: int, num_cx: int, coupling_map):
         """Computes the qubit mapping with the best connectivity.
 
         Args:

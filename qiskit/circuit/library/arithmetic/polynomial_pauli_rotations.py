@@ -85,7 +85,7 @@ def _large_coefficients_iter(m, n):
             yield (temp_a, coefficients[b])
 
 
-def _multinomial_coefficients(m, n):
+def _multinomial_coefficients(m: int, n: int):
     """Return an iterator of multinomial coefficients
 
     Based-on/forked from sympy's multinomial_coefficients() function [#]

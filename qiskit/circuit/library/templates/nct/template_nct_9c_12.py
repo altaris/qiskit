@@ -24,7 +24,7 @@ Template 9c_12:
 from qiskit.circuit.quantumcircuit import QuantumCircuit
 
 
-def template_nct_9c_12():
+def template_nct_9c_12() -> QuantumCircuit:
     """
     Returns:
         QuantumCircuit: template as a quantum circuit.

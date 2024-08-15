@@ -88,7 +88,7 @@ class GateSequence:
 
         return True
 
-    def to_circuit(self):
+    def to_circuit(self) -> QuantumCircuit:
         """Convert to a circuit.
 
         If no gates set but the product is not the identity, returns a circuit with a
@@ -106,7 +106,7 @@ class GateSequence:
 
         return circuit
 
-    def to_dag(self):
+    def to_dag(self) -> "DAGCircuit":
         """Convert to a :class:`.DAGCircuit`.
 
         If no gates set but the product is not the identity, returns a circuit with a

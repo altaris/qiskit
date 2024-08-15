@@ -25,7 +25,7 @@ Clifford template 5_1:
 from qiskit.circuit.quantumcircuit import QuantumCircuit
 
 
-def clifford_5_1():
+def clifford_5_1() -> QuantumCircuit:
     """
     Returns:
         QuantumCircuit: template as a quantum circuit.

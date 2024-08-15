@@ -17,12 +17,14 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any
 
+from qiskit.circuit.library import PauliEvolutionGate
+
 
 class EvolutionSynthesis(ABC):
     """Interface for evolution synthesis algorithms."""
 
     @abstractmethod
-    def synthesize(self, evolution):
+    def synthesize(self, evolution: PauliEvolutionGate):
         """Synthesize an ``qiskit.circuit.library.PauliEvolutionGate``.
 
         Args:

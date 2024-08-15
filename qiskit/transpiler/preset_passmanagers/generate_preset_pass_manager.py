@@ -15,6 +15,7 @@ Preset pass manager generation function
 """
 
 import copy
+from typing import Optional
 import warnings
 
 from qiskit.circuit.controlflow import CONTROL_FLOW_OP_NAMES
@@ -29,6 +30,7 @@ from qiskit.transpiler.layout import Layout
 from qiskit.transpiler.passmanager_config import PassManagerConfig
 from qiskit.transpiler.target import Target, target_to_backend_properties
 from qiskit.transpiler.timing_constraints import TimingConstraints
+from qiskit.transpiler.passmanager import StagedPassManager
 
 from .level0 import level_0_pass_manager
 from .level1 import level_1_pass_manager
@@ -61,7 +63,7 @@ def generate_preset_pass_manager(
     dt=None,
     *,
     _skip_target: bool = False,
-):
+) -> StagedPassManager:
     """Generate a preset :class:`~.PassManager`
 
     This function is used to quickly generate a preset pass manager. Preset pass
@@ -396,7 +398,7 @@ def generate_preset_pass_manager(
     return pm
 
 
-def _parse_basis_gates(basis_gates, backend, inst_map, skip_target):
+def _parse_basis_gates(basis_gates, backend, inst_map, skip_target: bool):
     name_mapping = {}
     standard_gates = get_standard_gate_name_mapping()
     # Add control flow gates by default to basis set
@@ -483,7 +485,7 @@ def _parse_coupling_map(coupling_map, backend):
         )
 
 
-def _parse_instruction_durations(backend, inst_durations, dt):
+def _parse_instruction_durations(backend, inst_durations, dt) -> InstructionDurations:
     """Create a list of ``InstructionDuration``s. If ``inst_durations`` is provided,
     the backend will be ignored, otherwise, the durations will be populated from the
     backend.
@@ -499,7 +501,7 @@ def _parse_instruction_durations(backend, inst_durations, dt):
     return final_durations
 
 
-def _parse_timing_constraints(backend, timing_constraints):
+def _parse_timing_constraints(backend, timing_constraints) -> TimingConstraints:
     if isinstance(timing_constraints, TimingConstraints):
         return timing_constraints
     if backend is None and timing_constraints is None:
@@ -522,7 +524,7 @@ def _parse_initial_layout(initial_layout):
     return initial_layout
 
 
-def _parse_approximation_degree(approximation_degree):
+def _parse_approximation_degree(approximation_degree: Optional[float]):
     if approximation_degree is None:
         return None
     if approximation_degree < 0.0 or approximation_degree > 1.0:

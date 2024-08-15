@@ -243,7 +243,7 @@ def marginal_distribution(
     return res
 
 
-def _marginalize(counts, indices=None):
+def _marginalize(counts: dict, indices=None):
     """Get the marginal counts for the given set of indices"""
     num_clbits = len(next(iter(counts)).replace(" ", ""))
     # Check if we do not need to marginalize and if so, trim
@@ -290,6 +290,6 @@ def _format_marginal(counts, marg_counts, indices):
     return format_counts
 
 
-def _remove_space_underscore(bitstring: str):
+def _remove_space_underscore(bitstring: str) -> str:
     """Removes all spaces and underscores from bitstring"""
     return bitstring.replace(" ", "").replace("_", "")

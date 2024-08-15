@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import copy as _copy
 import math
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 
 import numpy as np
 
@@ -148,18 +148,18 @@ class SuperOp(QuantumChannel):
     # BaseOperator methods
     # ---------------------------------------------------------------------
 
-    def conjugate(self):
+    def conjugate(self) -> SuperOp:
         ret = _copy.copy(self)
         ret._data = np.conj(self._data)
         return ret
 
-    def transpose(self):
+    def transpose(self) -> SuperOp:
         ret = _copy.copy(self)
         ret._data = np.transpose(self._data)
         ret._op_shape = self._op_shape.transpose()
         return ret
 
-    def adjoint(self):
+    def adjoint(self) -> SuperOp:
         ret = _copy.copy(self)
         ret._data = np.conj(np.transpose(self._data))
         ret._op_shape = self._op_shape.transpose()
@@ -238,7 +238,7 @@ class SuperOp(QuantumChannel):
     # Additional methods
     # ---------------------------------------------------------------------
 
-    def _evolve(self, state, qargs=None):
+    def _evolve(self, state: Union[DensityMatrix, Statevector], qargs=None) -> DensityMatrix:
         """Evolve a quantum state by the quantum channel.
 
         Args:

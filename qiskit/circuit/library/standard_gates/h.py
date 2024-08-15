@@ -85,7 +85,7 @@ class HGate(SingletonGate):
         label: str | None = None,
         ctrl_state: int | str | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CHGate:
         """Return a (multi-)controlled-H gate.
 
         One control qubit returns a CH gate.
@@ -112,7 +112,7 @@ class HGate(SingletonGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> HGate:
         r"""Return inverted H gate (itself).
 
         Args:
@@ -126,7 +126,7 @@ class HGate(SingletonGate):
         """
         return HGate()  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, HGate)
 
 
@@ -249,9 +249,9 @@ class CHGate(SingletonControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CHGate:
         """Return inverted CH gate (itself)."""
         return CHGate(ctrl_state=self.ctrl_state)  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CHGate) and self.ctrl_state == other.ctrl_state

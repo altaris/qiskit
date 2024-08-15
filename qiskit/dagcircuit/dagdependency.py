@@ -171,11 +171,11 @@ class DAGDependency:
         """Returns the DAGDependency in retworkx format."""
         return self._multi_graph
 
-    def size(self):
+    def size(self) -> int:
         """Returns the number of gates in the circuit"""
         return len(self._multi_graph)
 
-    def depth(self):
+    def depth(self) -> int:
         """Return the circuit depth.
         Returns:
             int: the circuit depth
@@ -382,7 +382,7 @@ class DAGDependency:
 
         return iter(rx.lexicographical_topological_sort(self._multi_graph, key=_key))
 
-    def _create_op_node(self, operation, qargs, cargs):
+    def _create_op_node(self, operation, qargs, cargs) -> DAGDepNode:
         """Creates a DAGDepNode to the graph and update the edges.
 
         Args:
@@ -508,7 +508,7 @@ class DAGDependency:
                 rx.ancestors(self._multi_graph, node_id)
             )
 
-    def copy(self):
+    def copy(self) -> DAGDependency:
         """
         Function to copy a DAGDependency object.
         Returns:

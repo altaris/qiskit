@@ -52,7 +52,7 @@ from qiskit.transpiler.passes.layout.vf2_layout import VF2LayoutStopReason
 from qiskit.transpiler.passes.layout.vf2_post_layout import VF2PostLayoutStopReason
 from qiskit.transpiler.exceptions import TranspilerError
 from qiskit.transpiler.layout import Layout
-
+from qiskit.transpiler.timing_constraints import TimingConstraints
 
 _ControlFlowState = collections.namedtuple("_ControlFlowState", ("working", "not_working"))
 
@@ -72,11 +72,11 @@ _CONTROL_FLOW_STATES = {
 }
 
 
-def _has_control_flow(property_set):
+def _has_control_flow(property_set) -> bool:
     return any(property_set[f"contains_{x}"] for x in CONTROL_FLOW_OP_NAMES)
 
 
-def _without_control_flow(property_set):
+def _without_control_flow(property_set) -> bool:
     return not any(property_set[f"contains_{x}"] for x in CONTROL_FLOW_OP_NAMES)
 
 
@@ -93,7 +93,7 @@ class _InvalidControlFlowForBackend:
             # Pass manager without basis gates or target; assume everything's valid.
             self.unsupported = []
 
-    def message(self, property_set):
+    def message(self, property_set) -> str:
         """Create an error message for the given property set."""
         fails = [x for x in self.unsupported if property_set[f"contains_{x}"]]
         if len(fails) == 1:
@@ -103,7 +103,7 @@ class _InvalidControlFlowForBackend:
             " are not supported by the backend."
         )
 
-    def condition(self, property_set):
+    def condition(self, property_set) -> bool:
         """Checkable condition for the given property set."""
         return any(property_set[f"contains_{x}"] for x in self.unsupported)
 
@@ -116,7 +116,7 @@ def generate_control_flow_options_check(
     scheduling_method=None,
     basis_gates=(),
     target=None,
-):
+) -> PassManager:
     """Generate a pass manager that, when run on a DAG that contains control flow, fails with an
     error message explaining the invalid options, and what could be used instead.
 
@@ -157,7 +157,7 @@ def generate_control_flow_options_check(
     return out
 
 
-def generate_error_on_control_flow(message):
+def generate_error_on_control_flow(message) -> PassManager:
     """Get a pass manager that always raises an error if control flow is present in a given
     circuit."""
     out = PassManager()
@@ -166,7 +166,7 @@ def generate_error_on_control_flow(message):
     return out
 
 
-def if_has_control_flow_else(if_present, if_absent):
+def if_has_control_flow_else(if_present, if_absent) -> PassManager:
     """Generate a pass manager that will run the passes in ``if_present`` if the given circuit
     has control-flow operations in it, and those in ``if_absent`` if it doesn't."""
     if isinstance(if_present, PassManager):
@@ -187,7 +187,7 @@ def generate_unroll_3q(
     unitary_synthesis_method: str = "default",
     unitary_synthesis_plugin_config=None,
     hls_config=None,
-):
+) -> PassManager:
     """Generate an unroll >3q :class:`~qiskit.transpiler.PassManager`
 
     Args:
@@ -239,7 +239,7 @@ def generate_unroll_3q(
     return unroll_3q
 
 
-def generate_embed_passmanager(coupling_map):
+def generate_embed_passmanager(coupling_map) -> PassManager:
     """Generate a layout embedding :class:`~qiskit.transpiler.PassManager`
 
     This is used to generate a :class:`~qiskit.transpiler.PassManager` object
@@ -255,13 +255,13 @@ def generate_embed_passmanager(coupling_map):
     return PassManager([FullAncillaAllocation(coupling_map), EnlargeWithAncilla(), ApplyLayout()])
 
 
-def _layout_not_perfect(property_set):
+def _layout_not_perfect(property_set) -> bool:
     """Return ``True`` if the first attempt at layout has been checked and found to be imperfect.
     In this case, perfection means "does not require any swap routing"."""
     return property_set["is_swap_mapped"] is not None and not property_set["is_swap_mapped"]
 
 
-def _apply_post_layout_condition(property_set):
+def _apply_post_layout_condition(property_set) -> bool:
     # if VF2 Post layout found a solution we need to re-apply the better
     # layout. Otherwise we can skip apply layout.
     return (
@@ -280,7 +280,7 @@ def generate_routing_passmanager(
     check_trivial: bool = False,
     use_barrier_before_measurement: bool = True,
     vf2_max_trials=None,
-):
+) -> PassManager:
     """Generate a routing :class:`~qiskit.transpiler.PassManager`
 
     Args:
@@ -312,7 +312,7 @@ def generate_routing_passmanager(
         PassManager: The routing pass manager
     """
 
-    def _run_post_layout_condition(property_set):
+    def _run_post_layout_condition(property_set) -> bool:
         # If we check trivial layout and the found trivial layout was not perfect also
         # ensure VF2 initial layout was not used before running vf2 post layout
         if not check_trivial or _layout_not_perfect(property_set):
@@ -327,7 +327,7 @@ def generate_routing_passmanager(
     else:
         routing.append(CheckMap(coupling_map, property_set_field="routing_not_needed"))
 
-    def _swap_condition(property_set):
+    def _swap_condition(property_set) -> bool:
         return not property_set["routing_not_needed"]
 
     if use_barrier_before_measurement:
@@ -371,7 +371,9 @@ def generate_routing_passmanager(
     return routing
 
 
-def generate_pre_op_passmanager(target=None, coupling_map=None, remove_reset_in_zero: bool = False):
+def generate_pre_op_passmanager(
+    target=None, coupling_map=None, remove_reset_in_zero: bool = False
+) -> PassManager:
     """Generate a pre-optimization loop :class:`~qiskit.transpiler.PassManager`
 
     This pass manager will check to ensure that directionality from the coupling
@@ -390,7 +392,7 @@ def generate_pre_op_passmanager(target=None, coupling_map=None, remove_reset_in_
     if coupling_map:
         pre_opt.append(CheckGateDirection(coupling_map, target=target))
 
-        def _direction_condition(property_set):
+        def _direction_condition(property_set) -> bool:
             return not property_set["is_direction_mapped"]
 
         pre_opt.append(
@@ -414,7 +416,7 @@ def generate_translation_passmanager(
     unitary_synthesis_method: str = "default",
     unitary_synthesis_plugin_config=None,
     hls_config=None,
-):
+) -> PassManager:
     """Generate a basis translation :class:`~qiskit.transpiler.PassManager`
 
     Args:
@@ -520,8 +522,12 @@ def generate_translation_passmanager(
 
 
 def generate_scheduling(
-    instruction_durations, scheduling_method, timing_constraints, inst_map, target=None
-):
+    instruction_durations,
+    scheduling_method,
+    timing_constraints: TimingConstraints,
+    inst_map,
+    target=None,
+) -> PassManager:
     """Generate a post optimization scheduling :class:`~qiskit.transpiler.PassManager`
 
     Args:

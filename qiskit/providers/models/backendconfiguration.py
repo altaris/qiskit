@@ -94,7 +94,7 @@ class GateConfig:
             self.description = description
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new GateConfig object from a dictionary.
 
         Args:
@@ -128,7 +128,7 @@ class GateConfig:
             out_dict["description"] = self.description
         return out_dict
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, GateConfig):
             if self.to_dict() == other.to_dict():
                 return True
@@ -175,7 +175,7 @@ class UchannelLO:
         self.scale = scale
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new UchannelLO object from a dictionary.
 
         Args:
@@ -200,7 +200,7 @@ class UchannelLO:
         }
         return out_dict
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, UchannelLO):
             if self.to_dict() == other.to_dict():
                 return True
@@ -411,7 +411,7 @@ class QasmBackendConfiguration:
             raise AttributeError(f"Attribute {name} is not defined") from ex
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new GateConfig object from a dictionary.
 
         Args:
@@ -507,7 +507,7 @@ class QasmBackendConfiguration:
         """
         return self.n_qubits
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, QasmBackendConfiguration):
             if self.to_dict() == other.to_dict():
                 return True
@@ -720,7 +720,7 @@ class PulseBackendConfiguration(QasmBackendConfiguration):
         )
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new GateConfig object from a dictionary.
 
         Args:
@@ -819,7 +819,7 @@ class PulseBackendConfiguration(QasmBackendConfiguration):
 
         return out_dict
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, QasmBackendConfiguration):
             if self.to_dict() == other.to_dict():
                 return True

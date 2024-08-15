@@ -114,7 +114,7 @@ class ForLoopOp(ControlFlowOp):
     def blocks(self):
         return (self._params[2],)
 
-    def replace_blocks(self, blocks):
+    def replace_blocks(self, blocks) -> ForLoopOp:
         (body,) = blocks
         return ForLoopOp(self.params[0], self.params[1], body, label=self.label)
 
@@ -186,7 +186,7 @@ class ForLoopContext:
         self._label = label
         self._used = False
 
-    def __enter__(self):
+    def __enter__(self) -> Parameter:
         if self._used:
             raise CircuitError("A for-loop context manager cannot be re-entered.")
         self._used = True
@@ -201,7 +201,7 @@ class ForLoopContext:
         exc_type: Optional[Type[BaseException]],
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
-    ):
+    ) -> bool:
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, there's nothing
             # to do except restore the circuit state.

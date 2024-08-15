@@ -24,7 +24,7 @@ from qiskit.quantum_info.operators.operator import Operator
 from qiskit.quantum_info.operators.symplectic.pauli import Pauli
 from qiskit.quantum_info.operators.scalar_op import ScalarOp
 from qiskit.quantum_info.operators.mixins import generate_apidocs, AdjointMixin
-from qiskit.circuit import QuantumCircuit, Instruction
+from qiskit.circuit import QuantumCircuit, Instruction, Gate
 from .dihedral_circuits import _append_circuit
 from .polynomial import SpecialPolynomial
 
@@ -195,7 +195,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         prod = np.mod(np.dot(mat, vec), 2)
         return prod
 
-    def _dot(self, other):
+    def _dot(self, other: CNOTDihedral) -> CNOTDihedral:
         """Left multiplication self * other."""
         if self.num_qubits != other.num_qubits:
             raise QiskitError("Multiplication on different number of qubits.")
@@ -218,7 +218,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         result.poly = other.poly + self.poly.evaluate(new_vars)
         return result
 
-    def _compose(self, other):
+    def _compose(self, other: CNOTDihedral) -> CNOTDihedral:
         """Right multiplication other * self."""
         if self.num_qubits != other.num_qubits:
             raise QiskitError("Multiplication on different number of qubits.")
@@ -241,7 +241,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         result.poly = self.poly + other.poly.evaluate(new_vars)
         return result
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Test equality."""
         return (
             isinstance(other, CNOTDihedral)
@@ -315,7 +315,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         out += ")\n"
         return out
 
-    def to_circuit(self):
+    def to_circuit(self) -> QuantumCircuit:
         """Return a QuantumCircuit implementing the CNOT-Dihedral element.
 
         Return:
@@ -334,11 +334,11 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
 
         return synth_cnotdihedral_full(self)
 
-    def to_instruction(self):
+    def to_instruction(self) -> Gate:
         """Return a Gate instruction implementing the CNOTDihedral object."""
         return self.to_circuit().to_gate()
 
-    def _from_circuit(self, circuit):
+    def _from_circuit(self, circuit) -> CNOTDihedral:
         """Initialize from a QuantumCircuit or Instruction.
 
         Args:
@@ -386,7 +386,7 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         other.poly.weight_0 = 0  # set global phase
         return other
 
-    def _tensor(self, other, reverse: bool = False):
+    def _tensor(self, other: CNOTDihedral, reverse: bool = False) -> CNOTDihedral:
         """Returns the tensor product operator."""
 
         if not isinstance(other, CNOTDihedral):
@@ -440,12 +440,12 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
     def expand(self, other: CNOTDihedral) -> CNOTDihedral:
         return self._tensor(other, reverse=False)
 
-    def adjoint(self):
+    def adjoint(self) -> CNOTDihedral:
         circ = self.to_instruction()
         result = self._from_circuit(circ.inverse())
         return result
 
-    def conjugate(self):
+    def conjugate(self) -> CNOTDihedral:
         circ = self.to_instruction()
         new_circ = QuantumCircuit(self.num_qubits)
         bit_indices = {bit: index for index, bit in enumerate(circ.definition.qubits)}
@@ -471,12 +471,12 @@ class CNOTDihedral(BaseOperator, AdjointMixin):
         result = self._from_circuit(new_circ)
         return result
 
-    def transpose(self):
+    def transpose(self) -> CNOTDihedral:
         circ = self.to_instruction()
         result = self._from_circuit(circ.reverse_ops())
         return result
 
-    def _is_valid(self):
+    def _is_valid(self) -> bool:
         """Return True if input is a CNOTDihedral element."""
 
         if (

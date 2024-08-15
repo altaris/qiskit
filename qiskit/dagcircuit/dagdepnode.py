@@ -133,7 +133,7 @@ class DAGDepNode:
                             return True
         return False
 
-    def copy(self):
+    def copy(self) -> DAGDepNode:
         """
         Function to copy a DAGDepNode object.
         Returns:

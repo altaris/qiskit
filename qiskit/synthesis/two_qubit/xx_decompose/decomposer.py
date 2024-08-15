@@ -33,7 +33,7 @@ from .utilities import EPSILON
 from .polytopes import XXPolytope
 
 
-def _average_infidelity(p, q):
+def _average_infidelity(p, q) -> float:
     """
     Computes the infidelity distance between two points p, q expressed in positive canonical
     coordinates.
@@ -182,7 +182,7 @@ class XXDecomposer:
 
         return {"point": best_point, "cost": best_cost, "sequence": best_sequence}
 
-    def num_basis_gates(self, unitary: Operator | np.ndarray):
+    def num_basis_gates(self, unitary: Operator | np.ndarray) -> int:
         """
         Counts the number of gates that would be emitted during re-synthesis.
 

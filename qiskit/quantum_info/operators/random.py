@@ -29,7 +29,7 @@ from .symplectic.random import random_clifford, random_pauli, random_pauli_list
 DEFAULT_RNG = default_rng()
 
 
-def random_unitary(dims: int | tuple, seed: int | np.random.Generator | None = None):
+def random_unitary(dims: int | tuple, seed: int | np.random.Generator | None = None) -> Operator:
     """Return a random unitary Operator.
 
     The operator is sampled from the unitary Haar measure.
@@ -58,7 +58,7 @@ def random_unitary(dims: int | tuple, seed: int | np.random.Generator | None = N
 
 def random_hermitian(
     dims: int | tuple, traceless: bool = False, seed: int | np.random.Generator | None = None
-):
+) -> Operator:
     """Return a random hermitian Operator.
 
     The operator is sampled from Gaussian Unitary Ensemble.
@@ -107,7 +107,7 @@ def random_quantum_channel(
     output_dims: int | tuple | None = None,
     rank: int | None = None,
     seed: int | np.random.Generator | None = None,
-):
+) -> Stinespring:
     """Return a random CPTP quantum channel.
 
     This constructs the Stinespring operator for the quantum channel by

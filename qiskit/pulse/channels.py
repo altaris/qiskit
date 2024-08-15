@@ -158,7 +158,7 @@ class Channel(metaclass=ABCMeta):
             return NotImplemented
         return type(self) is type(other) and self._index == other._index
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((type(self), self._index))
 
 

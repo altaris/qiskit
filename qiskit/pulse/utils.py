@@ -139,7 +139,7 @@ def _validate_single_parameter(parameter: Parameter, value):
         raise PulseError(f"Parameter '{parameter.name}' is not assignable to {value}.")
 
 
-def _validate_parameter_value(parameter, value):
+def _validate_parameter_value(parameter, value) -> bool:
     """Validate parameter and its value."""
     if isinstance(parameter, ParameterVector):
         _validate_parameter_vector(parameter, value)

@@ -178,7 +178,7 @@ class Register:
 
         return bit in self._bit_indices
 
-    def index(self, bit):
+    def index(self, bit) -> int:
         """Find the index of the provided bit within this register."""
         if self._bit_indices is None:
             self._bit_indices = {bit: idx for idx, bit in enumerate(self._bits)}
@@ -188,7 +188,7 @@ class Register:
         except KeyError as err:
             raise ValueError(f"Bit {bit} not found in Register {self}.") from err
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Two Registers are the same if they are of the same type
         (i.e. quantum/classical), and have the same name and size. Additionally,
         if either Register contains new-style bits, the bits in both registers

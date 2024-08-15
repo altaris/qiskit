@@ -142,7 +142,7 @@ class DiagonalGate(Gate):
     def _define(self) -> None:
         self.definition = Diagonal(self.params).decompose()
 
-    def validate_parameter(self, parameter):
+    def validate_parameter(self, parameter) -> complex:
         """Diagonal Gate parameter should accept complex
         (in addition to the Gate parameter types) and always return build-in complex."""
         if isinstance(parameter, complex):
@@ -150,7 +150,7 @@ class DiagonalGate(Gate):
         else:
             return complex(super().validate_parameter(parameter))
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> DiagonalGate:
         """Return the inverse of the diagonal gate."""
         return DiagonalGate([np.conj(entry) for entry in self.params])
 

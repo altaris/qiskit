@@ -25,6 +25,7 @@ from qiskit import pulse
 from qiskit.exceptions import QiskitError
 from qiskit.utils import optionals as _optionals, deprecate_func
 from qiskit.providers import basic_provider
+from qiskit.providers.basic_provider.basic_provider_job import BasicProviderJob
 
 
 class _Credentials:
@@ -134,7 +135,7 @@ class FakeBackend(BackendV1):
         else:
             return basic_provider.BasicSimulator._default_options()
 
-    def run(self, run_input, **kwargs):
+    def run(self, run_input, **kwargs) -> BasicProviderJob:
         """Main job in simulator"""
         circuits = run_input
         pulse_job = None

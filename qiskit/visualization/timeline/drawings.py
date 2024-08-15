@@ -135,7 +135,7 @@ class ElementaryData(ABC):
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(type={self.data_type}, key={self.data_key})"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, self.__class__) and self.data_key == other.data_key
 
 

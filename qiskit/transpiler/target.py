@@ -432,7 +432,9 @@ class Target(BaseTarget):
         self._instruction_durations = None
         self._instruction_schedule_map = None
 
-    def update_instruction_properties(self, instruction, qargs, properties) -> None:
+    def update_instruction_properties(
+        self, instruction: str, qargs, properties: InstructionProperties
+    ) -> None:
         """Update the property object for an instruction qarg pair already in the Target
 
         Args:
@@ -447,7 +449,9 @@ class Target(BaseTarget):
         self._instruction_durations = None
         self._instruction_schedule_map = None
 
-    def update_from_instruction_schedule_map(self, inst_map, inst_name_map=None, error_dict=None):
+    def update_from_instruction_schedule_map(
+        self, inst_map: InstructionScheduleMap, inst_name_map=None, error_dict=None
+    ):
         """Update the target from an instruction schedule map.
 
         If the input instruction schedule map contains new instructions not in
@@ -577,7 +581,7 @@ class Target(BaseTarget):
             return None
         return self._gate_map[operation].keys()
 
-    def durations(self):
+    def durations(self) -> InstructionDurations:
         """Get an InstructionDurations object from the target
 
         Returns:
@@ -594,7 +598,7 @@ class Target(BaseTarget):
         self._instruction_durations = InstructionDurations(out_durations, dt=self.dt)
         return self._instruction_durations
 
-    def timing_constraints(self):
+    def timing_constraints(self) -> TimingConstraints:
         """Get an :class:`~qiskit.transpiler.TimingConstraints` object from the target
 
         Returns:
@@ -604,7 +608,7 @@ class Target(BaseTarget):
             self.granularity, self.min_length, self.pulse_alignment, self.acquire_alignment
         )
 
-    def instruction_schedule_map(self):
+    def instruction_schedule_map(self) -> InstructionScheduleMap:
         """Return an :class:`~qiskit.pulse.InstructionScheduleMap` for the
         instructions in the target with a pulse schedule defined.
 

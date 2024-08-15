@@ -52,7 +52,7 @@ from .dag_to_dagdependency import dag_to_dagdependency
 from .dagdependency_to_dag import dagdependency_to_dag
 
 
-def isinstanceint(obj):
+def isinstanceint(obj: int) -> bool:
     """Like isinstance(obj,int), but with casting. Except for strings."""
     if isinstance(obj, str):
         return False
@@ -63,7 +63,7 @@ def isinstanceint(obj):
         return False
 
 
-def isinstancelist(obj):
+def isinstancelist(obj) -> bool:
     """Like isinstance(obj, list), but with casting. Except for strings and dicts."""
     if isinstance(obj, (str, dict)):
         return False

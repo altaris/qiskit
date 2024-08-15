@@ -218,7 +218,7 @@ def remove_trivial_barriers(schedule: Schedule) -> Schedule:
         schedule: A schedule without trivial barriers
     """
 
-    def filter_func(inst):
+    def filter_func(inst) -> bool:
         return isinstance(inst[1], directives.RelativeBarrier) and len(inst[1].channels) < 2
 
     return schedule.exclude(filter_func)
@@ -314,7 +314,7 @@ def align_measures(
             acquire_times.append(qubit_first_acquire_times)
         return acquire_times
 
-    def get_max_calibration_duration(inst_map, cal_gate):
+    def get_max_calibration_duration(inst_map, cal_gate) -> int:
         """Return the time needed to allow for readout discrimination calibration pulses."""
         # TODO (qiskit-terra #5472): fix behavior of this.
         max_calibration_duration = 0

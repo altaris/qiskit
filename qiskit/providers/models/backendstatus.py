@@ -48,7 +48,7 @@ class BackendStatus:
         self.status_msg = status_msg
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new BackendStatus object from a dictionary.
 
         Args:
@@ -61,7 +61,7 @@ class BackendStatus:
         """
         return cls(**data)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """Return a dictionary format representation of the BackendStatus.
 
         Returns:
@@ -69,7 +69,7 @@ class BackendStatus:
         """
         return self.__dict__
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, BackendStatus):
             if self.__dict__ == other.__dict__:
                 return True

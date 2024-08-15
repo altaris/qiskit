@@ -99,7 +99,7 @@ class U3Gate(Gate):
         """Create new U3 gate."""
         super().__init__("u3", 1, [theta, phi, lam], label=label, duration=duration, unit=unit)
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> U3Gate:
         r"""Return inverted U3 gate.
 
         :math:`U3(\theta,\phi,\lambda)^{\dagger} =U3(-\theta,-\lambda,-\phi))`
@@ -121,7 +121,7 @@ class U3Gate(Gate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CU3Gate:
         """Return a (multi-)controlled-U3 gate.
 
         Args:
@@ -303,7 +303,7 @@ class CU3Gate(ControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CU3Gate:
         r"""Return inverted CU3 gate.
 
         :math:`CU3(\theta,\phi,\lambda)^{\dagger} =CU3(-\theta,-\phi,-\lambda))`
@@ -362,7 +362,7 @@ def _generate_gray_code(num_bits: int):
     return [format(x, f"0{num_bits}b") for x in result]
 
 
-def _gray_code_chain(q, num_ctrl_qubits: int, gate):
+def _gray_code_chain(q: QuantumRegister, num_ctrl_qubits: int, gate):
     """Apply the gate to the last qubit in the register ``q``, controlled on all
     preceding qubits. This function uses the gray code to propagate down to the last qubit.
 

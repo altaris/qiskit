@@ -42,7 +42,7 @@ class MeasurementKernel:
         return {"name": self.name, "params": self.params}
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new MeasurementKernel object from a dictionary.
 
         Args:
@@ -78,7 +78,7 @@ class Discriminator:
         return {"name": self.name, "params": self.params}
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new Discriminator object from a dictionary.
 
         Args:
@@ -139,7 +139,7 @@ class Command:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new Command object from a dictionary.
 
         Args:
@@ -261,7 +261,7 @@ class PulseDefaults:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new PulseDefaults object from a dictionary.
 
         Args:

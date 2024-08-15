@@ -121,7 +121,7 @@ class StatePreparation(Gate):
         else:
             self.definition = self._define_synthesis_isom()
 
-    def _define_from_label(self):
+    def _define_from_label(self) -> QuantumCircuit:
         q = QuantumRegister(self.num_qubits, "q")
         initialize_circuit = QuantumCircuit(q, name="init_def")
 
@@ -145,7 +145,7 @@ class StatePreparation(Gate):
 
         return initialize_circuit
 
-    def _define_from_int(self):
+    def _define_from_int(self) -> QuantumCircuit:
         q = QuantumRegister(self.num_qubits, "q")
         initialize_circuit = QuantumCircuit(q, name="init_def")
 
@@ -168,7 +168,7 @@ class StatePreparation(Gate):
         # we don't need to invert anything
         return initialize_circuit
 
-    def _define_synthesis_isom(self):
+    def _define_synthesis_isom(self) -> QuantumCircuit:
         """Calculate a subcircuit that implements this initialization via isometry"""
         q = QuantumRegister(self.num_qubits, "q")
         initialize_circuit = QuantumCircuit(q, name="init_def")
@@ -183,7 +183,7 @@ class StatePreparation(Gate):
 
         return initialize_circuit
 
-    def _get_num_qubits(self, num_qubits: int, params):
+    def _get_num_qubits(self, num_qubits: int, params) -> int:
         """Get number of qubits needed for state preparation"""
         if isinstance(params, str):
             num_qubits = len(params)
@@ -200,7 +200,7 @@ class StatePreparation(Gate):
             num_qubits = int(num_qubits)
         return num_qubits
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "StatePreparation":
         """Return inverted StatePreparation"""
 
         label = (

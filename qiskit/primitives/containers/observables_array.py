@@ -113,7 +113,7 @@ class ObservablesArray(ShapedMixin):
     @overload
     def __getitem__(self, args: slice) -> ObservablesArray: ...
 
-    def __getitem__(self, args):
+    def __getitem__(self, args) -> ObservablesArray:
         item = self._array[args]
         if not isinstance(item, np.ndarray):
             return item

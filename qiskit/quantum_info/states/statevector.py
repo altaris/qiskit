@@ -109,7 +109,7 @@ class Statevector(QuantumState, TolerancesMixin):
         dtype = self.data.dtype if dtype is None else dtype
         return np.array(self.data, dtype=dtype, copy=copy)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return super().__eq__(other) and np.allclose(
             self._data, other._data, rtol=self.rtol, atol=self.atol
         )
@@ -321,7 +321,7 @@ class Statevector(QuantumState, TolerancesMixin):
         ret._data = np.kron(other._data, self._data)
         return ret
 
-    def _add(self, other):
+    def _add(self, other) -> Statevector:
         """Return the linear combination self + other.
 
         Args:
@@ -341,7 +341,7 @@ class Statevector(QuantumState, TolerancesMixin):
         ret._data = self.data + other.data
         return ret
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> Statevector:
         """Return the scalar multiplied state self * other.
 
         Args:
@@ -455,7 +455,7 @@ class Statevector(QuantumState, TolerancesMixin):
         ret._op_shape = self._op_shape.reverse()
         return ret
 
-    def _expectation_value_pauli(self, pauli, qargs=None):
+    def _expectation_value_pauli(self, pauli: Pauli, qargs=None) -> complex:
         """Compute the expectation value of a Pauli.
 
         Args:
@@ -841,7 +841,7 @@ class Statevector(QuantumState, TolerancesMixin):
         )
 
     @staticmethod
-    def _evolve_operator(statevec, oper, qargs=None):
+    def _evolve_operator(statevec: Statevector, oper: Operator, qargs=None):
         """Evolve a qudit statevector"""
         new_shape = statevec._op_shape.compose(oper._op_shape, qargs=qargs)
         if qargs is None:
@@ -881,7 +881,7 @@ class Statevector(QuantumState, TolerancesMixin):
         return statevec
 
     @staticmethod
-    def _evolve_instruction(statevec, obj, qargs=None):
+    def _evolve_instruction(statevec: Statevector, obj: Instruction, qargs=None):
         """Update the current Statevector by applying an instruction."""
         from qiskit.circuit.reset import Reset
         from qiskit.circuit.barrier import Barrier

@@ -95,7 +95,9 @@ class InstructionDurations:
 
         return cls(instruction_durations, dt=dt)
 
-    def update(self, inst_durations: "InstructionDurationsType" | None, dt: float = None):
+    def update(
+        self, inst_durations: "InstructionDurationsType" | None, dt: float = None
+    ) -> InstructionDurations:
         """Update self with inst_durations (inst_durations overwrite self).
 
         Args:

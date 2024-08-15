@@ -245,7 +245,7 @@ class ControlledGate(Gate):
         else:
             raise CircuitError("Controlled gate does not define base gate for extracting params")
 
-    def __deepcopy__(self, memo=None):
+    def __deepcopy__(self, memo=None) -> ControlledGate:
         cpy = copy.copy(self)
         cpy.base_gate = self.base_gate.copy()
         if self._definition:

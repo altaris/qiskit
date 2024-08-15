@@ -37,7 +37,7 @@ from qiskit.synthesis.linear.linear_matrix_utils import calc_inverse_matrix
 from qiskit.synthesis.linear.linear_depth_lnn import _optimize_cx_circ_depth_5n_line
 
 
-def _initialize_phase_schedule(mat_z):
+def _initialize_phase_schedule(mat_z: np.ndarray):
     """
     Given a CZ layer (represented as an n*n CZ matrix Mz)
     Return a schedule of phase gates implementing Mz in a SWAP-only netwrok
@@ -68,7 +68,7 @@ def _shuffle(labels: Sequence[int], odd):
     return swapped + labels[-1:] if odd else swapped
 
 
-def _make_seq(n):
+def _make_seq(n: int):
     """
     Given the width of the circuit n,
     Return the labels of the boxes in order from left to right, top to bottom
@@ -117,7 +117,7 @@ def _swap_plus(instructions, seq):
     return swap_plus
 
 
-def _update_phase_schedule(n, phase_schedule, swap_plus):
+def _update_phase_schedule(n: int, phase_schedule, swap_plus):
     """
     Given phase_schedule initialized to induce a CZ circuit in SWAP-only network and list of SWAP+ boxes
     Update phase_schedule for each SWAP+ according to Algorithm 2, [2]
@@ -161,7 +161,7 @@ def _update_phase_schedule(n, phase_schedule, swap_plus):
     return phase_schedule
 
 
-def _apply_phase_to_nw_circuit(n, phase_schedule, seq, swap_plus):
+def _apply_phase_to_nw_circuit(n: int, phase_schedule, seq, swap_plus) -> QuantumCircuit:
     """
     Given
         Width of the circuit (int n)

@@ -87,7 +87,7 @@ class ProviderV1(Provider, ABC):
         """
         pass
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Equality comparison.
 
         By default, it is assumed that two `Providers` from the same class are

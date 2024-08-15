@@ -35,7 +35,7 @@ class ApplyLayout(TransformationPass):
     ``original_virtual`` -> ``new_physical``
     """
 
-    def run(self, dag):
+    def run(self, dag) -> DAGCircuit:
         """Run the ApplyLayout pass on ``dag``.
 
         Args:

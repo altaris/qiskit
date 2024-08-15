@@ -107,7 +107,7 @@ class UnitaryGate(Gate):
         # Store instruction params
         super().__init__("unitary", num_qubits, [data], label=label)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not isinstance(other, UnitaryGate):
             return False
         if self.label != other.label:
@@ -123,7 +123,7 @@ class UnitaryGate(Gate):
         """Return the adjoint of the unitary."""
         return self.adjoint()
 
-    def conjugate(self):
+    def conjugate(self) -> UnitaryGate:
         """Return the conjugate of the unitary."""
         return UnitaryGate(numpy.conj(self.to_matrix()))
 
@@ -131,7 +131,7 @@ class UnitaryGate(Gate):
         """Return the adjoint of the unitary."""
         return self.transpose().conjugate()
 
-    def transpose(self):
+    def transpose(self) -> UnitaryGate:
         """Return the transpose of the unitary."""
         return UnitaryGate(numpy.transpose(self.to_matrix()))
 
@@ -208,7 +208,7 @@ class UnitaryGate(Gate):
         out.name = self.name
         return out
 
-    def validate_parameter(self, parameter):
+    def validate_parameter(self, parameter) -> numpy.ndarray:
         """Unitary gate parameter has to be an ndarray."""
         if isinstance(parameter, numpy.ndarray):
             return parameter

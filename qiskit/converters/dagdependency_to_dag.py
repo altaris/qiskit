@@ -12,9 +12,10 @@
 
 """Helper function for converting a dag dependency to a dag circuit"""
 from qiskit.dagcircuit.dagcircuit import DAGCircuit
+from qiskit.dagcircuit.dagdependency import DAGDependency
 
 
-def dagdependency_to_dag(dagdependency):
+def dagdependency_to_dag(dagdependency: DAGDependency) -> DAGCircuit:
     """Build a ``DAGCircuit`` object from a ``DAGDependency``.
 
     Args:

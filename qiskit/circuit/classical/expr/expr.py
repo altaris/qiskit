@@ -95,7 +95,7 @@ class Cast(Expr):
     def accept(self, visitor, /):
         return visitor.visit_cast(self)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (
             isinstance(other, Cast)
             and self.type == other.type
@@ -145,7 +145,7 @@ class Var(Expr):
         super().__setattr__("name", name)
 
     @classmethod
-    def new(cls, name: str, type: types.Type) -> typing.Self:
+    def new(cls, name: str, type: types.Type):
         """Generate a new named variable that owns its own backing storage."""
         return cls(uuid.uuid4(), type, name=name)
 
@@ -163,10 +163,10 @@ class Var(Expr):
             raise AttributeError(f"'Var' object attribute '{key}' is read-only")
         raise AttributeError(f"'Var' object has no attribute '{key}'")
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.type, self.var, self.name))
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (
             isinstance(other, Var)
             and self.type == other.type
@@ -188,11 +188,11 @@ class Var(Expr):
         super().__setattr__("var", var)
         super().__setattr__("name", name)
 
-    def __copy__(self):
+    def __copy__(self) -> Var:
         # I am immutable...
         return self
 
-    def __deepcopy__(self, memo):
+    def __deepcopy__(self, memo) -> Var:
         # ... as are all my constituent parts.
         return self
 
@@ -210,7 +210,7 @@ class Value(Expr):
     def accept(self, visitor, /):
         return visitor.visit_value(self)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, Value) and self.type == other.type and self.value == other.value
 
     def __repr__(self) -> str:
@@ -261,7 +261,7 @@ class Unary(Expr):
     def accept(self, visitor, /):
         return visitor.visit_unary(self)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (
             isinstance(other, Unary)
             and self.type == other.type
@@ -352,7 +352,7 @@ class Binary(Expr):
     def accept(self, visitor, /):
         return visitor.visit_binary(self)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (
             isinstance(other, Binary)
             and self.type == other.type
@@ -385,7 +385,7 @@ class Index(Expr):
     def accept(self, visitor, /):
         return visitor.visit_index(self)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (
             isinstance(other, Index)
             and self.type == other.type

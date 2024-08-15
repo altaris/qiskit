@@ -153,7 +153,7 @@ class SwitchCaseOp(ControlFlowOp):
 
         super().__init__("switch_case", num_qubits, num_clbits, self._params, label=label)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         # The general __eq__ will compare the blocks in the right order, so we just need to ensure
         # that all the labels point the right way as well.
         return (
@@ -240,7 +240,7 @@ class SwitchCasePlaceholder(InstructionPlaceholder):
             label=label,
         )
 
-    def _calculate_placeholder_resources(self):
+    def _calculate_placeholder_resources(self) -> InstructionResources:
         qubits = set()
         clbits = set()
         qregs = set()
@@ -338,7 +338,7 @@ class SwitchContext:
         self._cases: List[Tuple[Tuple[Any, ...], ControlFlowBuilderBlock]] = []
         self._label_set = set()
 
-    def label_in_use(self, label):
+    def label_in_use(self, label) -> bool:
         """Return whether a case label is already accounted for in the switch statement."""
         return label in self._label_set
 
@@ -355,7 +355,7 @@ class SwitchContext:
         self._label_set.update(labels)
         self._cases.append((labels, block))
 
-    def __enter__(self):
+    def __enter__(self) -> CaseBuilder:
         self.circuit._push_scope(forbidden_message="Cannot have instructions outside a case")
         return CaseBuilder(self)
 
@@ -364,7 +364,7 @@ class SwitchContext:
         exc_type: Optional[Type[BaseException]],
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
-    ):
+    ) -> bool:
         self.complete = True
         # The popped scope should be the forbidden scope.
         self.circuit._pop_scope()

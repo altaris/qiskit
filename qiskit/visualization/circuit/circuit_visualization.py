@@ -39,6 +39,7 @@ from typing import Literal
 from qiskit import user_config
 from qiskit.circuit import ControlFlowOp, Measure
 from qiskit.utils import optionals as _optionals
+from qiskit.visualization.circuit.text import TextDrawing
 
 from ..exceptions import VisualizationError
 from ..utils import _trim as trim_image
@@ -260,7 +261,7 @@ def circuit_drawer(
             )
         cregbundle = False
 
-    def check_clbit_in_inst(circuit, cregbundle):
+    def check_clbit_in_inst(circuit, cregbundle) -> bool:
         if cregbundle is False:
             return False
         for inst in circuit.data:
@@ -362,7 +363,7 @@ def circuit_drawer(
 
 
 def _text_circuit_drawer(
-    circuit,
+    circuit: QuantumCircuit,
     filename=None,
     reverse_bits: bool = False,
     plot_barriers: bool = True,
@@ -376,7 +377,7 @@ def _text_circuit_drawer(
     encoding=None,
     wire_order=None,
     expr_len: int = 30,
-):
+) -> TextDrawing:
     """Draws a circuit using ascii art.
 
     Args:
@@ -578,7 +579,7 @@ def _latex_circuit_drawer(
 
 
 def _generate_latex_source(
-    circuit,
+    circuit: QuantumCircuit,
     filename=None,
     scale: float = 0.7,
     style=None,
@@ -651,7 +652,7 @@ def _generate_latex_source(
 
 
 def _matplotlib_circuit_drawer(
-    circuit,
+    circuit: QuantumCircuit,
     scale=None,
     filename=None,
     style=None,

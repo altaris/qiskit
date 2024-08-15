@@ -166,7 +166,7 @@ class BackendV1(Backend, ABC):
         """
         return self._provider
 
-    def status(self):
+    def status(self) -> BackendStatus:
         """Return the backend status.
 
         Returns:

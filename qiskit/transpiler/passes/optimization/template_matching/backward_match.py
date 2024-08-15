@@ -89,7 +89,7 @@ class MatchingScenariosList:
         """
         self.matching_scenarios_list = []
 
-    def append_scenario(self, matching) -> None:
+    def append_scenario(self, matching: MatchingScenarios) -> None:
         """
         Append a scenario to the list.
         Args:
@@ -244,7 +244,7 @@ class BackwardMatch:
         """
         return node_circuit.op == node_template.op
 
-    def _is_same_q_conf(self, node_circuit, node_template, qarg_circuit):
+    def _is_same_q_conf(self, node_circuit, node_template, qarg_circuit) -> bool:
         """
         Check if the qubits configurations are compatible.
         Args:
@@ -292,7 +292,7 @@ class BackwardMatch:
             else:
                 return qarg_circuit == node_template.qindices
 
-    def _is_same_c_conf(self, node_circuit, node_template, carg_circuit):
+    def _is_same_c_conf(self, node_circuit, node_template, carg_circuit) -> bool:
         """
         Check if the clbits configurations are compatible.
         Args:
@@ -374,7 +374,7 @@ class BackwardMatch:
                     if j in largest
                 ]
 
-    def _backward_metrics(self, scenario):
+    def _backward_metrics(self, scenario) -> int:
         """
         Heuristics to cut the tree in the backward match algorithm.
         Args:

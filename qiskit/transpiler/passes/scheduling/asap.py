@@ -42,7 +42,7 @@ class ASAPSchedule(BaseSchedulerTransform):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-    def run(self, dag):
+    def run(self, dag) -> DAGCircuit:
         """Run the ASAPSchedule pass on `dag`.
 
         Args:

@@ -59,7 +59,7 @@ from qiskit.utils.multiprocessing import local_hardware_info
 from qiskit import user_config
 
 
-def get_platform_parallel_default():
+def get_platform_parallel_default() -> bool:
     """
     Returns the default parallelism flag value for the current platform.
 

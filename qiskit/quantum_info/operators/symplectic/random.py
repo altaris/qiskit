@@ -17,7 +17,6 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from numpy.random import default_rng
 
 from .clifford import Clifford
 from .pauli import Pauli
@@ -26,7 +25,7 @@ from .pauli_list import PauliList
 
 def random_pauli(
     num_qubits: int, group_phase: bool = False, seed: int | np.random.Generator | None = None
-):
+) -> Pauli:
     """Return a random Pauli.
 
     Args:
@@ -45,7 +44,7 @@ def random_pauli(
     elif isinstance(seed, np.random.Generator):
         rng = seed
     else:
-        rng = default_rng(seed)
+        rng = np.random.default_rng(seed)
     z = rng.integers(2, size=num_qubits, dtype=bool)
     x = rng.integers(2, size=num_qubits, dtype=bool)
     phase = rng.integers(4) if group_phase else 0
@@ -58,7 +57,7 @@ def random_pauli_list(
     size: int = 1,
     seed: int | np.random.Generator | None = None,
     phase: bool = True,
-):
+) -> PauliList:
     """Return a random PauliList.
 
     Args:
@@ -76,7 +75,7 @@ def random_pauli_list(
     elif isinstance(seed, np.random.Generator):
         rng = seed
     else:
-        rng = default_rng(seed)
+        rng = np.random.default_rng(seed)
 
     z = rng.integers(2, size=(size, num_qubits)).astype(bool)
     x = rng.integers(2, size=(size, num_qubits)).astype(bool)
@@ -86,7 +85,7 @@ def random_pauli_list(
     return PauliList.from_symplectic(z, x)
 
 
-def random_clifford(num_qubits: int, seed: int | np.random.Generator | None = None):
+def random_clifford(num_qubits: int, seed: int | np.random.Generator | None = None) -> Clifford:
     """Return a random Clifford operator.
 
     The Clifford is sampled using the method of Reference [1].
@@ -109,7 +108,7 @@ def random_clifford(num_qubits: int, seed: int | np.random.Generator | None = No
     elif isinstance(seed, np.random.Generator):
         rng = seed
     else:
-        rng = default_rng(seed)
+        rng = np.random.default_rng(seed)
 
     had, perm = _sample_qmallows(num_qubits, rng)
 
@@ -157,7 +156,7 @@ def random_clifford(num_qubits: int, seed: int | np.random.Generator | None = No
     return Clifford(tableau, validate=False)
 
 
-def _sample_qmallows(n, rng=None):
+def _sample_qmallows(n: int, rng=None):
     """Sample from the quantum Mallows distribution"""
 
     if rng is None:
@@ -185,7 +184,7 @@ def _sample_qmallows(n, rng=None):
     return had, perm
 
 
-def _fill_tril(mat, rng, symmetric: bool = False) -> None:
+def _fill_tril(mat, rng: np.random.Generator, symmetric: bool = False) -> None:
     """Add symmetric random ints to off diagonals"""
     dim = mat.shape[0]
     # Optimized for low dimensions
@@ -220,7 +219,7 @@ def _fill_tril(mat, rng, symmetric: bool = False) -> None:
         mat[(cols, rows)] = vals
 
 
-def _inverse_tril(mat, block_inverse_threshold):
+def _inverse_tril(mat, block_inverse_threshold: int):
     """Invert a lower-triangular matrix with unit diagonal."""
     # Optimized inversion function for low dimensions
     dim = mat.shape[0]

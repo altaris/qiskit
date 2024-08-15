@@ -75,7 +75,7 @@ class ScalarOp(LinearOp):
     def transpose(self):
         return self.copy()
 
-    def is_unitary(self, atol=None, rtol=None):
+    def is_unitary(self, atol=None, rtol=None) -> bool:
         """Return True if operator is a unitary matrix."""
         if atol is None:
             atol = self.atol

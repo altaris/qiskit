@@ -220,7 +220,7 @@ def _write_expr_type(file_obj, type_: types.Type):
         raise exceptions.QpyError(f"unhandled Type object '{type_};")
 
 
-def _read_parameter(file_obj):
+def _read_parameter(file_obj) -> Parameter:
     data = formats.PARAMETER(
         *struct.unpack(formats.PARAMETER_PACK, file_obj.read(formats.PARAMETER_SIZE))
     )
@@ -247,7 +247,7 @@ def _read_parameter_vec(file_obj, vectors):
     return vector[data.index]
 
 
-def _read_parameter_expression(file_obj):
+def _read_parameter_expression(file_obj) -> ParameterExpression:
     data = formats.PARAMETER_EXPR(
         *struct.unpack(formats.PARAMETER_EXPR_PACK, file_obj.read(formats.PARAMETER_EXPR_SIZE))
     )
@@ -283,7 +283,7 @@ def _read_parameter_expression(file_obj):
     return ParameterExpression(symbol_map, expr_)
 
 
-def _read_parameter_expression_v3(file_obj, vectors, use_symengine):
+def _read_parameter_expression_v3(file_obj, vectors, use_symengine) -> ParameterExpression:
     data = formats.PARAMETER_EXPR(
         *struct.unpack(formats.PARAMETER_EXPR_PACK, file_obj.read(formats.PARAMETER_EXPR_SIZE))
     )
@@ -515,7 +515,7 @@ def write_standalone_vars(file_obj, circuit):
 def dumps_value(
     obj,
     *,
-    version,
+    version: int,
     index_map=None,
     use_symengine: bool = False,
     standalone_var_indices=None,

@@ -42,7 +42,7 @@ def _read_channel(file_obj, version):
     return channel_cls(index)
 
 
-def _read_waveform(file_obj, version):
+def _read_waveform(file_obj, version) -> library.Waveform:
     header = formats.WAVEFORM._make(
         struct.unpack(
             formats.WAVEFORM_PACK,
@@ -79,7 +79,7 @@ def _loads_obj(type_key, binary_data, version, vectors):
         return value.loads_value(type_key, binary_data, version, vectors)
 
 
-def _read_kernel(file_obj, version):
+def _read_kernel(file_obj, version) -> Kernel:
     params = common.read_mapping(
         file_obj=file_obj,
         deserializer=_loads_obj,
@@ -90,7 +90,7 @@ def _read_kernel(file_obj, version):
     return Kernel(name=name, **params)
 
 
-def _read_discriminator(file_obj, version):
+def _read_discriminator(file_obj, version) -> Discriminator:
     params = common.read_mapping(
         file_obj=file_obj,
         deserializer=_loads_obj,
@@ -309,7 +309,7 @@ def _loads_operand(type_key, data_bytes, version, use_symengine):
     return value.loads_value(type_key, data_bytes, version, {})
 
 
-def _read_element(file_obj, version, metadata_deserializer, use_symengine):
+def _read_element(file_obj, version, metadata_deserializer, use_symengine: bool):
     type_key = common.read_type_key(file_obj)
 
     if type_key == type_keys.Program.SCHEDULE_BLOCK:
@@ -402,7 +402,7 @@ def _write_discriminator(file_obj, data, version) -> None:
     value.write_value(file_obj, name, version=version)
 
 
-def _dumps_symbolic_expr(expr, use_symengine):
+def _dumps_symbolic_expr(expr, use_symengine: bool) -> bytes:
     if expr is None:
         return b""
     if use_symengine:
@@ -446,7 +446,7 @@ def _write_symbolic_pulse(file_obj, data, use_symengine, version) -> None:
     value.write_value(file_obj, data.name, version=version)
 
 
-def _write_alignment_context(file_obj, context, version) -> None:
+def _write_alignment_context(file_obj, context, version: int) -> None:
     type_key = type_keys.ScheduleAlignment.assign(context)
     common.write_type_key(file_obj, type_key)
     common.write_sequence(
@@ -481,7 +481,9 @@ def _dumps_operand(operand, use_symengine, version):
     return type_key, data_bytes
 
 
-def _write_element(file_obj, element, metadata_serializer, use_symengine, version) -> None:
+def _write_element(
+    file_obj, element, metadata_serializer, use_symengine: bool, version: int
+) -> None:
     if isinstance(element, ScheduleBlock):
         common.write_type_key(file_obj, type_keys.Program.SCHEDULE_BLOCK)
         write_schedule_block(file_obj, element, metadata_serializer, use_symengine, version=version)
@@ -513,7 +515,9 @@ def _dumps_reference_item(schedule, metadata_serializer, version):
     return type_key, data_bytes
 
 
-def read_schedule_block(file_obj, version, metadata_deserializer=None, use_symengine: bool = False):
+def read_schedule_block(
+    file_obj, version, metadata_deserializer=None, use_symengine: bool = False
+) -> ScheduleBlock:
     """Read a single ScheduleBlock from the file like object.
 
     Args:
@@ -584,7 +588,7 @@ def write_schedule_block(
     block,
     metadata_serializer=None,
     use_symengine: bool = False,
-    version=common.QPY_VERSION,
+    version: int = common.QPY_VERSION,
 ) -> None:
     """Write a single ScheduleBlock object in the file like object.
 

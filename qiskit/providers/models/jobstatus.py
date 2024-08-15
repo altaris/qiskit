@@ -32,7 +32,7 @@ class JobStatus:
         self._data.update(kwargs)
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new JobStatus object from a dictionary.
 
         Args:

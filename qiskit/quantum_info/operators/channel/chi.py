@@ -148,16 +148,16 @@ class Chi(QuantumChannel):
     # BaseOperator methods
     # ---------------------------------------------------------------------
 
-    def conjugate(self):
+    def conjugate(self) -> Chi:
         # Since conjugation is basis dependent we transform
         # to the Choi representation to compute the
         # conjugate channel
         return Chi(Choi(self).conjugate())
 
-    def transpose(self):
+    def transpose(self) -> Chi:
         return Chi(Choi(self).transpose())
 
-    def adjoint(self):
+    def adjoint(self) -> Chi:
         return Chi(Choi(self).adjoint())
 
     def compose(self, other: Chi, qargs: list | None = None, front: bool = False) -> Chi:

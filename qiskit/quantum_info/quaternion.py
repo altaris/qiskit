@@ -33,7 +33,7 @@ class Quaternion:
     def __str__(self) -> str:
         return np.array_str(self.data)
 
-    def __mul__(self, r):
+    def __mul__(self, r: Quaternion):
         if isinstance(r, Quaternion):
             q = self
             out_data = np.zeros(4, dtype=float)

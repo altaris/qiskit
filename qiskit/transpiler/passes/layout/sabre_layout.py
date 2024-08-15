@@ -191,7 +191,7 @@ class SabreLayout(TransformationPass):
                 self.coupling_map.make_symmetric()
             self._neighbor_table = NeighborTable(rx.adjacency_matrix(self.coupling_map.graph))
 
-    def run(self, dag):
+    def run(self, dag) -> DAGCircuit:
         """Run the SabreLayout pass on `dag`.
 
         Args:
@@ -435,7 +435,7 @@ class SabreLayout(TransformationPass):
         self.property_set = enlarge_pass.property_set
         return dag
 
-    def _layout_and_route_passmanager(self, initial_layout):
+    def _layout_and_route_passmanager(self, initial_layout: Layout) -> PassManager:
         """Return a passmanager for a full layout and routing.
 
         We use a factory to remove potential statefulness of passes.
@@ -450,7 +450,7 @@ class SabreLayout(TransformationPass):
         pm = PassManager(layout_and_route)
         return pm
 
-    def _compose_layouts(self, initial_layout, pass_final_layout, qregs):
+    def _compose_layouts(self, initial_layout: Layout, pass_final_layout, qregs) -> Layout:
         """Return the real final_layout resulting from the composition
         of an initial_layout with the final_layout reported by a pass.
 

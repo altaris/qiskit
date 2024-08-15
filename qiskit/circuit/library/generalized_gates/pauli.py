@@ -61,7 +61,7 @@ class PauliGate(Gate):
             qc._append(CircuitInstruction(gates[p](), (q[i],), ()))
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "PauliGate":
         r"""Return inverted pauli gate (itself)."""
         return PauliGate(self.params[0])  # self-inverse
 
@@ -73,7 +73,7 @@ class PauliGate(Gate):
 
         return Pauli(self.params[0]).__array__(dtype=dtype, copy=copy)
 
-    def validate_parameter(self, parameter):
+    def validate_parameter(self, parameter) -> str:
         if isinstance(parameter, str):
             if all(c in ["I", "X", "Y", "Z"] for c in parameter):
                 return parameter

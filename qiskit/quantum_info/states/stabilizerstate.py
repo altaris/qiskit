@@ -604,7 +604,7 @@ class StabilizerState(QuantumState):
         return phase
 
     @staticmethod
-    def _rowsum(accum_pauli, accum_phase, row_pauli, row_phase):
+    def _rowsum(accum_pauli: Pauli, accum_phase, row_pauli: Pauli, row_phase):
         """Aaronson-Gottesman rowsum helper function"""
 
         newr = 2 * row_phase + 2 * accum_phase
@@ -623,7 +623,7 @@ class StabilizerState(QuantumState):
         return accum_pauli, accum_phase
 
     @staticmethod
-    def _rowsum_nondeterministic(clifford, accum, row) -> None:
+    def _rowsum_nondeterministic(clifford: Clifford, accum: int, row) -> None:
         """Updating StabilizerState Clifford in the
         non-deterministic rowsum calculation.
         row and accum are rows in the StabilizerState Clifford."""
@@ -645,7 +645,7 @@ class StabilizerState(QuantumState):
         z[accum] = accum_pauli.z
 
     @staticmethod
-    def _rowsum_deterministic(clifford, aux_pauli, row):
+    def _rowsum_deterministic(clifford: Clifford, aux_pauli: Pauli, row):
         """Updating an auxiliary Pauli aux_pauli in the
         deterministic rowsum calculation.
         The StabilizerState itself is not updated."""

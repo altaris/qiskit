@@ -21,7 +21,7 @@ from qiskit.exceptions import QiskitError
 from qiskit.circuit.exceptions import CircuitError
 
 
-def _compute_control_matrix(base_mat, num_ctrl_qubits: int, ctrl_state=None):
+def _compute_control_matrix(base_mat: numpy.ndarray, num_ctrl_qubits: int, ctrl_state=None):
     r"""
     Compute the controlled version of the input matrix with qiskit ordering.
     This function computes the controlled unitary with :math:`n` control qubits
@@ -65,7 +65,7 @@ def _compute_control_matrix(base_mat, num_ctrl_qubits: int, ctrl_state=None):
     return full_mat
 
 
-def _ctrl_state_to_int(ctrl_state, num_ctrl_qubits: int):
+def _ctrl_state_to_int(ctrl_state, num_ctrl_qubits: int) -> int:
     """Convert ctrl_state to int.
 
     Args:

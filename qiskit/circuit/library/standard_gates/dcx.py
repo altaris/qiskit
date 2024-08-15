@@ -75,5 +75,5 @@ class DCXGate(SingletonGate):
 
         self.definition = qc
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, DCXGate)

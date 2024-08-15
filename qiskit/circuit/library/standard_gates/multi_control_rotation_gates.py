@@ -43,7 +43,7 @@ def _apply_cu(circuit, theta, phi, lam, control, target, use_basis_gates: bool =
         circuit.cu(theta, phi, lam, 0, control, target)
 
 
-def _apply_mcu_graycode(circuit, theta, phi, lam, ctls, tgt, use_basis_gates) -> None:
+def _apply_mcu_graycode(circuit, theta, phi, lam, ctls, tgt, use_basis_gates: bool) -> None:
     """Apply multi-controlled u gate from ctls to tgt using graycode
     pattern with single-step angles theta, phi, lam."""
 
@@ -206,7 +206,7 @@ def _mcsu2_real_diagonal(
 
 
 def mcrx(
-    self,
+    self: QuantumCircuit,
     theta: ParameterValueType,
     q_controls: Union[QuantumRegister, List[Qubit]],
     q_target: Qubit,
@@ -270,7 +270,7 @@ def mcrx(
 
 
 def mcry(
-    self,
+    self: QuantumCircuit,
     theta: ParameterValueType,
     q_controls: Union[QuantumRegister, List[Qubit]],
     q_target: Qubit,
@@ -350,7 +350,7 @@ def mcry(
 
 
 def mcrz(
-    self,
+    self: QuantumCircuit,
     lam: ParameterValueType,
     q_controls: Union[QuantumRegister, List[Qubit]],
     q_target: Qubit,

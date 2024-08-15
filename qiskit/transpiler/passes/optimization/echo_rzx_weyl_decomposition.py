@@ -104,7 +104,7 @@ class EchoRZXWeylDecomposition(TransformationPass):
         reverse_rzx_dag.apply_operation_back(HGate(), [qr[1]], [])
         return reverse_rzx_dag
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """Run the EchoRZXWeylDecomposition pass on `dag`.
 
         Rewrites two-qubit gates in an arbitrary circuit in terms of echoed cross-resonance

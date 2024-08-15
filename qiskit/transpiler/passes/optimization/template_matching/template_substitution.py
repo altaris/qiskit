@@ -48,7 +48,7 @@ class SubstitutionConfig:
         self.clbit_config = clbit_config if clbit_config is not None else []
         self.pred_block = pred_block
 
-    def has_parameters(self):
+    def has_parameters(self) -> bool:
         """Ensure that the template does not have parameters."""
         for node in self.template_dag_dep.get_nodes():
             for param in node.op.params:
@@ -127,7 +127,7 @@ class TemplateSubstitution:
                 "p": 1,
             }
 
-    def _pred_block(self, circuit_sublist, index):
+    def _pred_block(self, circuit_sublist, index: int):
         """
         It returns the predecessors of a given part of the circuit.
         Args:
@@ -149,7 +149,7 @@ class TemplateSubstitution:
 
         return pred
 
-    def _quantum_cost(self, left, right):
+    def _quantum_cost(self, left, right) -> bool:
         """
         Compare the two parts of the template and returns True if the quantum cost is reduced.
         Args:
@@ -168,7 +168,7 @@ class TemplateSubstitution:
 
         return cost_left > cost_right
 
-    def _rules(self, circuit_sublist, template_sublist, template_complement):
+    def _rules(self, circuit_sublist, template_sublist, template_complement) -> bool:
         """
         Set of rules to decide whether the match is to be substitute or not.
         Args:
@@ -240,7 +240,7 @@ class TemplateSubstitution:
         while not ordered:
             ordered = self._permutation()
 
-    def _permutation(self):
+    def _permutation(self) -> bool:
         """
         Permute two groups of matches if first one has predecessors in the second one.
         Returns:
@@ -523,7 +523,7 @@ class TemplateSubstitution:
 
         _dummy_counter = itertools.count()
 
-        def dummy_parameter():
+        def dummy_parameter() -> Parameter:
             # Strictly not _guaranteed_ to avoid naming clashes, but if someone's calling their
             # parameters this then that's their own fault.
             return Parameter(f"_qiskit_template_dummy_{next(_dummy_counter)}")
@@ -618,7 +618,7 @@ class TemplateSubstitution:
 
         return template_dag_dep
 
-    def _incr_num_parameters(self, template):
+    def _incr_num_parameters(self, template) -> bool:
         """
         Checks if template substitution would increase the number of
         parameters in the circuit.

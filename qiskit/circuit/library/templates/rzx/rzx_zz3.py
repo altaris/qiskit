@@ -32,7 +32,7 @@ from qiskit.circuit import Parameter, QuantumCircuit
 from qiskit.circuit.parameterexpression import ParameterValueType
 
 
-def rzx_zz3(theta: ParameterValueType | None = None):
+def rzx_zz3(theta: ParameterValueType | None = None) -> QuantumCircuit:
     """Template for CX - RZGate - CX."""
     if theta is None:
         theta = Parameter("ϴ")

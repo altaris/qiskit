@@ -732,7 +732,9 @@ class DefaultSynthesisClifford(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given Clifford."""
         decomposition = synth_clifford_full(high_level_object)
         return decomposition
@@ -745,7 +747,9 @@ class AGSynthesisClifford(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given Clifford."""
         decomposition = synth_clifford_ag(high_level_object)
         return decomposition
@@ -778,7 +782,9 @@ class GreedySynthesisClifford(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given Clifford."""
         decomposition = synth_clifford_greedy(high_level_object)
         return decomposition
@@ -792,7 +798,9 @@ class LayerSynthesisClifford(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given Clifford."""
         decomposition = synth_clifford_layers(high_level_object)
         return decomposition
@@ -820,7 +828,9 @@ class DefaultSynthesisLinearFunction(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given LinearFunction."""
         decomposition = synth_cnot_count_full_pmh(high_level_object.linear)
         return decomposition
@@ -843,7 +853,9 @@ class KMSSynthesisLinearFunction(HighLevelSynthesisPlugin):
 
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given LinearFunction."""
 
         if not isinstance(high_level_object, LinearFunction):
@@ -894,7 +906,9 @@ class PMHSynthesisLinearFunction(HighLevelSynthesisPlugin):
            `arXiv:quant-ph/0302002 [quant-ph] <https://arxiv.org/abs/quant-ph/0302002>`_
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given LinearFunction."""
 
         if not isinstance(high_level_object, LinearFunction):
@@ -930,7 +944,9 @@ class KMSSynthesisPermutation(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given Permutation."""
         decomposition = synth_permutation_depth_lnn_kms(high_level_object.pattern)
         return decomposition
@@ -943,7 +959,9 @@ class BasicSynthesisPermutation(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given Permutation."""
         decomposition = synth_permutation_basic(high_level_object.pattern)
         return decomposition
@@ -956,7 +974,9 @@ class ACGSynthesisPermutation(HighLevelSynthesisPlugin):
     an :class:`~.HLSConfig` object to use this method with :class:`~.HighLevelSynthesis`.
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given Permutation."""
         decomposition = synth_permutation_acg(high_level_object.pattern)
         return decomposition
@@ -993,7 +1013,9 @@ class QFTSynthesisFull(HighLevelSynthesisPlugin):
            `arXiv:quant-ph/0403071 [quant-ph] <https://https://arxiv.org/abs/quant-ph/0403071>`_
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given QFTGate."""
         if not isinstance(high_level_object, QFTGate):
             raise TranspilerError(
@@ -1045,7 +1067,9 @@ class QFTSynthesisLine(HighLevelSynthesisPlugin):
            `arXiv:quant-ph/0403071 [quant-ph] <https://https://arxiv.org/abs/quant-ph/0403071>`_
     """
 
-    def run(self, high_level_object, coupling_map=None, target=None, qubits=None, **options):
+    def run(
+        self, high_level_object, coupling_map=None, target=None, qubits=None, **options
+    ) -> QuantumCircuit:
         """Run synthesis for the given QFTGate."""
         if not isinstance(high_level_object, QFTGate):
             raise TranspilerError(

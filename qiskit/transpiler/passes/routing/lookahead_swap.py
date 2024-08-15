@@ -16,7 +16,9 @@ import collections
 import copy
 import logging
 import math
+from typing import Sequence
 
+from qiskit.circuit.gate import Gate
 from qiskit.circuit.library.standard_gates import SwapGate
 from qiskit.transpiler.basepasses import TransformationPass
 from qiskit.transpiler.exceptions import TranspilerError
@@ -189,7 +191,7 @@ class LookaheadSwap(TransformationPass):
         return mapped_dag
 
 
-def _search_forward_n_swaps(state, gates, depth: int, width: int):
+def _search_forward_n_swaps(state: _SystemState, gates: Sequence[Gate], depth: int, width: int):
     """Search for SWAPs which allow for application of largest number of gates.
 
     Args:
@@ -327,7 +329,7 @@ def _map_free_gates(state, gates):
     return mapped_gates, remaining_gates
 
 
-def _calc_layout_distance(gates, state, max_gates=None):
+def _calc_layout_distance(gates, state, max_gates=None) -> int:
     """Return the sum of the distances of two-qubit pairs in each CNOT in gates
     according to the layout and the coupling.
     """
@@ -359,7 +361,7 @@ def _score_state_with_swap(swap, state, gates):
     return _calc_layout_distance(gates, new_state), swap, new_state
 
 
-def _score_step(step):
+def _score_step(step) -> int:
     """Count the mapped two-qubit gates, less the number of added SWAPs."""
     # Each added swap will add 3 ops to gates_mapped, so subtract 3.
     return len([g for g in step.gates_mapped if len(g.qargs) == 2]) - 3 * len(step.swaps_added)

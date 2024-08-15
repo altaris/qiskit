@@ -102,7 +102,7 @@ class XGate(SingletonGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> MCXGate:
         """Return a (multi-)controlled-X gate.
 
         One control returns a CX gate. Two controls returns a CCX gate.
@@ -134,7 +134,7 @@ class XGate(SingletonGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> XGate:
         r"""Return inverted X gate (itself).
 
         Args:
@@ -148,7 +148,7 @@ class XGate(SingletonGate):
         """
         return XGate()  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, XGate)
 
 
@@ -249,7 +249,7 @@ class CXGate(SingletonControlledGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> MCXGate:
         """Return a controlled-X gate with more control lines.
 
         Args:
@@ -281,7 +281,7 @@ class CXGate(SingletonControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CXGate:
         """Return inverted CX gate (itself).
 
         Args:
@@ -295,7 +295,7 @@ class CXGate(SingletonControlledGate):
         """
         return CXGate(ctrl_state=self.ctrl_state)  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CXGate) and self.ctrl_state == other.ctrl_state
 
 
@@ -445,7 +445,7 @@ class CCXGate(SingletonControlledGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> MCXGate:
         """Controlled version of this gate.
 
         Args:
@@ -477,7 +477,7 @@ class CCXGate(SingletonControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CCXGate:
         """Return an inverted CCX gate (also a CCX).
 
         Args:
@@ -491,7 +491,7 @@ class CCXGate(SingletonControlledGate):
         """
         return CCXGate(ctrl_state=self.ctrl_state)  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CCXGate) and self.ctrl_state == other.ctrl_state
 
 
@@ -568,7 +568,7 @@ class RCCXGate(SingletonGate):
 
         self.definition = qc
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, RCCXGate)
 
 
@@ -677,7 +677,7 @@ class C3SXGate(SingletonControlledGate):
 
         self.definition = qc
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, C3SXGate) and self.ctrl_state == other.ctrl_state
 
 
@@ -793,7 +793,7 @@ class C3XGate(SingletonControlledGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> MCXGate:
         """Controlled version of this gate.
 
         Args:
@@ -825,7 +825,7 @@ class C3XGate(SingletonControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> C3XGate:
         """Invert this gate. The C3X is its own inverse.
 
         Args:
@@ -839,7 +839,7 @@ class C3XGate(SingletonControlledGate):
         """
         return C3XGate(ctrl_state=self.ctrl_state)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, C3XGate) and self.ctrl_state == other.ctrl_state
 
 
@@ -940,7 +940,7 @@ class RC3XGate(SingletonGate):
 
         self.definition = qc
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, RC3XGate)
 
 
@@ -1039,7 +1039,7 @@ class C4XGate(SingletonControlledGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> MCXGate:
         """Controlled version of this gate.
 
         Args:
@@ -1071,7 +1071,7 @@ class C4XGate(SingletonControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> C4XGate:
         """Invert this gate. The C4X is its own inverse.
 
         Args:
@@ -1085,7 +1085,7 @@ class C4XGate(SingletonControlledGate):
         """
         return C4XGate(ctrl_state=self.ctrl_state)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, C4XGate) and self.ctrl_state == other.ctrl_state
 
 
@@ -1153,7 +1153,7 @@ class MCXGate(ControlledGate):
             base_gate=XGate(label=_base_label),
         )
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> MCXGate:
         """Invert this gate. The MCX is its own inverse.
 
         Args:
@@ -1214,7 +1214,7 @@ class MCXGate(ControlledGate):
         label: Optional[str] = None,
         ctrl_state: Optional[Union[str, int]] = None,
         annotated: bool = False,
-    ):
+    ) -> MCXGate:
         """Return a multi-controlled-X gate with more control lines.
 
         Args:
@@ -1288,7 +1288,7 @@ class MCXGrayCode(MCXGate):
     ) -> None:
         super().__init__(num_ctrl_qubits, label=label, ctrl_state=ctrl_state, _name="mcx_gray")
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> MCXGrayCode:
         """Invert this gate. The MCX is its own inverse.
 
         Args:
@@ -1355,7 +1355,7 @@ class MCXRecursive(MCXGate):
         """Get the number of required ancilla qubits."""
         return MCXGate.get_num_ancilla_qubits(num_ctrl_qubits, mode)
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> MCXRecursive:
         """Invert this gate. The MCX is its own inverse.
 
         Args:
@@ -1451,7 +1451,7 @@ class MCXVChain(MCXGate):
         self._action_only = action_only
         super().__init__(num_ctrl_qubits, label=label, ctrl_state=ctrl_state, _name="mcx_vchain")
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> MCXVChain:
         """Invert this gate. The MCX is its own inverse.
 
         Args:

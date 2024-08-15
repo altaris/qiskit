@@ -89,7 +89,7 @@ class SXGate(SingletonGate):
             qc._append(operation, qubits, clbits)
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> SXdgGate:
         """Return inverse SX gate (i.e. SXdg).
 
         Args:
@@ -109,7 +109,7 @@ class SXGate(SingletonGate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CSXGate:
         """Return a (multi-)controlled-SX gate.
 
         One control returns a CSX gate.
@@ -136,7 +136,7 @@ class SXGate(SingletonGate):
             )
         return gate
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, SXGate)
 
 
@@ -193,7 +193,7 @@ class SXdgGate(SingletonGate):
             qc._append(operation, qubits, clbits)
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> SXGate:
         """Return inverse SXdg gate (i.e. SX).
 
         Args:
@@ -207,7 +207,7 @@ class SXdgGate(SingletonGate):
         """
         return SXGate()
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, SXdgGate)
 
 
@@ -310,5 +310,5 @@ class CSXGate(SingletonControlledGate):
             qc._append(operation, qubits, clbits)
         self.definition = qc
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CSXGate) and self.ctrl_state == other.ctrl_state

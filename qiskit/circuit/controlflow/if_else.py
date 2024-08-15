@@ -387,7 +387,7 @@ class IfContext:
         """Whether this context manager is enclosed within a loop."""
         return self._in_loop
 
-    def __enter__(self):
+    def __enter__(self) -> ElseContext:
         resources = condition_resources(self._condition)
         self._circuit._push_scope(
             clbits=resources.clbits,
@@ -401,7 +401,7 @@ class IfContext:
         exc_type: Optional[Type[BaseException]],
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
-    ):
+    ) -> bool:
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, there's nothing
             # to do except restore the circuit state.
@@ -500,7 +500,7 @@ class ElseContext:
         exc_type: Optional[Type[BaseException]],
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
-    ):
+    ) -> bool:
         circuit = self._if_context.circuit
         if exc_type is not None:
             # If we're leaving the context manager because an exception was raised, we need to

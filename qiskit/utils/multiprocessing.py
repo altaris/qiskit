@@ -46,7 +46,7 @@ def local_hardware_info():
     return results
 
 
-def is_main_process():
+def is_main_process() -> bool:
     """Checks whether the current process is the main one"""
     if platform.system() == "Windows":
         return not isinstance(mp.current_process(), mp.context.SpawnProcess)

@@ -75,7 +75,7 @@ def block_to_dag(block: ScheduleBlock) -> rx.PyDAG:
     return _parallel_allocation(block)
 
 
-def _sequential_allocation(block) -> rx.PyDAG:
+def _sequential_allocation(block: ScheduleBlock) -> rx.PyDAG:
     """A helper function to create a DAG of a sequential alignment context."""
     dag = rx.PyDAG()
 
@@ -90,7 +90,7 @@ def _sequential_allocation(block) -> rx.PyDAG:
     return dag
 
 
-def _parallel_allocation(block) -> rx.PyDAG:
+def _parallel_allocation(block: ScheduleBlock) -> rx.PyDAG:
     """A helper function to create a DAG of a parallel alignment context."""
     dag = rx.PyDAG()
 

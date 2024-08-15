@@ -125,7 +125,7 @@ class _StructuralEquivalenceImpl(ExprVisitor[bool]):
         self.other_key = other_key
         self.other = other
 
-    def visit_var(self, node, /):
+    def visit_var(self, node, /) -> bool:
         if self.other.__class__ is not node.__class__ or self.other.type != node.type:
             return False
         if self.self_key is None or (self_var := self.self_key(node.var)) is None:
@@ -134,14 +134,14 @@ class _StructuralEquivalenceImpl(ExprVisitor[bool]):
             other_var = self.other.var
         return self_var == other_var
 
-    def visit_value(self, node, /):
+    def visit_value(self, node, /) -> bool:
         return (
             node.__class__ is self.other.__class__
             and node.type == self.other.type
             and node.value == self.other.value
         )
 
-    def visit_unary(self, node, /):
+    def visit_unary(self, node, /) -> bool:
         if (
             self.other.__class__ is not node.__class__
             or self.other.op is not node.op
@@ -151,7 +151,7 @@ class _StructuralEquivalenceImpl(ExprVisitor[bool]):
         self.other = self.other.operand
         return node.operand.accept(self)
 
-    def visit_binary(self, node, /):
+    def visit_binary(self, node, /) -> bool:
         if (
             self.other.__class__ is not node.__class__
             or self.other.op is not node.op
@@ -165,13 +165,13 @@ class _StructuralEquivalenceImpl(ExprVisitor[bool]):
         self.other = other.right
         return node.right.accept(self)
 
-    def visit_cast(self, node, /):
+    def visit_cast(self, node, /) -> bool:
         if self.other.__class__ is not node.__class__ or self.other.type != node.type:
             return False
         self.other = self.other.operand
         return node.operand.accept(self)
 
-    def visit_index(self, node, /):
+    def visit_index(self, node, /) -> bool:
         if self.other.__class__ is not node.__class__ or self.other.type != node.type:
             return False
         other = self.other
@@ -237,19 +237,19 @@ def structurally_equivalent(
 class _IsLValueImpl(ExprVisitor[bool]):
     __slots__ = ()
 
-    def visit_var(self, node, /):
+    def visit_var(self, node, /) -> bool:
         return True
 
-    def visit_value(self, node, /):
+    def visit_value(self, node, /) -> bool:
         return False
 
-    def visit_unary(self, node, /):
+    def visit_unary(self, node, /) -> bool:
         return False
 
-    def visit_binary(self, node, /):
+    def visit_binary(self, node, /) -> bool:
         return False
 
-    def visit_cast(self, node, /):
+    def visit_cast(self, node, /) -> bool:
         return False
 
     def visit_index(self, node, /):

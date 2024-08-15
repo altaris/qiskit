@@ -97,7 +97,7 @@ class PassManager(BasePassManager):
 
         return out_program
 
-    def _finalize_layouts(self, dag) -> None:
+    def _finalize_layouts(self, dag: DAGCircuit) -> None:
         if (virtual_permutation_layout := self.property_set["virtual_permutation_layout"]) is None:
             return
 
@@ -411,7 +411,7 @@ class StagedPassManager(PassManager):
     def remove(self, index: int) -> None:
         raise NotImplementedError
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> PassManager:
         self._update_passmanager()
 
         # Do not inherit from the PassManager, i.e. super()

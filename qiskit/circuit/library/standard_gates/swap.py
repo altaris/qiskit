@@ -95,7 +95,7 @@ class SwapGate(SingletonGate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CSwapGate:
         """Return a (multi-)controlled-SWAP gate.
 
         One control returns a CSWAP (Fredkin) gate.
@@ -122,7 +122,7 @@ class SwapGate(SingletonGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> SwapGate:
         """Return inverse Swap gate (itself).
 
         Args:
@@ -136,7 +136,7 @@ class SwapGate(SingletonGate):
         """
         return SwapGate()  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, SwapGate)
 
 
@@ -270,7 +270,7 @@ class CSwapGate(SingletonControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CSwapGate:
         """Return inverse CSwap gate (itself).
 
         Args:
@@ -284,5 +284,5 @@ class CSwapGate(SingletonControlledGate):
         """
         return CSwapGate(ctrl_state=self.ctrl_state)  # self-inverse
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, CSwapGate) and self.ctrl_state == other.ctrl_state

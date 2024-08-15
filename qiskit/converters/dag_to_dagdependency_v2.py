@@ -14,7 +14,7 @@
 from qiskit.dagcircuit.dagdependency_v2 import _DAGDependencyV2
 
 
-def _dag_to_dagdependency_v2(dag):
+def _dag_to_dagdependency_v2(dag) -> _DAGDependencyV2:
     """Build a ``_DAGDependencyV2`` object from a ``DAGCircuit``.
 
     Args:

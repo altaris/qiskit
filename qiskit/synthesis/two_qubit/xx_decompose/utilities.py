@@ -24,7 +24,7 @@ EPSILON = 1e-6  # Fraction(1, 1_000_000)
 
 
 # TODO: THIS IS A STOPGAP!!!
-def safe_arccos(numerator, denominator):
+def safe_arccos(numerator, denominator) -> float:
     """
     Computes arccos(n/d) with different (better?) numerical stability.
     """

@@ -21,7 +21,7 @@ from qiskit.circuit.exceptions import CircuitError
 from . import calc_inverse_matrix, check_invertible_binary_matrix
 
 
-def transpose_cx_circ(qc: QuantumCircuit):
+def transpose_cx_circ(qc: QuantumCircuit) -> QuantumCircuit:
     """Takes a circuit having only CX gates, and calculates its transpose.
     This is done by recursively replacing CX(i, j) with CX(j, i) in all instructions.
 
@@ -42,7 +42,9 @@ def transpose_cx_circ(qc: QuantumCircuit):
     return transposed_circ
 
 
-def optimize_cx_4_options(function: Callable, mat: np.ndarray, optimize_count: bool = True):
+def optimize_cx_4_options(
+    function: Callable, mat: np.ndarray, optimize_count: bool = True
+) -> QuantumCircuit:
     """Get the best implementation of a circuit implementing a binary invertible matrix M,
     by considering all four options: M,M^(-1),M^T,M^(-1)^T.
     Optimizing either the CX count or the depth.

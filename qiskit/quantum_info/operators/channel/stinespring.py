@@ -153,7 +153,7 @@ class Stinespring(QuantumChannel):
         else:
             return self._data
 
-    def is_cptp(self, atol=None, rtol=None):
+    def is_cptp(self, atol=None, rtol=None) -> bool:
         """Return True if completely-positive trace-preserving."""
         if atol is None:
             atol = self.atol
@@ -171,7 +171,7 @@ class Stinespring(QuantumChannel):
     # BaseOperator methods
     # ---------------------------------------------------------------------
 
-    def conjugate(self):
+    def conjugate(self) -> Stinespring:
         ret = copy.copy(self)
         stine_l = np.conjugate(self._data[0])
         stine_r = None
@@ -180,7 +180,7 @@ class Stinespring(QuantumChannel):
         ret._data = (stine_l, stine_r)
         return ret
 
-    def transpose(self):
+    def transpose(self) -> Stinespring:
         ret = copy.copy(self)
         ret._op_shape = self._op_shape.transpose()
         din, dout = self.dim
@@ -263,12 +263,12 @@ class Stinespring(QuantumChannel):
             other = Choi(other)
         return self._add(-other, qargs=qargs)
 
-    def _add(self, other, qargs=None):
+    def _add(self, other, qargs=None) -> Stinespring:
         # Since we cannot directly add two channels in the Stinespring
         # representation we convert to the Choi representation
         return Stinespring(Choi(self)._add(other, qargs=qargs))
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> Stinespring:
         if not isinstance(other, Number):
             raise QiskitError("other is not a number")
 

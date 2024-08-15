@@ -106,7 +106,7 @@ class UnitaryOverlap(QuantumCircuit):
         self.compose(unitaries[1].inverse(), inplace=True)
 
 
-def _check_unitary(circuit):
+def _check_unitary(circuit: QuantumCircuit):
     """Check a circuit is unitary by checking if all operations are of type ``Gate``."""
 
     for instruction in circuit.data:

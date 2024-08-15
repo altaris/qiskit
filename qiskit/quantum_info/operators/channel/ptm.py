@@ -150,16 +150,16 @@ class PTM(QuantumChannel):
     # BaseOperator methods
     # ---------------------------------------------------------------------
 
-    def conjugate(self):
+    def conjugate(self) -> PTM:
         # Since conjugation is basis dependent we transform
         # to the SuperOp representation to compute the
         # conjugate channel
         return PTM(SuperOp(self).conjugate())
 
-    def transpose(self):
+    def transpose(self) -> PTM:
         return PTM(SuperOp(self).transpose())
 
-    def adjoint(self):
+    def adjoint(self) -> PTM:
         return PTM(SuperOp(self).adjoint())
 
     def compose(self, other: PTM, qargs: list | None = None, front: bool = False) -> PTM:

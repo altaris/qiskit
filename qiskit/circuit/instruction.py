@@ -177,7 +177,7 @@ class Instruction(Operation):
     def condition(self, condition) -> None:
         self._condition = condition
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Two instructions are the same if they have the same name,
         same dimensions, and same params.
 
@@ -307,7 +307,7 @@ class Instruction(Operation):
         """Instruction parameters has no validation or normalization."""
         return parameter
 
-    def is_parameterized(self):
+    def is_parameterized(self) -> bool:
         """Return whether the :class:`Instruction` contains :ref:`compile-time parameters
         <circuit-compile-time-parameters>`."""
         return any(
@@ -381,7 +381,7 @@ class Instruction(Operation):
         """Assemble a QasmQobjInstruction"""
         return self._assemble()
 
-    def _assemble(self):
+    def _assemble(self) -> QasmQobjInstruction:
         with warnings.catch_warnings():
             # The class QasmQobjInstruction is deprecated
             warnings.filterwarnings("ignore", category=DeprecationWarning, module="qiskit")
@@ -508,7 +508,7 @@ class Instruction(Operation):
         inverse_gate.definition = inverse_definition
         return inverse_gate
 
-    def c_if(self, classical, val):
+    def c_if(self, classical, val: int) -> Instruction:
         """Set a classical equality condition on this instruction between the register or cbit
         ``classical`` and value ``val``.
 
@@ -545,7 +545,7 @@ class Instruction(Operation):
             cpy.name = name
         return cpy
 
-    def __deepcopy__(self, memo=None):
+    def __deepcopy__(self, memo=None) -> Instruction:
         cpy = copy.copy(self)
         cpy._params = copy.copy(self._params)
         if self._definition:
@@ -583,7 +583,7 @@ class Instruction(Operation):
         flat_cargs = [carg for sublist in cargs for carg in sublist]
         yield flat_qargs, flat_cargs
 
-    def _return_repeat(self, exponent):
+    def _return_repeat(self, exponent: int) -> Instruction:
         return Instruction(
             name=f"{self.name}*{exponent}",
             num_qubits=self.num_qubits,
@@ -591,7 +591,7 @@ class Instruction(Operation):
             params=self.params,
         )
 
-    def repeat(self, n):
+    def repeat(self, n) -> Instruction:
         """Creates an instruction with ``self`` repeated :math`n` times.
 
         If this operation has a conditional, the output instruction will have the same conditional
@@ -674,7 +674,7 @@ class Instruction(Operation):
         """Set num_clbits."""
         self._num_clbits = num_clbits
 
-    def _compare_parameters(self, other):
+    def _compare_parameters(self, other) -> bool:
         for x, y in zip(self.params, other.params):
             try:
                 if not math.isclose(x, y, rel_tol=0, abs_tol=1e-10):

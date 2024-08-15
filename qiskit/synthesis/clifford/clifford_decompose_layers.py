@@ -40,7 +40,7 @@ from qiskit.synthesis.linear.linear_matrix_utils import (
 )
 
 
-def _default_cx_synth_func(mat):
+def _default_cx_synth_func(mat) -> QuantumCircuit:
     """
     Construct the layer of CX gates from a boolean invertible matrix mat.
     """
@@ -50,7 +50,7 @@ def _default_cx_synth_func(mat):
     return CX_circ
 
 
-def _default_cz_synth_func(symmetric_mat):
+def _default_cz_synth_func(symmetric_mat) -> QuantumCircuit:
     """
     Construct the layer of CZ gates from a symmetric matrix.
     """
@@ -168,7 +168,7 @@ def synth_clifford_layers(
     return layeredCircuit
 
 
-def _reverse_clifford(cliff):
+def _reverse_clifford(cliff: Clifford):
     """Reverse qubit order of a Clifford cliff"""
     cliff_cpy = cliff.copy()
     cliff_cpy.stab_z = np.flip(cliff.stab_z, axis=1)
@@ -178,7 +178,7 @@ def _reverse_clifford(cliff):
     return cliff_cpy
 
 
-def _create_graph_state(cliff, validate: bool = False):
+def _create_graph_state(cliff: Clifford, validate: bool = False):
     """Given a Clifford cliff (denoted by U) that induces a stabilizer state U |0>,
     apply a layer H1 of Hadamard gates to a subset of the qubits to make H1 U |0> into a graph state,
     namely to make cliff.stab_x matrix have full rank.
@@ -309,7 +309,12 @@ def _decompose_graph_state(cliff, validate: bool, cz_synth_func):
 
 
 def _decompose_hadamard_free(
-    cliff, validate: bool, cz_synth_func, cx_synth_func, cx_cz_synth_func, cz_func_reverse_qubits
+    cliff: Clifford,
+    validate: bool,
+    cz_synth_func: Callable,
+    cx_synth_func: Callable,
+    cx_cz_synth_func: Callable,
+    cz_func_reverse_qubits: bool,
 ):
     """Assumes that the Clifford cliff is Hadamard free.
     Decompose it into the layers S2 - CZ2 - CX, where
@@ -379,7 +384,7 @@ def _decompose_hadamard_free(
     return S2_circ, CZ2_circ, CX_circ
 
 
-def _calc_pauli_diff(cliff, cliff_target):
+def _calc_pauli_diff(cliff: Clifford, cliff_target: Clifford) -> QuantumCircuit:
     """Given two Cliffords that differ by a Pauli, we find this Pauli."""
 
     num_qubits = cliff.num_qubits
@@ -413,7 +418,7 @@ def _calc_pauli_diff(cliff, cliff_target):
     return pauli_circ
 
 
-def synth_clifford_depth_lnn(cliff):
+def synth_clifford_depth_lnn(cliff: Clifford) -> QuantumCircuit:
     """Synthesis of a :class:`.Clifford` into layers for linear-nearest neighbor connectivity.
 
     The depth of the synthesized n-qubit circuit is bounded by :math:`7n+2`, which is not optimal.

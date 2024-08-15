@@ -155,7 +155,7 @@ class RZZGate(Gate):
         )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> RZZGate:
         """Return inverse RZZ gate (i.e. with the negative rotation angle).
 
         Args:
@@ -186,11 +186,11 @@ class RZZGate(Gate):
             dtype=dtype,
         )
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> RZZGate:
         (theta,) = self.params
         return RZZGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, RZZGate):
             return self._compare_parameters(other)
         return False

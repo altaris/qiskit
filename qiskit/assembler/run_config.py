@@ -55,7 +55,7 @@ class RunConfig(SimpleNamespace):
         self.__dict__.update(kwargs)
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new RunConfig object from a dictionary.
 
         Args:
@@ -68,7 +68,7 @@ class RunConfig(SimpleNamespace):
         """
         return cls(**data)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """Return a dictionary format representation of the RunConfig
 
         Returns:

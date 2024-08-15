@@ -81,7 +81,7 @@ from . import (
 _sel = StandardEquivalenceLibrary = EquivalenceLibrary()
 
 
-def _cnot_rxx_decompose(plus_ry: bool = True, plus_rxx: bool = True):
+def _cnot_rxx_decompose(plus_ry: bool = True, plus_rxx: bool = True) -> QuantumCircuit:
     """Decomposition of CNOT gate.
 
     NOTE: this differs to CNOT by a global phase.

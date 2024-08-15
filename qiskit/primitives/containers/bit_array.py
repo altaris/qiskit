@@ -129,7 +129,7 @@ class BitArray(ShapedMixin):
         desc = f"<shape={self.shape}, num_shots={self.num_shots}, num_bits={self.num_bits}>"
         return f"BitArray({desc})"
 
-    def __getitem__(self, indices):
+    def __getitem__(self, indices) -> BitArray:
         if isinstance(indices, tuple):
             if len(indices) == self.ndim + 1:
                 raise IndexError(

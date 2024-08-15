@@ -538,7 +538,7 @@ class OptimizationPassManager(PassManagerStagePlugin):
                 MinimumPoint(["depth", "size"], "optimization_loop"),
             ]
 
-            def _opt_control(property_set):
+            def _opt_control(property_set) -> bool:
                 return (not property_set["depth_fixed_point"]) or (
                     not property_set["size_fixed_point"]
                 )
@@ -604,7 +604,7 @@ class OptimizationPassManager(PassManagerStagePlugin):
                     CommutativeCancellation(target=pass_manager_config.target),
                 ]
 
-                def _opt_control(property_set):
+                def _opt_control(property_set) -> bool:
                     return not property_set["optimization_loop_minimum_point"]
 
             else:
@@ -613,7 +613,7 @@ class OptimizationPassManager(PassManagerStagePlugin):
             unroll = translation.to_flow_controller()
 
             # Build nested Flow controllers
-            def _unroll_condition(property_set):
+            def _unroll_condition(property_set) -> bool:
                 return not property_set["all_gates_in_basis"]
 
             # Check if any gate is not in the basis, and if so, run unroll passes
@@ -715,15 +715,15 @@ class DefaultLayoutPassManager(PassManagerStagePlugin):
     def pass_manager(self, pass_manager_config, optimization_level=None) -> PassManager:
         _given_layout = SetLayout(pass_manager_config.initial_layout)
 
-        def _choose_layout_condition(property_set):
+        def _choose_layout_condition(property_set) -> bool:
             return not property_set["layout"]
 
-        def _layout_not_perfect(property_set):
+        def _layout_not_perfect(property_set) -> bool:
             """Return ``True`` if the first attempt at layout has been checked and found to be
             imperfect.  In this case, perfection means "does not require any swap routing"."""
             return property_set["is_swap_mapped"] is not None and not property_set["is_swap_mapped"]
 
-        def _vf2_match_not_found(property_set):
+        def _vf2_match_not_found(property_set) -> bool:
             # If a layout hasn't been set by the time we run vf2 layout we need to
             # run layout
             if property_set["layout"] is None:
@@ -735,7 +735,7 @@ class DefaultLayoutPassManager(PassManagerStagePlugin):
                 and property_set["VF2Layout_stop_reason"] is not VF2LayoutStopReason.SOLUTION_FOUND
             )
 
-        def _swap_mapped(property_set):
+        def _swap_mapped(property_set) -> bool:
             return property_set["final_layout"] is None
 
         if pass_manager_config.target is None:
@@ -876,7 +876,7 @@ class TrivialLayoutPassManager(PassManagerStagePlugin):
     def pass_manager(self, pass_manager_config, optimization_level=None) -> PassManager:
         _given_layout = SetLayout(pass_manager_config.initial_layout)
 
-        def _choose_layout_condition(property_set):
+        def _choose_layout_condition(property_set) -> bool:
             return not property_set["layout"]
 
         if pass_manager_config.target is None:
@@ -899,7 +899,7 @@ class DenseLayoutPassManager(PassManagerStagePlugin):
     def pass_manager(self, pass_manager_config, optimization_level=None) -> PassManager:
         _given_layout = SetLayout(pass_manager_config.initial_layout)
 
-        def _choose_layout_condition(property_set):
+        def _choose_layout_condition(property_set) -> bool:
             return not property_set["layout"]
 
         if pass_manager_config.target is None:
@@ -929,10 +929,10 @@ class SabreLayoutPassManager(PassManagerStagePlugin):
     def pass_manager(self, pass_manager_config, optimization_level=None) -> PassManager:
         _given_layout = SetLayout(pass_manager_config.initial_layout)
 
-        def _choose_layout_condition(property_set):
+        def _choose_layout_condition(property_set) -> bool:
             return not property_set["layout"]
 
-        def _swap_mapped(property_set):
+        def _swap_mapped(property_set) -> bool:
             return property_set["final_layout"] is None
 
         if pass_manager_config.target is None:
@@ -1008,7 +1008,7 @@ class SabreLayoutPassManager(PassManagerStagePlugin):
         return layout
 
 
-def _get_trial_count(default_trials: int = 5):
+def _get_trial_count(default_trials: int = 5) -> int:
     if CONFIG.get("sabre_all_threads", None) or os.getenv("QISKIT_SABRE_ALL_THREADS"):
         return max(CPU_COUNT, default_trials)
     return default_trials

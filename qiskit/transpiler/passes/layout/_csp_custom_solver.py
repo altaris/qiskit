@@ -35,7 +35,7 @@ if _optionals.HAS_CONSTRAINT:
             self.time_current = None
             super().__init__()
 
-        def limit_reached(self):
+        def limit_reached(self) -> bool:
             """Checks if a limit is reached."""
             if self.call_current is not None:
                 self.call_current += 1

@@ -60,7 +60,7 @@ class TemplateMatching:
             heuristics_backward_param if heuristics_backward_param is not None else []
         )
 
-    def _list_first_match_new(self, node_circuit, node_template, n_qubits_t, n_clbits_t):
+    def _list_first_match_new(self, node_circuit, node_template, n_qubits_t: int, n_clbits_t: int):
         """
         Returns the list of qubit for circuit given the first match, the unknown qubit are
         replaced by -1.
@@ -186,7 +186,7 @@ class TemplateMatching:
             if not already_in:
                 self.match_list.append(b_match)
 
-    def _explore_circuit(self, node_id_c, node_id_t, n_qubits_t, length: int):
+    def _explore_circuit(self, node_id_c: int, node_id_t: int, n_qubits_t: int, length: int):
         """
         Explore the successors of the node_id_c (up to the given length).
         Args:

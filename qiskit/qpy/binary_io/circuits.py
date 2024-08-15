@@ -227,7 +227,7 @@ def _read_instruction(
     custom_operations,
     version,
     vectors,
-    use_symengine,
+    use_symengine: bool,
     standalone_vars,
 ):
     if version < 5:
@@ -512,7 +512,7 @@ def _parse_custom_operation(
     raise ValueError(f"Invalid custom instruction type '{type_str}'")
 
 
-def _read_pauli_evolution_gate(file_obj, version, vectors):
+def _read_pauli_evolution_gate(file_obj, version, vectors) -> library.PauliEvolutionGate:
     pauli_evolution_def = formats.PAULI_EVOLUTION_DEF._make(
         struct.unpack(
             formats.PAULI_EVOLUTION_DEF_PACK, file_obj.read(formats.PAULI_EVOLUTION_DEF_SIZE)
@@ -653,7 +653,7 @@ def _read_calibrations(file_obj, version, vectors, metadata_deserializer):
     return calibrations
 
 
-def _dumps_register(register, index_map):
+def _dumps_register(register, index_map) -> bytes:
     if isinstance(register, ClassicalRegister):
         return register.name.encode(common.ENCODE)
     # Clbit.
@@ -711,8 +711,8 @@ def _write_instruction(
     instruction,
     custom_operations,
     index_map,
-    use_symengine,
-    version,
+    use_symengine: bool,
+    version: int,
     standalone_var_indices=None,
 ):
     if isinstance(instruction.operation, Instruction):
@@ -912,8 +912,8 @@ def _write_custom_operation(
     name: str,
     operation,
     custom_operations,
-    use_symengine,
-    version,
+    use_symengine: bool,
+    version: int,
     *,
     standalone_var_indices,
 ):
@@ -988,7 +988,7 @@ def _write_custom_operation(
     return new_custom_instruction
 
 
-def _write_calibrations(file_obj, calibrations, metadata_serializer, version) -> None:
+def _write_calibrations(file_obj, calibrations, metadata_serializer, version: int) -> None:
     flatten_dict = {}
     for gate, caldef in calibrations.items():
         for (qubits, params), schedule in caldef.items():
@@ -1016,7 +1016,7 @@ def _write_calibrations(file_obj, calibrations, metadata_serializer, version) ->
         schedules.write_schedule_block(file_obj, schedule, metadata_serializer, version=version)
 
 
-def _write_registers(file_obj, in_circ_regs, full_bits):
+def _write_registers(file_obj, in_circ_regs, full_bits) -> int:
     bitmap = {bit: index for index, bit in enumerate(full_bits)}
 
     out_circ_regs = set()
@@ -1129,7 +1129,7 @@ def _write_layout(file_obj, circuit) -> None:
         file_obj.write(struct.pack("!I", i))
 
 
-def _read_layout(file_obj, circuit) -> None:
+def _read_layout(file_obj, circuit: QuantumCircuit) -> None:
     header = formats.LAYOUT._make(
         struct.unpack(formats.LAYOUT_PACK, file_obj.read(formats.LAYOUT_SIZE))
     )
@@ -1138,7 +1138,7 @@ def _read_layout(file_obj, circuit) -> None:
     _read_common_layout(file_obj, header, circuit)
 
 
-def _read_common_layout(file_obj, header, circuit) -> None:
+def _read_common_layout(file_obj, header, circuit: QuantumCircuit) -> None:
     registers = {
         name: QuantumRegister(len(v[1]), name)
         for name, v in _read_registers_v4(file_obj, header.extra_registers)["q"].items()
@@ -1187,7 +1187,7 @@ def _read_common_layout(file_obj, header, circuit) -> None:
     circuit._layout = TranspileLayout(initial_layout, input_qubit_mapping, final_layout)
 
 
-def _read_layout_v2(file_obj, circuit) -> None:
+def _read_layout_v2(file_obj, circuit: QuantumCircuit) -> None:
     header = formats.LAYOUT_V2._make(
         struct.unpack(formats.LAYOUT_V2_PACK, file_obj.read(formats.LAYOUT_V2_SIZE))
     )
@@ -1204,7 +1204,7 @@ def write_circuit(
     circuit,
     metadata_serializer=None,
     use_symengine: bool = False,
-    version=common.QPY_VERSION,
+    version: int = common.QPY_VERSION,
 ):
     """Write a single QuantumCircuit object in the file like object.
 
@@ -1325,7 +1325,9 @@ def write_circuit(
     _write_layout(file_obj, circuit)
 
 
-def read_circuit(file_obj, version, metadata_deserializer=None, use_symengine: bool = False):
+def read_circuit(
+    file_obj, version, metadata_deserializer=None, use_symengine: bool = False
+) -> QuantumCircuit:
     """Read a single QuantumCircuit object from the file like object.
 
     Args:

@@ -68,7 +68,7 @@ def _check_candidate(candidate, existing_sequences, tol: float = 1e-10):
     return _check_candidate_greedy(candidate, existing_sequences, tol)
 
 
-def _check_candidate_greedy(candidate, existing_sequences, tol: float = 1e-10):
+def _check_candidate_greedy(candidate, existing_sequences, tol: float = 1e-10) -> bool:
     # do a quick, string-based check if the same sequence already exists
     if any(candidate.name == existing.name for existing in existing_sequences):
         return False

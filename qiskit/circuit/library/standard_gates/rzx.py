@@ -191,7 +191,7 @@ class RZXGate(Gate):
         )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> RZXGate:
         """Return inverse RZX gate (i.e. with the negative rotation angle).
 
         Args:
@@ -219,11 +219,11 @@ class RZXGate(Gate):
             dtype=dtype,
         )
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> RZXGate:
         (theta,) = self.params
         return RZXGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, RZXGate):
             return self._compare_parameters(other)
         return False

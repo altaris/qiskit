@@ -68,7 +68,7 @@ class BasePadding(TransformationPass):
         super().__init__()
         self.target = target
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """Run the padding pass on ``dag``.
 
         Args:

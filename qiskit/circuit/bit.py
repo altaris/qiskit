@@ -67,7 +67,7 @@ class Bit:
     def __hash__(self):
         return self._hash
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if (self._register, self._index) == (None, None):
             return other is self
 
@@ -76,11 +76,11 @@ class Bit:
         except AttributeError:
             return False
 
-    def __copy__(self):
+    def __copy__(self) -> "Bit":
         # Bits are immutable.
         return self
 
-    def __deepcopy__(self, memo=None):
+    def __deepcopy__(self, memo=None) -> "Bit":
         if (self._register, self._index) == (None, None):
             return self
 

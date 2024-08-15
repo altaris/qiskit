@@ -196,7 +196,7 @@ class XXPlusYYGate(Gate):
         )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> XXPlusYYGate:
         """Return inverse XX+YY gate (i.e. with the negative rotation angle and same phase angle).
 
         Args:
@@ -229,11 +229,11 @@ class XXPlusYYGate(Gate):
             dtype=dtype,
         )
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> XXPlusYYGate:
         theta, beta = self.params
         return XXPlusYYGate(exponent * theta, beta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, XXPlusYYGate):
             return self._compare_parameters(other)
         return False

@@ -61,7 +61,7 @@ class BaseOperator(GroupMixin, ABC):
     # Set higher priority than Numpy array and matrix classes
     __array_priority__ = 20
 
-    def __call__(self, *qargs):
+    def __call__(self, *qargs) -> BaseOperator:
         """Return a shallow copy with qargs attribute set"""
         if len(qargs) == 1 and isinstance(qargs[0], (tuple, list)):
             qargs = qargs[0]
@@ -75,7 +75,7 @@ class BaseOperator(GroupMixin, ABC):
         ret._qargs = tuple(qargs)
         return ret
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, type(self)) and self._op_shape == other._op_shape
 
     @property
@@ -140,6 +140,6 @@ class BaseOperator(GroupMixin, ABC):
         """Return tuple of output dimension for specified subsystems."""
         return self._op_shape.dims_l(qargs)
 
-    def copy(self):
+    def copy(self) -> BaseOperator:
         """Make a deep copy of current operator."""
         return copy.deepcopy(self)

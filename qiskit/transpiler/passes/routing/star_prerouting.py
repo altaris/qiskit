@@ -37,7 +37,7 @@ class StarBlock:
         """Returns the list of nodes used in the block."""
         return self.nodes
 
-    def append_node(self, node):
+    def append_node(self, node) -> bool:
         """
         If node can be added to block while keeping the block star-shaped, and
         return True. Otherwise, does not add node to block and returns False.
@@ -72,7 +72,7 @@ class StarBlock:
 
         return added
 
-    def size(self):
+    def size(self) -> int:
         """
         Returns the number of two-qubit quantum gates in this block.
         """
@@ -160,11 +160,11 @@ class StarPreRouting(TransformationPass):
         else:
             return [dag.get_node(succ_id) for succ_id in dag.direct_successors(node.node_id)]
 
-    def _have_uncollected_nodes(self):
+    def _have_uncollected_nodes(self) -> bool:
         """Returns whether there are uncollected (pending) nodes"""
         return len(self._pending_nodes) > 0
 
-    def collect_matching_block(self, dag, filter_fn):
+    def collect_matching_block(self, dag, filter_fn) -> StarBlock:
         """Iteratively collects the largest block of input nodes (that is, nodes with
         ``_in_degree`` equal to 0) that match a given filtering function.
         Examples of this include collecting blocks of swap gates,
@@ -218,7 +218,7 @@ class StarPreRouting(TransformationPass):
         Returns the list of matching blocks only.
         """
 
-        def filter_fn(node):
+        def filter_fn(node) -> bool:
             """Specifies which nodes can be collected into star blocks."""
             return (
                 len(node.qargs) <= 2
@@ -227,7 +227,7 @@ class StarPreRouting(TransformationPass):
                 and not isinstance(node.op, Barrier)
             )
 
-        def not_filter_fn(node):
+        def not_filter_fn(node) -> bool:
             """Returns the opposite of filter_fn."""
             return not filter_fn(node)
 
@@ -329,7 +329,7 @@ class StarPreRouting(TransformationPass):
             node: f"a{index:0{int_digits}}" for index, node in enumerate(processing_order)
         }
 
-        def tie_breaker_key(node):
+        def tie_breaker_key(node) -> str:
             return processing_order_index_map.get(node, node.sort_key)
 
         rust_processing_order = _extract_nodes(dag.topological_op_nodes(key=tie_breaker_key), dag)

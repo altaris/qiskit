@@ -60,7 +60,7 @@ class QobjMeasurementOption:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new QobjMeasurementOption object from a dictionary.
 
         Args:
@@ -72,7 +72,7 @@ class QobjMeasurementOption:
         name = data.pop("name")
         return cls(name, **data)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, QobjMeasurementOption):
             if self.to_dict() == other.to_dict():
                 return True
@@ -234,7 +234,7 @@ class PulseQobjInstruction:
         return out
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new PulseQobjExperimentConfig object from a dictionary.
 
         Args:
@@ -272,7 +272,7 @@ class PulseQobjInstruction:
 
         return cls(data["name"], data["t0"], **in_data)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, PulseQobjInstruction):
             if self.to_dict() == other.to_dict():
                 return True
@@ -372,7 +372,7 @@ class PulseQobjConfig(QobjDictField):
         if kwargs:
             self.__dict__.update(kwargs)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         """Return a dictionary format representation of the Pulse Qobj config.
 
         Returns:
@@ -385,7 +385,7 @@ class PulseQobjConfig(QobjDictField):
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new PulseQobjConfig object from a dictionary.
 
         Args:
@@ -474,7 +474,7 @@ class PulseQobjExperiment:
         return out
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new PulseQobjExperiment object from a dictionary.
 
         Args:
@@ -496,7 +496,7 @@ class PulseQobjExperiment:
             ]
         return cls(instructions, config, header)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, PulseQobjExperiment):
             if self.to_dict() == other.to_dict():
                 return True
@@ -564,7 +564,7 @@ class PulseLibraryItem:
         return {"name": self.name, "samples": self.samples}
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new PulseLibraryItem object from a dictionary.
 
         Args:
@@ -581,7 +581,7 @@ class PulseLibraryItem:
     def __str__(self) -> str:
         return f"Pulse Library Item:\n\tname: {self.name}\n\tsamples: {self.samples}"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, PulseLibraryItem):
             if self.to_dict() == other.to_dict():
                 return True
@@ -678,7 +678,7 @@ class PulseQobj:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new PulseQobj object from a dictionary.
 
         Args:
@@ -702,7 +702,7 @@ class PulseQobj:
             qobj_id=data.get("qobj_id"), config=config, experiments=experiments, header=header
         )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, PulseQobj):
             if self.to_dict() == other.to_dict():
                 return True

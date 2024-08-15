@@ -24,9 +24,10 @@ from qiskit.converters import circuit_to_dag
 from qiskit._accelerate import vf2_layout
 from qiskit._accelerate.nlayout import NLayout
 from qiskit._accelerate.error_map import ErrorMap
+from qiskit.dagcircuit.dagcircuit import DAGCircuit
 
 
-def build_interaction_graph(dag, strict_direction: bool = True):
+def build_interaction_graph(dag: DAGCircuit, strict_direction: bool = True):
     """Build an interaction graph from a dag."""
     im_graph = PyDiGraph(multigraph=False) if strict_direction else PyGraph(multigraph=False)
     im_graph_node_map = {}
@@ -95,7 +96,7 @@ def build_interaction_graph(dag, strict_direction: bool = True):
     return im_graph, im_graph_node_map, reverse_im_graph_node_map, free_nodes
 
 
-def build_edge_list(im_graph):
+def build_edge_list(im_graph) -> "EdgeList":
     """Generate an edge list for scoring."""
     return vf2_layout.EdgeList(
         [((edge[0], edge[1]), sum(edge[2].values())) for edge in im_graph.edge_index_map().values()]

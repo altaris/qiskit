@@ -22,7 +22,7 @@ def synth_mcx_n_dirty_i15(
     num_ctrl_qubits: int,
     relative_phase: bool = False,
     action_only: bool = False,
-):
+) -> QuantumCircuit:
     """
     Synthesize a multi-controlled X gate with :math:`k` controls using :math:`k - 2`
     dirty ancillary qubits producing a circuit with :math:`2 * k - 1` qubits and at most
@@ -122,7 +122,7 @@ def synth_mcx_n_dirty_i15(
     return qc
 
 
-def synth_mcx_n_clean_m15(num_ctrl_qubits: int):
+def synth_mcx_n_clean_m15(num_ctrl_qubits: int) -> QuantumCircuit:
     """
     Synthesize a multi-controlled X gate with :math:`k` controls using :math:`k - 2`
     clean ancillary qubits with producing a circuit with :math:`2 * k - 1` qubits
@@ -165,7 +165,7 @@ def synth_mcx_n_clean_m15(num_ctrl_qubits: int):
     return qc
 
 
-def synth_mcx_1_clean_b95(num_ctrl_qubits: int):
+def synth_mcx_1_clean_b95(num_ctrl_qubits: int) -> QuantumCircuit:
     """
     Synthesize a multi-controlled X gate with :math:`k` controls using a single
     clean ancillary qubit producing a circuit with :math:`k + 2` qubits and at most

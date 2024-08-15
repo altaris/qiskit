@@ -177,7 +177,7 @@ def evolve_pauli(
         _multi_qubit_evolution(output, pauli, time, cx_structure, wrap)
 
 
-def _single_qubit_evolution(output, pauli, time, wrap) -> None:
+def _single_qubit_evolution(output: QuantumCircuit, pauli: Pauli, time, wrap: bool) -> None:
     dest = QuantumCircuit(1) if wrap else output
     # Note that all phases are removed from the pauli label and are only in the coefficients.
     # That's because the operators we evolved have all been translated to a SparsePauliOp.
@@ -204,7 +204,9 @@ def _single_qubit_evolution(output, pauli, time, wrap) -> None:
         output.append(gate, qargs=qubits, copy=False)
 
 
-def _two_qubit_evolution(output, pauli, time, cx_structure, wrap) -> None:
+def _two_qubit_evolution(
+    output: QuantumCircuit, pauli: Pauli, time, cx_structure, wrap: bool
+) -> None:
     # Get the Paulis and the qubits they act on.
     # Note that all phases are removed from the pauli label and are only in the coefficients.
     # That's because the operators we evolved have all been translated to a SparsePauliOp.
@@ -236,7 +238,9 @@ def _two_qubit_evolution(output, pauli, time, cx_structure, wrap) -> None:
         output.append(gate, qargs=qubits, copy=False)
 
 
-def _multi_qubit_evolution(output, pauli, time, cx_structure, wrap) -> None:
+def _multi_qubit_evolution(
+    output: QuantumCircuit, pauli: Pauli, time, cx_structure: str, wrap: bool
+) -> None:
     # get diagonalizing clifford
     cliff = diagonalizing_clifford(pauli)
 

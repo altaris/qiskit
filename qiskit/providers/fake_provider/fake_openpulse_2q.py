@@ -386,6 +386,6 @@ class FakeOpenPulse2Q(FakeBackend):
         """
         return self._defaults
 
-    def properties(self):
+    def properties(self) -> BackendProperties:
         """Return the measured characteristics of the backend."""
         return self._properties

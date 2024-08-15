@@ -244,7 +244,7 @@ class PauliFeatureMap(NLocal):
         time = self._data_map_func(np.asarray(params))
         return self.pauli_evolution(pauli_string, time)
 
-    def pauli_evolution(self, pauli_string: str, time):
+    def pauli_evolution(self, pauli_string: str, time: float) -> QuantumCircuit:
         """Get the evolution block for the given pauli string."""
         # for some reason this is in reversed order
         pauli_string = pauli_string[::-1]

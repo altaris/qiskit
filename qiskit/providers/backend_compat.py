@@ -36,7 +36,7 @@ def convert_to_target(
     custom_name_mapping: Optional[Dict[str, Any]] = None,
     add_delay: bool = True,
     filter_faulty: bool = True,
-):
+) -> "Target":
     """Decode transpiler target from backend data set.
 
     This function generates :class:`.Target`` instance from intermediate

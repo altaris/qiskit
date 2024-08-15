@@ -31,11 +31,11 @@ class ParameterView(MappingView):
 
         super().__init__(self.data)
 
-    def copy(self):
+    def copy(self) -> "ParameterView":
         """Copy the ParameterView."""
         return self.__class__(self.data.copy())
 
-    def isdisjoint(self, x):
+    def isdisjoint(self, x) -> bool:
         """Check whether self and the input are disjoint."""
         return not any(element in self for element in x)
 
@@ -51,7 +51,7 @@ class ParameterView(MappingView):
         """Get items."""
         return self.data[index]
 
-    def __and__(self, x):
+    def __and__(self, x) -> "ParameterView":
         """Get the intersection between self and the input."""
         inter = []
         for element in self:
@@ -60,11 +60,11 @@ class ParameterView(MappingView):
 
         return self.__class__(inter)
 
-    def __rand__(self, x):
+    def __rand__(self, x) -> "ParameterView":
         """Get the intersection between self and the input."""
         return self.__and__(x)
 
-    def __iand__(self, x):
+    def __iand__(self, x) -> "ParameterView":
         """Get the intersection between self and the input in-place."""
         for element in self:
             if element not in x:
@@ -90,21 +90,21 @@ class ParameterView(MappingView):
     def __ne__(self, other):
         return set(other) != set(self)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return set(other) == set(self)
 
-    def __le__(self, x):
+    def __le__(self, x) -> bool:
         return all(element in x for element in self)
 
-    def __lt__(self, x):
+    def __lt__(self, x) -> bool:
         if x != self:
             return self <= x
         return False
 
-    def __ge__(self, x):
+    def __ge__(self, x) -> bool:
         return all(element in self for element in x)
 
-    def __gt__(self, x):
+    def __gt__(self, x) -> bool:
         if x != self:
             return self >= x
         return False

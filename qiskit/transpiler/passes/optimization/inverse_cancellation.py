@@ -72,7 +72,7 @@ class InverseCancellation(TransformationPass):
 
         super().__init__()
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """Run the InverseCancellation pass on `dag`.
 
         Args:
@@ -87,7 +87,7 @@ class InverseCancellation(TransformationPass):
             dag = self._run_on_inverse_pairs(dag)
         return dag
 
-    def _run_on_self_inverse(self, dag: DAGCircuit):
+    def _run_on_self_inverse(self, dag: DAGCircuit) -> DAGCircuit:
         """
         Run self-inverse gates on `dag`.
 
@@ -131,7 +131,7 @@ class InverseCancellation(TransformationPass):
                         dag.remove_op_node(node)
         return dag
 
-    def _run_on_inverse_pairs(self, dag: DAGCircuit):
+    def _run_on_inverse_pairs(self, dag: DAGCircuit) -> DAGCircuit:
         """
         Run inverse gate pairs on `dag`.
 

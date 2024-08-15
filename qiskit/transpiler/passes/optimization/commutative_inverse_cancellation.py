@@ -36,7 +36,7 @@ class CommutativeInverseCancellation(TransformationPass):
         self._max_qubits = max_qubits
         super().__init__()
 
-    def _skip_node(self, node):
+    def _skip_node(self, node: DAGOpNode) -> bool:
         """Returns True if we should skip this node for the analysis."""
         if not isinstance(node, DAGOpNode):
             return True
@@ -53,7 +53,7 @@ class CommutativeInverseCancellation(TransformationPass):
             return True
         return False
 
-    def _check_inverse(self, node1, node2):
+    def _check_inverse(self, node1: DAGOpNode, node2: DAGOpNode):
         """Checks whether op1 and op2 are inverse up to a phase, that is whether
         ``op2 = e^{i * d} op1^{-1})`` for some phase difference ``d``.
         If this is the case, we can replace ``op2 * op1`` by `e^{i * d} I``.
@@ -76,7 +76,7 @@ class CommutativeInverseCancellation(TransformationPass):
                 phase_difference = props["phase_difference"]
         return is_inverse, phase_difference
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """
         Run the CommutativeInverseCancellation pass on `dag`.
 

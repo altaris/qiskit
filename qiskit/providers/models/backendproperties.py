@@ -49,7 +49,7 @@ class Nduv:
         self.value = value
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new Nduv object from a dictionary.
 
         Args:
@@ -76,7 +76,7 @@ class Nduv:
         }
         return out_dict
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, Nduv):
             if self.to_dict() == other.to_dict():
                 return True
@@ -120,7 +120,7 @@ class GateProperties:
             raise AttributeError(f"Attribute {name} is not defined") from ex
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new Gate object from a dictionary.
 
         Args:
@@ -152,7 +152,7 @@ class GateProperties:
         out_dict.update(self._data)
         return out_dict
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, GateProperties):
             if self.to_dict() == other.to_dict():
                 return True
@@ -236,7 +236,7 @@ class BackendProperties:
             raise AttributeError(f"Attribute {name} is not defined") from ex
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new BackendProperties object from a dictionary.
 
         Args:
@@ -285,7 +285,7 @@ class BackendProperties:
         out_dict.update(self._data)
         return out_dict
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, BackendProperties):
             if self.to_dict() == other.to_dict():
                 return True

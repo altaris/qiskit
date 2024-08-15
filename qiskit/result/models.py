@@ -88,7 +88,7 @@ class ExperimentResultData:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new ExperimentResultData object from a dictionary.
 
         Args:
@@ -215,7 +215,7 @@ class ExperimentResult:
         return out_dict
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new ExperimentResult object from a dictionary.
 
         Args:

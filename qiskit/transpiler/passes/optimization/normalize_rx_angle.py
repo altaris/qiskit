@@ -64,7 +64,7 @@ class NormalizeRXAngle(TransformationPass):
         self.resolution_in_radian = resolution_in_radian
         self.already_generated = {}
 
-    def quantize_angles(self, qubit, original_angle):
+    def quantize_angles(self, qubit, original_angle) -> float:
         """Quantize the RX rotation angles by assigning the same value for the angles
         that differ within a resolution provided by the user.
 

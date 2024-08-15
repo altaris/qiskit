@@ -67,10 +67,10 @@ class Type:
     def __setattr__(self, _key, _value) -> None:
         raise AttributeError(f"'{self.kind.__name__}' instances are immutable")
 
-    def __copy__(self):
+    def __copy__(self) -> Type:
         return self
 
-    def __deepcopy__(self, _memo):
+    def __deepcopy__(self, _memo) -> Type:
         return self
 
     def __setstate__(self, state) -> None:
@@ -89,10 +89,10 @@ class Bool(Type, metaclass=_Singleton):
     def __repr__(self) -> str:
         return "Bool()"
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.__class__)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, Bool)
 
 
@@ -110,8 +110,8 @@ class Uint(Type):
     def __repr__(self) -> str:
         return f"Uint({self.width})"
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.__class__, self.width))
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return isinstance(other, Uint) and self.width == other.width

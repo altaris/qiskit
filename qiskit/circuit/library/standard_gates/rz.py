@@ -94,7 +94,7 @@ class RZGate(Gate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> CRZGate:
         """Return a (multi-)controlled-RZ gate.
 
         Args:
@@ -128,7 +128,7 @@ class RZGate(Gate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> RZGate:
         r"""Return inverted RZ gate
 
         :math:`RZ(\lambda)^{\dagger} = RZ(-\lambda)`
@@ -153,11 +153,11 @@ class RZGate(Gate):
         ilam2 = 0.5j * float(self.params[0])
         return np.array([[exp(-ilam2), 0], [0, exp(ilam2)]], dtype=dtype)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> RZGate:
         (theta,) = self.params
         return RZGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, RZGate):
             return self._compare_parameters(other)
         return False
@@ -280,7 +280,7 @@ class CRZGate(ControlledGate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CRZGate:
         """Return inverse CRZ gate (i.e. with the negative rotation angle).
 
         Args:
@@ -312,7 +312,7 @@ class CRZGate(ControlledGate):
                 dtype=dtype,
             )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, CRZGate):
             return self._compare_parameters(other) and self.ctrl_state == other.ctrl_state
         return False

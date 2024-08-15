@@ -110,7 +110,7 @@ class Result:
             raise AttributeError(f"Attribute {name} is not defined") from ex
 
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict):
         """Create a new ExperimentResultData object from a dictionary.
 
         Args:

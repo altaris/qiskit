@@ -309,7 +309,7 @@ def _build_sabre_dag(dag, num_physical_qubits: int, qubit_indices):
             circuit_to_dag_dict[block_id] = block_dag
         return process_dag(block_dag, block_qubit_indices)
 
-    def process_dag(block_dag, wire_map):
+    def process_dag(block_dag, wire_map) -> SabreDAG:
         dag_list = []
         node_blocks = {}
         for node in block_dag.topological_op_nodes():
@@ -347,10 +347,10 @@ def _build_sabre_dag(dag, num_physical_qubits: int, qubit_indices):
 
 
 def _apply_sabre_result(
-    out_dag,
+    out_dag: DAGCircuit,
     in_dag,
     sabre_result,
-    initial_layout,
+    initial_layout: NLayout,
     physical_qubits,
     circuit_to_dag_dict,
 ):
@@ -381,7 +381,7 @@ def _apply_sabre_result(
     # time we need to use it.
     swap_singleton = SwapGate()
 
-    def empty_dag(block):
+    def empty_dag(block) -> DAGCircuit:
         empty = DAGCircuit()
         empty.add_qubits(out_dag.qubits)
         for qreg in out_dag.qregs.values():

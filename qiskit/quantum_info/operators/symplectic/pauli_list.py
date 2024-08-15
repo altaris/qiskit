@@ -16,7 +16,7 @@ Optimized list of Pauli operators
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Optional, Literal
+from typing import Iterable, Optional, Literal, Union
 
 import numpy as np
 import rustworkx as rx
@@ -159,7 +159,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         return ret if dtype is None else ret.astype(dtype, copy=False)
 
     @staticmethod
-    def _from_paulis(data):
+    def _from_paulis(data: Iterable[Pauli]) -> PauliList:
         """Construct a PauliList from a list of Pauli data.
 
         Args:
@@ -206,7 +206,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         """Print representation."""
         return self._truncated_str(False)
 
-    def _truncated_str(self, show_class):
+    def _truncated_str(self, show_class: bool) -> str:
         stop = self._num_paulis
         if self.__truncate__ and self.num_qubits > 0:
             max_paulis = self.__truncate__ // self.num_qubits
@@ -224,7 +224,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         )
         return prefix + list_str[:-1] + suffix
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Entrywise comparison of Pauli equality."""
         if not isinstance(other, PauliList):
             other = PauliList(other)
@@ -755,7 +755,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         """
         return self.compose(other, qargs=qargs, front=True, inplace=inplace)
 
-    def _add(self, other, qargs=None):
+    def _add(self, other: PauliList, qargs: Union[None, Iterable] = None) -> PauliList:
         """Append two PauliLists.
 
         If ``qargs`` are specified the other operator will be added
@@ -795,7 +795,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
 
         return PauliList(BasePauli(base_z, base_x, base_phase))
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> PauliList:
         """Multiply each Pauli in the list by a phase.
 
         Args:
@@ -809,19 +809,19 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         """
         return PauliList(super()._multiply(other))
 
-    def conjugate(self):
+    def conjugate(self) -> PauliList:
         """Return the conjugate of each Pauli in the list."""
         return PauliList(super().conjugate())
 
-    def transpose(self):
+    def transpose(self) -> PauliList:
         """Return the transpose of each Pauli in the list."""
         return PauliList(super().transpose())
 
-    def adjoint(self):
+    def adjoint(self) -> PauliList:
         """Return the adjoint of each Pauli in the list."""
         return PauliList(super().adjoint())
 
-    def inverse(self):
+    def inverse(self) -> PauliList:
         """Return the inverse of each Pauli in the list."""
         return PauliList(super().adjoint())
 
@@ -887,7 +887,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         """
         return self._commutes_with_all(other, anti=True)
 
-    def _commutes_with_all(self, other, anti: bool = False):
+    def _commutes_with_all(self, other: PauliList, anti: bool = False):
         """Return row indexes that commute with all rows in another PauliList.
 
         Args:
@@ -1124,7 +1124,7 @@ class PauliList(BasePauli, LinearMixin, GroupMixin):
         base_z, base_x, base_phase = cls._from_array(z, x, phase)
         return cls(BasePauli(base_z, base_x, base_phase))
 
-    def _noncommutation_graph(self, qubit_wise):
+    def _noncommutation_graph(self, qubit_wise: bool):
         """Create an edge list representing the non-commutation graph (Pauli Graph).
 
         An edge (i, j) is present if i and j are not commutable.

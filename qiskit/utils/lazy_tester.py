@@ -283,7 +283,7 @@ class LazyImportTester(LazyDependencyManager):
             name = f"{', '.join(all_names[:-1])} and {all_names[-1]}"
         super().__init__(name=name, callback=callback, install=install, msg=msg)
 
-    def _is_available(self):
+    def _is_available(self) -> bool:
         failed_modules = {}
         failed_names = collections.defaultdict(list)
         for module, names in self._modules.items():
@@ -354,7 +354,7 @@ class LazySubprocessTester(LazyDependencyManager):
             raise ValueError("no command supplied")
         super().__init__(name=name or self._command[0], callback=callback, install=install, msg=msg)
 
-    def _is_available(self):
+    def _is_available(self) -> bool:
         try:
             subprocess.run(
                 self._command, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL

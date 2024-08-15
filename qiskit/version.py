@@ -45,7 +45,7 @@ def _minimal_ext_cmd(cmd):
     return stdout
 
 
-def git_version():
+def git_version() -> str:
     """Get the current git head sha1."""
     # Determine if we're at main
     try:
@@ -61,7 +61,7 @@ with open(os.path.join(ROOT_DIR, "VERSION.txt")) as version_file:
     VERSION = version_file.read().strip()
 
 
-def get_version_info():
+def get_version_info() -> str:
     """Get the full version string."""
     # Adding the git rev number needs to be done inside
     # write_version_py(), otherwise the import of scipy.version messes

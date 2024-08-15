@@ -31,7 +31,7 @@ class ConvertConditionsToIfOps(TransformationPass):
     This is a simple pass aimed at easing the conversion from the old style of using
     :meth:`.InstructionSet.c_if` into the new style of using more complex conditional logic."""
 
-    def _run_inner(self, dag):
+    def _run_inner(self, dag) -> bool:
         """Run the pass on one :class:`.DAGCircuit`, mutating it.  Returns ``True`` if the circuit
         was modified and ``False`` if not."""
         modified = False

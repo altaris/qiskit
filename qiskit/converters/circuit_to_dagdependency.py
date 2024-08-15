@@ -13,9 +13,12 @@
 """Helper function for converting a circuit to a dag dependency"""
 
 from qiskit.dagcircuit.dagdependency import DAGDependency
+from qiskit.circuit.quantumcircuit import QuantumCircuit
 
 
-def circuit_to_dagdependency(circuit, create_preds_and_succs: bool = True):
+def circuit_to_dagdependency(
+    circuit: QuantumCircuit, create_preds_and_succs: bool = True
+) -> DAGDependency:
     """Build a ``DAGDependency`` object from a :class:`~.QuantumCircuit`.
 
     Args:

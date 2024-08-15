@@ -26,7 +26,7 @@ from qiskit.quantum_info.operators.predicates import is_hermitian_matrix
 from qiskit.quantum_info.operators.predicates import ATOL_DEFAULT
 
 
-def _transform_rep(input_rep, output_rep, data, input_dim, output_dim):
+def _transform_rep(input_rep: str, output_rep: str, data, input_dim, output_dim):
     """Transform a QuantumChannel between representation."""
     if input_rep == output_rep:
         return data
@@ -47,7 +47,7 @@ def _transform_rep(input_rep, output_rep, data, input_dim, output_dim):
     raise QiskitError(f"Invalid QuantumChannel {output_rep}")
 
 
-def _to_choi(rep, data, input_dim, output_dim):
+def _to_choi(rep: str, data, input_dim, output_dim):
     """Transform a QuantumChannel to the Choi representation."""
     if rep == "Choi":
         return data
@@ -67,7 +67,7 @@ def _to_choi(rep, data, input_dim, output_dim):
     raise QiskitError(f"Invalid QuantumChannel {rep}")
 
 
-def _to_superop(rep, data, input_dim, output_dim):
+def _to_superop(rep: str, data, input_dim: int, output_dim: int):
     """Transform a QuantumChannel to the SuperOp representation."""
     if rep == "SuperOp":
         return data
@@ -87,7 +87,7 @@ def _to_superop(rep, data, input_dim, output_dim):
     raise QiskitError(f"Invalid QuantumChannel {rep}")
 
 
-def _to_kraus(rep, data, input_dim, output_dim):
+def _to_kraus(rep: str, data, input_dim, output_dim):
     """Transform a QuantumChannel to the Kraus representation."""
     if rep == "Kraus":
         return data
@@ -141,7 +141,7 @@ def _to_stinespring(rep, data, input_dim, output_dim):
     return _kraus_to_stinespring(data, input_dim, output_dim)
 
 
-def _to_operator(rep, data, input_dim, output_dim):
+def _to_operator(rep: str, data, input_dim, output_dim):
     """Transform a QuantumChannel to the Operator representation."""
     if rep == "Operator":
         return data
@@ -153,7 +153,7 @@ def _to_operator(rep, data, input_dim, output_dim):
     return _kraus_to_operator(data)
 
 
-def _from_operator(rep, data, input_dim, output_dim):
+def _from_operator(rep: str, data, input_dim, output_dim):
     """Transform Operator representation to other representation."""
     if rep == "Operator":
         return data
@@ -204,7 +204,7 @@ def _choi_to_superop(data, input_dim, output_dim):
     return _reshuffle(data, shape)
 
 
-def _kraus_to_choi(data):
+def _kraus_to_choi(data) -> np.ndarray:
     """Transform Kraus representation to Choi representation."""
     choi = 0
     kraus_l, kraus_r = data
@@ -218,7 +218,7 @@ def _kraus_to_choi(data):
     return choi
 
 
-def _choi_to_kraus(data, input_dim, output_dim, atol=ATOL_DEFAULT):
+def _choi_to_kraus(data, input_dim, output_dim, atol: float = ATOL_DEFAULT):
     """Transform Choi representation to Kraus representation."""
     from scipy import linalg as la
 
@@ -314,7 +314,7 @@ def _kraus_to_stinespring(data, input_dim, output_dim):
     return tuple(stine_pair)
 
 
-def _kraus_to_superop(data):
+def _kraus_to_superop(data) -> np.ndarray:
     """Transform Kraus representation to SuperOp representation."""
     kraus_l, kraus_r = data
     superop = 0

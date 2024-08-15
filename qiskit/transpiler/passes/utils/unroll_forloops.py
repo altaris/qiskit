@@ -68,7 +68,7 @@ class UnrollForLoops(TransformationPass):
         return dag
 
 
-def _body_contains_continue_or_break(circuit):
+def _body_contains_continue_or_break(circuit) -> bool:
     """Checks if a circuit contains ``continue``s or ``break``s. Conditional bodies are inspected."""
     for inst in circuit.data:
         operation = inst.operation

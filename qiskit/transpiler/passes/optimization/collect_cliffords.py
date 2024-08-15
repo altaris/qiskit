@@ -77,12 +77,12 @@ clifford_gate_names = (
 )
 
 
-def _is_clifford_gate(node):
+def _is_clifford_gate(node) -> bool:
     """Specifies whether a node holds a clifford gate."""
     return node.op.name in clifford_gate_names and getattr(node.op, "condition", None) is None
 
 
-def _collapse_to_clifford(circuit):
+def _collapse_to_clifford(circuit) -> Clifford:
     """Specifies how to construct a ``Clifford`` from a quantum circuit (that must
     consist of Clifford gates only)."""
     return Clifford(circuit)

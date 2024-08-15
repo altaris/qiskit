@@ -152,7 +152,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
         else:
             return list(run_clone), list(commuted)
 
-    def _resynthesize(self, run, qubit):
+    def _resynthesize(self, run, qubit) -> DAGCircuit:
         """
         Synthesizes an efficient circuit from a sequence `run` of `DAGOpNode`s.
 
@@ -170,7 +170,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
         )
 
     @staticmethod
-    def _replace_subdag(dag, old_run, new_dag) -> None:
+    def _replace_subdag(dag, old_run, new_dag: DAGCircuit) -> None:
         """
         Replaces a nonempty sequence `old_run` of `DAGNode`s, assumed to be a complete chain in
         `dag`, with the circuit `new_circ`.
@@ -184,7 +184,7 @@ class Optimize1qGatesSimpleCommutation(TransformationPass):
         spliced_run = [node_map[node._node_id] for node in new_dag.topological_op_nodes()]
         mov_list(old_run, spliced_run)
 
-    def _step(self, dag):
+    def _step(self, dag) -> bool:
         """
         Performs one full pass of optimization work.
 

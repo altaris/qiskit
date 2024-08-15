@@ -192,7 +192,7 @@ class XXMinusYYGate(Gate):
         )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> XXMinusYYGate:
         """Inverse gate.
 
         Args:
@@ -225,11 +225,11 @@ class XXMinusYYGate(Gate):
             dtype=dtype,
         )
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> XXMinusYYGate:
         theta, beta = self.params
         return XXMinusYYGate(exponent * theta, beta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, XXMinusYYGate):
             return self._compare_parameters(other)
         return False

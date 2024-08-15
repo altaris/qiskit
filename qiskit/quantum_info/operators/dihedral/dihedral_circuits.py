@@ -22,7 +22,7 @@ from qiskit.circuit.barrier import Barrier
 from qiskit.circuit.delay import Delay
 
 
-def _append_circuit(elem, circuit, qargs=None):
+def _append_circuit(elem: "CNOTDihedral", circuit, qargs=None):
     """Update a CNOTDihedral element inplace by applying a CNOTDihedral circuit.
 
     Args:

@@ -131,7 +131,7 @@ class DrawElement:
     def width(self, value) -> None:
         self._width = value
 
-    def connect(self, wire_char, where, label: Optional[str] = None) -> None:
+    def connect(self, wire_char: str, where, label: Optional[str] = None) -> None:
         """Connects boxes and elements using wire_char and setting proper connectors.
 
         Args:
@@ -680,7 +680,7 @@ class EmptyWire(DrawElement):
         self._mid_padding = self.mid_bck = wire
 
     @staticmethod
-    def fillup_layer(layer, first_clbit):
+    def fillup_layer(layer, first_clbit: int):
         """Given a layer, replace the Nones in it with EmptyWire elements.
 
         Args:
@@ -706,7 +706,7 @@ class BreakWire(DrawElement):
         self.bot_connect = arrow_char
 
     @staticmethod
-    def fillup_layer(layer_length, arrow_char):
+    def fillup_layer(layer_length: int, arrow_char: str):
         """Creates a layer with BreakWire elements.
 
         Args:
@@ -801,7 +801,7 @@ class TextDrawing:
     def __str__(self) -> str:
         return self.single_string()
 
-    def _repr_html_(self):
+    def _repr_html_(self) -> str:
         return (
             '<pre style="word-wrap: normal;'
             "white-space: pre;"
@@ -961,7 +961,7 @@ class TextDrawing:
 
         return wire_labels
 
-    def should_compress(self, top_line, bot_line):
+    def should_compress(self, top_line: str, bot_line: str) -> bool:
         """Decides if the top_line and bot_line should be merged,
         based on `self.vertical_compression`."""
         if self.vertical_compression == "high":
@@ -1021,7 +1021,7 @@ class TextDrawing:
         return labels.get(node_type, None)
 
     @staticmethod
-    def merge_lines(top, bot, icod: str = "top"):
+    def merge_lines(top: str, bot: str, icod: str = "top"):
         """Merges two lines (top and bot) in a way that the overlapping makes sense.
 
         Args:
@@ -1091,7 +1091,7 @@ class TextDrawing:
             node.layer_width = longest
 
     @staticmethod
-    def controlled_wires(node, wire_map, ctrl_text, conditional, mod_control):
+    def controlled_wires(node, wire_map, ctrl_text, conditional: bool, mod_control):
         """
         Analyzes the node in the layer and checks if the controlled arguments are in
         the box or out of the box.
@@ -1447,7 +1447,9 @@ class TextDrawing:
         flow_layer = self.draw_flow_box(node, flow_wire_map, CF_RIGHT, conditional=False)
         layers.append(flow_layer.full_layer)
 
-    def draw_flow_box(self, node, flow_wire_map, section, circ_num=0, conditional: bool = False):
+    def draw_flow_box(
+        self, node, flow_wire_map, section: int, circ_num: int = 0, conditional: bool = False
+    ) -> "Layer":
         """Draw the left, middle, or right of a control flow box"""
 
         op = node.op
@@ -1591,7 +1593,7 @@ class Layer:
         """
         self.qubit_layer[self._wire_map[qubit]] = element
 
-    def set_clbit(self, clbit, element) -> None:
+    def set_clbit(self, clbit: Clbit, element) -> None:
         """Sets the clbit to the element.
 
         Args:
@@ -1857,7 +1859,7 @@ class Layer:
             controlled_edge=controlled_edge,
         )
 
-    def connect_with(self, wire_char) -> None:
+    def connect_with(self, wire_char: str) -> None:
         """Connects the elements in the layer using wire_char.
 
         Args:

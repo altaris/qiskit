@@ -893,7 +893,7 @@ class NLocal(BlueprintCircuit):
                     parameterized_block = self._parameterize_block(block, param_iter, i, j, indices)
                     circuit.compose(parameterized_block, indices, inplace=True, copy=False)
 
-    def _build_entanglement_layer(self, circuit, param_iter, i) -> None:
+    def _build_entanglement_layer(self, circuit, param_iter, i: int) -> None:
         """Build an entanglement layer."""
         # iterate over all entanglement blocks
         target_qubits = circuit.qubits
@@ -918,7 +918,9 @@ class NLocal(BlueprintCircuit):
                     parameterized_block = self._parameterize_block(block, param_iter, i, j, indices)
                     circuit.compose(parameterized_block, indices, inplace=True, copy=False)
 
-    def _build_additional_layers(self, circuit, which):
+    def _build_additional_layers(
+        self, circuit, which: typing.Literal["appended", "prepended"]
+    ) -> None:
         if which == "appended":
             blocks = self._appended_blocks
             entanglements = self._appended_entanglement

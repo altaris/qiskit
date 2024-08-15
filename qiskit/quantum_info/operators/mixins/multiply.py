@@ -44,14 +44,14 @@ class MultiplyMixin(ABC):
     def __mul__(self, other) -> Self:
         return self._multiply(other)
 
-    def __truediv__(self, other) -> Self:
+    def __truediv__(self, other: float) -> Self:
         return self._multiply(1 / other)
 
     def __neg__(self) -> Self:
         return self._multiply(-1)
 
     @abstractmethod
-    def _multiply(self, other):
+    def _multiply(self, other: complex):
         """Return the CLASS other * self.
 
         Args:

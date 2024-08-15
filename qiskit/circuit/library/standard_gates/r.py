@@ -82,7 +82,7 @@ class RGate(Gate):
 
         self.definition = qc
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> "RGate":
         """Invert this gate as: :math:`r(θ, φ)^dagger = r(-θ, φ)`
 
         Args:
@@ -107,11 +107,11 @@ class RGate(Gate):
         exp_p = exp(1j * phi)
         return numpy.array([[cos, -1j * exp_m * sin], [-1j * exp_p * sin, cos]], dtype=dtype)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> "RGate":
         theta, phi = self.params
         return RGate(exponent * theta, phi)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, RGate):
             return self._compare_parameters(other)
         return False

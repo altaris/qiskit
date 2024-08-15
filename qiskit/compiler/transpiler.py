@@ -418,12 +418,12 @@ def _check_circuits_coupling_map(circuits, cmap, backend):
             )
 
 
-def _log_transpile_time(start_time, end_time) -> None:
+def _log_transpile_time(start_time: float, end_time: float) -> None:
     log_msg = f"Total Transpile Time - {((end_time - start_time) * 1000):.5f} (ms)"
     logger.info(log_msg)
 
 
-def _parse_coupling_map(coupling_map):
+def _parse_coupling_map(coupling_map) -> CouplingMap:
     # coupling_map could be None, or a list of lists, e.g. [[0, 1], [2, 1]]
     if isinstance(coupling_map, list) and all(
         isinstance(i, list) and len(i) == 2 for i in coupling_map

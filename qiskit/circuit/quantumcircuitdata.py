@@ -32,7 +32,7 @@ class QuantumCircuitData(MutableSequence):
     def __init__(self, circuit) -> None:
         self._circuit = circuit
 
-    def __getitem__(self, i):
+    def __getitem__(self, i: int):
         return self._circuit._data[i]
 
     def __setitem__(self, key, value) -> None:

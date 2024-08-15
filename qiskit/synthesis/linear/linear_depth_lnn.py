@@ -86,7 +86,7 @@ def _get_label_arr(n, mat_t):
     return label_arr
 
 
-def _in_linear_combination(label_arr_t, mat_inv_t, row, k):
+def _in_linear_combination(label_arr_t, mat_inv_t, row, k) -> bool:
     # Check if "row" is a linear combination of all rows in mat_inv_t not including the row labeled by k
     indx_k = label_arr_t[k]
     w_needed = np.zeros(len(row), dtype=bool)
@@ -166,7 +166,7 @@ def _matrix_to_north_west(n, mat, mat_inv):
     return cx_instructions_rows
 
 
-def _north_west_to_identity(n, mat):
+def _north_west_to_identity(n: int, mat):
     # Transform a north-west triangular matrix to identity in depth 3*n by Proposition 7.4 of [1]
 
     # At start the labels are in reversed order

@@ -36,7 +36,7 @@ from qiskit.circuit.library.standard_gates import (
 )
 
 
-def _swap_node_qargs(node):
+def _swap_node_qargs(node) -> DAGOpNode:
     return DAGOpNode(node.op, node.qargs[::-1], node.cargs)
 
 

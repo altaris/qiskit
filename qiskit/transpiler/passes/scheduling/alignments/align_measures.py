@@ -108,7 +108,7 @@ class AlignMeasures(TransformationPass):
         super().__init__()
         self.alignment = alignment
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """Run the measurement alignment pass on `dag`.
 
         Args:

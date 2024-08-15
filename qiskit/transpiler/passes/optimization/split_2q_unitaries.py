@@ -38,7 +38,7 @@ class Split2QUnitaries(TransformationPass):
         super().__init__()
         self.requested_fidelity = fidelity
 
-    def run(self, dag: DAGCircuit):
+    def run(self, dag: DAGCircuit) -> DAGCircuit:
         """Run the Split2QUnitaries pass on `dag`."""
         for node in dag.topological_op_nodes():
             # skip operations without two-qubits and for which we can not determine a potential 1q split

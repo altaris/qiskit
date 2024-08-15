@@ -85,7 +85,7 @@ class HamiltonianGate(Gate):
         # Store instruction params
         super().__init__("hamiltonian", num_qubits, [data, time], label=label)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not isinstance(other, HamiltonianGate):
             return False
         if self.label != other.label:
@@ -114,15 +114,15 @@ class HamiltonianGate(Gate):
         """Return the adjoint of the unitary."""
         return self.adjoint()
 
-    def conjugate(self):
+    def conjugate(self) -> HamiltonianGate:
         """Return the conjugate of the Hamiltonian."""
         return HamiltonianGate(np.conj(self.params[0]), -self.params[1])
 
-    def adjoint(self):
+    def adjoint(self) -> HamiltonianGate:
         """Return the adjoint of the unitary."""
         return HamiltonianGate(self.params[0], -self.params[1])
 
-    def transpose(self):
+    def transpose(self) -> HamiltonianGate:
         """Return the transpose of the Hamiltonian."""
         return HamiltonianGate(np.transpose(self.params[0]), self.params[1])
 

@@ -20,9 +20,10 @@ import numpy as np
 from qiskit.circuit import Barrier, Delay, Gate
 from qiskit.circuit.exceptions import CircuitError
 from qiskit.exceptions import QiskitError
+from qiskit.circuit.quantumcircuit import QuantumCircuit
 
 
-def _append_circuit(clifford, circuit, qargs=None):
+def _append_circuit(clifford: "Clifford", circuit: QuantumCircuit, qargs=None):
     """Update Clifford inplace by applying a Clifford circuit.
 
     Args:
@@ -50,7 +51,7 @@ def _append_circuit(clifford, circuit, qargs=None):
     return clifford
 
 
-def _append_operation(clifford, operation, qargs=None):
+def _append_operation(clifford: "Clifford", operation, qargs=None):
     """Update Clifford inplace by applying a Clifford operation.
 
     Args:
@@ -189,7 +190,7 @@ def _n_half_pis(param) -> int:
 # ---------------------------------------------------------------------
 # Helper functions for applying basis gates
 # ---------------------------------------------------------------------
-def _append_rz(clifford, qubit, multiple):
+def _append_rz(clifford, qubit: int, multiple: int):
     """Apply an Rz gate to a Clifford.
 
     Args:
@@ -210,7 +211,7 @@ def _append_rz(clifford, qubit, multiple):
     return clifford
 
 
-def _append_i(clifford, qubit):
+def _append_i(clifford: "Clifford", qubit: int):
     """Apply an I gate to a Clifford.
 
     Args:
@@ -224,7 +225,7 @@ def _append_i(clifford, qubit):
     return clifford
 
 
-def _append_x(clifford, qubit):
+def _append_x(clifford: "Clifford", qubit: int):
     """Apply an X gate to a Clifford.
 
     Args:
@@ -238,7 +239,7 @@ def _append_x(clifford, qubit):
     return clifford
 
 
-def _append_y(clifford, qubit):
+def _append_y(clifford: "Clifford", qubit: int):
     """Apply a Y gate to a Clifford.
 
     Args:
@@ -254,7 +255,7 @@ def _append_y(clifford, qubit):
     return clifford
 
 
-def _append_z(clifford, qubit):
+def _append_z(clifford: "Clifford", qubit: int):
     """Apply an Z gate to a Clifford.
 
     Args:
@@ -268,7 +269,7 @@ def _append_z(clifford, qubit):
     return clifford
 
 
-def _append_h(clifford, qubit):
+def _append_h(clifford: "Clifford", qubit: int):
     """Apply a H gate to a Clifford.
 
     Args:
@@ -287,7 +288,7 @@ def _append_h(clifford, qubit):
     return clifford
 
 
-def _append_s(clifford, qubit):
+def _append_s(clifford: "Clifford", qubit: int):
     """Apply an S gate to a Clifford.
 
     Args:
@@ -305,7 +306,7 @@ def _append_s(clifford, qubit):
     return clifford
 
 
-def _append_sdg(clifford, qubit):
+def _append_sdg(clifford: "Clifford", qubit: int):
     """Apply an Sdg gate to a Clifford.
 
     Args:
@@ -322,7 +323,7 @@ def _append_sdg(clifford, qubit):
     return clifford
 
 
-def _append_sx(clifford, qubit):
+def _append_sx(clifford: "Clifford", qubit: int):
     """Apply an SX gate to a Clifford.
 
     Args:
@@ -340,7 +341,7 @@ def _append_sx(clifford, qubit):
     return clifford
 
 
-def _append_sxdg(clifford, qubit):
+def _append_sxdg(clifford: "Clifford", qubit: int):
     """Apply an SXdg gate to a Clifford.
 
     Args:
@@ -358,7 +359,7 @@ def _append_sxdg(clifford, qubit):
     return clifford
 
 
-def _append_v(clifford, qubit):
+def _append_v(clifford: "Clifford", qubit: int):
     """Apply a V gate to a Clifford.
 
     This is equivalent to an Sdg gate followed by a H gate.
@@ -378,7 +379,7 @@ def _append_v(clifford, qubit):
     return clifford
 
 
-def _append_w(clifford, qubit):
+def _append_w(clifford: "Clifford", qubit: int):
     """Apply a W gate to a Clifford.
 
     This is equivalent to two V gates.
@@ -398,7 +399,7 @@ def _append_w(clifford, qubit):
     return clifford
 
 
-def _append_cx(clifford, control, target):
+def _append_cx(clifford: "Clifford", control: int, target: int):
     """Apply a CX gate to a Clifford.
 
     Args:
@@ -419,7 +420,7 @@ def _append_cx(clifford, control, target):
     return clifford
 
 
-def _append_cz(clifford, control, target):
+def _append_cz(clifford: "Clifford", control: int, target: int):
     """Apply a CZ gate to a Clifford.
 
     Args:
@@ -440,7 +441,7 @@ def _append_cz(clifford, control, target):
     return clifford
 
 
-def _append_cy(clifford, control, target):
+def _append_cy(clifford: "Clifford", control: int, target: int):
     """Apply a CY gate to a Clifford.
 
     Args:
@@ -457,7 +458,7 @@ def _append_cy(clifford, control, target):
     return clifford
 
 
-def _append_swap(clifford, qubit0, qubit1):
+def _append_swap(clifford: "Clifford", qubit0: int, qubit1: int):
     """Apply a Swap gate to a Clifford.
 
     Args:
@@ -473,7 +474,7 @@ def _append_swap(clifford, qubit0, qubit1):
     return clifford
 
 
-def _append_iswap(clifford, qubit0, qubit1):
+def _append_iswap(clifford: "Clifford", qubit0: int, qubit1: int):
     """Apply a iSwap gate to a Clifford.
 
     Args:
@@ -493,7 +494,7 @@ def _append_iswap(clifford, qubit0, qubit1):
     return clifford
 
 
-def _append_dcx(clifford, qubit0, qubit1):
+def _append_dcx(clifford: "Clifford", qubit0: int, qubit1: int):
     """Apply a DCX gate to a Clifford.
 
     Args:
@@ -509,7 +510,7 @@ def _append_dcx(clifford, qubit0, qubit1):
     return clifford
 
 
-def _append_ecr(clifford, qubit0, qubit1):
+def _append_ecr(clifford: "Clifford", qubit0: int, qubit1: int):
     """Apply an ECR gate to a Clifford.
 
     Args:

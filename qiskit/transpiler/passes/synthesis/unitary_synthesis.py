@@ -111,7 +111,7 @@ def _choose_kak_gate(basis_gates):
     return kak_gate
 
 
-def _choose_euler_basis(basis_gates):
+def _choose_euler_basis(basis_gates) -> str:
     """Choose the first available 1q basis to use in the Euler decomposition."""
     basis_set = set(basis_gates or [])
     decomposers = _possible_decomposers(basis_set)
@@ -167,7 +167,7 @@ def _decomposer_2q_from_basis_gates(basis_gates, pulse_optimize=None, approximat
     return decomposer2q
 
 
-def _error(circuit, target=None, qubits=None):
+def _error(circuit, target=None, qubits=None) -> float:
     """
     Calculate a rough error for a `circuit` that runs on specific
     `qubits` of `target`.
@@ -505,7 +505,13 @@ class UnitarySynthesis(TransformationPass):
         )
 
     def _run_main_loop(
-        self, dag, qubit_indices, plugin_method, plugin_kwargs, default_method, default_kwargs
+        self,
+        dag: DAGCircuit,
+        qubit_indices,
+        plugin_method,
+        plugin_kwargs,
+        default_method,
+        default_kwargs,
     ):
         """Inner loop for the optimizer, after all DAG-independent set-up has been completed."""
         for node in dag.op_nodes():
@@ -819,7 +825,7 @@ class DefaultUnitarySynthesis(plugin.UnitarySynthesisPlugin):
         # TODO: reduce number of decomposers here somehow
         decomposers = []
 
-        def is_supercontrolled(gate):
+        def is_supercontrolled(gate) -> bool:
             try:
                 operator = Operator(gate)
             except QiskitError:
@@ -827,7 +833,7 @@ class DefaultUnitarySynthesis(plugin.UnitarySynthesisPlugin):
             kak = TwoQubitWeylDecomposition(operator.data)
             return isclose(kak.a, pi / 4) and isclose(kak.c, 0.0)
 
-        def is_controlled(gate):
+        def is_controlled(gate) -> bool:
             try:
                 operator = Operator(gate)
             except QiskitError:
@@ -1036,7 +1042,7 @@ class DefaultUnitarySynthesis(plugin.UnitarySynthesisPlugin):
             return self._reversed_synth_su4(su4_mat, decomposer2q, approximation_degree)
         return synth_circ
 
-    def _reversed_synth_su4(self, su4_mat, decomposer2q, approximation_degree):
+    def _reversed_synth_su4(self, su4_mat, decomposer2q, approximation_degree) -> DAGCircuit:
         approximate = not approximation_degree == 1.0
         su4_mat_mm = su4_mat.copy()
         su4_mat_mm[[1, 2]] = su4_mat_mm[[2, 1]]

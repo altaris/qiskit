@@ -63,7 +63,7 @@ and second qubits and are passed pi as a parameter.
 """
 
 
-def apply_reflection(reflection_name, coordinate):
+def apply_reflection(reflection_name: str, coordinate):
     """
     Given a reflection type and a canonical coordinate, applies the reflection
     and describes a circuit which enacts the reflection + a global phase shift.
@@ -79,7 +79,7 @@ def apply_reflection(reflection_name, coordinate):
     return reflected_coord, source_reflection, reflection_phase_shift
 
 
-def apply_shift(shift_name, coordinate):
+def apply_shift(shift_name: str, coordinate):
     """
     Given a shift type and a canonical coordinate, applies the shift and
     describes a circuit which enacts the shift + a global phase shift.
@@ -95,7 +95,7 @@ def apply_shift(shift_name, coordinate):
     return shifted_coord, source_shift, shift_phase_shift
 
 
-def canonical_rotation_circuit(first_index, second_index):
+def canonical_rotation_circuit(first_index: int, second_index: int) -> QuantumCircuit:
     """
     Given a pair of distinct indices 0 ≤ (first_index, second_index) ≤ 2,
     produces a two-qubit circuit which rotates a canonical gate

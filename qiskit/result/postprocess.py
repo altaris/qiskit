@@ -18,17 +18,17 @@ import numpy as np
 from qiskit.exceptions import QiskitError
 
 
-def _hex_to_bin(hexstring: str):
+def _hex_to_bin(hexstring: str) -> str:
     """Convert hexadecimal readouts (memory) to binary readouts."""
     return str(bin(int(hexstring, 16)))[2:]
 
 
-def _bin_to_hex(bitstring: str):
+def _bin_to_hex(bitstring: str) -> str:
     """Convert bitstring readouts (memory) to hexadecimal readouts."""
     return hex(int(bitstring, 2))
 
 
-def _pad_zeros(bitstring: str, memory_slots):
+def _pad_zeros(bitstring: str, memory_slots) -> str:
     """If the bitstring is truncated, pad extra zeros to make its
     length equal to memory_slots"""
     return format(int(bitstring, 2), f"0{memory_slots}b")
@@ -44,7 +44,7 @@ def _separate_bitstring(bitstring: str, creg_sizes: Sequence[int]):
     return " ".join(substrings)
 
 
-def format_counts_memory(shot_memory, header=None):
+def format_counts_memory(shot_memory: str, header=None) -> str:
     """
     Format a single bitstring (memory) from a single shot experiment.
 

@@ -130,7 +130,7 @@ class PhaseGate(Gate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> PhaseGate:
         r"""Return inverted Phase gate (:math:`Phase(\lambda)^{\dagger} = Phase(-\lambda)`)
 
         Args:
@@ -151,11 +151,11 @@ class PhaseGate(Gate):
         lam = float(self.params[0])
         return numpy.array([[1, 0], [0, exp(1j * lam)]], dtype=dtype)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> PhaseGate:
         (theta,) = self.params
         return PhaseGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, PhaseGate):
             return self._compare_parameters(other)
         return False
@@ -257,7 +257,7 @@ class CPhaseGate(ControlledGate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> MCPhaseGate:
         """Controlled version of this gate.
 
         Args:
@@ -283,7 +283,7 @@ class CPhaseGate(ControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> CPhaseGate:
         r"""Return inverted CPhase gate (:math:`CPhase(\lambda)^{\dagger} = CPhase(-\lambda)`)"""
         return CPhaseGate(-self.params[0], ctrl_state=self.ctrl_state)
 
@@ -298,11 +298,11 @@ class CPhaseGate(ControlledGate):
             )
         return numpy.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, eith, 0], [0, 0, 0, 1]], dtype=dtype)
 
-    def power(self, exponent: float, annotated: bool = False):
+    def power(self, exponent: float, annotated: bool = False) -> CPhaseGate:
         (theta,) = self.params
         return CPhaseGate(exponent * theta)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, CPhaseGate):
             return self._compare_parameters(other) and self.ctrl_state == other.ctrl_state
         return False
@@ -398,7 +398,7 @@ class MCPhaseGate(ControlledGate):
         label: str | None = None,
         ctrl_state: str | int | None = None,
         annotated: bool | None = None,
-    ):
+    ) -> MCPhaseGate:
         """Controlled version of this gate.
 
         Args:
@@ -428,6 +428,6 @@ class MCPhaseGate(ControlledGate):
             )
         return gate
 
-    def inverse(self, annotated: bool = False):
+    def inverse(self, annotated: bool = False) -> MCPhaseGate:
         r"""Return inverted MCPhase gate (:math:`MCPhase(\lambda)^{\dagger} = MCPhase(-\lambda)`)"""
         return MCPhaseGate(-self.params[0], self.num_ctrl_qubits)

@@ -69,12 +69,12 @@ class CollectLinearFunctions(CollectAndCollapse):
         )
 
 
-def _is_linear_gate(node):
+def _is_linear_gate(node) -> bool:
     """Specifies whether a node holds a linear gate."""
     return node.op.name in ("cx", "swap") and getattr(node.op, "condition", None) is None
 
 
-def _collapse_to_linear_function(circuit):
+def _collapse_to_linear_function(circuit) -> LinearFunction:
     """Specifies how to construct a ``LinearFunction`` from a quantum circuit (that must
     consist of linear gates only)."""
     return LinearFunction(circuit)

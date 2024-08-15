@@ -205,7 +205,7 @@ class UCGate(Gate):
     def _rz(alpha: float):
         return np.array([[np.exp(1j * alpha / 2), 0], [0, np.exp(-1j * alpha / 2)]])
 
-    def validate_parameter(self, parameter):
+    def validate_parameter(self, parameter) -> np.ndarray:
         """Uniformly controlled gate parameter has to be an ndarray."""
         if isinstance(parameter, np.ndarray):
             return parameter

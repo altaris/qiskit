@@ -19,8 +19,11 @@ from qiskit.circuit.classicalregister import ClassicalRegister, Clbit
 
 
 def circuit_to_instruction(
-    circuit, parameter_map=None, equivalence_library=None, label: Optional[str] = None
-):
+    circuit: "QuantumCircuit",
+    parameter_map=None,
+    equivalence_library=None,
+    label: Optional[str] = None,
+) -> Instruction:
     """Build an :class:`~.circuit.Instruction` object from a :class:`.QuantumCircuit`.
 
     The instruction is anonymous (not tied to a named quantum register),

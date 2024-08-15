@@ -104,7 +104,7 @@ class HoareOptimizer(TransformationPass):
         for i, tvar in enumerate(trgtvar):
             self.solver.add(z3.Implies(z3.Not(ctrl_ones), new_vars[i] == tvar))
 
-    def _test_gate(self, gate, ctrl_ones, trgtvar):
+    def _test_gate(self, gate, ctrl_ones, trgtvar) -> bool:
         """use z3 sat solver to determine triviality of gate
         Args:
             gate (Gate): gate to inspect
@@ -272,7 +272,7 @@ class HoareOptimizer(TransformationPass):
                         for qbt in node.qargs:
                             self.gatecache[qbt].remove(node)
 
-    def _is_identity(self, sequence):
+    def _is_identity(self, sequence) -> bool:
         """determine whether the sequence of gates combines to the identity
             (consider sequences of length 2 for now)
         Args:

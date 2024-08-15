@@ -743,7 +743,7 @@ def plot_state_paulivec(
         return fig.savefig(filename)
 
 
-def n_choose_k(n, k):
+def n_choose_k(n, k: int) -> int:
     """Return the number of combinations for n choose k.
 
     Args:
@@ -758,7 +758,7 @@ def n_choose_k(n, k):
     return reduce(lambda x, y: x * y[0] / y[1], zip(range(n - k + 1, n + 1), range(1, k + 1)), 1)
 
 
-def lex_index(n, k, lst):
+def lex_index(n: int, k, lst) -> int:
     """Return  the lex index of a combination..
 
     Args:
@@ -779,7 +779,7 @@ def lex_index(n, k, lst):
     return int(dualm)
 
 
-def bit_string_index(s):
+def bit_string_index(s: str) -> int:
     """Return the index of a string of 0s and 1s."""
     n = len(s)
     k = s.count("1")
@@ -1338,7 +1338,7 @@ def _state_to_latex_ket(
     """
     num = int(math.log2(len(data)))
 
-    def ket_name(i):
+    def ket_name(i) -> str:
         return bin(i)[2:].zfill(num)
 
     data = np.around(data, decimals)

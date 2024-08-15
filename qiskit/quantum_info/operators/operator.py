@@ -133,7 +133,7 @@ class Operator(LinearOp):
             f"{pad}input_dims={self.input_dims()}, output_dims={self.output_dims()})"
         )
 
-    def __eq__(self, other):
+    def __eq__(self, other: Operator) -> bool:
         """Test if two Operators are equal."""
         if not super().__eq__(other):
             return False
@@ -446,20 +446,20 @@ class Operator(LinearOp):
         """Convert operator to matrix operator class"""
         return self
 
-    def to_instruction(self):
+    def to_instruction(self) -> "UnitaryGate":
         """Convert to a UnitaryGate instruction."""
         # pylint: disable=cyclic-import
         from qiskit.circuit.library.generalized_gates.unitary import UnitaryGate
 
         return UnitaryGate(self.data)
 
-    def conjugate(self):
+    def conjugate(self) -> Operator:
         # Make a shallow copy and update array
         ret = _copy.copy(self)
         ret._data = np.conj(self._data)
         return ret
 
-    def transpose(self):
+    def transpose(self) -> Operator:
         # Make a shallow copy and update array
         ret = _copy.copy(self)
         ret._data = np.transpose(self._data)
@@ -563,7 +563,7 @@ class Operator(LinearOp):
         ret._data = np.kron(a.data, b.data)
         return ret
 
-    def _add(self, other, qargs=None):
+    def _add(self, other, qargs=None) -> Operator:
         """Return the operator self + other.
 
         If ``qargs`` are specified the other operator will be added
@@ -597,7 +597,7 @@ class Operator(LinearOp):
         ret._data = self.data + other.data
         return ret
 
-    def _multiply(self, other):
+    def _multiply(self, other) -> Operator:
         """Return the operator self * other.
 
         Args:
@@ -739,7 +739,7 @@ class Operator(LinearOp):
                 pass
         return mat
 
-    def _append_instruction(self, obj, qargs=None):
+    def _append_instruction(self, obj: Instruction, qargs=None):
         """Update the current Operator by apply an instruction."""
         from qiskit.circuit.barrier import Barrier
         from .scalar_op import ScalarOp

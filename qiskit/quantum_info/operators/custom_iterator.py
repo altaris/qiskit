@@ -37,7 +37,7 @@ class CustomIterator(ABC):
     def __len__(self) -> int:
         return len(self.obj)
 
-    def __iter__(self):
+    def __iter__(self) -> CustomIterator:
         self._iter = 0
         return self
 
