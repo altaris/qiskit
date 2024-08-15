@@ -11,11 +11,14 @@
 # that they have been altered from the originals.
 
 """Helper function for converting a circuit to an instruction."""
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 from qiskit.exceptions import QiskitError
 from qiskit.circuit.instruction import Instruction
 from qiskit.circuit.quantumregister import QuantumRegister
 from qiskit.circuit.classicalregister import ClassicalRegister, Clbit
+
+if TYPE_CHECKING:
+    from qiskit.circuit.quantumcircuit import QuantumCircuit
 
 
 def circuit_to_instruction(

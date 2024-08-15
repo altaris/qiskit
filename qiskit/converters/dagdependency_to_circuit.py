@@ -11,7 +11,11 @@
 # that they have been altered from the originals.
 
 """Helper function for converting a dag dependency to a circuit"""
+from typing import TYPE_CHECKING
 from qiskit.circuit import QuantumCircuit, CircuitInstruction
+
+if TYPE_CHECKING:
+    from qiskit.dagcircuit import DAGDependency
 
 
 def dagdependency_to_circuit(dagdependency: "DAGDependency") -> QuantumCircuit:

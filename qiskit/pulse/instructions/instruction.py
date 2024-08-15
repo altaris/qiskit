@@ -24,11 +24,14 @@ For example::
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from qiskit.circuit import Parameter, ParameterExpression
 from qiskit.pulse.channels import Channel
 from qiskit.pulse.exceptions import PulseError
 
+if TYPE_CHECKING:
+    from qiskit.pulse.schedule import Schedule
 
 # pylint: disable=bad-docstring-quotes
 

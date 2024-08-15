@@ -16,10 +16,14 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import math
+from typing import TYPE_CHECKING
 import numpy as np
 
 from qiskit.circuit import Gate, QuantumCircuit, Qubit
 from qiskit.circuit.library.generalized_gates.unitary import UnitaryGate
+
+if TYPE_CHECKING:
+    from qiskit.dagcircuit import DAGCircuit
 
 
 class GateSequence:

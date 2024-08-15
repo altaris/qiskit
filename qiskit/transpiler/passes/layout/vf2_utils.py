@@ -96,7 +96,7 @@ def build_interaction_graph(dag: DAGCircuit, strict_direction: bool = True):
     return im_graph, im_graph_node_map, reverse_im_graph_node_map, free_nodes
 
 
-def build_edge_list(im_graph) -> "EdgeList":
+def build_edge_list(im_graph) -> vf2_layout.EdgeList:
     """Generate an edge list for scoring."""
     return vf2_layout.EdgeList(
         [((edge[0], edge[1]), sum(edge[2].values())) for edge in im_graph.edge_index_map().values()]

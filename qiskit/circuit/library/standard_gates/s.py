@@ -15,7 +15,7 @@
 from __future__ import annotations
 
 from math import pi
-from typing import Optional, Union
+from typing import TYPE_CHECKING, Optional, Union
 
 import numpy
 
@@ -23,6 +23,9 @@ from qiskit.circuit.singleton import SingletonGate, SingletonControlledGate, std
 from qiskit.circuit.quantumregister import QuantumRegister
 from qiskit.circuit._utils import with_gate_array, with_controlled_gate_array
 from qiskit._accelerate.circuit import StandardGate
+
+if TYPE_CHECKING:
+    from qiskit.circuit.library.standard_gates.p import PhaseGate, CPhaseGate
 
 
 _S_ARRAY = numpy.array([[1, 0], [0, 1j]])

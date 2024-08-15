@@ -21,6 +21,7 @@ from itertools import zip_longest
 from collections import defaultdict
 
 import rustworkx
+from rustworkx.visit import DijkstraVisitor, PruneSearch
 
 from qiskit.circuit import (
     Gate,
@@ -458,7 +459,7 @@ class StopIfBasisRewritable(Exception):
     """Custom exception that signals `rustworkx.dijkstra_search` to stop."""
 
 
-class BasisSearchVisitor(rustworkx.visit.DijkstraVisitor):
+class BasisSearchVisitor(DijkstraVisitor):
     """Handles events emitted during `rustworkx.dijkstra_search`."""
 
     def __init__(self, graph, source_basis, target_basis) -> None:
@@ -510,7 +511,7 @@ class BasisSearchVisitor(rustworkx.visit.DijkstraVisitor):
         # if there are gates in this `rule` that we have not yet generated, we can't apply
         # this `rule`. if `target` is already in basis, it's not beneficial to use this rule.
         if self._num_gates_remain_for_rule[edata.index] > 0 or target in self.target_basis:
-            raise rustworkx.visit.PruneSearch
+            raise PruneSearch
 
     def edge_relaxed(self, edge) -> None:
         _, target, edata = edge

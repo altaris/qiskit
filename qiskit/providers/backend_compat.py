@@ -15,7 +15,7 @@
 from __future__ import annotations
 import logging
 import warnings
-from typing import List, Iterable, Any, Dict, Optional
+from typing import TYPE_CHECKING, List, Iterable, Any, Dict, Optional
 
 from qiskit.providers.backend import BackendV1, BackendV2
 from qiskit.providers.backend import QubitProperties
@@ -25,6 +25,10 @@ from qiskit.circuit.controlflow import CONTROL_FLOW_OP_NAMES
 from qiskit.providers.models.pulsedefaults import PulseDefaults
 from qiskit.providers.options import Options
 from qiskit.providers.exceptions import BackendPropertyError
+
+if TYPE_CHECKING:
+    from qiskit.transpiler.target import Target
+    from qiskit.circuit.instruction import Instruction
 
 logger = logging.getLogger(__name__)
 

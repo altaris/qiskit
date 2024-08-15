@@ -12,11 +12,14 @@
 
 
 """Helper function for converting a circuit to a gate"""
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 from qiskit.circuit.annotated_operation import AnnotatedOperation
 from qiskit.circuit.gate import Gate
 from qiskit.circuit.quantumregister import QuantumRegister
 from qiskit.exceptions import QiskitError
+
+if TYPE_CHECKING:
+    from qiskit.circuit.quantumcircuit import QuantumCircuit
 
 
 def _check_is_gate(op) -> bool:

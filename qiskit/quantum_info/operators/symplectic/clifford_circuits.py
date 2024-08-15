@@ -14,6 +14,7 @@ Circuit simulation for the Clifford class.
 """
 
 from __future__ import annotations
+from typing import TYPE_CHECKING
 
 import numpy as np
 
@@ -21,6 +22,9 @@ from qiskit.circuit import Barrier, Delay, Gate
 from qiskit.circuit.exceptions import CircuitError
 from qiskit.exceptions import QiskitError
 from qiskit.circuit.quantumcircuit import QuantumCircuit
+
+if TYPE_CHECKING:
+    from qiskit.quantum_info.operators.symplectic.clifford import Clifford
 
 
 def _append_circuit(clifford: "Clifford", circuit: QuantumCircuit, qargs=None):

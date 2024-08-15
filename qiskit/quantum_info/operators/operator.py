@@ -36,6 +36,7 @@ from qiskit.quantum_info.operators.predicates import is_unitary_matrix, matrix_e
 
 if TYPE_CHECKING:
     from qiskit.transpiler.layout import Layout
+    from qiskit.circuit.library.generalized_gates.unitary import UnitaryGate
 
 
 class Operator(LinearOp):

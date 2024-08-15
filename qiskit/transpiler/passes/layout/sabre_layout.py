@@ -18,7 +18,7 @@ import dataclasses
 import logging
 import functools
 import time
-from typing import Optional
+from typing import Dict, Optional, Sequence, Tuple
 
 import numpy as np
 import rustworkx as rx
@@ -480,5 +480,5 @@ class _DisjointComponent:
     coupling_map: CouplingMap
     initial_layout: NLayout
     final_permutation: "list[int]"
-    sabre_result: "tuple[SwapMap, Sequence[int], NodeBlockResults]"
-    circuit_to_dag_dict: "dict[int, DAGCircuit]"
+    sabre_result: Tuple["SwapMap", Sequence[int], "NodeBlockResults"]  # type: ignore[name-defined]
+    circuit_to_dag_dict: Dict[int, DAGCircuit]

@@ -14,7 +14,7 @@
 
 from __future__ import annotations
 import copy
-from typing import Optional, Union
+from typing import TYPE_CHECKING, Optional, Union
 
 from qiskit.circuit.exceptions import CircuitError
 
@@ -23,6 +23,9 @@ from .quantumcircuit import QuantumCircuit
 from .gate import Gate
 from .quantumregister import QuantumRegister
 from ._utils import _ctrl_state_to_int
+
+if TYPE_CHECKING:
+    from qiskit.circuit.annotated_operation import AnnotatedOperation
 
 
 class ControlledGate(Gate):

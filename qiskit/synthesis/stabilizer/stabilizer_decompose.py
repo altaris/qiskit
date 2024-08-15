@@ -17,6 +17,7 @@ Circuit synthesis for a stabilizer state preparation circuit.
 from __future__ import annotations
 
 from collections.abc import Callable
+from typing import TYPE_CHECKING
 import numpy as np
 from qiskit.circuit import QuantumCircuit
 from qiskit.exceptions import QiskitError
@@ -31,6 +32,9 @@ from qiskit.synthesis.clifford.clifford_decompose_layers import (
     _create_graph_state,
     _decompose_graph_state,
 )
+
+if TYPE_CHECKING:
+    from qiskit.quantum_info.operators.symplectic import Clifford
 
 
 def synth_stabilizer_layers(

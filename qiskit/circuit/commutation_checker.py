@@ -13,7 +13,7 @@
 """Code from commutative_analysis pass that checks commutation relations between DAG nodes."""
 
 from functools import lru_cache
-from typing import List, Union, Set, Optional
+from typing import TYPE_CHECKING, List, Union, Set, Optional
 import numpy as np
 
 from qiskit import QiskitError
@@ -21,6 +21,9 @@ from qiskit.circuit import Qubit
 from qiskit.circuit.operation import Operation
 from qiskit.circuit.controlflow import CONTROL_FLOW_OP_NAMES
 from qiskit.quantum_info.operators import Operator
+
+if TYPE_CHECKING:
+    from qiskit.dagcircuit.dagnode import DAGOpNode
 
 _skipped_op_names = {"measure", "reset", "delay", "initialize"}
 _no_cache_op_names = {"annotated"}
