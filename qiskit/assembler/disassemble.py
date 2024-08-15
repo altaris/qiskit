@@ -11,7 +11,7 @@
 # that they have been altered from the originals.
 
 """Disassemble function for a qobj into a list of circuits and its config"""
-from typing import Any, Dict, List, NewType, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union, TypeAlias
 import collections
 import math
 
@@ -28,14 +28,12 @@ from qiskit.utils import deprecate_func
 # A ``CircuitModule`` is a representation of a circuit execution on the backend.
 # It is currently a list of quantum circuits to execute, a run Qobj dictionary
 # and a header dictionary.
-CircuitModule = NewType(
-    "CircuitModule", Tuple[List[QuantumCircuit], Dict[str, Any], Dict[str, Any]]
-)
+CircuitModule: TypeAlias = tuple[List[QuantumCircuit], Dict[str, Any], Dict[str, Any]]
 
 # A ``PulseModule`` is a representation of a pulse execution on the backend.
 # It is currently a list of pulse schedules to execute, a run Qobj dictionary
 # and a header dictionary.
-PulseModule = NewType("PulseModule", Tuple[List[pulse.Schedule], Dict[str, Any], Dict[str, Any]])
+PulseModule: TypeAlias = tuple[List[pulse.Schedule], Dict[str, Any], Dict[str, Any]]
 
 
 @deprecate_func(

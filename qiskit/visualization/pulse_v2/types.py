@@ -18,7 +18,7 @@ Special data types.
 from __future__ import annotations
 
 from enum import Enum
-from typing import NamedTuple, Union, Optional, NewType, Any, List
+from typing import NamedTuple, Union, Optional, Any, List, TypeAlias
 
 import numpy as np
 from qiskit import pulse
@@ -234,11 +234,7 @@ class TimeUnits(str, Enum):
 
 # convenient type to represent union of drawing data
 # TODO: https://github.com/Qiskit/qiskit-terra/issues/9591
-#  NewType means that a value of type Original cannot be used in places
-#  where a value of type Derived is expected
-#  (see https://docs.python.org/3/library/typing.html#newtype)
-#  This breaks a lot of type checking.
-DataTypes = NewType("DataType", Union[WaveformType, LabelType, LineType, SymbolType])
+DataTypes: TypeAlias = Union[WaveformType, LabelType, LineType, SymbolType]
 
 # convenient type to represent union of values to represent a coordinate
-Coordinate = NewType("Coordinate", Union[float, AbstractCoordinate])
+Coordinate: TypeAlias = Union[float, AbstractCoordinate]

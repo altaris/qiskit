@@ -15,7 +15,7 @@ Special data types.
 """
 
 from enum import Enum
-from typing import NamedTuple, List, Union, NewType, Tuple, Dict
+from typing import NamedTuple, List, Union, Tuple, Dict, TypeAlias
 
 from qiskit import circuit
 
@@ -139,10 +139,10 @@ class Plotter(str, Enum):
 
 
 # convenient type to represent union of drawing data
-DataTypes = NewType("DataType", Union[BoxType, LabelType, LineType, SymbolType])
+DataTypes: TypeAlias = Union[BoxType, LabelType, LineType, SymbolType]
 
 # convenient type to represent union of values to represent a coordinate
-Coordinate = NewType("Coordinate", Union[float, AbstractCoordinate])
+Coordinate: TypeAlias = Union[float, AbstractCoordinate]
 
 # Valid bit objects
-Bits = NewType("Bits", Union[circuit.Qubit, circuit.Clbit])
+Bits: TypeAlias = Union[circuit.Qubit, circuit.Clbit]

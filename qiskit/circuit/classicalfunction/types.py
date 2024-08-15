@@ -12,7 +12,7 @@
 
 """ClassicalFunction function types."""
 
-from typing import NewType
+from typing import TypeAlias
 
-Int1 = NewType("Int1", bool)
-Int2 = NewType("Int2", int)
+Int1: TypeAlias = bool
+Int2: TypeAlias = int
