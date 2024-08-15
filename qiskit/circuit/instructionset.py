@@ -17,7 +17,7 @@ Instruction collection.
 from __future__ import annotations
 
 from collections.abc import MutableSequence
-from typing import Callable
+from typing import Callable, Tuple
 
 from qiskit.circuit.exceptions import CircuitError
 from .classicalregister import Clbit, ClassicalRegister
@@ -55,7 +55,7 @@ class InstructionSet:
 
         """
         self._instructions: list[
-            CircuitInstruction | (MutableSequence[CircuitInstruction], int)
+            CircuitInstruction | Tuple[MutableSequence[CircuitInstruction], int]
         ] = []
         self._requester = resource_requester
 
