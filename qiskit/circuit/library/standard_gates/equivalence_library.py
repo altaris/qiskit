@@ -1736,7 +1736,7 @@ q = QuantumRegister(2, "q")
 xxminusyy = QuantumCircuit(q)
 beta = Parameter("beta")
 theta = Parameter("theta")
-rules: list[tuple[Gate, list[Qubit], list[Clbit]]] = [
+rules = [
     (RZGate(-beta), [q[1]], []),
     (RZGate(-pi / 2), [q[0]], []),
     (SXGate(), [q[0]], []),
