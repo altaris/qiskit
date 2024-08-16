@@ -27,8 +27,7 @@ import enum
 import itertools
 import math
 from collections import OrderedDict, defaultdict, deque, namedtuple
-from collections.abc import Callable, Generator, Iterable
-from typing import Dict, Sequence, Any, Literal
+from typing import Dict, Sequence, Any, Literal, Callable, Generator, Iterable
 
 import numpy as np
 import rustworkx as rx
